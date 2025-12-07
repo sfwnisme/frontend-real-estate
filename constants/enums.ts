@@ -27,6 +27,7 @@ export const PAGINATION_CONFIG = {
     },
     DASHBOARD: 9,
   },
+  
 };
 
 export const STATUS_TEXT = {
@@ -40,6 +41,13 @@ export const USER_ROLES = {
   MANAGER: "manager",
   CONTENT: "content",
   VIEW_ONLY: "view_only",
+} as const;
+
+export const USER_ROLES_READABLE = {
+  [USER_ROLES.ADMIN]: "admin",
+  [USER_ROLES.MANAGER]: "manager",
+  [USER_ROLES.CONTENT]: "content",
+  [USER_ROLES.VIEW_ONLY]: "viewer",
 } as const;
 
 export const PROPERTY_TYPE = {

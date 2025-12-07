@@ -9,6 +9,7 @@ type Props = {
   className?: string;
   childrenClassName?: string;
   variant?: "default" | "container";
+  error?: string;
 };
 
 export default function FieldSet({
@@ -18,6 +19,7 @@ export default function FieldSet({
   description,
   className,
   childrenClassName,
+  error,
 }: Props) {
   return (
     <fieldset className={cn("border rounded-lg w-full", className)}>
@@ -31,6 +33,7 @@ export default function FieldSet({
       )}
       {variant === "default" && <Separator />}
       <div className={cn("p-4 w-full", childrenClassName)}>{children}</div>
+      <small className={cn("min-h-4 h-full text-xs pb-4 px-4 inline-block text-destructive invisible", error && "visible")}>{error}</small>
     </fieldset>
   );
 }

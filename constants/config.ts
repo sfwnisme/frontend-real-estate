@@ -67,9 +67,8 @@ export const API_ROUTES = {
   USERS: {
     GET: "/users",
     CURRENT_USER: "/users/me",
-    CREATE: "/users/create",
+    CREATE: "/users/register",
     UPDATE: "/users",
-    UPDATE_SLUG: "/users/update-slug",
     DELETE: "/users/delete",
   },
   IMAGES: {

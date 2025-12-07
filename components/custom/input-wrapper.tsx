@@ -33,13 +33,13 @@ export default function InputWrapper(props: Props) {
         </div>
       </Label>
       <small
-        className="min-h-4 h-full text-xs mt-1 text-primary/60"
+        className="flex min-h-4 h-full text-xs mt-1 text-primary/60"
         hidden={!description}
       >
         {description}
       </small>
       <small
-        className="min-h-4 h-full text-xs mt-1 text-destructive"
+        className="flex min-h-4 h-full text-xs mt-1 text-destructive"
         hidden={disableError}
       >
         {error}

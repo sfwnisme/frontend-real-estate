@@ -232,7 +232,7 @@ export const login = async (
 };
 
 export const getCurrentUser = async (): Promise<
-  APIResponse<Omit<User, "role" | "token">>
+  APIResponse<Omit<User, "token">>
 > => {
   try {
     const cookiesStore = await cookies()

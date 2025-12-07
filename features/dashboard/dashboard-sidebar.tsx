@@ -55,6 +55,16 @@ const data = {
       url: "/dashboard/blog-posts/create",
       icon: NotebookPen,
     },
+    {
+      name: "Users",
+      url: "/dashboard/users",
+      icon: LibraryBig,
+    },
+    {
+      name: "Create Users",
+      url: "/dashboard/users/create",
+      icon: NotebookPen,
+    },
   ],
 }
 

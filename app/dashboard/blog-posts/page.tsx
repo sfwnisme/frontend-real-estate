@@ -9,9 +9,9 @@ import { type SearchParamsType } from "@/types/types";
 import { type Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 
-const {CREATE} = PAGES_ROUTES.BLOG_POSTS
+const { CREATE } = PAGES_ROUTES.BLOG_POSTS;
 
 export const metadata: Metadata = {
   title: "Blog posts",
@@ -29,8 +29,8 @@ export default async function page({
 
   const blogPosts = await getBlogPosts(currentPageSize, currentPage);
   const blogPostsData = blogPosts.data;
-  if(!blogPostsData?.data) {
-    notFound()
+  if (!blogPostsData?.data) {
+    notFound();
   }
 
   return (

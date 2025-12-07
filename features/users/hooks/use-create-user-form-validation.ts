@@ -1,7 +1,7 @@
 import { create } from "domain";
 import React, { useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { CreateUserSchema, CreateUserSchemaType } from "../schema/user-schema";
+import { CreateUserSchema, CreateUserType } from "../schema/user-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { STATUS_TEXT, USER_ROLES } from "@/constants/enums";
 import { createUser } from "../lib/requests";
@@ -9,7 +9,7 @@ import { toast } from "sonner";
 
 export default function useCreateUserFormValidation() {
   const [isCreating, startCreating] = useTransition();
-  const form = useForm<CreateUserSchemaType>({
+  const form = useForm<CreateUserType>({
     resolver: zodResolver(CreateUserSchema),
     defaultValues: {
       name: "",
@@ -20,7 +20,7 @@ export default function useCreateUserFormValidation() {
     mode: "onBlur"
   });
 
-  const onSubmit: SubmitHandler<CreateUserSchemaType> = (values) => {
+  const onSubmit: SubmitHandler<CreateUserType> = (values) => {
     startCreating(async () => {
       try {
         const createUserRes = await createUser(values);

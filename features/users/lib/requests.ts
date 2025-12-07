@@ -4,16 +4,16 @@ import { getBaseUrl } from "@/constants/enums";
 import { formatedSerErrRes } from "@/lib/utils";
 import { APIResponse, User } from "@/types/types";
 import { cookies, headers } from "next/headers";
-import { CreateUserSchemaType } from "../schema/user-schema";
+import { CreateUserType, UpdateUserType } from "../schema/user-schema";
 import { API_ROUTES } from "@/constants/config";
 
 const endpoint = "/users";
 
-const {CREATE, UPDATE, DELETE, CURRENT_USER} = API_ROUTES.USERS
+const { CREATE, UPDATE, DELETE, CURRENT_USER } = API_ROUTES.USERS;
 
 export const getUsers = async (): Promise<APIResponse<User[]>> => {
   try {
-    const token = (await cookies()).get("TOKEN")?.value
+    const token = (await cookies()).get("TOKEN")?.value;
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${endpoint}`;
     const response = await fetch(url, {
       headers: {
@@ -30,8 +30,13 @@ export const getUsers = async (): Promise<APIResponse<User[]>> => {
 
 export const getUser = async (userId: string): Promise<APIResponse<User>> => {
   try {
+    const token = (await cookies()).get("TOKEN")?.value;
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${endpoint}/${userId}`;
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: {
+        Authorization: String(token),
+      },
+    });
     const responseData = await response.json();
     return responseData;
   } catch (error: any) {
@@ -57,7 +62,9 @@ export const getCurrentUser = async (): Promise<APIResponse<User>> => {
   }
 };
 
-export const createUser = async (userData: CreateUserSchemaType): Promise<APIResponse<User>>  => {
+export const createUser = async (
+  userData: CreateUserType
+): Promise<APIResponse<User>> => {
   try {
     const token = (await cookies()).get("TOKEN")?.value;
     const bodyToJson = JSON.stringify(userData);
@@ -77,7 +84,7 @@ export const createUser = async (userData: CreateUserSchemaType): Promise<APIRes
   }
 };
 
-export const updateUser = async (userData: User, userId: string) => {
+export const updateUser = async (userData: UpdateUserType, userId: string) => {
   try {
     const token = (await cookies()).get("TOKEN")?.value;
     const bodyToJson = JSON.stringify(userData);
@@ -115,6 +122,6 @@ export const deleteUser = async (userId: string) => {
   }
 };
 
-export const logOut = async () =>{
-  (await cookies()).delete("TOKEN")
-}
+export const logOut = async () => {
+  (await cookies()).delete("TOKEN");
+};

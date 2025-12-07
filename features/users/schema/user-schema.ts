@@ -10,7 +10,7 @@ export const CreateUserSchema = z.object({
   role: z.enum(USER_ROLES, { message: "Invalid role" }),
 });
 
-export type CreateUserSchemaType = z.infer<typeof CreateUserSchema>;
+export type CreateUserType = z.infer<typeof CreateUserSchema>;
 
 export const UpdateUserSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -21,4 +21,4 @@ export const UpdateUserSchema = z.object({
   role: z.enum(USER_ROLES, { message: "Invalid role" }),
 });
 
-export type UpdateUserSchemaType = z.infer<typeof UpdateUserSchema>;
+export type UpdateUserType = z.infer<typeof UpdateUserSchema>;

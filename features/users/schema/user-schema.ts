@@ -12,13 +12,12 @@ export const CreateUserSchema = z.object({
 
 export type CreateUserType = z.infer<typeof CreateUserSchema>;
 
-export const UpdateUserSchema = z.object({
-  name: z.string().min(1, { message: "Name is required" }),
-  email: z.email({ message: "Invalid email address" }),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters long" }),
-  role: z.enum(USER_ROLES, { message: "Invalid role" }),
+export const UpdateUserSchema = CreateUserSchema.extend({
+  password: CreateUserSchema.shape.password // reuse the original password schema
+    .or(z.literal("")) // accept empty string as valid
+    .optional()
+    .transform((val) => (val === "" ? undefined : val)), // convert empty string to undefined
 });
 
-export type UpdateUserType = z.infer<typeof UpdateUserSchema>;
+export type UpdateUserInputType = z.input<typeof UpdateUserSchema>; // form input type
+export type UpdateUserType = z.infer<typeof UpdateUserSchema>; // output type after transform

@@ -241,6 +241,8 @@ export const getCurrentUser = async (): Promise<
     const response = await fetch(
       process.env.NEXT_PUBLIC_BASE_URL + API_ROUTES.USERS.CURRENT_USER,
       {
+        cache: "force-cache",
+        next: {revalidate: 60},
         headers: {
           Authorization: String(token),
         },

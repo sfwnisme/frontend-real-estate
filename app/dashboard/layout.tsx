@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default async function layout({ children }: Props) {
   const currentUser = await getCurrentUser()
-  if(!currentUser) {
+  if(!currentUser.data) {
     redirect("/login");
   }
   return (

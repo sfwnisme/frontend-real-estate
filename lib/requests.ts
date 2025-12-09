@@ -2,8 +2,8 @@
 
 import {
   PAGINATION_CONFIG,
-  getBaseUrl,
   STATUS_TEXT,
+  USER_ROLES,
 } from "@/constants/enums";
 import {
   APIResponsePaginated,
@@ -30,7 +30,7 @@ export const getData = async <T>(
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${endpoint}${queryParams}`;
     const response = await fetch(url);
     const responseData = await response.json();
-    return responseData ;
+    return responseData;
   } catch (error: any) {
     console.error("error in getData", error);
     return formatedSerErrRes("server error", error);
@@ -52,13 +52,16 @@ export const deleteDataByQueryParams = async (
       };
     }
     const token = (await cookies()).get("TOKEN")?.value;
-    const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + endpoint + id, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: String(token),
-      },
-    });
+    const response = await fetch(
+      process.env.NEXT_PUBLIC_BASE_URL + endpoint + id,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: String(token),
+        },
+      }
+    );
     const responseData = await response.json();
 
     if (!response.ok) {
@@ -84,8 +87,8 @@ export const getProperties = async (
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}/properties?pageSize=${pageSize}&page=${currentPage}`;
     const response = await fetch(url, { cache: "no-cache" });
     const responseData = await response.json();
-    if(!response.ok) {
-      return formatedApiErrRes(responseData)
+    if (!response.ok) {
+      return formatedApiErrRes(responseData);
     }
     return responseData;
   } catch (error: any) {
@@ -95,17 +98,21 @@ export const getProperties = async (
 };
 
 export const getPropertyImages = async (
-  propertyId: string,
+  propertyId: string
 ): Promise<APIResponse<ImageType[]>> => {
   try {
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL}${"/images/property/"}${propertyId}`;
+    const url = `${
+      process.env.NEXT_PUBLIC_BASE_URL
+    }${"/images/property/"}${propertyId}`;
     const response = await fetch(url, {
-      next: {tags: [`delete-image-${propertyId}`, `property-images-${propertyId}`]}
+      next: {
+        tags: [`delete-image-${propertyId}`, `property-images-${propertyId}`],
+      },
     });
     const responseData = await response.json();
 
-    if(!response.ok) {
-      return formatedApiErrRes(responseData)
+    if (!response.ok) {
+      return formatedApiErrRes(responseData);
     }
     return responseData;
   } catch (error: any) {
@@ -121,8 +128,8 @@ export const getProperty = async (
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${"/properties/"}${slug}`;
     const response = await fetch(url);
     const responseData = await response.json();
-    if(!response.ok) {
-      return formatedApiErrRes(responseData)
+    if (!response.ok) {
+      return formatedApiErrRes(responseData);
     }
     return responseData;
   } catch (error: any) {
@@ -145,8 +152,8 @@ export const getBlogPosts = async (
       // next: { revalidate: 50 },
     });
     const responseData = await response.json();
-    if(!response.ok) {
-      return formatedApiErrRes(responseData)
+    if (!response.ok) {
+      return formatedApiErrRes(responseData);
     }
     return responseData;
   } catch (error: any) {
@@ -164,8 +171,8 @@ export const getBlogPost = async (
       cache: "no-cache",
     });
     const responseData = await response.json();
-    if(!response.ok) {
-      return formatedApiErrRes(responseData)
+    if (!response.ok) {
+      return formatedApiErrRes(responseData);
     }
     return responseData;
   } catch (error: any) {
@@ -179,11 +186,13 @@ export const getBlogPostImage = async (
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}/images/blog-post/${blogPostId}`;
     const response = await fetch(url, {
-      next: {tags: [`blog-post-image-${blogPostId}`, `delete-image-${blogPostId}`]}
+      next: {
+        tags: [`blog-post-image-${blogPostId}`, `delete-image-${blogPostId}`],
+      },
     });
     const responseData = await response.json();
-    if(!response.ok) {
-      return formatedApiErrRes(responseData)
+    if (!response.ok) {
+      return formatedApiErrRes(responseData);
     }
     return responseData;
   } catch (error: any) {
@@ -212,13 +221,22 @@ export const login = async (
     });
     const responseData = await response.json();
     const accessToken = responseData.data?.token;
-    if(!accessToken) {
-      console.log(responseData)
-      return responseData
+    if (!accessToken) {
+      console.log(responseData);
+      return responseData;
     }
     cookieStore.set({
       name: "TOKEN",
       value: "Bearer " + accessToken,
+      httpOnly: true,
+      sameSite: "strict",
+      path: "/",
+      secure: true,
+      priority: "high",
+    });
+    cookieStore.set({
+      name: "USER_ROLE",
+      value: responseData.data?.role || USER_ROLES.VIEW_ONLY,
       httpOnly: true,
       sameSite: "strict",
       path: "/",
@@ -235,12 +253,14 @@ export const getCurrentUser = async (): Promise<
   APIResponse<Omit<User, "token">>
 > => {
   try {
-    const cookiesStore = await cookies()
+    const cookiesStore = await cookies();
     const token = cookiesStore.get("TOKEN")?.value;
 
     const response = await fetch(
       process.env.NEXT_PUBLIC_BASE_URL + API_ROUTES.USERS.CURRENT_USER,
       {
+        cache: "force-cache",
+        next: { revalidate: 60 },
         headers: {
           Authorization: String(token),
         },
@@ -248,7 +268,7 @@ export const getCurrentUser = async (): Promise<
     );
     const responseData = await response.json();
     if (!response.ok) {
-      cookiesStore.delete("TOKEN")
+      cookiesStore.delete("TOKEN");
       return formatedApiErrRes(responseData);
     }
     return {
@@ -256,7 +276,7 @@ export const getCurrentUser = async (): Promise<
       statusText: responseData.statusText,
       msg: responseData.msg,
       data: responseData.data,
-      error: null
+      error: null,
     };
   } catch (error: any) {
     return formatedSerErrRes("server error", error);
@@ -276,10 +296,10 @@ export const deleteImage = async (imageId: string, ownerId: string) => {
       },
     });
     const responseData = await response.json();
-    if(!response.ok) {
-      return formatedApiErrRes(responseData)
+    if (!response.ok) {
+      return formatedApiErrRes(responseData);
     }
-    revalidateTag(`delete-image-${ownerId}`, "max")
+    revalidateTag(`delete-image-${ownerId}`, "max");
     return responseData;
   } catch (error) {
     return formatedSerErrRes("server error", error);

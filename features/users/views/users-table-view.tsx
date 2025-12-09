@@ -17,6 +17,8 @@ import { getUsers } from "../lib/requests";
 import { USER_ROLES_READABLE } from "@/constants/enums";
 import { Badge } from "@/components/ui/badge";
 import { getCurrentUser } from "@/lib/requests";
+import can from "@/features/dashboard/auth/can";
+import { Visible } from "@sfwnisme/visi";
 
 type Props = {
   currentPage?: number;
@@ -40,6 +42,9 @@ export default async function UsersTableView({
   if (!usersData) {
     return notFound();
   }
+
+  const canDeleteUser = await can("user.delete");
+  const canUpdateUser = await can("user.update");
 
   const currentUser = await getCurrentUser();
   return (
@@ -71,29 +76,37 @@ export default async function UsersTableView({
                         Open
                       </Link>
                     </Button>
-                    <Button variant="outline" size="sm">
-                      <Link href={`${PAGES_ROUTES.USERS.UPDATE}/${user._id}`}>
-                        <Pencil />
-                      </Link>
-                    </Button>
+                    <Visible when={canUpdateUser}>
+                      <Button variant="outline" size="sm">
+                        <Link href={`${PAGES_ROUTES.USERS.UPDATE}/${user._id}`}>
+                          <Pencil />
+                        </Link>
+                      </Button>
+                    </Visible>
                   </ButtonGroup>
-                  <Link
-                    href={
-                      currentUser.data?._id !== user._id
-                        ? modalQuery("delete", "user", user._id, searchParams)
-                        : ""
-                    }
-                    prefetch={true}
-                  >
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      disabled={currentUser.data?._id === user._id}
-                      title={currentUser.data?._id === user._id ? "You cannot delete yourself" : ""}
+                  <Visible when={canDeleteUser}>
+                    <Link
+                      href={
+                        currentUser.data?._id !== user._id
+                          ? modalQuery("delete", "user", user._id, searchParams)
+                          : ""
+                      }
+                      prefetch={true}
                     >
-                      <Trash />
-                    </Button>
-                  </Link>
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        disabled={currentUser.data?._id === user._id}
+                        title={
+                          currentUser.data?._id === user._id
+                            ? "You cannot delete yourself"
+                            : ""
+                        }
+                      >
+                        <Trash />
+                      </Button>
+                    </Link>
+                  </Visible>
                 </div>
               </TableCell>
             </TableRow>

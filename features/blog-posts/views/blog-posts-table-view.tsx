@@ -15,6 +15,8 @@ import { ButtonGroup } from "@/components/ui/button-group";
 import { PAGINATION_CONFIG } from "@/constants/enums";
 import { formatDate, modalQuery } from "@/lib/utils";
 import { PAGES_ROUTES } from "@/constants/config";
+import can from "@/features/dashboard/auth/can";
+import { Visible } from "@sfwnisme/visi";
 
 type Props = {
   currentPage: number;
@@ -33,7 +35,8 @@ export default async function BlogPostsTableView({
   if (!blogPostsData || blogPostsData?.length === 0) {
     return notFound();
   }
-
+  const canDeleteBlogPost = await can("blogpost.delete");
+  const canEditBlogPost = await can("blogpost.update");
   return (
     <div className="overflow-x-scroll w-full">
       <Table>
@@ -63,29 +66,37 @@ export default async function BlogPostsTableView({
                 <div className="inline-flex items-center gap-2">
                   <ButtonGroup>
                     <Button variant="outline" size="sm">
-                      <Link href={`${PAGES_ROUTES.BLOG_POSTS.PREVIEW}/${blogPost.slug}`}>Open</Link>
-                    </Button>
-                    <Button variant="outline" size="sm">
                       <Link
-                        href={`${PAGES_ROUTES.BLOG_POSTS.UPDATE}/${blogPost.slug}`}
+                        href={`${PAGES_ROUTES.BLOG_POSTS.PREVIEW}/${blogPost.slug}`}
                       >
-                        <Pencil />
+                        Open
                       </Link>
                     </Button>
+                    <Visible when={canEditBlogPost}>
+                      <Button variant="outline" size="sm">
+                        <Link
+                          href={`${PAGES_ROUTES.BLOG_POSTS.UPDATE}/${blogPost.slug}`}
+                        >
+                          <Pencil />
+                        </Link>
+                      </Button>
+                    </Visible>
                   </ButtonGroup>
-                  <Link
-                    href={modalQuery(
-                      "delete",
-                      "blog",
-                      blogPost._id,
-                      searchParams
-                    )}
-                    prefetch={true}
-                  >
-                    <Button variant="secondary" size="sm">
-                      <Trash />
-                    </Button>
-                  </Link>
+                  <Visible when={canDeleteBlogPost}>
+                    <Link
+                      href={modalQuery(
+                        "delete",
+                        "blog",
+                        blogPost._id,
+                        searchParams
+                      )}
+                      prefetch={true}
+                    >
+                      <Button variant="secondary" size="sm">
+                        <Trash />
+                      </Button>
+                    </Link>
+                  </Visible>
                 </div>
               </TableCell>
             </TableRow>

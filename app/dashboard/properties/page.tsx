@@ -9,11 +9,16 @@ import { PAGINATION_CONFIG } from "@/constants/enums";
 import { type Metadata } from "next";
 import { type SearchParamsType } from "@/types/types";
 import { notFound } from "next/navigation";
+import can from "@/features/dashboard/auth/can";
+import { Visible } from "@sfwnisme/visi";
+import { PAGES_ROUTES } from "@/constants/config";
 
 export const metadata: Metadata = {
   title: "Properties",
   description: "Properties page",
 };
+
+const {CREATE} = PAGES_ROUTES.PROPERTIES
 
 export default async function page({
   searchParams,
@@ -27,9 +32,10 @@ export default async function page({
 
   const properties = await getProperties(currentPageSize, currentPage);
   const propertiesData = properties.data;
-  if(!propertiesData?.data) {
-    notFound()
+  if (!propertiesData?.data) {
+    notFound();
   }
+  const canCreateProperty = await can("property.write");
 
   return (
     <div>
@@ -37,9 +43,11 @@ export default async function page({
         <h1 className="scroll-m-20 text-center text-4xl font-medium tracking-tight text-balance">
           Properties
         </h1>
-        <Button asChild>
-          <Link href="properties/create">Add Property</Link>
-        </Button>
+        <Visible when={canCreateProperty}>
+          <Button asChild>
+            <Link href={CREATE}>Add Property</Link>
+          </Button>
+        </Visible>
       </div>
       <Suspense
         key={currentPage}

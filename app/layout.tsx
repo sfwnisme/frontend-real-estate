@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   description: SITE_INFO.DESCRIPTION,
   verification: {
-    google: process.env.GOOGLE_SEARCH_CONSOLE_KEY,
+    google: process.env.NEXT_PUBLIC_GOOGLE_SEARCH_CONSOLE_KEY,
   },
 };
 

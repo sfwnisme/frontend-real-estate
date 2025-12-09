@@ -15,6 +15,8 @@ import { ButtonGroup } from "@/components/ui/button-group";
 import { PAGINATION_CONFIG } from "@/constants/enums";
 import { modalQuery } from "@/lib/utils";
 import { PAGES_ROUTES } from "@/constants/config";
+import can from "@/features/dashboard/auth/can";
+import { Visible } from "@sfwnisme/visi";
 
 type Props = {
   currentPage: number;
@@ -33,6 +35,8 @@ export default async function PropertiesTableView({
   if (!propertiesData || propertiesData?.length === 0) {
     return notFound();
   }
+  const canDeleteProperty = await can("property.delete");
+  const canEditProperty = await can("property.update");
 
   return (
     <div>
@@ -71,29 +75,37 @@ export default async function PropertiesTableView({
                 <div className="inline-flex items-center gap-2">
                   <ButtonGroup>
                     <Button variant="outline" size="sm" asChild>
-                      <Link href={`${PAGES_ROUTES.PROPERTIES.PREVIEW}/${property.slug}`}>Open</Link>
-                    </Button>
-                    <Button variant="outline" size="sm" asChild>
                       <Link
-                        href={`${PAGES_ROUTES.PROPERTIES.UPDATE}/${property.slug}`}
+                        href={`${PAGES_ROUTES.PROPERTIES.PREVIEW}/${property.slug}`}
                       >
-                        <Pencil />
+                        Open
                       </Link>
                     </Button>
+                    <Visible when={canEditProperty}>
+                      <Button variant="outline" size="sm" asChild>
+                        <Link
+                          href={`${PAGES_ROUTES.PROPERTIES.UPDATE}/${property.slug}`}
+                        >
+                          <Pencil />
+                        </Link>
+                      </Button>
+                    </Visible>
                   </ButtonGroup>
-                  <Link
-                    href={modalQuery(
-                      "delete",
-                      "property",
-                      property._id,
-                      searchParams
-                    )}
-                    prefetch={true}
-                  >
-                    <Button variant="secondary" size="sm">
-                      <Trash />
-                    </Button>
-                  </Link>
+                  <Visible when={canDeleteProperty}>
+                    <Link
+                      href={modalQuery(
+                        "delete",
+                        "property",
+                        property._id,
+                        searchParams
+                      )}
+                      prefetch={true}
+                    >
+                      <Button variant="secondary" size="sm">
+                        <Trash />
+                      </Button>
+                    </Link>
+                  </Visible>
                 </div>
               </TableCell>
             </TableRow>

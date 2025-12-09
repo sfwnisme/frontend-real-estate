@@ -5,6 +5,10 @@ import { PAGINATION_CONFIG } from "@/constants/enums";
 import { SITE_INFO } from "@/constants/config";
 import type { SearchParamsType } from "@/types/types";
 import PropertiesGridView from "@/features/properties/views/properties-grid-veiw";
+import PaginationLayout from "@/components/custom/pagination-layout";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import PropertyCardSkeleton from "@/features/properties/skeletons/property-card-skeleton";
 
 export async function generateMetadata({
   searchParams,
@@ -38,10 +42,22 @@ export async function generateMetadata({
   };
 }
 
-export default async function page({searchParams}: {searchParams: SearchParamsType}) {
-  const page = (await searchParams)?.page
-  const currentPage = page? parseInt(page): 1
-
+export default async function page({
+  searchParams,
+}: {
+  searchParams: SearchParamsType;
+}) {
+  const page = (await searchParams)?.page;
+  const currentPage = page ? parseInt(page) : 1;
+  const currentPageSize = PAGINATION_CONFIG.PROPERTIES.CLIENT.PAGE;
+  const properties = await getProperties(
+    PAGINATION_CONFIG.PROPERTIES.CLIENT.PAGE,
+    currentPage
+  );
+  if (!properties.data) {
+    notFound();
+  }
+  const propertiesData = properties.data;
   return (
     <div>
       <Title
@@ -50,7 +66,21 @@ export default async function page({searchParams}: {searchParams: SearchParamsTy
         type="start"
       />
       <div className="h-10" />
-      <PropertiesGridView currentPage={currentPage}/>
+      <Suspense fallback={<PropertyCardSkeleton count={currentPageSize} />}>
+        <PropertiesGridView
+          currentPage={currentPage}
+          pageSize={currentPageSize}
+        />
+      </Suspense>
+      <div className="my-12">
+        <PaginationLayout
+          page={propertiesData.page}
+          nextPage={propertiesData.nextPage}
+          prevPage={propertiesData.prevPage}
+          currentPage={currentPage}
+          totalPages={propertiesData.totalPages}
+        />
+      </div>
     </div>
   );
 }

@@ -1,10 +1,14 @@
+import PaginationLayout from "@/components/custom/pagination-layout";
 import Title from "@/components/custom/title";
 import { SITE_INFO } from "@/constants/config";
 import { PAGINATION_CONFIG, STATUS_TEXT } from "@/constants/enums";
+import BlogPostCardSkeleton from "@/features/blog-posts/skeletons/blog-post-card-skeleton";
 import BlogPostsGridView from "@/features/blog-posts/views/blog-posts-grid-view";
 import { getBlogPosts } from "@/lib/requests";
 import type { SearchParamsType } from "@/types/types";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 export const generateMetadata = async ({
   searchParams,
@@ -45,6 +49,15 @@ export default async function page({
 }) {
   const page = (await searchParams)?.page;
   const currentPage = page ? parseInt(page) : 1;
+  const currentPageSize = PAGINATION_CONFIG.BLOG.CLIENT.PAGE;
+  const blogPosts = await getBlogPosts(
+    PAGINATION_CONFIG.BLOG.CLIENT.PAGE,
+    currentPage
+  );
+  if (!blogPosts.data) {
+    notFound();
+  }
+  const blogPostsData = blogPosts.data;
 
   return (
     <div>
@@ -54,7 +67,21 @@ export default async function page({
         description="Explore a handpicked collection of stunning homes that reflect timeless design, innovative architecture, and unparalleled luxury."
       />
       <div className="h-10" />
-      <BlogPostsGridView currentPage={currentPage} />
+      <Suspense fallback={<BlogPostCardSkeleton count={currentPageSize} />}>
+        <BlogPostsGridView
+          currentPage={currentPage}
+          pageSize={currentPageSize}
+        />
+      </Suspense>
+      <div className="my-12">
+        <PaginationLayout
+          page={blogPostsData.page}
+          nextPage={blogPostsData.nextPage}
+          prevPage={blogPostsData.prevPage}
+          currentPage={currentPage}
+          totalPages={blogPostsData.totalPages}
+        />
+      </div>
     </div>
   );
 }

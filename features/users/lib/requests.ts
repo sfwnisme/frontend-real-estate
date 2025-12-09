@@ -124,4 +124,5 @@ export const deleteUser = async (userId: string) => {
 
 export const logOut = async () => {
   (await cookies()).delete("TOKEN");
+  (await cookies()).delete("USER_ROLE");
 };

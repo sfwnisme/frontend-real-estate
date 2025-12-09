@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     default: SITE_INFO.NAME,
   },
   description: SITE_INFO.DESCRIPTION,
+  verification: {
+    google: process.env.GOOGLE_SEARCH_CONSOLE_KEY,
+  },
 };
 
 export default function RootLayout({

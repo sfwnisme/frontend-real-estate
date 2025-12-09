@@ -4,8 +4,10 @@ import { PAGES_ROUTES } from "@/constants/config";
 import { PAGINATION_CONFIG } from "@/constants/enums";
 import BlogPostsTableSkeleton from "@/features/blog-posts/skeletons/blog-posts-table-skeleton";
 import BlogPostsTableView from "@/features/blog-posts/views/blog-posts-table-view";
+import can from "@/features/dashboard/auth/can";
 import { getBlogPosts } from "@/lib/requests";
 import { type SearchParamsType } from "@/types/types";
+import { Visible } from "@sfwnisme/visi";
 import { type Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -32,6 +34,7 @@ export default async function page({
   if (!blogPostsData?.data) {
     notFound();
   }
+  const canCreateBlogPost = await can("blogpost.write");
 
   return (
     <div className="w-full">
@@ -39,9 +42,11 @@ export default async function page({
         <h1 className="scroll-m-20 text-center text-4xl font-medium tracking-tight text-balance">
           Blog Posts
         </h1>
-        <Button asChild>
-          <Link href={CREATE}>Create blog post</Link>
-        </Button>
+        <Visible when={canCreateBlogPost}>
+          <Button asChild>
+            <Link href={CREATE}>Create blog post</Link>
+          </Button>
+        </Visible>
       </div>
       <Suspense
         fallback={<BlogPostsTableSkeleton count={currentPageSize} />}

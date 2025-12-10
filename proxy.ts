@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Permission, rolePermissions } from "@/constants/permissions";
 import { UserRoles } from "@/types/types";
+import createMiddleware from "next-intl/middleware";
+import { routing } from "@/i18n/routing";
 
 const protectedRoutes = "/dashboard";
 
@@ -57,8 +59,16 @@ function getRequiredPermission(path: string): Permission | null {
   return null;
 }
 
+// Create the next-intl middleware
+const intlMiddleware = createMiddleware(routing);
+
 export default async function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;
+
+  // Run next-intl middleware first to handle locale detection/routing
+  const intlResponse = intlMiddleware(req);
+
+  // Check if it's a protected route
   const isProtectedRoute = path.startsWith(protectedRoutes);
   const token = req.cookies.get("TOKEN")?.value;
   const userRole = req.cookies.get("USER_ROLE")?.value as UserRoles | undefined;
@@ -75,9 +85,13 @@ export default async function proxy(req: NextRequest) {
     }
   }
 
-  return NextResponse.next();
+  // Return the intl response (which includes locale headers/cookies)
+  return intlResponse;
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*"],
+  // Match all pathnames except for:
+  // - API routes, trpc, _next, _vercel
+  // - Files with extensions (e.g., favicon.ico)
+  matcher: ["/((?!api|trpc|_next|_vercel|.*\\..*).*)"],
 };

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { SITE_INFO } from "@/constants/config";
+import { NextIntlClientProvider } from "next-intl";
 
 const interFont = Inter({
   variable: "--font-inter",
@@ -29,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${interFont.variable} antialiased overflow-x-hidden`}>
-        {children}
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
         <Toaster position="top-right" expand />
       </body>
     </html>

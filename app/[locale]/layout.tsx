@@ -6,8 +6,8 @@ import { SITE_INFO } from "@/constants/config";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-// import { setRequestLocale } from "next-intl/server"
 
+const { NAME, DESCRIPTION } = SITE_INFO;
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -26,10 +26,10 @@ const kufiFont = Noto_Kufi_Arabic({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_FRONTEND_URL!),
   title: {
-    template: `%s | ${SITE_INFO.NAME}`,
-    default: SITE_INFO.NAME,
+    template: `%s | ${NAME}`,
+    default: NAME,
   },
-  description: SITE_INFO.DESCRIPTION,
+  description: DESCRIPTION,
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SEARCH_CONSOLE_KEY,
   },
@@ -43,8 +43,6 @@ export default async function RootLayout({ children, params }: Props) {
   const defaultLocale = locale ?? routing.defaultLocale;
   const isRtl = defaultLocale === "ar";
   const font = isRtl ? kufiFont.className : interFont.className;
-
-  // setRequestLocale(locale);
 
   return (
     <html

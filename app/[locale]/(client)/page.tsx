@@ -9,23 +9,29 @@ import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 
 const { TITLE, DESCRIPTION, ROUTE } = SITE_INFO.PAGES.HOME;
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: {
-    canonical: ROUTE,
-    languages: {
-      en: `${ROUTE}/en`,
-      ar: `${ROUTE}/ar`,
-    },
-  },
-  openGraph: {
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const canonical = locale === 'ar' ? `${ROUTE}` : `${ROUTE}/${locale}`;
+  return {
     title: TITLE,
     description: DESCRIPTION,
-    url: ROUTE,
-    images: [{ url: "/logo.png" }],
-  },
-};
+    alternates: {
+      canonical,
+      languages: {
+        "x-default": ROUTE,
+        en: `${ROUTE}/en`,
+        ar: `${ROUTE}`,
+      },
+    },
+    openGraph: {
+      title: TITLE,
+      description: DESCRIPTION,
+      url: ROUTE,
+      images: [{ url: "/logo.png" }],
+    },
+  };
+}
 
 export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

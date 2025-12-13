@@ -5,12 +5,53 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { PAGES_ROUTES, SITE_INFO } from "@/constants/config";
 import { faqsDummyData } from "@/data/dummyData";
+import { routing } from "@/i18n/routing";
 import { ChevronDown, Home } from "lucide-react";
+import { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import Image from "next/image";
-import React from "react";
 
-export default function page() {
+const { TITLE, DESCRIPTION, ROUTE } = SITE_INFO.PAGES.ABOUT;
+export async function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const canonical = locale === "ar" ? `${ROUTE}` : `${ROUTE}/${locale}`;
+  return {
+    title: TITLE,
+    description: DESCRIPTION,
+    alternates: {
+      canonical,
+      languages: {
+        "x-default": ROUTE,
+        en: `${ROUTE}/en`,
+        ar: `${ROUTE}`,
+      },
+    },
+    openGraph: {
+      title: TITLE,
+      description: DESCRIPTION,
+      url: ROUTE,
+      images: [{ url: "/logo.png" }],
+    },
+  };
+}
+
+export default async function page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <div className="flex flex-col gap-20">
       <div>

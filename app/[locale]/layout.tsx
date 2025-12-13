@@ -6,6 +6,7 @@ import { SITE_INFO } from "@/constants/config";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
+// import { setRequestLocale } from "next-intl/server"
 
 type Props = {
   children: React.ReactNode;
@@ -42,6 +43,8 @@ export default async function RootLayout({ children, params }: Props) {
   const defaultLocale = locale ?? routing.defaultLocale;
   const isRtl = defaultLocale === "ar";
   const font = isRtl ? kufiFont.className : interFont.className;
+
+  // setRequestLocale(locale);
 
   return (
     <html

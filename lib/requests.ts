@@ -1,10 +1,6 @@
 "use server";
 
-import {
-  PAGINATION_CONFIG,
-  STATUS_TEXT,
-  USER_ROLES,
-} from "@/constants/enums";
+import { PAGINATION_CONFIG, STATUS_TEXT, USER_ROLES } from "@/constants/enums";
 import {
   APIResponsePaginated,
   APIResponse,
@@ -12,6 +8,8 @@ import {
   ImageType,
   Property,
   User,
+  RequestOptionsType,
+  FetchOptions,
 } from "@/types/types";
 import { cookies } from "next/headers";
 import { formatedApiErrRes, formatedSerErrRes } from "./utils";
@@ -82,10 +80,10 @@ export const deleteDataByQueryParams = async (
 export const getProperties = async (
   pageSize: number = PAGINATION_CONFIG.PROPERTIES.CLIENT.PAGE,
   currentPage?: number
-): Promise<APIResponsePaginated<Property[]>> => {
+): Promise<APIResponse<Property[]>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}/properties?pageSize=${pageSize}&page=${currentPage}`;
-    const response = await fetch(url, { cache: "no-cache" });
+    const response = await fetch(url, { next: { revalidate: 60 } });
     const responseData = await response.json();
     if (!response.ok) {
       return formatedApiErrRes(responseData);
@@ -96,6 +94,27 @@ export const getProperties = async (
     return formatedSerErrRes("server error", error);
   }
 };
+
+export const getPropertiesWithRevalidate = async (
+  pageSize: number = PAGINATION_CONFIG.PROPERTIES.CLIENT.PAGE,
+  currentPage?: number,
+  revalidate: number = 60
+): Promise<APIResponse<Property[]>> => {
+  try {
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/properties?pageSize=${pageSize}&page=${currentPage}`;
+    const response = await fetch(url, { next: { revalidate } });
+    const responseData = await response.json();
+    if (!response.ok) {
+      return formatedApiErrRes(responseData);
+    }
+    return responseData;
+  } catch (error: any) {
+    console.error("error in getProperties", error);
+    return formatedSerErrRes("server error", error);
+  }
+};
+
+
 
 export const getPropertyImages = async (
   propertyId: string
@@ -148,8 +167,7 @@ export const getBlogPosts = async (
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}/blog-posts?pageSize=${pageSize}&page=${currentPage}`;
     const response = await fetch(url, {
-      cache: "no-cache",
-      // next: { revalidate: 50 },
+      next: { revalidate: 60 },
     });
     const responseData = await response.json();
     if (!response.ok) {
@@ -163,12 +181,15 @@ export const getBlogPosts = async (
 };
 
 export const getBlogPost = async (
-  blogPostId: string
+  blogPostId: string,
+  options?: FetchOptions
 ): Promise<APIResponse<BlogPost>> => {
   try {
+    const { cache, revalidate } = options || {};
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}/blog-posts/${blogPostId}`;
     const response = await fetch(url, {
-      cache: "no-cache",
+      next: { revalidate },
+      cache,
     });
     const responseData = await response.json();
     if (!response.ok) {

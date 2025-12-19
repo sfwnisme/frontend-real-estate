@@ -27,8 +27,11 @@ const routePermissions: RoutePermission[] = [
     permission: "property.update",
     exact: false,
   },
-  { path: "/dashboard/properties", permission: "property.read", exact: false },
-
+  { 
+    path: "/dashboard/properties", 
+    permission: "property.read", 
+    exact: false
+  },
   {
     path: "/dashboard/blog-posts/create",
     permission: "blogpost.write",

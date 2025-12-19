@@ -37,6 +37,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children, params }: Props) {
   const locale = (await params).locale;
+  // MANDATORY: Ensure that the incoming `locale` is valid
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }

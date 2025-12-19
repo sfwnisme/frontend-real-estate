@@ -13,10 +13,21 @@ type RoutePermission = {
 };
 
 const routePermissions: RoutePermission[] = [
-  { path: "/dashboard/users/create", permission: "user.write", exact: true },
-  { path: "/dashboard/users/update", permission: "user.update", exact: false },
-  { path: "/dashboard/users", permission: "user.read", exact: false },
-
+  {
+    path: "/dashboard/users/create",
+    permission: "user.write",
+    exact: true,
+  },
+  {
+    path: "/dashboard/users/update",
+    permission: "user.update",
+    exact: false,
+  },
+  {
+    path: "/dashboard/users",
+    permission: "user.read",
+    exact: false,
+  },
   {
     path: "/dashboard/properties/create",
     permission: "property.write",
@@ -27,10 +38,10 @@ const routePermissions: RoutePermission[] = [
     permission: "property.update",
     exact: false,
   },
-  { 
-    path: "/dashboard/properties", 
-    permission: "property.read", 
-    exact: false
+  {
+    path: "/dashboard/properties",
+    permission: "property.read",
+    exact: false,
   },
   {
     path: "/dashboard/blog-posts/create",

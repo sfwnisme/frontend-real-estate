@@ -10,6 +10,10 @@ import { setRequestLocale } from "next-intl/server";
 
 const { TITLE, DESCRIPTION, ROUTE } = SITE_INFO.PAGES.HOME;
 
+export async function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const canonical = locale === 'ar' ? `${ROUTE}` : `${ROUTE}/${locale}`;
@@ -31,10 +35,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       images: [{ url: "/logo.png" }],
     },
   };
-}
-
-export async function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
 }
 
 export default async function Home({params}: {params: Promise<{locale: string}>}) {

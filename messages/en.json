@@ -39,22 +39,21 @@
       "title": "Our Expertise, Your Advantage",
       "description": "We’re here to guide you every step of the way..",
       "badge": "Services",
-      "servicesList": [
+      "ServicesList": [
         {
           "title": "Property Search",
-          "description": "Find your dream home with our advanced search tools."
+          "description": "Find your dream home with our advanced search tools.",
+          "image": "/blog/blog01.webp"
         },
         {
           "title": "Property Valuation",
-          "description": "Get an accurate valuation of your property."
+          "description": "Get an accurate valuation of your property.",
+          "image": "/blog/blog02.webp"
         },
         {
           "title": "Property Management",
-          "description": "Manage your property with our expert team."
-        },
-        {
-          "title": "Legal Consultation",
-          "description": "Get legal advice from our experienced attorneys."
+          "description": "Manage your property with our expert team.",
+          "image": "/blog/blog03.webp"
         }
       ]
     },

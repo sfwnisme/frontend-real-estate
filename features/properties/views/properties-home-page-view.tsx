@@ -14,14 +14,13 @@ export default async function PropertiesHomePageView({
   pageSize = PAGINATION_CONFIG.BLOG.CLIENT.OVERVIEW,
   currentPage = 1,
 }: Props) {
-  // const t = await getTranslations("HomePage");
-  const t = await getTranslations("HomePage");
+  const t = await getTranslations("HomePage.PropertiesSection");
   return (
     <div>
       <Title
         type="center"
-        title={ t("title")}
-        description="Nestled in the heart of a lush green forest, this property is a true nature lover's paradise. "
+        title={t("title")}
+        description={t("description")}
       />
       <div className="h-16" />
       <Suspense fallback={<PropertyCardSkeleton count={pageSize} />}>

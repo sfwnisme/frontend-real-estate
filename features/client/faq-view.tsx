@@ -3,13 +3,17 @@ import Title from '../../components/custom/title'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../../components/ui/accordion'
 import { ChevronDown, ChevronDownCircle } from 'lucide-react'
 import { faqsDummyData } from '@/data/dummyData'
+import { getTranslations } from 'next-intl/server'
 
 type Props = {}
 
-export default function Faq({ }: Props) {
+export default async function Faq({ }: Props) {
+  const t = await getTranslations("HomePage.FaqSection")
+  console.log("questions" ,t.raw("Questions"))
+
   return (
     <div className='flex max-lg:flex-col items-start gap-8 lg:gap-16 justify-between'>
-      <Title type='start' title="Frequently asked questions." description="We're here to make your real estate journey seamless and stress-free" />
+      <Title type='start' title={t("title")} description={t("description")} />
       <div className='w-full'>
         <Accordion
           type="single"
@@ -17,11 +21,11 @@ export default function Faq({ }: Props) {
           className="w-full"
           defaultValue="item-1"
         >
-          {faqsDummyData.map((faq) => (
-            <AccordionItem value={String(faq.id)} key={faq.id} className='border-gray-100'>
-              <AccordionTrigger>{faq.title}<ChevronDown strokeWidth="1" className='border border-gray-200 rounded-full ' /></AccordionTrigger>
+          {t.raw("Questions").map((faq: { question: string, answer: string }) => (
+            <AccordionItem value={String(faq.question)} key={faq.question} className='border-gray-100'>
+              <AccordionTrigger>{faq.question}<ChevronDown strokeWidth="1" className='border border-gray-200 rounded-full ' /></AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4 text-balance">
-                <p>{faq.description}</p>
+                <p>{faq.answer}</p>
               </AccordionContent>
             </AccordionItem>
           ))}

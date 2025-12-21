@@ -1,7 +1,7 @@
 {
   "HomePage": {
     "title": "Hello world!",
-    "button": "Click me!",
+    "button": "Explore Properties",
     "description": "Discover over 70+ properties!",
     "PropertiesSection": {
       "title": "Recently Listed",

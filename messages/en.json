@@ -60,12 +60,13 @@
     "Footer": {
       "title": "Frequently Asked Questions",
       "placeholder": "Your email address",
-      "QuickLinks": ["About Us", "Properties", "Blog", "Contact Us"],
-      "Others": [
-        "Sfwn. All rights reserved.",
-        "Privacy Policy",
-        "Terms of Service"
-      ]
+      "button": "Submit",
+      "copyright": "Sfwn. All rights reserved.",
+      "QuickLinks": {
+        "title": "Quick Links",
+        "links": ["About Us", "Properties", "Blog", "Contact Us"]
+      },
+      "Others": ["Privacy Policy", "Terms of Service"]
     }
   }
 }

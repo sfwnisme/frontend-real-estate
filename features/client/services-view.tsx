@@ -15,7 +15,9 @@ export default function ServicesView({ }: Props) {
     <div className="bg-gray-50">
       <div className=' flex flex-nowrap max-lg:flex-col items-start justify-between gap-8 lg:gap-20 h-full'>
         <div className='w-full h-full flex flex-col justify-between'>
-          <Title type="with_badge" title={t("title")} description={t("description")} badge="Services" />
+          <div className='mb-8'>
+          <Title type="with_badge" title={t("title")} description={t("description")} badge={t("badge")} />
+          </div>
           <div className='w-full'>
             <Accordion
               type="single"

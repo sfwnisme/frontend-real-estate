@@ -128,7 +128,23 @@
         "metaTitle": "Meta Title",
         "metaDescription": "Meta Description",
         "metaKeywords": "Meta Keywords",
-        "featuredImage": "Featured Image"
+        "featuredImage": "Featured Image",
+        "description": "Description",
+        "price": "Price",
+        "propertySize": "Property Size",
+        "bedrooms": "Bedrooms",
+        "bathrooms": "Bathrooms",
+        "garage": "Garage",
+        "garageSize": "Garage Size",
+        "yearBuilt": "Year Built",
+        "state": "State",
+        "city": "City",
+        "area": "Area",
+        "zipCode": "Zip Code",
+        "other": "Other",
+        "features": "Features",
+        "video": "Video",
+        "images": "Images"
       },
       "placeholders": {
         "status": "Status",
@@ -140,12 +156,26 @@
       },
       "sections": {
         "userDetails": "User details",
-        "seoSettings": "SEO settings"
+        "seoSettings": "SEO settings",
+        "propertyDetails": "Property Details",
+        "specifications": "Specifications",
+        "classification": "Classification",
+        "address": "Address",
+        "moreInformation": "More Information",
+        "images": "Images"
       },
       "descriptions": {
-        "userDetails": "Update the details of the user",
+        "userDetails": "Create a new user",
         "email": "user email at lease 5 characters",
-        "youCannotDeleteYourself": "You cannot delete yourself"
+        "youCannotDeleteYourself": "You cannot delete yourself",
+        "propertyDetails": "Create a new property with images",
+        "specifications": "Add the property specifications",
+        "classification": "Add the property classification",
+        "address": "Add the property address",
+        "moreInformation": "Add more information about the property",
+        "images": "Add property images",
+        "features": "Add property features, write ',' after each feature",
+        "video": "Add property video, write 'Youtube: go to the video > share > copy embed code'"
       }
     },
     "dialog": {

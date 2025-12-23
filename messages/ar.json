@@ -126,7 +126,23 @@
         "metaTitle": "عنوان Meta",
         "metaDescription": "وصف Meta",
         "metaKeywords": "الكلامات المفتاحية",
-        "featuredImage": "الصورة المميزة"
+        "featuredImage": "الصورة المميزة",
+        "description": "الوصف",
+        "price": "السعر",
+        "propertySize": "مساحة العقار",
+        "bedrooms": "الغرف النومية",
+        "bathrooms": "الحمامات",
+        "garage": "المركبات",
+        "garageSize": "مساحة المركبات",
+        "yearBuilt": "سنة البناء",
+        "state": "المحافظة",
+        "city": "المدينة",
+        "area": "المنطقة",
+        "zipCode": "الرمز البريدي",
+        "other": "الأخرى",
+        "features": "الميزات",
+        "video": "الفيديو",
+        "images": "الصور"
       },
       "placeholders": {
         "status": "الحالة",
@@ -138,12 +154,26 @@
       },
       "sections": {
         "userDetails": "تفاصيل المستخدم",
-        "seoSettings": "إعدادات محركات البحث"
-      },
+        "seoSettings": "إعدادات محركات البحث",
+        "propertyDetails": "تفاصيل العقار",
+        "specifications": "المواصفات",
+        "classification": "التصنيف",
+        "address": "العنوان",
+        "moreInformation": "المزيد من المعلومات",
+        "images": "الصور"
+      },  
       "descriptions": {
         "userDetails": "انشاء مستخدم جديد",
         "email": "بريد المستخدم الإلكتروني يجب أن يكون 5 أحرف على الأقل",
-      "youCannotDeleteYourself": "لا يمكنك حذف نفسك"
+        "youCannotDeleteYourself": "لا يمكنك حذف نفسك",
+        "propertyDetails": "قم بإنشاء عقار جديد مع الصور",
+        "specifications": "قم بإضافة المواصفات الخاصة بالعقار",
+        "classification": "قم بإضافة التصنيف الخاص بالعقار",
+        "address": "قم بإضافة العنوان الخاص بالعقار",
+        "moreInformation": "قم بإضافة المزيد من المعلومات الخاصة بالعقار",
+        "images": "قم بإضافة الصور الخاصة بالعقار",
+        "features": "قم بإضافة الميزات الخاصة بالعقار يجب كتابة ',' بعد كل ميزة",
+        "video": "قم بإضافة الفيديو الخاص بالعقار يجب كتابة 'Youtube: go to the video > share > copy embed code'"
       }
     },
     "dialog": {

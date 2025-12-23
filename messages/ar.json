@@ -141,8 +141,9 @@
         "seoSettings": "إعدادات SEO"
       },
       "descriptions": {
-        "userDetails": "تحديث تفاصيل المستخدم",
-        "email": "بريد المستخدم الإلكتروني يجب أن يكون 5 أحرف على الأقل"
+        "userDetails": "انشاء مستخدم جديد",
+        "email": "بريد المستخدم الإلكتروني يجب أن يكون 5 أحرف على الأقل",
+      "youCannotDeleteYourself": "لا يمكنك حذف نفسك"
       }
     },
     "dialog": {
@@ -157,8 +158,7 @@
       "notFound": "غير موجود",
       "loading": "جاري التحميل...",
       "noData": "لا توجد بيانات متاحة",
-      "notPublished": "لم يتم نشر",
-      "youCannotDeleteYourself": "لا يمكنك حذف نفسك"
+      "notPublished": "لم يتم نشر"
     }
   },
   "resources": {

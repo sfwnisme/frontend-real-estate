@@ -55,7 +55,11 @@ export default function Nav({}: Props) {
           </Link>
         </li>
         <li>
-          <NextIntlLink href="/" locale={switchLocale} className="font-medium">
+          <NextIntlLink 
+            href="/" 
+            locale={switchLocale} 
+            className={`font-medium ${locale === "en" ? "font-arabic" : "font-english"}`}
+          >
             {useLocale() === "ar" ? "English" : "العربية"}
           </NextIntlLink>
         </li>

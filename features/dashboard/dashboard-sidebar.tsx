@@ -128,7 +128,7 @@ export function DashboardSidebar({
         <DashboardNavRoutes projects={filteredRoutes} />
       </SidebarContent>
       <SidebarFooter>
-        <DashboardNavUser user={data.user} />
+        <DashboardNavUser />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

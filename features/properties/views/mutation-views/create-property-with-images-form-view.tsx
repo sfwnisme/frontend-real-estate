@@ -23,8 +23,13 @@ import { cn } from "@/lib/utils";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import CreatePropertyImagesFormView from "./create-property-images-form-view";
 import FieldSet from "@/components/custom/field-set";
+import { useTranslations } from "next-intl";
 
 const CreatePropertyWithImagesFormView = () => {
+  const t = useTranslations("common.form.labels")
+  const tSections = useTranslations("common.form.sections")
+  const tDescs = useTranslations("common.form.descriptions")
+  const tActions = useTranslations("common.actions")
   const { form, onSubmit, isPending } =
     useCreatePropertyWithImagesFormValidation();
   const formErrors = form.formState.errors;
@@ -37,13 +42,13 @@ const CreatePropertyWithImagesFormView = () => {
         className="grid grid-cols-2 gap-4 flex-1 w-full lg:min-w-[500px]"
       >
         <FieldSet
-          title="Property details"
-          description="Update the details of the property"
+          title={tSections("propertyDetails")}
+          description={tDescs("propertyDetails")}
           childrenClassName="grid gap-4 grid-cols-2"
           className="col-span-full"
         >
           <InputWrapper
-            title="Title"
+            title={t("title")}
             error={formErrors.title?.message}
             className="col-span-full"
             name="title"
@@ -52,7 +57,7 @@ const CreatePropertyWithImagesFormView = () => {
           </InputWrapper>
 
           <InputWrapper
-            title="Description"
+            title={t("description")}
             description="property description at lease 5 characters"
             error={formErrors.description?.message}
             className="col-span-full"
@@ -60,14 +65,14 @@ const CreatePropertyWithImagesFormView = () => {
             <Textarea id="description" {...form.register("description")} />
           </InputWrapper>
           <InputWrapper
-            title="Price"
+            title={t("price")}
             error={formErrors.price?.message}
             className=""
           >
             <Input type="number" id="price" {...form.register("price")} />
           </InputWrapper>
           <InputWrapper
-            title="Property size"
+            title={t("propertySize")}
             error={formErrors.propertySize?.message}
           >
             <Input
@@ -78,26 +83,26 @@ const CreatePropertyWithImagesFormView = () => {
           </InputWrapper>
         </FieldSet>
         <FieldSet
-          title="Specifications"
-          description="Update the specifications of the property"
+          title={tSections("specifications")}
+          description={tDescs("specifications")}
           childrenClassName="grid grid-cols-2 gap-4"
           className="col-span-full sm:col-span-1"
         >
-          <InputWrapper title="Bedrooms" error={formErrors.bedrooms?.message}>
+          <InputWrapper title={t("bedrooms")} error={formErrors.bedrooms?.message}>
             <Input type="number" id="bedrooms" {...form.register("bedrooms")} />
           </InputWrapper>
-          <InputWrapper title="Bathrooms" error={formErrors.bathrooms?.message}>
+          <InputWrapper title={t("bathrooms")} error={formErrors.bathrooms?.message}>
             <Input
               type="number"
               id="bathrooms"
               {...form.register("bathrooms")}
             />
           </InputWrapper>
-          <InputWrapper title="Garage" error={formErrors.garage?.message}>
+          <InputWrapper title={t("garage")} error={formErrors.garage?.message}>
             <Input type="number" id="garage" {...form.register("garage")} />
           </InputWrapper>
           <InputWrapper
-            title="Garage size"
+            title={t("garageSize")}
             error={formErrors.garageSize?.message}
           >
             <Input
@@ -107,7 +112,7 @@ const CreatePropertyWithImagesFormView = () => {
             />
           </InputWrapper>
           <InputWrapper
-            title="Year built"
+            title={t("yearBuilt")}
             error={formErrors.yearBuilt?.message}
             className="col-span-full"
           >
@@ -119,12 +124,12 @@ const CreatePropertyWithImagesFormView = () => {
           </InputWrapper>
         </FieldSet>
         <FieldSet
-          title="Classification"
-          description="Update the classification of the property"
+          title={tSections("classification")}
+          description={tDescs("classification")}
           childrenClassName="grid gap-4"
           className="col-span-full sm:col-span-1"
         >
-          <InputWrapper title="Type" error={formErrors.propertyType?.message}>
+          <InputWrapper title={t("type")} error={formErrors.propertyType?.message}>
             <Controller
               name="propertyType"
               control={form.control}
@@ -135,7 +140,7 @@ const CreatePropertyWithImagesFormView = () => {
                   name="propertyType"
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Type" />
+                    <SelectValue placeholder={t("type")} />
                   </SelectTrigger>
                   <SelectContent>
                     {Object.values(PROPERTY_TYPE).map((type) => (
@@ -149,7 +154,7 @@ const CreatePropertyWithImagesFormView = () => {
             />
           </InputWrapper>
           <InputWrapper
-            title="Status"
+            title={t("status")}
             error={formErrors.propertyStatus?.message}
           >
             <Controller
@@ -162,7 +167,7 @@ const CreatePropertyWithImagesFormView = () => {
                   name="propertyStatus"
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Status" />
+                    <SelectValue placeholder={t("status")} />
                   </SelectTrigger>
                   <SelectContent>
                     {Object.values(PROPERTY_STATUS).map((status) => (
@@ -192,13 +197,13 @@ const CreatePropertyWithImagesFormView = () => {
           </Label>
         </FieldSet>
         <FieldSet
-          title="Address"
-          description="Update the address of the property"
+          title={tSections("address")}
+          description={tDescs("address")}
           className="col-span-full"
           childrenClassName="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4"
         >
           <InputWrapper
-            title="State"
+            title={t("state")}
             error={formErrors.address?.state?.message}
           >
             <Input
@@ -207,14 +212,14 @@ const CreatePropertyWithImagesFormView = () => {
               {...form.register("address.state")}
             />
           </InputWrapper>
-          <InputWrapper title="City" error={formErrors.address?.city?.message}>
+          <InputWrapper title={t("city")} error={formErrors.address?.city?.message}>
             <Input
               type="text"
               id="address.city"
               {...form.register("address.city")}
             />
           </InputWrapper>
-          <InputWrapper title="Area" error={formErrors.address?.area?.message}>
+          <InputWrapper title={t("area")} error={formErrors.address?.area?.message}>
             <Input
               type="text"
               id="address.area"
@@ -222,7 +227,7 @@ const CreatePropertyWithImagesFormView = () => {
             />
           </InputWrapper>
           <InputWrapper
-            title="Zip code"
+            title={t("zipCode")}
             error={formErrors.address?.zipCode?.message}
           >
             <Input
@@ -232,7 +237,7 @@ const CreatePropertyWithImagesFormView = () => {
             />
           </InputWrapper>
           <InputWrapper
-            title="Other"
+            title={t("other")}
             error={formErrors.address?.other?.message}
             className="col-span-full sm:col-span-2 lg:col-span-2"
           >
@@ -244,23 +249,23 @@ const CreatePropertyWithImagesFormView = () => {
           </InputWrapper>
         </FieldSet>
         <FieldSet
-          title="More information"
-          description="Update the more information of the property"
+          title={tSections("moreInformation")}
+          description={tDescs("moreInformation")}
           childrenClassName="grid gap-4"
           className="col-span-full"
         >
           <InputWrapper
-            title="Features"
-            description="adding (,) after every feature is a must i.e. 'Pool, Garden, Red Sea, International resturants and cafés' "
+            title={t("features")}
+            description={tDescs("features")}
             disableError
           >
             <Input type="text" id="features" {...form.register("features")} />
           </InputWrapper>
           <InputWrapper
-            title="Video"
+            title={t("video")}
             error={formErrors.video?.message}
             disableError
-            description="Youtube: go to the video > share > copy embed code"
+            description={tDescs("video")}
           >
             <Input
               type="text"
@@ -286,14 +291,14 @@ const CreatePropertyWithImagesFormView = () => {
           className="w-full col-span-full hidden lg:block"
           disabled={isPending || !form.formState.isValid}
         >
-          {isPending ? "Creating..." : "Create"}
+        {isPending ? tActions("creating") : tActions("create")}
         </Button>
         <DevTool control={form.control} />
       </form>
       <div className="w-full lg:max-w-[400px]">
         <FieldSet
-          title="Images"
-          description="Upload the images of the property"
+          title={tSections("images")}
+          description={tDescs("images")}
           childrenClassName="grid gap-4"
           className="col-span-full"
         >
@@ -306,7 +311,7 @@ const CreatePropertyWithImagesFormView = () => {
         disabled={isPending || !form.formState.isValid}
         onClick={onSubmit}
       >
-        {isPending ? "Creating..." : "Create"}
+        {isPending ? tActions("creating") : tActions("create")}
       </Button>
     </div>
   );

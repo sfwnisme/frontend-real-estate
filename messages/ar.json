@@ -168,6 +168,7 @@
       },  
       "descriptions": {
         "userDetails": "انشاء مستخدم جديد",
+        "updateUserDetails": "تحديث تفاصيل المستخدم",
         "email": "بريد المستخدم الإلكتروني يجب أن يكون 5 أحرف على الأقل",
         "youCannotDeleteYourself": "لا يمكنك حذف نفسك",
         "propertyDetails": "قم بإنشاء عقار جديد مع الصور",

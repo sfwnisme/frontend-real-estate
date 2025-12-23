@@ -170,6 +170,7 @@
       },
       "descriptions": {
         "userDetails": "Create a new user",
+        "updateUserDetails": "Update the details of the user",
         "email": "user email at lease 5 characters",
         "youCannotDeleteYourself": "You cannot delete yourself",
         "propertyDetails": "Create a new property with images",

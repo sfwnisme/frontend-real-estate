@@ -2,6 +2,7 @@
 import React from "react";
 import { DevTool } from "@hookform/devtools";
 import { Controller } from "react-hook-form";
+import { useTranslations } from "next-intl";
 
 import {
   Select,
@@ -25,6 +26,11 @@ type Props = {
 }
 
 const UpdateUserFormView = ({user}: Props) => {
+  const t = useTranslations("common.form.labels");
+  const tActions = useTranslations("common.actions");
+  const tDescs = useTranslations("common.form.descriptions");
+  const tSections = useTranslations("common.form.sections");
+  const tPlaceholders = useTranslations("common.form.placeholders");
   const { form, onSubmit, isPending } = useUpdateUserFormValidation(user);
   const formErrors = form.formState.errors;
   const globalError = useErrorMessage(form.formState.errors.root?.message);
@@ -33,12 +39,12 @@ const UpdateUserFormView = ({user}: Props) => {
     <div className="">
       <form onSubmit={onSubmit} className="grid w-full lg:min-w-[500px]">
         <FieldSet
-          title="User details"
-          description="Update the details of the user"
+          title={tSections("userDetails")}
+          description={tDescs("updateUserDetails")}
           childrenClassName="grid gap-4 grid-cols-2"
         >
           <InputWrapper
-            title="Name"
+            title={t("name")}
             error={formErrors.name?.message}
             className="col-span-full"
             name="name"
@@ -47,15 +53,15 @@ const UpdateUserFormView = ({user}: Props) => {
           </InputWrapper>
 
           <InputWrapper
-            title="Email"
-            description="user email at lease 5 characters"
+            title={t("email")}
+            description={tDescs("email")}
             error={formErrors.email?.message}
             className="col-span-full"
           >
             <Input type="email" id="email" {...form.register("email")} />
           </InputWrapper>
           <InputWrapper
-            title="Password"
+            title={t("password")}
             error={formErrors.password?.message}
             className="max-md:col-span-full"
           >
@@ -67,7 +73,7 @@ const UpdateUserFormView = ({user}: Props) => {
           </InputWrapper>
 
           <InputWrapper
-            title="Type"
+            title={t("role")}
             error={formErrors.role?.message}
             className="max-md:col-span-full"
           >
@@ -81,7 +87,7 @@ const UpdateUserFormView = ({user}: Props) => {
                   name="role"
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Role" />
+                    <SelectValue placeholder={tPlaceholders("role")} />
                   </SelectTrigger>
                   <SelectContent>
                     {Object.values(USER_ROLES).map((role) => (
@@ -105,7 +111,7 @@ const UpdateUserFormView = ({user}: Props) => {
           className="w-full col-span-full"
           disabled={isPending || !form.formState.isValid}
         >
-          {isPending ? "Updating..." : "Update"}
+          {isPending ? tActions("updating") : tActions("update")}
         </Button>
         <DevTool control={form.control} />
       </form>

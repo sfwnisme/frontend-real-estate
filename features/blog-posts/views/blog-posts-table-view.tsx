@@ -17,6 +17,7 @@ import { formatDate, modalQuery } from "@/lib/utils";
 import { PAGES_ROUTES } from "@/constants/config";
 import can from "@/features/dashboard/auth/can";
 import { Visible } from "@sfwnisme/visi";
+import { getLocale } from "next-intl/server";
 
 type Props = {
   currentPage: number;
@@ -31,6 +32,7 @@ export default async function BlogPostsTableView({
     PAGINATION_CONFIG.BLOG.DASHBOARD,
     currentPage
   );
+  const locale = await getLocale();
   const blogPostsData = blogPosts.data?.data;
   if (!blogPostsData || blogPostsData?.length === 0) {
     return notFound();
@@ -42,10 +44,10 @@ export default async function BlogPostsTableView({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Title</TableHead>
+            <TableHead className="text-start">Title</TableHead>
             <TableHead className="text-start">Creation Date</TableHead>
             <TableHead className="text-start">Last Modification</TableHead>
-            <TableHead>Published Date</TableHead>
+            <TableHead className="text-start">Published Date</TableHead>
             <TableHead className="text-start w-20">Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -64,7 +66,7 @@ export default async function BlogPostsTableView({
               </TableCell>
               <TableCell className="text-end w-fit">
                 <div className="inline-flex items-center gap-2">
-                  <ButtonGroup>
+                  <ButtonGroup orientation={locale === "en" ? "horizontal" : "horizontalAr"}>
                     <Button variant="outline" size="sm">
                       <Link
                         href={`${PAGES_ROUTES.BLOG_POSTS.PREVIEW}/${blogPost.slug}`}

@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useTranslations } from "next-intl";
 import FieldSet from "@/components/custom/field-set";
 import { Input } from "@/components/ui/input";
 import InputWrapper from "@/components/custom/input-wrapper";
@@ -23,6 +24,10 @@ type Props = {
 
 export default function UpdateBlogPostFormView(props: Props) {
   const { blogPost } = props;
+  const t = useTranslations("common.form.labels");
+  const tActions = useTranslations("common.actions");
+  const tSections = useTranslations("common.form.sections");
+  const tPlaceholders = useTranslations("common.form.placeholders");
   const { form, onSubmit, isPending } =
     useUpdateBlogPostFormValidation(blogPost);
   console.log("trigger:", blogPost);
@@ -37,25 +42,25 @@ export default function UpdateBlogPostFormView(props: Props) {
         className="grid grid-cols-1 gap-4"
       >
         <div className="flex flex-col gap-4 w-full">
-          <FieldSet title="title" variant="container">
+          <FieldSet title={t("title")} variant="container">
             <InputWrapper
-              title="Title"
+              title={t("title")}
               error={form.formState.errors.title?.message}
             >
               <Input type="text" {...form.register("title")} />
             </InputWrapper>
           </FieldSet>
-          <FieldSet title="excerpt" variant="container">
+          <FieldSet title={t("excerpt")} variant="container">
             <InputWrapper
-              title="Excerpt"
+              title={t("excerpt")}
               error={form.formState.errors.excerpt?.message}
             >
               <Input type="text" {...form.register("excerpt")} />
             </InputWrapper>
           </FieldSet>
-          <FieldSet title="content" variant="container">
+          <FieldSet title={t("content")} variant="container">
             <InputWrapper
-              title="Content"
+              title={t("content")}
               error={form.formState.errors.content?.message}
             >
               <Textarea
@@ -66,9 +71,9 @@ export default function UpdateBlogPostFormView(props: Props) {
           </FieldSet>
         </div>
         <div className="flex flex-col gap-4 w-full">
-          <FieldSet title="SEO settings" childrenClassName="grid gap-4">
+          <FieldSet title={tSections("seoSettings")} childrenClassName="grid gap-4">
             <InputWrapper
-              title="Status"
+              title={t("status")}
               error={form.formState.errors.status?.message}
             >
               <Select
@@ -79,7 +84,7 @@ export default function UpdateBlogPostFormView(props: Props) {
                 name="blogPostStatus"
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Status" />
+                  <SelectValue placeholder={tPlaceholders("status")} />
                 </SelectTrigger>
                 <SelectContent>
                   {Object.values(BLOG_POST_STATUS).map((status) => (
@@ -92,33 +97,33 @@ export default function UpdateBlogPostFormView(props: Props) {
             </InputWrapper>
             <Separator />
             <InputWrapper
-              title="Meta Title"
+              title={t("metaTitle")}
               error={form.formState.errors.meta?.title?.message}
             >
               <Input
                 type="text"
                 {...form.register("meta.title")}
-                placeholder="Meta Title"
+                placeholder={tPlaceholders("metaTitle")}
               />
             </InputWrapper>
             <InputWrapper
-              title="Meta Description"
+              title={t("metaDescription")}
               error={form.formState.errors.meta?.description?.message}
             >
               <Textarea
                 className="min-h-[100px]"
                 {...form.register("meta.description")}
-                placeholder="Meta Description"
+                placeholder={tPlaceholders("metaDescription")}
               />
             </InputWrapper>
             <InputWrapper
-              title="Meta Keywords"
+              title={t("metaKeywords")}
               error={form.formState.errors.meta?.keywords?.message}
             >
               <Input
                 type="text"
                 {...form.register("meta.keywords")}
-                placeholder="Meta Keywords"
+                placeholder={tPlaceholders("metaKeywords")}
               />
             </InputWrapper>
           </FieldSet>
@@ -128,7 +133,7 @@ export default function UpdateBlogPostFormView(props: Props) {
           disabled={isPending || !form.formState.isValid}
           className=""
         >
-          {isPending && <LoadingSpinner />}Update Blog Post Details
+          {isPending && <LoadingSpinner />}{tActions("updateBlogPostDetails")}
         </Button>
       </form>
     </div>

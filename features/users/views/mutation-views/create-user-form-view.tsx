@@ -25,18 +25,19 @@ import { useTranslations } from "next-intl";
 const CreateUserFormView = () => {
   const t = useTranslations("common.form.labels")
   const tActions = useTranslations("common.actions")
+  const tDescs = useTranslations("common.form.descriptions")
+  const tSections = useTranslations("common.form.sections")
   const { form, onSubmit, isPending } = useCreateUserFormValidation();
   const formErrors = form.formState.errors;
   const globalFormError = formErrors.root?.message;
-  console.log(globalFormError);
   const globalError = useErrorMessage(form.formState.errors.root?.message);
 
   return (
     <div className="">
       <form onSubmit={onSubmit} className="grid w-full lg:min-w-[500px]">
         <FieldSet
-          title="User details"
-          description="Update the details of the user"
+          title={tSections("userDetails")}
+          description={tDescs("userDetails")}
           childrenClassName="grid gap-4 grid-cols-2"
         >
           <InputWrapper
@@ -50,7 +51,7 @@ const CreateUserFormView = () => {
 
           <InputWrapper
             title={t("email")}
-            description="user email at lease 5 characters"
+            description={tDescs("email")}
             error={formErrors.email?.message}
             className="col-span-full"
           >

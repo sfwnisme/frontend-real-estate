@@ -156,7 +156,9 @@
     "messages": {
       "notFound": "غير موجود",
       "loading": "جاري التحميل...",
-      "noData": "لا توجد بيانات متاحة"
+      "noData": "لا توجد بيانات متاحة",
+      "notPublished": "لم يتم نشر",
+      "youCannotDeleteYourself": "لا يمكنك حذف نفسك"
     }
   },
   "resources": {

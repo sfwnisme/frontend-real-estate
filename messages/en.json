@@ -94,7 +94,9 @@
       "previous": "Previous",
       "creating": "Creating...",
       "updating": "Updating...",
-      "deleting": "Deleting..."
+      "deleting": "Deleting...",
+      "notPublished": "Not Published",
+      "youCannotDeleteYourself": "You cannot delete yourself"
     },
     "table": {
       "headers": {

@@ -17,7 +17,7 @@ import { modalQuery } from "@/lib/utils";
 import { PAGES_ROUTES } from "@/constants/config";
 import can from "@/features/dashboard/auth/can";
 import { Visible } from "@sfwnisme/visi";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 type Props = {
   currentPage: number;
   searchParams: { [key: string]: string | undefined };
@@ -28,6 +28,9 @@ export default async function PropertiesTableView({
   searchParams,
 }: Props) {
   const locale = await getLocale();
+  const tTable = await getTranslations("common.table.headers")
+  const tActions = await getTranslations("common.actions")
+  console.log(tTable("title"))
   const properties = await getProperties(
     PAGINATION_CONFIG.PROPERTIES.DASHBOARD,
     currentPage
@@ -44,12 +47,12 @@ export default async function PropertiesTableView({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-start">Name</TableHead>
-            <TableHead className="text-start">Price</TableHead>
-            <TableHead className="text-start">Size</TableHead>
-            <TableHead className="text-start">Year Built</TableHead>
-            <TableHead className="text-start">Type</TableHead>
-            <TableHead className="text-start w-20">Actions</TableHead>
+            <TableHead className="text-start">{tTable('name')}</TableHead>
+            <TableHead className="text-start">{tTable('price')}</TableHead>
+            <TableHead className="text-start">{tTable('size')}</TableHead>
+            <TableHead className="text-start">{tTable('yearBuilt')}</TableHead>
+            <TableHead className="text-start">{tTable('type')}</TableHead>
+            <TableHead className="text-start w-20">{tTable('actions')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -79,7 +82,7 @@ export default async function PropertiesTableView({
                       <Link
                         href={`${PAGES_ROUTES.PROPERTIES.PREVIEW}/${property.slug}`}
                       >
-                        Open
+                        {tActions('open')}
                       </Link>
                     </Button>
                     <Visible when={canEditProperty}>

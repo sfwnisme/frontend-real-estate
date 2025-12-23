@@ -125,7 +125,7 @@
         "content": "المحتوى",
         "metaTitle": "عنوان Meta",
         "metaDescription": "وصف Meta",
-        "metaKeywords": "كلمات Meta المفتاحية",
+        "metaKeywords": "الكلامات المفتاحية",
         "featuredImage": "الصورة المميزة"
       },
       "placeholders": {
@@ -133,12 +133,12 @@
         "role": "الدور",
         "metaTitle": "عنوان Meta",
         "metaDescription": "وصف Meta",
-        "metaKeywords": "كلمات Meta المفتاحية",
+        "metaKeywords": "الكلامات المفتاحية",
         "email": "عنوان بريدك الإلكتروني"
       },
       "sections": {
         "userDetails": "تفاصيل المستخدم",
-        "seoSettings": "إعدادات SEO"
+        "seoSettings": "إعدادات محركات البحث"
       },
       "descriptions": {
         "userDetails": "انشاء مستخدم جديد",

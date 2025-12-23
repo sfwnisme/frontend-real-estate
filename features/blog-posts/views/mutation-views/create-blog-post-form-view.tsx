@@ -19,9 +19,13 @@ import ImageInput from "@/components/custom/image-input";
 import ImagePreview from "@/components/custom/image-preview";
 import { Button } from "@/components/ui/button";
 import LoadingSpinner from "@/components/custom/loading-spinner";
+import { useTranslations } from "next-intl";
 type Props = {};
 
 export default function CreateBlogPostFormView({}: Props) {
+  const t = useTranslations("common.form.labels")
+  const tSections = useTranslations("common.form.sections")
+  const tActions = useTranslations("common.actions")
   const { form, onSubmit, isPending } = useCreateBlogPostFormValidation();
   const image = form.watch("image");
   const imageUrl = image
@@ -69,7 +73,7 @@ export default function CreateBlogPostFormView({}: Props) {
         <div className="flex flex-col gap-4 w-full min-w-[500px] flex-1">
           <FieldSet title="title" variant="container">
             <InputWrapper
-              title="Title"
+              title={t("title")}
               error={form.formState.errors.title?.message}
             >
               <Input type="text" {...form.register("title")} />
@@ -77,7 +81,7 @@ export default function CreateBlogPostFormView({}: Props) {
           </FieldSet>
           <FieldSet title="excerpt" variant="container">
             <InputWrapper
-              title="Excerpt"
+              title={t("excerpt")}
               error={form.formState.errors.excerpt?.message}
             >
               <Input type="text" {...form.register("excerpt")} />
@@ -85,7 +89,7 @@ export default function CreateBlogPostFormView({}: Props) {
           </FieldSet>
           <FieldSet title="content" variant="container">
             <InputWrapper
-              title="Content"
+              title={t("content")}
               error={form.formState.errors.content?.message}
             >
               <Textarea
@@ -99,13 +103,13 @@ export default function CreateBlogPostFormView({}: Props) {
             disabled={isPending || !form.formState.isValid}
             className="hidden lg:flex"
           >
-            {isPending && <LoadingSpinner />}Create Blog Post
+            {isPending && <LoadingSpinner />}{tActions("create")}
           </Button>
         </div>
         <div className="flex flex-col gap-4 w-full lg:max-w-[400px]">
-          <FieldSet title="SEO settings" childrenClassName="grid gap-4">
+          <FieldSet title={tSections("seoSettings")} childrenClassName="grid gap-4">
             <InputWrapper
-              title="Status"
+              title={t("status")}
               error={form.formState.errors.status?.message}
             >
               <Select
@@ -116,7 +120,7 @@ export default function CreateBlogPostFormView({}: Props) {
                 name="blogPostStatus"
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Status" />
+                  <SelectValue placeholder={t("status")} />
                 </SelectTrigger>
                 <SelectContent>
                   {Object.values(BLOG_POST_STATUS).map((status) => (
@@ -129,37 +133,37 @@ export default function CreateBlogPostFormView({}: Props) {
             </InputWrapper>
             <Separator />
             <InputWrapper
-              title="Meta Title"
+              title={t("metaTitle")}
               error={form.formState.errors.meta?.title?.message}
             >
               <Input
                 type="text"
                 {...form.register("meta.title")}
-                placeholder="Meta Title"
+                placeholder={t("metaTitle")}
               />
             </InputWrapper>
             <InputWrapper
-              title="Meta Description"
+              title={t("metaDescription")}
               error={form.formState.errors.meta?.description?.message}
             >
               <Textarea
                 className="min-h-[100px]"
                 {...form.register("meta.description")}
-                placeholder="Meta Description"
+                placeholder={t("metaDescription")}
               />
             </InputWrapper>
             <InputWrapper
-              title="Meta Keywords"
+              title={t("metaKeywords")}
               error={form.formState.errors.meta?.keywords?.message}
             >
               <Input
                 type="text"
                 {...form.register("meta.keywords")}
-                placeholder="Meta Keywords"
+                placeholder={t("metaKeywords")}
               />
             </InputWrapper>
           </FieldSet>
-          <FieldSet title="Featured Image">
+          <FieldSet title={t("featuredImage")}>
             {image ? (
               renderImage
             ) : (
@@ -173,7 +177,7 @@ export default function CreateBlogPostFormView({}: Props) {
             disabled={isPending || !form.formState.isValid}
             className="w-full lg:hidden"
           >
-            {isPending && <LoadingSpinner />}Create Blog Post
+            {isPending && <LoadingSpinner />}{tActions("create")}
           </Button>
         </div>
       </form>

@@ -142,7 +142,8 @@
         "other": "الأخرى",
         "features": "الميزات",
         "video": "الفيديو",
-        "images": "الصور"
+        "images": "الصور",
+        "hidePropertyListing": "إخفاء العقار"
       },
       "placeholders": {
         "status": "الحالة",
@@ -150,7 +151,10 @@
         "metaTitle": "عنوان Meta",
         "metaDescription": "وصف Meta",
         "metaKeywords": "الكلامات المفتاحية",
-        "email": "عنوان بريدك الإلكتروني"
+        "email": "عنوان بريدك الإلكتروني",
+        "chooseFile": "اختر ملف",
+        "browseFiles": "تصفح الملفات",
+        "webpPreferable": "WEBP هو المفضل، يمكنك أيضا تحميل JPEG, PNG, JPG حتى 1MB"
       },
       "sections": {
         "userDetails": "تفاصيل المستخدم",
@@ -173,7 +177,9 @@
         "moreInformation": "قم بإضافة المزيد من المعلومات الخاصة بالعقار",
         "images": "قم بإضافة الصور الخاصة بالعقار",
         "features": "قم بإضافة الميزات الخاصة بالعقار يجب كتابة ',' بعد كل ميزة",
-        "video": "قم بإضافة الفيديو الخاص بالعقار يجب كتابة 'Youtube: go to the video > share > copy embed code'"
+        "video": "قم بإضافة الفيديو الخاص بالعقار يجب كتابة 'Youtube: go to the video > share > copy embed code'",
+        "hidePropertyFormPublicListing": "إخفاء هذه العقارات من الظهور للزوار",
+        "description": "وصف العقار يجب أن يكون 5 أحرف على الأقل"
       }
     },
     "dialog": {

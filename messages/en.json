@@ -144,7 +144,8 @@
         "other": "Other",
         "features": "Features",
         "video": "Video",
-        "images": "Images"
+        "images": "Images",
+        "hidePropertyListing": "Hide property listing"
       },
       "placeholders": {
         "status": "Status",
@@ -152,7 +153,10 @@
         "metaTitle": "Meta Title",
         "metaDescription": "Meta Description",
         "metaKeywords": "Meta Keywords",
-        "email": "Your email address"
+        "email": "Your email address",
+        "chooseFile": "Choose a file",
+        "browseFiles": "Browse Files",
+        "webpPreferable": "WEBP is the preferable, also you can upload JPEG, PNG, JPG up to 1MB"
       },
       "sections": {
         "userDetails": "User details",
@@ -175,7 +179,9 @@
         "moreInformation": "Add more information about the property",
         "images": "Add property images",
         "features": "Add property features, write ',' after each feature",
-        "video": "Add property video, write 'Youtube: go to the video > share > copy embed code'"
+        "video": "Add property video, write 'Youtube: go to the video > share > copy embed code'",
+        "hidePropertyFormPublicListing": "Hide this property form public listing",
+        "description": "Property description at lease 5 characters"
       }
     },
     "dialog": {

@@ -212,7 +212,8 @@
       "notFound": "Not Found",
       "loading": "Loading...",
       "noData": "No data available",
-      "notPublished": "Not Published"
+      "notPublished": "Not Published",
+      "editing": "Editing"
     },
     "toast": {
       "settingFeaturedImage": "Setting featured image...",

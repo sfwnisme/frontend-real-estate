@@ -210,7 +210,8 @@
       "notFound": "غير موجود",
       "loading": "جاري التحميل...",
       "noData": "لا توجد بيانات متاحة",
-      "notPublished": "لم يتم نشر"
+      "notPublished": "لم يتم نشر",
+      "editing": "تعديل"
     },
     "toast": {
       "settingFeaturedImage": "جاري تعيين الصورة المميزة...",

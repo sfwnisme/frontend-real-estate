@@ -11,6 +11,8 @@ const buttonGroupVariants = cva(
       orientation: {
         horizontal:
           "[&>*:not(:first-child)]:rounded-l-none [&>*:not(:first-child)]:border-l-0 [&>*:not(:last-child)]:rounded-r-none",
+          horizontalAr:
+          "[&>*:not(:first-child)]:rounded-r-none [&>*:not(:first-child)]:border-r-0 [&>*:not(:last-child)]:rounded-l-none",
         vertical:
           "flex-col [&>*:not(:first-child)]:rounded-t-none [&>*:not(:first-child)]:border-t-0 [&>*:not(:last-child)]:rounded-b-none",
       },

@@ -27,6 +27,7 @@ import {
 import Image from "next/image";
 import useCan from "./auth/use-can";
 import { Permission } from "@/constants/permissions";
+import { useLocale } from "next-intl";
 
 type FilteredRoute = {
   name: string;
@@ -101,7 +102,7 @@ const data: {
 export function DashboardSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
-
+  const locale = useLocale();
   const {can} = useCan()
   
   const filteredRoutes = data.routes.filter((route) => {
@@ -111,7 +112,7 @@ export function DashboardSidebar({
   });
   
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar collapsible="icon" {...props} side={locale === "en" ? "left" : "right"}>
       <SidebarHeader>
         <div className="w-full p-2">
           <Image

@@ -44,9 +44,9 @@ export default async function PropertiesTableView({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Name</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead>Size</TableHead>
+            <TableHead className="text-start">Name</TableHead>
+            <TableHead className="text-start">Price</TableHead>
+            <TableHead className="text-start">Size</TableHead>
             <TableHead className="text-start">Year Built</TableHead>
             <TableHead className="text-start">Type</TableHead>
             <TableHead className="text-start w-20">Actions</TableHead>

@@ -58,7 +58,7 @@ const CreatePropertyWithImagesFormView = () => {
 
           <InputWrapper
             title={t("description")}
-            description="property description at lease 5 characters"
+            description={tDescs("description")}
             error={formErrors.description?.message}
             className="col-span-full"
           >
@@ -188,10 +188,10 @@ const CreatePropertyWithImagesFormView = () => {
             />
             <div className="grid gap-1.5 font-normal">
               <p className="text-sm leading-none font-medium">
-                Hide property listing
+                {t("hidePropertyListing")}
               </p>
               <small className="text-muted-foreground">
-                Hide this property form public listing
+                {tDescs("hidePropertyFormPublicListing")}
               </small>
             </div>
           </Label>

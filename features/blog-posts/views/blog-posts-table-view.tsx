@@ -17,7 +17,7 @@ import { formatDate, modalQuery } from "@/lib/utils";
 import { PAGES_ROUTES } from "@/constants/config";
 import can from "@/features/dashboard/auth/can";
 import { Visible } from "@sfwnisme/visi";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 type Props = {
   currentPage: number;
@@ -33,6 +33,9 @@ export default async function BlogPostsTableView({
     currentPage
   );
   const locale = await getLocale();
+  const tTable = await getTranslations("common.table.headers")
+  const tActions = await getTranslations("common.actions")
+  const tMessages = await getTranslations("common.messages")
   const blogPostsData = blogPosts.data?.data;
   if (!blogPostsData || blogPostsData?.length === 0) {
     return notFound();
@@ -44,11 +47,11 @@ export default async function BlogPostsTableView({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-start">Title</TableHead>
-            <TableHead className="text-start">Creation Date</TableHead>
-            <TableHead className="text-start">Last Modification</TableHead>
-            <TableHead className="text-start">Published Date</TableHead>
-            <TableHead className="text-start w-20">Actions</TableHead>
+            <TableHead className="text-start">{tTable('title')}</TableHead>
+            <TableHead className="text-start">{tTable('creationDate')}</TableHead>
+            <TableHead className="text-start">{tTable('lastModification')}</TableHead>
+            <TableHead className="text-start">{tTable('publishedDate')}</TableHead>
+            <TableHead className="text-start w-20">{tTable('actions')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -62,7 +65,7 @@ export default async function BlogPostsTableView({
                 {formatDate(blogPost.updatedAt)}
               </TableCell>
               <TableCell className="text-start">
-                {formatDate(blogPost.publishedAt, "Not Published")}
+                {formatDate(blogPost.publishedAt, tMessages('notPublished'))}
               </TableCell>
               <TableCell className="text-end w-fit">
                 <div className="inline-flex items-center gap-2">
@@ -71,7 +74,7 @@ export default async function BlogPostsTableView({
                       <Link
                         href={`${PAGES_ROUTES.BLOG_POSTS.PREVIEW}/${blogPost.slug}`}
                       >
-                        Open
+                        {tActions('open')}
                       </Link>
                     </Button>
                     <Visible when={canEditBlogPost}>

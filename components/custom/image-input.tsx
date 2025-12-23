@@ -4,6 +4,7 @@ import React, { forwardRef, useRef } from "react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 type InputType = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -12,6 +13,7 @@ type InputType = React.DetailedHTMLProps<
 
 const ImageInput = forwardRef<HTMLInputElement, InputType>(
   (props: InputType, ref) => {
+    const t = useTranslations("common.form.placeholders")
     const inputId = React.useId();
     const { className, ...rest } = props;
     return (
@@ -29,12 +31,12 @@ const ImageInput = forwardRef<HTMLInputElement, InputType>(
           className="hover:bg-gray-50/50 duration-75 p-4 md:p-8 h-full w-full text-center text-sm md:text-base flex flex-col gap-2 items-center justify-center text-gray-500 rounded-2xl border-2 border-dashed cursor-pointer"
         >
           <UploadCloud />
-          <p>Choose a file</p>
+          <p>{t("chooseFile")}</p>
           <small>
-            WEBP is the preferable, also you can upload JPEG, PNG, JPG up to 1MB
+            {t("webpPreferable")}
           </small>
           <Badge variant="outline" className="h-8">
-            Browse Files
+            {t("browseFiles")}
           </Badge>
         </label>
       </div>

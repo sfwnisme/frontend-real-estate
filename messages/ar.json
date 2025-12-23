@@ -68,5 +68,115 @@
       },
       "Others": ["سياسة الخصوصية", "شروط الخدمة"]
     }
+  },
+  "dashboard": {
+    "sidebar": {
+      "overview": "نظرة عامة",
+      "properties": "العقارات",
+      "createProperty": "إنشاء عقار",
+      "blogPosts": "المقالات",
+      "createBlogPost": "إنشاء مقال",
+      "users": "المستخدمون",
+      "createUser": "إنشاء مستخدم"
+    }
+  },
+  "common": {
+    "actions": {
+      "create": "إنشاء",
+      "update": "تحديث",
+      "delete": "حذف",
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "submit": "إرسال",
+      "open": "فتح",
+      "edit": "تعديل",
+      "next": "التالي",
+      "previous": "السابق",
+      "creating": "جاري الإنشاء...",
+      "updating": "جاري التحديث...",
+      "deleting": "جاري الحذف..."
+    },
+    "table": {
+      "headers": {
+        "title": "العنوان",
+        "name": "الاسم",
+        "email": "البريد الإلكتروني",
+        "role": "الدور",
+        "actions": "الإجراءات",
+        "creationDate": "تاريخ الإنشاء",
+        "lastModification": "آخر تعديل",
+        "publishedDate": "تاريخ النشر",
+        "price": "السعر",
+        "size": "المساحة",
+        "yearBuilt": "سنة البناء",
+        "type": "النوع"
+      }
+    },
+    "form": {
+      "labels": {
+        "title": "العنوان",
+        "name": "الاسم",
+        "email": "البريد الإلكتروني",
+        "password": "كلمة المرور",
+        "role": "الدور",
+        "type": "النوع",
+        "status": "الحالة",
+        "excerpt": "الملخص",
+        "content": "المحتوى",
+        "metaTitle": "عنوان Meta",
+        "metaDescription": "وصف Meta",
+        "metaKeywords": "كلمات Meta المفتاحية",
+        "featuredImage": "الصورة المميزة"
+      },
+      "placeholders": {
+        "status": "الحالة",
+        "role": "الدور",
+        "metaTitle": "عنوان Meta",
+        "metaDescription": "وصف Meta",
+        "metaKeywords": "كلمات Meta المفتاحية",
+        "email": "عنوان بريدك الإلكتروني"
+      },
+      "sections": {
+        "userDetails": "تفاصيل المستخدم",
+        "seoSettings": "إعدادات SEO"
+      },
+      "descriptions": {
+        "userDetails": "تحديث تفاصيل المستخدم",
+        "email": "بريد المستخدم الإلكتروني يجب أن يكون 5 أحرف على الأقل"
+      }
+    },
+    "dialog": {
+      "delete": {
+        "title": "حذف بيانات {resource}؟",
+        "description": "هل أنت متأكد من أنك تريد حذف بيانات {resource} بشكل دائم؟ لا يمكن التراجع عن هذا الإجراء.",
+        "confirm": "حذف",
+        "cancel": "إلغاء"
+      }
+    },
+    "messages": {
+      "notFound": "غير موجود",
+      "loading": "جاري التحميل...",
+      "noData": "لا توجد بيانات متاحة"
+    }
+  },
+  "resources": {
+    "property": {
+      "singular": "عقار",
+      "plural": "عقارات",
+      "create": "إنشاء عقار",
+      "update": "تحديث عقار"
+    },
+    "blogPost": {
+      "singular": "مقال",
+      "plural": "مقالات",
+      "create": "إنشاء مقال",
+      "update": "تحديث مقال"
+    },
+    "user": {
+      "singular": "مستخدم",
+      "plural": "مستخدمون",
+      "create": "إنشاء مستخدم",
+      "update": "تحديث مستخدم"
+    }
   }
 }

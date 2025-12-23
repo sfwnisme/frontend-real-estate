@@ -68,5 +68,115 @@
       },
       "Others": ["Privacy Policy", "Terms of Service"]
     }
+  },
+  "dashboard": {
+    "sidebar": {
+      "overview": "Overview",
+      "properties": "Properties",
+      "createProperty": "Create Property",
+      "blogPosts": "Blog Posts",
+      "createBlogPost": "Create Blog Post",
+      "users": "Users",
+      "createUser": "Create User"
+    }
+  },
+  "common": {
+    "actions": {
+      "create": "Create",
+      "update": "Update",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "save": "Save",
+      "submit": "Submit",
+      "open": "Open",
+      "edit": "Edit",
+      "next": "Next",
+      "previous": "Previous",
+      "creating": "Creating...",
+      "updating": "Updating...",
+      "deleting": "Deleting..."
+    },
+    "table": {
+      "headers": {
+        "title": "Title",
+        "name": "Name",
+        "email": "Email",
+        "role": "Role",
+        "actions": "Actions",
+        "creationDate": "Creation Date",
+        "lastModification": "Last Modification",
+        "publishedDate": "Published Date",
+        "price": "Price",
+        "size": "Size",
+        "yearBuilt": "Year Built",
+        "type": "Type"
+      }
+    },
+    "form": {
+      "labels": {
+        "title": "Title",
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "role": "Role",
+        "type": "Type",
+        "status": "Status",
+        "excerpt": "Excerpt",
+        "content": "Content",
+        "metaTitle": "Meta Title",
+        "metaDescription": "Meta Description",
+        "metaKeywords": "Meta Keywords",
+        "featuredImage": "Featured Image"
+      },
+      "placeholders": {
+        "status": "Status",
+        "role": "Role",
+        "metaTitle": "Meta Title",
+        "metaDescription": "Meta Description",
+        "metaKeywords": "Meta Keywords",
+        "email": "Your email address"
+      },
+      "sections": {
+        "userDetails": "User details",
+        "seoSettings": "SEO settings"
+      },
+      "descriptions": {
+        "userDetails": "Update the details of the user",
+        "email": "user email at lease 5 characters"
+      }
+    },
+    "dialog": {
+      "delete": {
+        "title": "Delete {resource} Data?",
+        "description": "Are you sure you want to permanently delete this {resource} data? This action cannot be undone.",
+        "confirm": "Delete",
+        "cancel": "Cancel"
+      }
+    },
+    "messages": {
+      "notFound": "Not Found",
+      "loading": "Loading...",
+      "noData": "No data available"
+    }
+  },
+  "resources": {
+    "property": {
+      "singular": "Property",
+      "plural": "Properties",
+      "create": "Create Property",
+      "update": "Update Property"
+    },
+    "blogPost": {
+      "singular": "Blog Post",
+      "plural": "Blog Posts",
+      "create": "Create Blog Post",
+      "update": "Update Blog Post"
+    },
+    "user": {
+      "singular": "User",
+      "plural": "Users",
+      "create": "Create User",
+      "update": "Update User"
+    }
   }
 }

@@ -99,7 +99,8 @@
       "reset": "Reset",
       "visit": "Visit",
       "uploadImages": "Upload Images",
-      "updatePropertyDetails": "Update property details"
+      "updatePropertyDetails": "Update property details",
+      "updateBlogPostDetails": "Update Blog Post Details"
     },
     "table": {
       "headers": {
@@ -173,7 +174,8 @@
         "images": "Images",
         "slug": "Slug",
         "currentImages": "Current images",
-        "uploadImages": "Upload images"
+        "uploadImages": "Upload images",
+        "uploadImage": "Upload Image"
       },
       "descriptions": {
         "userDetails": "Create a new user",
@@ -196,6 +198,7 @@
         "hidePropertyFormPublicListing": "Hide this property form public listing",
         "description": "Property description at lease 5 characters",
         "slugDescription": "The slug is the URL of the property",
+        "slugDescriptionBlogPost": "The slug is the URL of the blog post",
         "currentImagesDescription": "View the current images for the property",
         "uploadImagesDescription": "Upload new images for the property"
       }
@@ -229,7 +232,9 @@
     "slug": {
       "defaultSlug": "This is the default slug",
       "setDefaultSlug": "set the property title as the slug",
-      "visitProperty": "Visit property"
+      "setDefaultSlugBlogPost": "set the blog post title as the slug",
+      "visitProperty": "Visit property",
+      "visitBlogPost": "Visit blog post"
     }
   },
   "resources": {

@@ -98,7 +98,8 @@
       "reset": "إعادة تعيين",
       "visit": "زيارة",
       "uploadImages": "رفع الصور",
-      "updatePropertyDetails": "تحديث تفاصيل العقار"
+      "updatePropertyDetails": "تحديث تفاصيل العقار",
+      "updateBlogPostDetails": "تحديث تفاصيل المقال"
     },
     "table": {
       "headers": {
@@ -171,7 +172,8 @@
         "images": "الصور",
         "slug": "الرابط",
         "currentImages": "الصور الحالية",
-        "uploadImages": "رفع الصور"
+        "uploadImages": "رفع الصور",
+        "uploadImage": "رفع الصورة"
       },  
       "descriptions": {
         "userDetails": "انشاء مستخدم جديد",
@@ -194,6 +196,7 @@
         "hidePropertyFormPublicListing": "إخفاء هذه العقارات من الظهور للزوار",
         "description": "وصف العقار يجب أن يكون 5 أحرف على الأقل",
         "slugDescription": "الرابط هو عنوان URL الخاص بالعقار",
+        "slugDescriptionBlogPost": "الرابط هو عنوان URL الخاص بالمقال",
         "currentImagesDescription": "عرض الصور الحالية للعقار",
         "uploadImagesDescription": "رفع صور جديدة للعقار"
       }
@@ -227,7 +230,9 @@
     "slug": {
       "defaultSlug": "هذا هو الرابط الافتراضي",
       "setDefaultSlug": "تعيين عنوان العقار كرابط",
-      "visitProperty": "زيارة العقار"
+      "setDefaultSlugBlogPost": "تعيين عنوان المقال كرابط",
+      "visitProperty": "زيارة العقار",
+      "visitBlogPost": "زيارة المقال"
     }
   },
   "resources": {

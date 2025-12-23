@@ -95,7 +95,11 @@
       "creating": "Creating...",
       "updating": "Updating...",
       "deleting": "Deleting...",
-      "notPublished": "Not Published"
+      "notPublished": "Not Published",
+      "reset": "Reset",
+      "visit": "Visit",
+      "uploadImages": "Upload Images",
+      "updatePropertyDetails": "Update property details"
     },
     "table": {
       "headers": {
@@ -166,7 +170,10 @@
         "classification": "Classification",
         "address": "Address",
         "moreInformation": "More Information",
-        "images": "Images"
+        "images": "Images",
+        "slug": "Slug",
+        "currentImages": "Current images",
+        "uploadImages": "Upload images"
       },
       "descriptions": {
         "userDetails": "Create a new user",
@@ -174,15 +181,23 @@
         "email": "user email at lease 5 characters",
         "youCannotDeleteYourself": "You cannot delete yourself",
         "propertyDetails": "Create a new property with images",
+        "updatePropertyDetails": "Update the details of the property",
         "specifications": "Add the property specifications",
+        "updateSpecifications": "Update the specifications of the property",
         "classification": "Add the property classification",
+        "updateClassification": "Update the classification of the property",
         "address": "Add the property address",
+        "updateAddress": "Update the address of the property",
         "moreInformation": "Add more information about the property",
+        "updateMoreInformation": "Update the more information of the property",
         "images": "Add property images",
         "features": "Add property features, write ',' after each feature",
         "video": "Add property video, write 'Youtube: go to the video > share > copy embed code'",
         "hidePropertyFormPublicListing": "Hide this property form public listing",
-        "description": "Property description at lease 5 characters"
+        "description": "Property description at lease 5 characters",
+        "slugDescription": "The slug is the URL of the property",
+        "currentImagesDescription": "View the current images for the property",
+        "uploadImagesDescription": "Upload new images for the property"
       }
     },
     "dialog": {
@@ -198,6 +213,22 @@
       "loading": "Loading...",
       "noData": "No data available",
       "notPublished": "Not Published"
+    },
+    "toast": {
+      "settingFeaturedImage": "Setting featured image...",
+      "featuredImageSet": "Featured image set successfully",
+      "failedToSetFeaturedImage": "Failed to set featured image",
+      "deletingImage": "Deleting image...",
+      "imageDeleted": "Image deleted successfully",
+      "failedToDeleteImage": "Failed to delete image",
+      "uploadingImages": "Uploading images...",
+      "imagesUploaded": "Images uploaded successfully",
+      "failedToUploadImages": "Failed to upload images"
+    },
+    "slug": {
+      "defaultSlug": "This is the default slug",
+      "setDefaultSlug": "set the property title as the slug",
+      "visitProperty": "Visit property"
     }
   },
   "resources": {

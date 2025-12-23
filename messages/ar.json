@@ -94,7 +94,11 @@
       "previous": "السابق",
       "creating": "جاري الإنشاء...",
       "updating": "جاري التحديث...",
-      "deleting": "جاري الحذف..."
+      "deleting": "جاري الحذف...",
+      "reset": "إعادة تعيين",
+      "visit": "زيارة",
+      "uploadImages": "رفع الصور",
+      "updatePropertyDetails": "تحديث تفاصيل العقار"
     },
     "table": {
       "headers": {
@@ -164,7 +168,10 @@
         "classification": "التصنيف",
         "address": "العنوان",
         "moreInformation": "المزيد من المعلومات",
-        "images": "الصور"
+        "images": "الصور",
+        "slug": "الرابط",
+        "currentImages": "الصور الحالية",
+        "uploadImages": "رفع الصور"
       },  
       "descriptions": {
         "userDetails": "انشاء مستخدم جديد",
@@ -172,15 +179,23 @@
         "email": "بريد المستخدم الإلكتروني يجب أن يكون 5 أحرف على الأقل",
         "youCannotDeleteYourself": "لا يمكنك حذف نفسك",
         "propertyDetails": "قم بإنشاء عقار جديد مع الصور",
+        "updatePropertyDetails": "تحديث تفاصيل العقار",
         "specifications": "قم بإضافة المواصفات الخاصة بالعقار",
+        "updateSpecifications": "تحديث مواصفات العقار",
         "classification": "قم بإضافة التصنيف الخاص بالعقار",
+        "updateClassification": "تحديث تصنيف العقار",
         "address": "قم بإضافة العنوان الخاص بالعقار",
+        "updateAddress": "تحديث عنوان العقار",
         "moreInformation": "قم بإضافة المزيد من المعلومات الخاصة بالعقار",
+        "updateMoreInformation": "تحديث المزيد من المعلومات الخاصة بالعقار",
         "images": "قم بإضافة الصور الخاصة بالعقار",
         "features": "قم بإضافة الميزات الخاصة بالعقار يجب كتابة ',' بعد كل ميزة",
         "video": "قم بإضافة الفيديو الخاص بالعقار يجب كتابة 'Youtube: go to the video > share > copy embed code'",
         "hidePropertyFormPublicListing": "إخفاء هذه العقارات من الظهور للزوار",
-        "description": "وصف العقار يجب أن يكون 5 أحرف على الأقل"
+        "description": "وصف العقار يجب أن يكون 5 أحرف على الأقل",
+        "slugDescription": "الرابط هو عنوان URL الخاص بالعقار",
+        "currentImagesDescription": "عرض الصور الحالية للعقار",
+        "uploadImagesDescription": "رفع صور جديدة للعقار"
       }
     },
     "dialog": {
@@ -196,6 +211,22 @@
       "loading": "جاري التحميل...",
       "noData": "لا توجد بيانات متاحة",
       "notPublished": "لم يتم نشر"
+    },
+    "toast": {
+      "settingFeaturedImage": "جاري تعيين الصورة المميزة...",
+      "featuredImageSet": "تم تعيين الصورة المميزة بنجاح",
+      "failedToSetFeaturedImage": "فشل تعيين الصورة المميزة",
+      "deletingImage": "جاري حذف الصورة...",
+      "imageDeleted": "تم حذف الصورة بنجاح",
+      "failedToDeleteImage": "فشل حذف الصورة",
+      "uploadingImages": "جاري رفع الصور...",
+      "imagesUploaded": "تم رفع الصور بنجاح",
+      "failedToUploadImages": "فشل رفع الصور"
+    },
+    "slug": {
+      "defaultSlug": "هذا هو الرابط الافتراضي",
+      "setDefaultSlug": "تعيين عنوان العقار كرابط",
+      "visitProperty": "زيارة العقار"
     }
   },
   "resources": {

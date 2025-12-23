@@ -25,10 +25,10 @@ export default function UpdateBlogPostView(props: Props) {
       </div>
       <div className="col-span-2 flex flex-col gap-4 h-full">
         <UpdateBlogPostSlugFormView blogPost={stableBlogPost} />
-          <CreateNewBlogPostImageFormView
-            blogPostId={stableBlogPost._id}
-            image={stableImage}
-          />
+        <CreateNewBlogPostImageFormView
+          blogPostId={stableBlogPost._id}
+          image={stableImage}
+        />
       </div>
     </div>
   );

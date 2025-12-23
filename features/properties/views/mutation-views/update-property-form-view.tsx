@@ -2,6 +2,7 @@
 import React, { memo } from "react";
 import { DevTool } from "@hookform/devtools";
 import { Controller } from "react-hook-form";
+import { useTranslations } from "next-intl";
 import {
   Select,
   SelectContent,
@@ -29,6 +30,11 @@ type Props = {
 
 const UpdatePropertyFormView = (props: Props) => {
   const { property } = props;
+  const t = useTranslations("common.form.labels");
+  const tActions = useTranslations("common.actions");
+  const tDescs = useTranslations("common.form.descriptions");
+  const tSections = useTranslations("common.form.sections");
+  const tPlaceholders = useTranslations("common.form.placeholders");
   const { form, onSubmit, isPending } =
     useUpdatePropertyFormValidation(property);
   const formErrors = form.formState.errors;
@@ -48,12 +54,12 @@ const UpdatePropertyFormView = (props: Props) => {
         >
           <div className="col-span-full">
             <FieldSet
-              title="Property details"
-              description="Update the details of the property"
+              title={tSections("propertyDetails")}
+              description={tDescs("updatePropertyDetails")}
               childrenClassName="grid gap-4 grid-cols-2"
             >
               <InputWrapper
-                title="Title"
+                title={t("title")}
                 error={formErrors.title?.message}
                 className="col-span-full"
                 name="title"
@@ -62,22 +68,22 @@ const UpdatePropertyFormView = (props: Props) => {
               </InputWrapper>
 
               <InputWrapper
-                title="Description"
-                description="property description at lease 5 characters"
+                title={t("description")}
+                description={tDescs("description")}
                 error={formErrors.description?.message}
                 className="col-span-full"
               >
                 <Textarea id="description" {...form.register("description")} />
               </InputWrapper>
               <InputWrapper
-                title="Price"
+                title={t("price")}
                 error={formErrors.price?.message}
                 className=""
               >
                 <Input type="number" id="price" {...form.register("price")} />
               </InputWrapper>
               <InputWrapper
-                title="Property size"
+                title={t("propertySize")}
                 error={formErrors.propertySize?.message}
               >
                 <Input
@@ -90,12 +96,12 @@ const UpdatePropertyFormView = (props: Props) => {
           </div>
           <div className="col-span-full sm:col-span-1">
             <FieldSet
-              title="Specifications"
-              description="Update the specifications of the property"
+              title={tSections("specifications")}
+              description={tDescs("updateSpecifications")}
               childrenClassName="grid grid-cols-2 gap-4"
             >
               <InputWrapper
-                title="Bedrooms"
+                title={t("bedrooms")}
                 error={formErrors.bedrooms?.message}
               >
                 <Input
@@ -105,7 +111,7 @@ const UpdatePropertyFormView = (props: Props) => {
                 />
               </InputWrapper>
               <InputWrapper
-                title="Bathrooms"
+                title={t("bathrooms")}
                 error={formErrors.bathrooms?.message}
               >
                 <Input
@@ -114,11 +120,11 @@ const UpdatePropertyFormView = (props: Props) => {
                   {...form.register("bathrooms")}
                 />
               </InputWrapper>
-              <InputWrapper title="Garage" error={formErrors.garage?.message}>
+              <InputWrapper title={t("garage")} error={formErrors.garage?.message}>
                 <Input type="number" id="garage" {...form.register("garage")} />
               </InputWrapper>
               <InputWrapper
-                title="Garage size"
+                title={t("garageSize")}
                 error={formErrors.garageSize?.message}
               >
                 <Input
@@ -128,7 +134,7 @@ const UpdatePropertyFormView = (props: Props) => {
                 />
               </InputWrapper>
               <InputWrapper
-                title="Year built"
+                title={t("yearBuilt")}
                 error={formErrors.yearBuilt?.message}
                 className="col-span-full"
               >
@@ -141,12 +147,12 @@ const UpdatePropertyFormView = (props: Props) => {
             </FieldSet>
           </div>
           <FieldSet
-            title="Classification"
-            description="Update the classification of the property"
+            title={tSections("classification")}
+            description={tDescs("updateClassification")}
             childrenClassName="grid gap-4"
             className="col-span-full sm:col-span-1"
           >
-            <InputWrapper title="Type" error={formErrors.propertyType?.message}>
+            <InputWrapper title={t("type")} error={formErrors.propertyType?.message}>
               <Controller
                 name="propertyType"
                 control={form.control}
@@ -157,7 +163,7 @@ const UpdatePropertyFormView = (props: Props) => {
                     name="propertyType"
                   >
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Type" />
+                      <SelectValue placeholder={t("type")} />
                     </SelectTrigger>
                     <SelectContent>
                       {Object.values(PROPERTY_TYPE).map((type) => (
@@ -171,7 +177,7 @@ const UpdatePropertyFormView = (props: Props) => {
               />
             </InputWrapper>
             <InputWrapper
-              title="Status"
+              title={t("status")}
               error={formErrors.propertyStatus?.message}
             >
               <Controller
@@ -184,7 +190,7 @@ const UpdatePropertyFormView = (props: Props) => {
                     name="propertyStatus"
                   >
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Status" />
+                      <SelectValue placeholder={tPlaceholders("status")} />
                     </SelectTrigger>
                     <SelectContent>
                       {Object.values(PROPERTY_STATUS).map((status) => (
@@ -207,22 +213,22 @@ const UpdatePropertyFormView = (props: Props) => {
               />
               <div className="grid gap-1.5 font-normal">
                 <p className="text-sm leading-none font-medium">
-                  Hide property listing
+                  {t("hidePropertyListing")}
                 </p>
                 <small className="text-muted-foreground">
-                  Hide this property form public listing
+                  {tDescs("hidePropertyFormPublicListing")}
                 </small>
               </div>
             </Label>
           </FieldSet>
           <FieldSet
-            title="Address"
-            description="Update the address of the property"
+            title={tSections("address")}
+            description={tDescs("updateAddress")}
             className="col-span-full"
             childrenClassName="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4"
           >
             <InputWrapper
-              title="State"
+              title={t("state")}
               error={formErrors.address?.state?.message}
             >
               <Input
@@ -232,7 +238,7 @@ const UpdatePropertyFormView = (props: Props) => {
               />
             </InputWrapper>
             <InputWrapper
-              title="City"
+              title={t("city")}
               error={formErrors.address?.city?.message}
             >
               <Input
@@ -242,7 +248,7 @@ const UpdatePropertyFormView = (props: Props) => {
               />
             </InputWrapper>
             <InputWrapper
-              title="Area"
+              title={t("area")}
               error={formErrors.address?.area?.message}
             >
               <Input
@@ -252,7 +258,7 @@ const UpdatePropertyFormView = (props: Props) => {
               />
             </InputWrapper>
             <InputWrapper
-              title="Zip code"
+              title={t("zipCode")}
               error={formErrors.address?.zipCode?.message}
             >
               <Input
@@ -262,7 +268,7 @@ const UpdatePropertyFormView = (props: Props) => {
               />
             </InputWrapper>
             <InputWrapper
-              title="Other"
+              title={t("other")}
               error={formErrors.address?.other?.message}
               className="col-span-full sm:col-span-2 lg:col-span-2"
             >
@@ -274,23 +280,23 @@ const UpdatePropertyFormView = (props: Props) => {
             </InputWrapper>
           </FieldSet>
           <FieldSet
-            title="More information"
-            description="Update the more information of the property"
+            title={tSections("moreInformation")}
+            description={tDescs("updateMoreInformation")}
             childrenClassName="grid gap-4"
             className="col-span-full"
           >
             <InputWrapper
-              title="Features"
-              description="adding (,) after every feature is a must i.e. 'Pool, Garden, Red Sea, International resturants and cafés' "
+              title={t("features")}
+              description={tDescs("features")}
               disableError
             >
               <Input type="text" id="features" {...form.register("features")} />
             </InputWrapper>
             <InputWrapper
-              title="Video"
+              title={t("video")}
               error={formErrors.video?.message}
               disableError
-              description="Youtube: go to the video > share > copy embed code"
+              description={tDescs("video")}
             >
               <Input
                 type="text"
@@ -311,7 +317,7 @@ const UpdatePropertyFormView = (props: Props) => {
           <AlertDescription>{globalError}</AlertDescription>
         </Alert>
         <Button type="submit" className="w-full" disabled={!canUpdate}>
-          {isPending && <LoadingSpinner />}Update property details
+          {isPending && <LoadingSpinner />}{tActions("updatePropertyDetails")}
         </Button>
         <DevTool control={form.control} />
       </form>

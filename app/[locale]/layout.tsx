@@ -16,11 +16,13 @@ type Props = {
 const interFont = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
 });
 
 const kufiFont = Noto_Kufi_Arabic({
   variable: "--font-noto-kufi-arabic",
   subsets: ["arabic"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
 });
 
 export const metadata: Metadata = {
@@ -44,13 +46,14 @@ export default async function RootLayout({ children, params }: Props) {
   const defaultLocale = locale ?? routing.defaultLocale;
   const isRtl = defaultLocale === "ar";
   const font = isRtl ? kufiFont.className : interFont.className;
+  const fontVariables = `${interFont.variable} ${kufiFont.variable}`
 
   return (
     <html
       lang={defaultLocale}
       dir={isRtl ? "rtl" : "ltr"}
     >
-      <body className={`${font} antialiased overflow-x-hidden`}>
+      <body className={`${font} ${fontVariables} antialiased overflow-x-hidden`}>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
         <Toaster position="top-right" expand />
       </body>

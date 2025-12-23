@@ -4,6 +4,7 @@ import { ImageType } from "@/types/types";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
 import React, { memo, useCallback, useMemo, useTransition } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Label } from "../../../../components/ui/label";
 import { Checkbox } from "../../../../components/ui/checkbox";
@@ -20,6 +21,7 @@ const UploadedPropertyImagesView = (props: Props) => {
   const images = props.images || [];
   const ownerId = images[0]?.ownerId;
   const [isPending, startTransition] = useTransition();
+  const tToast = useTranslations("common.toast");
   console.log("TRIGGER: uploaded-images");
   const handleSetFeaturedImage = useCallback(
     async (id: string) => {
@@ -29,21 +31,21 @@ const UploadedPropertyImagesView = (props: Props) => {
             const featuredImage = await setFeaturedImage(id, ownerId);
             if (!featuredImage.data) {
               throw new Error(
-                featuredImage.msg || "Failed to set featured image"
+                featuredImage.msg || tToast("failedToSetFeaturedImage")
               );
             }
             // revalidateTag handles the data refresh automatically
             return featuredImage.data;
           },
           {
-            loading: "Setting featured image...",
-            success: "Featured image set successfully",
-            error: "Failed to set featured image",
+            loading: tToast("settingFeaturedImage"),
+            success: tToast("featuredImageSet"),
+            error: tToast("failedToSetFeaturedImage"),
           }
         );
       });
     },
-    [ownerId]
+    [ownerId, tToast]
   );
   
   const handleDeleteImage = useCallback(
@@ -53,20 +55,20 @@ const UploadedPropertyImagesView = (props: Props) => {
           async () => {
             const deletedImage = await deleteImage(String(id), ownerId);
             if (!deletedImage.data) {
-              throw new Error(deletedImage.msg || "Failed to delete image");
+              throw new Error(deletedImage.msg || tToast("failedToDeleteImage"));
             }
             // No need for router.refresh() - revalidateTag handles it
             return deletedImage.data;
           },
           {
-            loading: "Deleting image...",
-            success: "Image deleted successfully",
-            error: "Failed to delete image",
+            loading: tToast("deletingImage"),
+            success: tToast("imageDeleted"),
+            error: tToast("failedToDeleteImage"),
           }
         );
       });
     },
-    [ownerId]
+    [ownerId, tToast]
   );
 
   const renderImagePreview = useMemo(() => {

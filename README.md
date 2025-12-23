@@ -9,7 +9,8 @@ You can manage your own properties listing, blog-post , and offer paid services(
 - [x] translate data tables, buttons, and links
 - [x] translate creation forms
 - [x] optimize UI to align RTL
-- [ ] translate update data forms
+- [x] translate update data forms
+- [ ] translate metadata
 
 ## Application v1 implementations
 

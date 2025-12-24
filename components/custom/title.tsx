@@ -1,7 +1,5 @@
 "use client";
-import { ArrowRight, LucideIcon, LucideProps } from "lucide-react";
-import { Button } from "../ui/button";
-import Link from "next/link";
+import { LucideProps } from "lucide-react";
 import ButtonLink from "./button-link";
 import { Badge } from "../ui/badge";
 import { useTranslations } from "next-intl";

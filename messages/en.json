@@ -265,5 +265,71 @@
     "blog": "Blog",
     "english": "English",
     "arabic": "العربية"
+  },
+  "AboutPage": {
+    "hero": {
+      "title": "Your New Home Awaits",
+      "description": "Discover a curated selection of properties designed to suit every lifestyle, from cozy family homes to luxurious retreats."
+    },
+    "whyWorkWithUs": {
+      "title": "We're not just about finding you a house; we're here to help you find your home.",
+      "badge": "Why Work With Us?",
+      "stats": {
+        "homesMatched": "Homes matched with happy owners",
+        "clientsGuided": "Clients guided every step of the way",
+        "description": "From modern family homes to breathtaking luxury escapes, find the perfect match for your lifestyle."
+      }
+    },
+    "needHelp": {
+      "title": "Need Help?",
+      "description": "Buying a home doesn't have to be overwhelming. Our FAQ section has answers to all your questions, so you can move forward with confidence."
+    },
+    "faq": {
+      "title": "Frequently asked questions.",
+      "description": "We're here to make your real estate journey seamless and stress-free",
+      "questions": [
+        {
+          "title": "How do I find the right property for my needs?",
+          "description": "We offer personalized recommendations based on your preferences, lifestyle, and budget. Our team works closely with you to ensure you find the perfect home or investment property."
+        },
+        {
+          "title": "What is the process for buying a property?",
+          "description": "The process includes property search, site visits, negotiations, legal paperwork, and finalizing the deal. We guide you at every step to make it seamless and stress-free."
+        },
+        {
+          "title": "Do you assist with financing options?",
+          "description": "Yes, we can connect you with trusted financial institutions and mortgage brokers to find the best financing options tailored to your needs."
+        },
+        {
+          "title": "Are your listings updated regularly?",
+          "description": "Absolutely! Our listings are updated in real-time to provide you with the latest and most accurate information about available properties."
+        },
+        {
+          "title": "Can you help me sell my property?",
+          "description": "Yes, we provide expert marketing and valuation services to ensure your property is sold at the best possible price in the shortest time."
+        }
+      ]
+    }
+  },
+  "ContactPage": {
+    "hero": {
+      "title": "We're Here to Help",
+      "description": "Our team is here to help you every step of the way"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Safwan Mohamed"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "safwanmabdo@gmail.com"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Write your message"
+      },
+      "submit": "Submit"
+    }
   }
 }

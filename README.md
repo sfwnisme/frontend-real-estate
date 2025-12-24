@@ -11,6 +11,7 @@ You can manage your own properties listing, blog-post , and offer paid services(
 - [x] optimize UI to align RTL
 - [x] translate update data forms
 - [ ] translate metadata
+- [x] translate profile pages
 
 ## Application v1 implementations
 

@@ -257,5 +257,13 @@
       "create": "Create User",
       "update": "Update User"
     }
+  },
+  "navigation": {
+    "properties": "Properties",
+    "about": "About",
+    "contact": "Contact",
+    "blog": "Blog",
+    "english": "English",
+    "arabic": "العربية"
   }
 }

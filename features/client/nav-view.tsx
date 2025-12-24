@@ -11,14 +11,14 @@ import {
 import { MenuIcon } from "lucide-react";
 import { PAGES_ROUTES } from "@/constants/config";
 import { Link as NextIntlLink } from "@/i18n/navigation";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 type Props = {};
 
 export default function Nav({}: Props) {
   const locale = useLocale();
   const switchLocale = useLocale() === "en" ? "ar" : "en";
-  console.log(locale);
+  const t = useTranslations("navigation");
   return (
     <nav className="flex items-center h-fit px-6 py-6 sticky top-0 z-50 bg-red- backdrop-blur-xs">
       <div className="w-50 max-w-full h-auto overflow-hidden me-auto">
@@ -36,22 +36,22 @@ export default function Nav({}: Props) {
       <ul className="flex items-center gap-8 max-md:hidden">
         <li>
           <Link href={PAGES_ROUTES.PROPERTIES.PREVIEW} className="font-medium">
-            Properties
+            {t("properties")}
           </Link>
         </li>
         <li>
           <Link href={PAGES_ROUTES.ABOUT.PREVIEW} className="font-medium">
-            About
+            {t("about")}
           </Link>
         </li>
         <li>
           <Link href={PAGES_ROUTES.CONTACT.PREVIEW} className="font-medium">
-            Contact
+            {t("contact")}
           </Link>
         </li>
         <li>
           <Link href={PAGES_ROUTES.BLOG_POSTS.PREVIEW} className="font-medium">
-            Blog
+            {t("blog")}
           </Link>
         </li>
         <li>
@@ -60,7 +60,7 @@ export default function Nav({}: Props) {
             locale={switchLocale} 
             className={`font-medium ${locale === "en" ? "font-arabic" : "font-english"}`}
           >
-            {useLocale() === "ar" ? "English" : "العربية"}
+            {locale === "ar" ? t("english") : t("arabic")}
           </NextIntlLink>
         </li>
       </ul>
@@ -74,17 +74,17 @@ export default function Nav({}: Props) {
               href={PAGES_ROUTES.PROPERTIES.PREVIEW}
               className="font-medium"
             >
-              Properties
+              {t("properties")}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href={PAGES_ROUTES.ABOUT.PREVIEW} className="font-medium">
-              About
+              {t("about")}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href={PAGES_ROUTES.CONTACT.PREVIEW} className="font-medium">
-              Contact
+              {t("contact")}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
@@ -92,7 +92,7 @@ export default function Nav({}: Props) {
               href={PAGES_ROUTES.BLOG_POSTS.PREVIEW}
               className="font-medium"
             >
-              Blog
+              {t("blog")}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
@@ -101,7 +101,7 @@ export default function Nav({}: Props) {
               locale={switchLocale}
               className="font-medium"
             >
-              {useLocale() === "ar" ? "English" : "العربية"}
+              {locale === "ar" ? t("english") : t("arabic")}
             </NextIntlLink>
           </DropdownMenuItem>
         </DropdownMenuContent>

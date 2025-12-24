@@ -255,5 +255,13 @@
       "create": "إنشاء مستخدم",
       "update": "تحديث مستخدم"
     }
+  },
+  "navigation": {
+    "properties": "العقارات",
+    "about": "من نحن",
+    "contact": "اتصل بنا",
+    "blog": "المدونة",
+    "english": "English",
+    "arabic": "العربية"
   }
 }

@@ -4,11 +4,16 @@ export const SITE_INFO = {
   METADATABASE: `${process.env.NEXT_PUBLIC_FRONTEND_URL}`,
   COUNTRY: "SA",
   PAGES: {
+    HOME: {
+      TITLE: "Home",
+      DESCRIPTION: "Home",
+      ROUTE: `${process.env.NEXT_PUBLIC_FRONTEND_URL}`,
+    },
     ABOUT: {
       TITLE: "Your New Home Awaits",
       DESCRIPTION:
         "We’re not just about finding you a house; we’re here to help you find your home.",
-      ROUTE: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/blog`,
+      ROUTE: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/about`,
     },
     PROPERTIES: {
       TITLE: "Find Your Dream Home",
@@ -20,7 +25,7 @@ export const SITE_INFO = {
       TITLE: "Discover insights, trends, and inspiration.",
       DESCRIPTION:
         "Explore a handpicked collection of stunning homes that reflect timeless design, innovative architecture, and unparalleled luxury.",
-      ROUTE: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/blog`,
+      ROUTE: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/blog-posts`,
     },
   },
 };
@@ -66,7 +71,8 @@ export const API_ROUTES = {
   },
   USERS: {
     GET: "/users",
-    CURRENT_USER: "/users/me",
+    GET_CURRENT_USER: "/users/me",
+    LOGIN: "/users/login",
     CREATE: "/users/register",
     UPDATE: "/users",
     DELETE: "/users/delete",

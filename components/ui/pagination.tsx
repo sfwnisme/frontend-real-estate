@@ -7,6 +7,7 @@ import {
 
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
+import { useLocale, useTranslations } from "next-intl"
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
@@ -69,15 +70,18 @@ function PaginationPrevious({
   className,
   ...props
 }: React.ComponentProps<typeof PaginationLink>) {
+  const locale = useLocale();
+  const t = useTranslations("pagination");
+  const chevronDir = locale === "en" ? <ChevronLeftIcon /> : <ChevronRightIcon />;
   return (
     <PaginationLink
-      aria-label="Go to previous page"
+      aria-label={t("goToPreviousPage")}
       size="default"
       className={cn("gap-1 px-2.5 sm:pl-2.5", className)}
       {...props}
     >
-      <ChevronLeftIcon />
-      <span className="hidden sm:block">Previous</span>
+      {chevronDir}
+      <span className="hidden sm:block">{t("previous")}</span>
     </PaginationLink>
   )
 }
@@ -86,15 +90,18 @@ function PaginationNext({
   className,
   ...props
 }: React.ComponentProps<typeof PaginationLink>) {
+  const locale = useLocale();
+  const t = useTranslations("pagination");
+  const chevronDir = locale === "en" ? <ChevronRightIcon /> : <ChevronLeftIcon />;
   return (
     <PaginationLink
-      aria-label="Go to next page"
+      aria-label={t("goToNextPage")}
       size="default"
       className={cn("gap-1 px-2.5 sm:pr-2.5", className)}
       {...props}
     >
-      <span className="hidden sm:block">Next</span>
-      <ChevronRightIcon />
+      <span className="hidden sm:block">{t("next")}</span>
+      {chevronDir}
     </PaginationLink>
   )
 }
@@ -103,6 +110,7 @@ function PaginationEllipsis({
   className,
   ...props
 }: React.ComponentProps<"span">) {
+  const t = useTranslations("pagination");
   return (
     <span
       aria-hidden
@@ -111,7 +119,7 @@ function PaginationEllipsis({
       {...props}
     >
       <MoreHorizontalIcon className="size-4" />
-      <span className="sr-only">More pages</span>
+      <span className="sr-only">{t("morePages")}</span>
     </span>
   )
 }

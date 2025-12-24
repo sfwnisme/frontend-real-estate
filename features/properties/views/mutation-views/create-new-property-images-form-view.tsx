@@ -1,5 +1,6 @@
 "use client";
 import React, { useCallback, useMemo, memo } from "react";
+import { useTranslations } from "next-intl";
 import ImageInput from "@/components/custom/image-input";
 import { Button } from "@/components/ui/button";
 import InputWrapper from "@/components/custom/input-wrapper";
@@ -14,6 +15,7 @@ const CreateNewPropertyImagesFormView = ({
   propertyId,
   disableFeaturedImage = false,
 }: Props) => {
+  const tActions = useTranslations("common.actions");
   const { form, onSubmit, isUploading, fieldArray } =
     useCreateImagesFormValidation(propertyId);
   const { errors } = form.formState;
@@ -122,7 +124,7 @@ const CreateNewPropertyImagesFormView = ({
           }
           className="w-full"
         >
-          Upload Images
+          {tActions("uploadImages")}
         </Button>
       </form>
     </div>

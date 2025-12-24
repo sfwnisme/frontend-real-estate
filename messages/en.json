@@ -1,0 +1,354 @@
+{
+  "HomePage": {
+    "title": "Hello world!",
+    "button": "Explore Properties",
+    "description": "Discover over 70+ properties!",
+    "PropertiesSection": {
+      "title": "Recently Listed",
+      "description": "Explore our latest listings."
+    },
+    "BlogSection": {
+      "title": "Latest Blog Posts",
+      "description": "Stay updated with our latest news and insights.",
+      "button": "Read More"
+    },
+    "FaqSection": {
+      "title": "Frequently Asked Questions",
+      "description": "Find answers to common questions.",
+      "button": "View All",
+      "Questions": [
+        {
+          "question": "What is the minimum deposit required?",
+          "answer": "The minimum deposit required is $500."
+        },
+        {
+          "question": "How long does it take to close on a property?",
+          "answer": "The closing process typically takes 30-45 days."
+        },
+        {
+          "question": "Can I make an offer on a property?",
+          "answer": "Yes, you can make an offer on a property."
+        },
+        {
+          "question": "What is the process for buying a property?",
+          "answer": "The process for buying a property typically involves a home inspection, appraisal, and financing."
+        }
+      ]
+    },
+    "ServicesSection": {
+      "title": "Our Expertise, Your Advantage",
+      "description": "We’re here to guide you every step of the way..",
+      "badge": "Services",
+      "ServicesList": [
+        {
+          "title": "Property Search",
+          "description": "Find your dream home with our advanced search tools.",
+          "image": "/blog/blog01.webp"
+        },
+        {
+          "title": "Property Valuation",
+          "description": "Get an accurate valuation of your property.",
+          "image": "/blog/blog02.webp"
+        },
+        {
+          "title": "Property Management",
+          "description": "Manage your property with our expert team.",
+          "image": "/blog/blog03.webp"
+        }
+      ]
+    },
+    "Footer": {
+      "title": "Frequently Asked Questions",
+      "placeholder": "Your email address",
+      "button": "Submit",
+      "copyright": "Sfwn. All rights reserved.",
+      "QuickLinks": {
+        "title": "Quick Links",
+        "links": ["About Us", "Properties", "Blog", "Contact Us"]
+      },
+      "Others": ["Privacy Policy", "Terms of Service"]
+    }
+  },
+  "dashboard": {
+    "sidebar": {
+      "overview": "Overview",
+      "properties": "Properties",
+      "createProperty": "Create Property",
+      "blogPosts": "Blog Posts",
+      "createBlogPost": "Create Blog Post",
+      "users": "Users",
+      "createUser": "Create User"
+    }
+  },
+  "common": {
+    "actions": {
+      "create": "Create",
+      "update": "Update",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "save": "Save",
+      "submit": "Submit",
+      "open": "Open",
+      "edit": "Edit",
+      "next": "Next",
+      "previous": "Previous",
+      "creating": "Creating...",
+      "updating": "Updating...",
+      "deleting": "Deleting...",
+      "notPublished": "Not Published",
+      "reset": "Reset",
+      "visit": "Visit",
+      "viewAll": "View all",
+      "uploadImages": "Upload Images",
+      "updatePropertyDetails": "Update property details",
+      "updateBlogPostDetails": "Update Blog Post Details"
+    },
+    "table": {
+      "headers": {
+        "title": "Title",
+        "name": "Name",
+        "email": "Email",
+        "role": "Role",
+        "actions": "Actions",
+        "creationDate": "Creation Date",
+        "lastModification": "Last Modification",
+        "publishedDate": "Published Date",
+        "price": "Price",
+        "size": "Size",
+        "yearBuilt": "Year Built",
+        "type": "Type"
+      }
+    },
+    "form": {
+      "labels": {
+        "userDetails": "User details",
+        "title": "Title",
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "role": "Role",
+        "type": "Type",
+        "status": "Status",
+        "excerpt": "Excerpt",
+        "content": "Content",
+        "metaTitle": "Meta Title",
+        "metaDescription": "Meta Description",
+        "metaKeywords": "Meta Keywords",
+        "featuredImage": "Featured Image",
+        "description": "Description",
+        "price": "Price",
+        "propertySize": "Property Size",
+        "bedrooms": "Bedrooms",
+        "bathrooms": "Bathrooms",
+        "garage": "Garage",
+        "garageSize": "Garage Size",
+        "yearBuilt": "Year Built",
+        "state": "State",
+        "city": "City",
+        "area": "Area",
+        "zipCode": "Zip Code",
+        "other": "Other",
+        "features": "Features",
+        "video": "Video",
+        "images": "Images",
+        "hidePropertyListing": "Hide property listing"
+      },
+      "placeholders": {
+        "status": "Status",
+        "role": "Role",
+        "metaTitle": "Meta Title",
+        "metaDescription": "Meta Description",
+        "metaKeywords": "Meta Keywords",
+        "email": "Your email address",
+        "chooseFile": "Choose a file",
+        "browseFiles": "Browse Files",
+        "webpPreferable": "WEBP is the preferable, also you can upload JPEG, PNG, JPG up to 1MB"
+      },
+      "sections": {
+        "userDetails": "User details",
+        "seoSettings": "SEO settings",
+        "propertyDetails": "Property Details",
+        "specifications": "Specifications",
+        "classification": "Classification",
+        "address": "Address",
+        "moreInformation": "More Information",
+        "images": "Images",
+        "slug": "Slug",
+        "currentImages": "Current images",
+        "uploadImages": "Upload images",
+        "uploadImage": "Upload Image"
+      },
+      "descriptions": {
+        "userDetails": "Create a new user",
+        "updateUserDetails": "Update the details of the user",
+        "email": "user email at lease 5 characters",
+        "youCannotDeleteYourself": "You cannot delete yourself",
+        "propertyDetails": "Create a new property with images",
+        "updatePropertyDetails": "Update the details of the property",
+        "specifications": "Add the property specifications",
+        "updateSpecifications": "Update the specifications of the property",
+        "classification": "Add the property classification",
+        "updateClassification": "Update the classification of the property",
+        "address": "Add the property address",
+        "updateAddress": "Update the address of the property",
+        "moreInformation": "Add more information about the property",
+        "updateMoreInformation": "Update the more information of the property",
+        "images": "Add property images",
+        "features": "Add property features, write ',' after each feature",
+        "video": "Add property video, write 'Youtube: go to the video > share > copy embed code'",
+        "hidePropertyFormPublicListing": "Hide this property form public listing",
+        "description": "Property description at lease 5 characters",
+        "slugDescription": "The slug is the URL of the property",
+        "slugDescriptionBlogPost": "The slug is the URL of the blog post",
+        "currentImagesDescription": "View the current images for the property",
+        "uploadImagesDescription": "Upload new images for the property"
+      }
+    },
+    "dialog": {
+      "delete": {
+        "title": "Delete {resource} Data?",
+        "description": "Are you sure you want to permanently delete this {resource} data? This action cannot be undone.",
+        "confirm": "Delete",
+        "cancel": "Cancel"
+      }
+    },
+    "messages": {
+      "notFound": "Not Found",
+      "loading": "Loading...",
+      "noData": "No data available",
+      "notPublished": "Not Published",
+      "editing": "Editing"
+    },
+    "toast": {
+      "settingFeaturedImage": "Setting featured image...",
+      "featuredImageSet": "Featured image set successfully",
+      "failedToSetFeaturedImage": "Failed to set featured image",
+      "deletingImage": "Deleting image...",
+      "imageDeleted": "Image deleted successfully",
+      "failedToDeleteImage": "Failed to delete image",
+      "uploadingImages": "Uploading images...",
+      "imagesUploaded": "Images uploaded successfully",
+      "failedToUploadImages": "Failed to upload images"
+    },
+    "slug": {
+      "defaultSlug": "This is the default slug",
+      "setDefaultSlug": "set the property title as the slug",
+      "setDefaultSlugBlogPost": "set the blog post title as the slug",
+      "visitProperty": "Visit property",
+      "visitBlogPost": "Visit blog post"
+    }
+  },
+  "resources": {
+    "property": {
+      "singular": "Property",
+      "plural": "Properties",
+      "create": "Create Property",
+      "update": "Update Property"
+    },
+    "blogPost": {
+      "singular": "Blog Post",
+      "plural": "Blog Posts",
+      "create": "Create Blog Post",
+      "update": "Update Blog Post"
+    },
+    "user": {
+      "singular": "User",
+      "plural": "Users",
+      "create": "Create User",
+      "update": "Update User"
+    }
+  },
+  "navigation": {
+    "properties": "Properties",
+    "about": "About",
+    "contact": "Contact",
+    "blog": "Blog",
+    "english": "English",
+    "arabic": "العربية"
+  },
+  "AboutPage": {
+    "hero": {
+      "title": "Your New Home Awaits",
+      "description": "Discover a curated selection of properties designed to suit every lifestyle, from cozy family homes to luxurious retreats."
+    },
+    "whyWorkWithUs": {
+      "title": "We're not just about finding you a house; we're here to help you find your home.",
+      "badge": "Why Work With Us?",
+      "stats": {
+        "homesMatched": "Homes matched with happy owners",
+        "clientsGuided": "Clients guided every step of the way",
+        "description": "From modern family homes to breathtaking luxury escapes, find the perfect match for your lifestyle."
+      }
+    },
+    "needHelp": {
+      "title": "Need Help?",
+      "description": "Buying a home doesn't have to be overwhelming. Our FAQ section has answers to all your questions, so you can move forward with confidence."
+    },
+    "faq": {
+      "title": "Frequently asked questions.",
+      "description": "We're here to make your real estate journey seamless and stress-free",
+      "questions": [
+        {
+          "title": "How do I find the right property for my needs?",
+          "description": "We offer personalized recommendations based on your preferences, lifestyle, and budget. Our team works closely with you to ensure you find the perfect home or investment property."
+        },
+        {
+          "title": "What is the process for buying a property?",
+          "description": "The process includes property search, site visits, negotiations, legal paperwork, and finalizing the deal. We guide you at every step to make it seamless and stress-free."
+        },
+        {
+          "title": "Do you assist with financing options?",
+          "description": "Yes, we can connect you with trusted financial institutions and mortgage brokers to find the best financing options tailored to your needs."
+        },
+        {
+          "title": "Are your listings updated regularly?",
+          "description": "Absolutely! Our listings are updated in real-time to provide you with the latest and most accurate information about available properties."
+        },
+        {
+          "title": "Can you help me sell my property?",
+          "description": "Yes, we provide expert marketing and valuation services to ensure your property is sold at the best possible price in the shortest time."
+        }
+      ]
+    }
+  },
+  "ContactPage": {
+    "hero": {
+      "title": "We're Here to Help",
+      "description": "Our team is here to help you every step of the way"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Safwan Mohamed"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "safwanmabdo@gmail.com"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Write your message"
+      },
+      "submit": "Submit"
+    }
+  },
+  "PropertiesPage": {
+    "hero": {
+      "title": "Find Your Dream Home",
+      "description": "Discover a curated selection of properties designed to suit every lifestyle, from cozy family homes to luxurious retreats."
+    }
+  },
+  "BlogPostsPage": {
+    "hero": {
+      "title": "Discover insights, trends, and inspiration.",
+      "description": "Explore a handpicked collection of stunning homes that reflect timeless design, innovative architecture, and unparalleled luxury."
+    }
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "goToPreviousPage": "Go to previous page",
+    "goToNextPage": "Go to next page",
+    "morePages": "More pages"
+  }
+}

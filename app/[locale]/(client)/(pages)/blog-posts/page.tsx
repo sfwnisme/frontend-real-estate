@@ -9,6 +9,7 @@ import type { SearchParamsType } from "@/types/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export const generateMetadata = async ({
   searchParams,
@@ -43,10 +44,15 @@ export const generateMetadata = async ({
 };
 
 export default async function page({
+  params,
   searchParams,
 }: {
+  params: Promise<{ locale: string }>;
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("BlogPostsPage");
   const page = (await searchParams)?.page;
   const currentPage = page ? parseInt(page) : 1;
   const currentPageSize = PAGINATION_CONFIG.BLOG.CLIENT.PAGE;
@@ -63,8 +69,8 @@ export default async function page({
     <div>
       <Title
         type="start"
-        title="Discover insights, trends, and inspiration."
-        description="Explore a handpicked collection of stunning homes that reflect timeless design, innovative architecture, and unparalleled luxury."
+        title={t("hero.title")}
+        description={t("hero.description")}
       />
       <div className="h-10" />
       <Suspense fallback={<BlogPostCardSkeleton count={currentPageSize} />}>

@@ -12,6 +12,7 @@ import { notFound } from "next/navigation";
 import can from "@/features/dashboard/auth/can";
 import { Visible } from "@sfwnisme/visi";
 import { PAGES_ROUTES } from "@/constants/config";
+import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Properties",
@@ -25,6 +26,7 @@ export default async function page({
 }: {
   searchParams: SearchParamsType;
 }) {
+  const t = await getTranslations("resources.property")
   const searchParamsRes = await searchParams;
   const page = searchParamsRes.page;
   const currentPage = page ? parseInt(page) : 1;
@@ -41,11 +43,11 @@ export default async function page({
     <div>
       <div className="inline-flex justify-between w-full mb-12">
         <h1 className="scroll-m-20 text-center text-4xl font-medium tracking-tight text-balance">
-          Properties
+          {t("plural")}
         </h1>
         <Visible when={canCreateProperty}>
           <Button asChild>
-            <Link href={CREATE}>Add Property</Link>
+            <Link href={CREATE}>{t("create")}</Link>
           </Button>
         </Visible>
       </div>

@@ -23,14 +23,7 @@ import { toast } from "sonner";
 import { getCurrentUser } from "@/lib/requests";
 import { logOut } from "../users/lib/requests";
 
-export function DashboardNavUser({
-  user,
-}: {
-  user: {
-    name: string;
-    email: string;
-  };
-}) {
+export function DashboardNavUser() {
   const [userData, setUserData] = useState<{
     name: string | undefined;
     email: string | undefined;

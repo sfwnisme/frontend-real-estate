@@ -9,6 +9,7 @@ import PaginationLayout from "@/components/custom/pagination-layout";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import PropertyCardSkeleton from "@/features/properties/skeletons/property-card-skeleton";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   searchParams,
@@ -43,10 +44,15 @@ export async function generateMetadata({
 }
 
 export default async function page({
+  params,
   searchParams,
 }: {
+  params: Promise<{ locale: string }>;
   searchParams: SearchParamsType;
 }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("PropertiesPage");
   const page = (await searchParams)?.page;
   const currentPage = page ? parseInt(page) : 1;
   const currentPageSize = PAGINATION_CONFIG.PROPERTIES.CLIENT.PAGE;
@@ -61,8 +67,8 @@ export default async function page({
   return (
     <div>
       <Title
-        title="Find Your Dream Home"
-        description="Discover a curated selection of properties designed to suit every lifestyle, from cozy family homes to luxurious retreats."
+        title={t("hero.title")}
+        description={t("hero.description")}
         type="start"
       />
       <div className="h-10" />

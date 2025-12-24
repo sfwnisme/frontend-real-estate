@@ -27,6 +27,7 @@ import {
 import Image from "next/image";
 import useCan from "./auth/use-can";
 import { Permission } from "@/constants/permissions";
+import { useLocale, useTranslations } from "next-intl";
 
 type FilteredRoute = {
   name: string;
@@ -34,84 +35,67 @@ type FilteredRoute = {
   icon: LucideIcon;
   permission: Permission;
 };
-type user = {
-  name: string;
-  email: string;
-  avatar: string;
-};
 
-// This is sample data.
+export function DashboardSidebar({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
+  const locale = useLocale();
+  const t = useTranslations("dashboard.sidebar")
+  const {can} = useCan()
 
-const data: {
-  user: user;
-  routes: FilteredRoute[];
-} = {
-  user: {
-    name: "safwan",
-    email: "safwanmabdo@gmail.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  routes: [
+  const routes: FilteredRoute[] = [
     {
-      name: "Overview",
+      name: t("overview"),
       url: "/dashboard",
       icon: Frame,
       permission: "property.read",
     },
     {
-      name: "Properties",
+      name: t("properties"),
       url: "/dashboard/properties",
       icon: House,
       permission: "property.read",
     },
     {
-      name: "Create New Property",
+      name: t("createProperty"),
       url: "/dashboard/properties/create",
       icon: HousePlus,
       permission: "property.write",
     },
     {
-      name: "Blog Posts",
+      name: t("blogPosts"),
       url: "/dashboard/blog-posts",
       icon: LibraryBig,
       permission: "blogpost.read",
     },
     {
-      name: "Create Blog Posts",
+      name: t("createBlogPost"),
       url: "/dashboard/blog-posts/create",
       icon: NotebookPen,
       permission: "blogpost.write",
     },
     {
-      name: "Users",
+      name: t("users"),
       url: "/dashboard/users",
       icon: Users,
       permission: "user.read",
     },
     {
-      name: "Create Users",
+      name: t("createUser"),
       url: "/dashboard/users/create",
       icon: UserPlus,
       permission: "user.write",
     },
-  ],
-};
-
-
-export function DashboardSidebar({
-  ...props
-}: React.ComponentProps<typeof Sidebar>) {
-
-  const {can} = useCan()
+  ]
   
-  const filteredRoutes = data.routes.filter((route) => {
+  const filteredRoutes = routes.filter((route) => {
     const canSee = can(route.permission);
     if (!canSee) return null;
     return route;
   });
   
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar collapsible="icon" {...props} side={locale === "en" ? "left" : "right"}>
       <SidebarHeader>
         <div className="w-full p-2">
           <Image
@@ -127,7 +111,7 @@ export function DashboardSidebar({
         <DashboardNavRoutes projects={filteredRoutes} />
       </SidebarContent>
       <SidebarFooter>
-        <DashboardNavUser user={data.user} />
+        <DashboardNavUser />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

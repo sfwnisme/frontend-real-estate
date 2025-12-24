@@ -20,24 +20,28 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import FieldSet from "@/components/custom/field-set";
 import useCreateUserFormValidation from "../../hooks/use-create-user-form-validation";
 import useErrorMessage from "@/features/dashboard/hooks/use-error-message";
+import { useTranslations } from "next-intl";
 
 const CreateUserFormView = () => {
+  const t = useTranslations("common.form.labels")
+  const tActions = useTranslations("common.actions")
+  const tDescs = useTranslations("common.form.descriptions")
+  const tSections = useTranslations("common.form.sections")
   const { form, onSubmit, isPending } = useCreateUserFormValidation();
   const formErrors = form.formState.errors;
   const globalFormError = formErrors.root?.message;
-  console.log(globalFormError);
   const globalError = useErrorMessage(form.formState.errors.root?.message);
 
   return (
     <div className="">
       <form onSubmit={onSubmit} className="grid w-full lg:min-w-[500px]">
         <FieldSet
-          title="User details"
-          description="Update the details of the user"
+          title={tSections("userDetails")}
+          description={tDescs("userDetails")}
           childrenClassName="grid gap-4 grid-cols-2"
         >
           <InputWrapper
-            title="Name"
+            title={t("name")}
             error={formErrors.name?.message}
             className="col-span-full"
             name="name"
@@ -46,15 +50,15 @@ const CreateUserFormView = () => {
           </InputWrapper>
 
           <InputWrapper
-            title="Email"
-            description="user email at lease 5 characters"
+            title={t("email")}
+            description={tDescs("email")}
             error={formErrors.email?.message}
             className="col-span-full"
           >
             <Input type="email" id="email" {...form.register("email")} />
           </InputWrapper>
           <InputWrapper
-            title="Password"
+            title={t("password")}
             error={formErrors.password?.message}
             className="max-md:col-span-full"
           >
@@ -66,7 +70,7 @@ const CreateUserFormView = () => {
           </InputWrapper>
 
           <InputWrapper
-            title="Type"
+            title={t("role")}
             error={formErrors.role?.message}
             className="max-md:col-span-full"
           >
@@ -80,7 +84,7 @@ const CreateUserFormView = () => {
                   name="role"
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Role" />
+                    <SelectValue placeholder={t("role")} />
                   </SelectTrigger>
                   <SelectContent>
                     {Object.values(USER_ROLES).map((role) => (
@@ -104,7 +108,7 @@ const CreateUserFormView = () => {
           className="w-full col-span-full"
           disabled={isPending || !form.formState.isValid}
         >
-          {isPending ? "Creating..." : "Create"}
+          {isPending ? tActions("creating") : tActions("create")}
         </Button>
         <DevTool control={form.control} />
       </form>

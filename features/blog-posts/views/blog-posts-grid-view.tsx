@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { getBlogPosts } from "@/lib/requests";
+import { getBlogPostsWithRevalidate } from "@/lib/requests";
 import BlogCard from "@/components/custom/blog-card";
 import { PAGINATION_CONFIG } from "@/constants/enums";
 import BlogPostCardSkeleton from "../skeletons/blog-post-card-skeleton";
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const RenderBlogPosts = async ({ pageSize, currentPage }: Props) => {
-  const blogPosts = await getBlogPosts(pageSize, currentPage);
+  const blogPosts = await getBlogPostsWithRevalidate(pageSize, currentPage, 60);
   if (!blogPosts.data?.data) return null;
   const blogPostsData = blogPosts.data.data;
   const renderBlogPosts = blogPostsData.map((blogPost) => (

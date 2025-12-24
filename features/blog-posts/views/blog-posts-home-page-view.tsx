@@ -5,6 +5,7 @@ import { PAGINATION_CONFIG } from "@/constants/enums";
 import BlogPostCardSkeleton from "../skeletons/blog-post-card-skeleton";
 import Title from "@/components/custom/title";
 import BlogPostsGridView from "./blog-posts-grid-view";
+import { getTranslations } from "next-intl/server";
 
 type Props = {
   pageSize?: number;
@@ -15,12 +16,13 @@ export default async function BlogPostsHomePageView({
   pageSize = PAGINATION_CONFIG.BLOG.CLIENT.OVERVIEW,
   currentPage = 1,
 }: Props) {
+  const t = await getTranslations("HomePage.BlogSection")
   return (
     <div>
       <Title
         type="with_button"
-        title="Discover insights, trends, and inspiration."
-        description="Explore a handpicked collection of stunning homes that reflect timeless design, innovative architecture, and unparalleled luxury."
+        title={t('title')}
+        description={t('description')}
         url="/blog-posts"
       />
       <div className="h-16" />

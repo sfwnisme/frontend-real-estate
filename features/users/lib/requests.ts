@@ -9,7 +9,7 @@ import { API_ROUTES } from "@/constants/config";
 
 const endpoint = "/users";
 
-const { CREATE, UPDATE, DELETE, CURRENT_USER } = API_ROUTES.USERS;
+const { CREATE, UPDATE, DELETE, GET_CURRENT_USER } = API_ROUTES.USERS;
 
 export const getUsers = async (): Promise<APIResponse<User[]>> => {
   try {

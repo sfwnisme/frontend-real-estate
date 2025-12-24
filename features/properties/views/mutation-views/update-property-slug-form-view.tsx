@@ -3,6 +3,7 @@
 import InputWrapper from "@/components/custom/input-wrapper";
 import { Input } from "@/components/ui/input";
 import React, { memo } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import slugify from "slugify";
 import useUpdatePropertySlugFormValidation from "../../hooks/use-update-property-slug-form-validation";
 import { Property } from "@/types/types";
@@ -19,6 +20,9 @@ type Props = {
   property: Property;
 };
 const UpdatePropertySlugFormView = (props: Props) => {
+  const locale = useLocale();
+  const tActions = useTranslations("common.actions");
+  const tSlug = useTranslations("common.slug");
   const { property } = props;
   const { form, onSubmit, isPending } = useUpdatePropertySlugFormValidation(
     property._id,
@@ -42,10 +46,10 @@ const UpdatePropertySlugFormView = (props: Props) => {
       >
         <Input type="text" {...form.register("slug")} />
       </InputWrapper>
-      <ButtonGroup>
+      <ButtonGroup orientation={locale === "en" ? "horizontal" : "horizontalAr"}>
         <Button type="submit" disabled={!canUpdate} size="sm">
           {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
-          Update
+          {tActions("update")}
         </Button>
         <ButtonGroupSeparator />
         <Button
@@ -55,23 +59,23 @@ const UpdatePropertySlugFormView = (props: Props) => {
           disabled={isDefaultSlug}
           title={
             isDefaultSlug
-              ? "This is the default slug"
-              : "set the property title as the slug"
+              ? tSlug("defaultSlug")
+              : tSlug("setDefaultSlug")
           }
           aria-label="reset to default slug"
           size="sm"
         >
-          Reset
+          {tActions("reset")}
         </Button>
         <Button
           variant="outline"
           type="button"
           onClick={() => router.push(`/properties/${property.slug}`)}
           aria-label="visit property"
-          title="Visit property"
+          title={tSlug("visitProperty")}
           size="sm"
         >
-          Visit
+          {tActions("visit")}
         </Button>
       </ButtonGroup>
     </form>

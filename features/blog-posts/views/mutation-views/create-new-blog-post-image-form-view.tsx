@@ -1,5 +1,6 @@
 "use client";
 import React, { useCallback, useMemo, memo } from "react";
+import { useTranslations } from "next-intl";
 import ImageInput from "@/components/custom/image-input";
 import { Button } from "@/components/ui/button";
 import InputWrapper from "@/components/custom/input-wrapper";
@@ -17,6 +18,9 @@ type Props = {
   image: ImageType | null;
 };
 const CreateNewBlogPostImageFormView = ({ blogPostId, image }: Props) => {
+  const tSections = useTranslations("common.form.sections");
+  const tToast = useTranslations("common.toast");
+  const tMessages = useTranslations("common.messages");
   const { form, onSubmit, isUploading } =
     useCreateBlogPostImageFormValidation(blogPostId);
   const { errors } = form.formState;
@@ -37,9 +41,9 @@ const CreateNewBlogPostImageFormView = ({ blogPostId, image }: Props) => {
 
   const removeImage = useCallback(async () => {
     toast.promise(deleteImage(image?._id!, blogPostId), {
-      loading: "Deleting image...",
-      success: "Image deleted successfully",
-      error: "Failed to delete image",
+      loading: tToast("deletingImage"),
+      success: tToast("imageDeleted"),
+      error: tToast("failedToDeleteImage"),
     });
   }, [form]);
 
@@ -90,8 +94,8 @@ const CreateNewBlogPostImageFormView = ({ blogPostId, image }: Props) => {
   }, [image]);
 
   return (
-    <FieldSet title="Upload Image">
-      <Shift fallback={<div>Loading...</div>}>
+    <FieldSet title={tSections("uploadImage")}>
+      <Shift fallback={<div>{tMessages("loading")}</div>}>
         <Case when={!image && !formImage}>{renderImageForm}</Case>
         <Case when={!image && formImage}>{renderNewImage}</Case>
         <Case when={image && !formImage}>{renderUploadedImage}</Case>

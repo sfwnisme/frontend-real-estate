@@ -9,6 +9,7 @@ import { getBlogPosts } from "@/lib/requests";
 import { type SearchParamsType } from "@/types/types";
 import { Visible } from "@sfwnisme/visi";
 import { type Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
@@ -24,6 +25,7 @@ export default async function page({
 }: {
   searchParams: SearchParamsType;
 }) {
+  const t = await getTranslations("resources.blogPost")
   const searchParamsRes = await searchParams;
   const page = searchParamsRes?.page;
   const currentPage = page ? parseInt(page) : 1;
@@ -40,11 +42,11 @@ export default async function page({
     <div className="w-full">
       <div className="inline-flex justify-between w-full mb-12">
         <h1 className="scroll-m-20 text-center text-4xl font-medium tracking-tight text-balance">
-          Blog Posts
+          {t("plural")}
         </h1>
         <Visible when={canCreateBlogPost}>
           <Button asChild>
-            <Link href={CREATE}>Create blog post</Link>
+            <Link href={CREATE}>{t("create")}</Link>
           </Button>
         </Visible>
       </div>

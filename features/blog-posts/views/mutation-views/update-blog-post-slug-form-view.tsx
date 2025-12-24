@@ -3,6 +3,7 @@
 import InputWrapper from "@/components/custom/input-wrapper";
 import { Input } from "@/components/ui/input";
 import React, { memo } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import slugify from "slugify";
 import useUpdateBlogPostSlugFormValidation from "../../hooks/use-update-blog-post-slug-form-validaiton";
 import { BlogPost, Property } from "@/types/types";
@@ -21,6 +22,11 @@ type Props = {
 };
 const UpdateBlogPostSlugFormView = (props: Props) => {
   const { blogPost } = props;
+  const locale = useLocale();
+  const tActions = useTranslations("common.actions");
+  const tSlug = useTranslations("common.slug");
+  const tSections = useTranslations("common.form.sections");
+  const tDescs = useTranslations("common.form.descriptions");
   const { form, onSubmit, isPending } = useUpdateBlogPostSlugFormValidation(
     blogPost._id,
     blogPost.slug
@@ -31,12 +37,12 @@ const UpdateBlogPostSlugFormView = (props: Props) => {
   const isDefaultSlug = slugify(blogPost.title, { lower: true }) === blogPost.slug;
 
   return (
-    <FieldSet title="Slug" childrenClassName="grid gap-4">
+    <FieldSet title={tSections("slug")} description={tDescs("slugDescriptionBlogPost")} childrenClassName="grid gap-4">
     <form onSubmit={onSubmit} className="flex flex-col gap-4">
       <InputWrapper
         description={
           process.env.NEXT_PUBLIC_FRONTEND_URL +
-          "/properties/" +
+          "/blog-posts/" +
           slugify(form.getValues("slug"), { lower: true })
         }
         error={form.formState.errors.slug?.message}
@@ -44,10 +50,10 @@ const UpdateBlogPostSlugFormView = (props: Props) => {
       >
         <Input type="text" {...form.register("slug")} />
       </InputWrapper>
-      <ButtonGroup>
+      <ButtonGroup orientation={locale === "en" ? "horizontal" : "horizontalAr"}>
         <Button type="submit" disabled={!canUpdate} size="sm">
           {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
-          Update
+          {tActions("update")}
         </Button>
         <ButtonGroupSeparator />
         <Button
@@ -57,23 +63,23 @@ const UpdateBlogPostSlugFormView = (props: Props) => {
           disabled={isDefaultSlug}
           title={
             isDefaultSlug
-              ? "This is the default slug"
-              : "set the property title as the slug"
+              ? tSlug("defaultSlug")
+              : tSlug("setDefaultSlugBlogPost")
           }
           aria-label="reset to default slug"
           size="sm"
         >
-          Reset
+          {tActions("reset")}
         </Button>
         <Button
           variant="outline"
           type="button"
           onClick={() => router.push(`/blog-posts/${blogPost.slug}`)}
           aria-label="visit blog post"
-          title="Visit blog post"
+          title={tSlug("visitBlogPost")}
           size="sm"
         >
-          Visit
+          {tActions("visit")}
         </Button>
       </ButtonGroup>
     </form>

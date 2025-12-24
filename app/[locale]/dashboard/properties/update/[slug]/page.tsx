@@ -3,6 +3,7 @@ import { getProperty, getPropertyImages } from "@/lib/requests";
 import { SlugParamsType } from "@/types/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import React from "react";
 
 export const metadata: Metadata = {
@@ -17,8 +18,8 @@ type Props = {
 export default async function page(props: Props) {
   const params = await props.params;
   const { slug } = params;
+  const t = await getTranslations("common.messages");
   const property = await getProperty(slug);
-  console.log(property);
   if (!property.data) {
     notFound();
   }
@@ -27,7 +28,7 @@ export default async function page(props: Props) {
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-2xl font-semibold text-primary">
-        Editing: {property.data.title}
+        {t("editing")}: {property.data.title}
       </h1>
       <UpdatePropertyView
         property={property.data}

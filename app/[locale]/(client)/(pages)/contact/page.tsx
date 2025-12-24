@@ -4,15 +4,23 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MessageSquare } from "lucide-react";
 import React from "react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
-export default function page() {
+export default async function page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("ContactPage");
   return (
     <div className="min-h-full">
       <Title
         type="with_icon"
-        title="We're Here to Help"
-        description="Our team is here to help you every step of the way"
-        Icon={MessageSquare}
+        title={t("hero.title")}
+        description={t("hero.description")}
+        Icon={<MessageSquare />}
       />
       <div
         data-component="contact-form"
@@ -20,39 +28,39 @@ export default function page() {
       >
         <form className="w-full flex flex-col gap-5">
           <label htmlFor="name" className="block font-medium">
-            Name
+            {t("form.name.label")}
             <Input
               type="name"
               id="name"
               name="client name"
-              placeholder="Safwan Mohamed"
-              title="Name"
+              placeholder={t("form.name.placeholder")}
+              title={t("form.name.label")}
               className="mt-2"
             />
           </label>
           <label htmlFor="email" className="block font-medium">
-            Email
+            {t("form.email.label")}
             <Input
               type="email"
               id="email"
               name="client email"
-              placeholder="safwanmabdo@gmail.com"
-              title="Email"
+              placeholder={t("form.email.placeholder")}
+              title={t("form.email.label")}
               className="mt-2"
             />
           </label>
           <label htmlFor="message" className="block font-medium">
-            Message
+            {t("form.message.label")}
             <Textarea
               id="message"
               name="client message"
-              placeholder="Write your message"
-              title="Message"
+              placeholder={t("form.message.placeholder")}
+              title={t("form.message.label")}
               className="min-h-40 mt-2"
             />
           </label>
           <Button type="submit" className="w-full" size="lg">
-            Submit
+            {t("form.submit")}
           </Button>
         </form>
       </div>

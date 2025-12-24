@@ -331,5 +331,24 @@
       },
       "submit": "Submit"
     }
+  },
+  "PropertiesPage": {
+    "hero": {
+      "title": "Find Your Dream Home",
+      "description": "Discover a curated selection of properties designed to suit every lifestyle, from cozy family homes to luxurious retreats."
+    }
+  },
+  "BlogPostsPage": {
+    "hero": {
+      "title": "Discover insights, trends, and inspiration.",
+      "description": "Explore a handpicked collection of stunning homes that reflect timeless design, innovative architecture, and unparalleled luxury."
+    }
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "goToPreviousPage": "Go to previous page",
+    "goToNextPage": "Go to next page",
+    "morePages": "More pages"
   }
 }

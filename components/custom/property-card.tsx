@@ -5,6 +5,7 @@ import { getPropertyImages } from "@/lib/requests";
 import { notFound } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { PAGES_ROUTES } from "@/constants/config";
+import { getTranslations } from "next-intl/server";
 
 // type Property = Property;
 export default async function PropertyCard({
@@ -13,7 +14,7 @@ export default async function PropertyCard({
   property: Property;
 }) {
   const propertyImages = await getPropertyImages(property._id);
-
+  const tActions = await getTranslations("common.actions");
   const mainImage = propertyImages?.data?.[0];
   if (!propertyImages) {
     notFound();
@@ -44,7 +45,7 @@ export default async function PropertyCard({
           <ButtonLink
             href={PAGES_ROUTES.PROPERTIES.PREVIEW + "/" + property.slug}
           >
-            View all
+            {tActions("viewAll")}
           </ButtonLink>
         </div>
       </div>

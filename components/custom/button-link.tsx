@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useLocale } from "next-intl";
 import Link from "next/link";
+import { Link as NextIntlLink } from "@/i18n/navigation";
 import React from "react";
 
 type Props = {
@@ -34,13 +35,13 @@ export default function ButtonLink({
     </div>
   );
   return (
-    <Link href={href} className="group/button flex flex-row items-center gap-3">
+    <NextIntlLink href={href} className="group/button flex flex-row items-center gap-3">
       {children}
       {icon === "visible" && (
         <div className={cn("w-[20px] overflow-hidden inline-flex items-center", locale === "ar" && "flex-row-reverse")}>
           {locale === "ar" ? rtlArrow : ltrArrow}
         </div>
       )}
-    </Link>
+    </NextIntlLink>
   );
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import Title from "../../components/custom/title";
 import {
   Accordion,
@@ -6,15 +5,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../../components/ui/accordion";
-import { ChevronDown, ChevronDownCircle } from "lucide-react";
-import { faqsDummyData } from "@/data/dummyData";
+import { ChevronDown } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 type Props = {};
 
 export default async function Faq({}: Props) {
   const t = await getTranslations("HomePage.FaqSection");
-  console.log("questions", t.raw("Questions"));
 
   return (
     <div className="flex max-lg:flex-col items-start gap-8 lg:gap-16 justify-between">

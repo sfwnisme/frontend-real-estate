@@ -5,6 +5,7 @@ import Link from "next/link";
 import ButtonLink from "./button-link";
 import { Badge } from "../ui/badge";
 import { useTranslations } from "next-intl";
+import React from "react";
 
 type Props = {
   type?: "center" | "start" | "with_button" | "with_badge" | "with_icon";
@@ -12,7 +13,7 @@ type Props = {
   description?: string;
   url?: string;
   badge?: string;
-  Icon?: LucideIcon;
+  Icon?: React.ReactElement<LucideProps>;
 };
 function TitleWithButton({
   title,
@@ -77,7 +78,11 @@ function TitleAlignCenterWithIcon({
     <div className="flex flex-col gap-4 items-center">
       {Icon && (
         <div className="bg-gray-900 p-3 rounded-md">
-          {<Icon size={24} strokeWidth={1.5} color="white" />}
+          {React.cloneElement(Icon, {
+            size: 24,
+            strokeWidth: 1.5,
+            color: "white",
+          })}
         </div>
       )}
       <h1 className="text-2xl md:text-4xl font-medium">{title}</h1>

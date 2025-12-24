@@ -22,7 +22,7 @@ export default function Nav({}: Props) {
   return (
     <nav className="flex items-center h-fit px-6 py-6 sticky top-0 z-50 bg-red- backdrop-blur-xs">
       <div className="w-50 max-w-full h-auto overflow-hidden me-auto">
-        <Link href="/" className="flex size-full">
+        <NextIntlLink href="/" className="flex size-full">
           <Image
             className="size-full"
             src="/logoipsum.png"
@@ -31,28 +31,28 @@ export default function Nav({}: Props) {
             width={200}
             height={50}
           />
-        </Link>
+        </NextIntlLink>
       </div>
       <ul className="flex items-center gap-8 max-md:hidden">
         <li>
-          <Link href={PAGES_ROUTES.PROPERTIES.PREVIEW} className="font-medium">
+          <NextIntlLink href={PAGES_ROUTES.PROPERTIES.PREVIEW} className="font-medium">
             {t("properties")}
-          </Link>
+          </NextIntlLink>
         </li>
         <li>
-          <Link href={PAGES_ROUTES.ABOUT.PREVIEW} className="font-medium">
+          <NextIntlLink href={PAGES_ROUTES.ABOUT.PREVIEW} className="font-medium">
             {t("about")}
-          </Link>
+          </NextIntlLink>
         </li>
         <li>
-          <Link href={PAGES_ROUTES.CONTACT.PREVIEW} className="font-medium">
+          <NextIntlLink href={PAGES_ROUTES.CONTACT.PREVIEW} className="font-medium">
             {t("contact")}
-          </Link>
+          </NextIntlLink>
         </li>
         <li>
-          <Link href={PAGES_ROUTES.BLOG_POSTS.PREVIEW} className="font-medium">
+          <NextIntlLink href={PAGES_ROUTES.BLOG_POSTS.PREVIEW} className="font-medium">
             {t("blog")}
-          </Link>
+          </NextIntlLink>
         </li>
         <li>
           <NextIntlLink 
@@ -70,30 +70,30 @@ export default function Nav({}: Props) {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem>
-            <Link
+            <NextIntlLink
               href={PAGES_ROUTES.PROPERTIES.PREVIEW}
               className="font-medium"
             >
               {t("properties")}
-            </Link>
+            </NextIntlLink>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href={PAGES_ROUTES.ABOUT.PREVIEW} className="font-medium">
+            <NextIntlLink href={PAGES_ROUTES.ABOUT.PREVIEW} className="font-medium">
               {t("about")}
-            </Link>
+            </NextIntlLink>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href={PAGES_ROUTES.CONTACT.PREVIEW} className="font-medium">
+            <NextIntlLink href={PAGES_ROUTES.CONTACT.PREVIEW} className="font-medium">
               {t("contact")}
-            </Link>
+            </NextIntlLink>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link
+            <NextIntlLink
               href={PAGES_ROUTES.BLOG_POSTS.PREVIEW}
               className="font-medium"
             >
               {t("blog")}
-            </Link>
+            </NextIntlLink>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <NextIntlLink

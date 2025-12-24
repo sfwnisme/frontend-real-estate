@@ -10,12 +10,14 @@ import {
 } from "../../components/ui/dropdown-menu";
 import { MenuIcon } from "lucide-react";
 import { PAGES_ROUTES } from "@/constants/config";
-import { Link as NextIntlLink } from "@/i18n/navigation";
+import { Link as NextIntlLink, getPathname } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import { usePathname } from "@/i18n/navigation";
 
 type Props = {};
 
 export default function Nav({}: Props) {
+  const pathname = usePathname()
   const locale = useLocale();
   const switchLocale = useLocale() === "en" ? "ar" : "en";
   const t = useTranslations("navigation");
@@ -55,13 +57,25 @@ export default function Nav({}: Props) {
           </NextIntlLink>
         </li>
         <li>
-          <NextIntlLink 
-            href="/" 
-            locale={switchLocale} 
-            className={`font-medium ${locale === "en" ? "font-arabic" : "font-english"}`}
-          >
-            {locale === "ar" ? t("english") : t("arabic")}
-          </NextIntlLink>
+          {
+            locale === "ar" ? (
+              <NextIntlLink 
+                href={pathname}
+                locale={'en'} 
+                className={`font-medium font-english`}
+              >
+                {t("english")}
+              </NextIntlLink>
+            ) : (
+              <NextIntlLink 
+                href={pathname}
+                locale={'ar'} 
+                className={`font-medium font-arabic`}
+              >
+                {t("arabic")}
+              </NextIntlLink>
+            )
+          }
         </li>
       </ul>
       <DropdownMenu>

@@ -27,134 +27,51 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  let metadataImages: OgImageType[] | undefined = [];
 
-  try {
-    // property data
-    const property = await getProperty(slug);
-    const propertyData = property.data;
-    if (!propertyData) {
-      return {};
-    }
+  const property = await getProperty(slug);
+  if (!property.data) {
+    return {};
+  }
+  const propertyData = property.data;
+  const propertyImages = await getPropertyImages(property.data._id);
+  // const propertyImagesData = propertyImages.data;
 
-    // images error handling
-    try {
-      const propertyImages = await getPropertyImages(propertyData._id);
-      console.log("propertyData", propertyImages);
-      if (!propertyImages.data) {
-        return {};
-      }
-
-      // const propertyImagesData = propertyImages.data;
-      if (propertyImages.data.length > 0) {
-        metadataImages = propertyImages.data.map((image) => ({
+  const propertyImagesMetadata: OgImageType[] | undefined =
+    propertyImages.status > 200
+      ? propertyImages.data?.map((image) => ({
           url: image.url,
           width: image.dimensions.width,
           height: image.dimensions.height,
           alt: propertyData.title,
           type: image.mimeType,
-        }));
-      } else if (!propertyImages.data) {
-        metadataImages = [];
-      }
-    } catch (error) {
-      console.error("property images", error);
-      return {};
-    }
+        }))
+      : [];
+  const canonicalUrl = PAGES_ROUTES.PROPERTIES.PREVIEW + slug;
 
-    // property data error handling
-    const canonicalUrl = PAGES_ROUTES.PROPERTIES.PREVIEW + slug;
-
-    return {
-      title: propertyData.title,
-      description: propertyData.description,
-      alternates: {
-        canonical: canonicalUrl,
-      },
-      openGraph: {
-        images: metadataImages,
-        title: propertyData.title,
-        description: propertyData.description,
-        url: canonicalUrl,
-        siteName: SITE_INFO.NAME,
-        type: "article",
-        countryName: SITE_INFO.COUNTRY,
-      },
-      twitter: {
-        images: metadataImages,
-        title: propertyData.title,
-        description: propertyData.description,
-        card: "summary_large_image",
-      },
-      robots: { index: true, follow: true },
-    };
-  } catch (error) {
-    console.error("property metadata", error);
-    return {};
-  }
+  return {
+    title: property.data.title,
+    description: property.data.description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      images: propertyImagesMetadata,
+      title: property.data.title,
+      description: property.data.description,
+      url: canonicalUrl,
+      siteName: SITE_INFO.NAME,
+      type: "article",
+      countryName: SITE_INFO.COUNTRY,
+    },
+    twitter: {
+      images: propertyImagesMetadata,
+      title: property.data.title,
+      description: property.data.description,
+      card: "summary_large_image",
+    },
+    robots: { index: true, follow: true },
+  };
 }
-// export async function generateMetadata({ params }: Props): Promise<Metadata> {
-//   const { slug } = await params;
-//   let metadataImages: OgImageType[] | undefined = [];
-
-//   const property = await getProperty(slug);
-//   if (!property.data) {
-//     return {};
-//   }
-//   const propertyData = property.data;
-//   const propertyImages = await getPropertyImages(property.data._id);
-//   console.log("propertyData", propertyImages);
-//   if (!propertyImages.data) {
-//     return {};
-//   }
-//   const propertyImagesData = propertyImages.data;
-//   console.log("--------propertyImagesData", propertyImagesData);
-//   if (propertyImagesData.length > 0) {
-//     metadataImages = propertyImagesData.map((image) => ({
-//       url: image.url,
-//       width: image.dimensions.width,
-//       height: image.dimensions.height,
-//       alt: propertyData.title,
-//       type: image.mimeType,
-//     }));
-//   } else if (!propertyImagesData) {
-//     metadataImages = [];
-//   }
-
-//   // const propertyImagesMetadata: OgImageType[] | undefined =
-//   //   propertyImagesData?.map((image) => ({
-//   //     url: image.url,
-//   //     width: image.dimensions.width,
-//   //     height: image.dimensions.height,
-//   //     alt: propertyData.title,
-//   //     type: image.mimeType,
-//   //   }));
-//   const canonicalUrl = PAGES_ROUTES.PROPERTIES.PREVIEW + slug;
-
-//   return {
-//     title: property.data.title,
-//     description: property.data.description,
-//     alternates: {
-//       canonical: canonicalUrl,
-//     },
-//     openGraph: {
-//       images: metadataImages,
-//       title: property.data.title,
-//       description: property.data.description,
-//       url: canonicalUrl,
-//       siteName: SITE_INFO.NAME,
-//       type: "article",
-//       countryName: SITE_INFO.COUNTRY,
-//     },
-//     twitter: {
-//       images: metadataImages,
-//       title: property.data.title,
-//       description: property.data.description,
-//       card: "summary_large_image",
-//     },
-//     robots: { index: true, follow: true },
-//   };
-// }
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;

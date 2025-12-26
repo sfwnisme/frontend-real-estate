@@ -28,49 +28,76 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
-  const property = await getProperty(slug);
-  if (!property.data) {
-    return {};
+  try {
+    const property = await getProperty(slug);
+    if (!property.data) {
+      return {
+        title: "Property Not Found",
+        description: "The requested property could not be found.",
+      };
+    }
+    const propertyData = property.data;
+
+    // Handle images - continue even if images fail (next-intl compatibility)
+    let propertyImagesMetadata: OgImageType[] | undefined = undefined;
+    try {
+      const propertyImages = await getPropertyImages(propertyData._id);
+      
+      // Check for success (status === 200) and valid data
+      if (propertyImages.status === 200 && propertyImages.data && Array.isArray(propertyImages.data) && propertyImages.data.length > 0) {
+        propertyImagesMetadata = propertyImages.data
+          .filter((image) => image && image.dimensions) // Filter out invalid images
+          .map((image) => ({
+            url: image.url || "",
+            width: image.dimensions?.width || 0,
+            height: image.dimensions?.height || 0,
+            alt: propertyData.title,
+            type: image.mimeType || "image/jpeg",
+          }));
+        
+        // Only set if we have valid images
+        if (propertyImagesMetadata.length === 0) {
+          propertyImagesMetadata = undefined;
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching property images for metadata:", error);
+      // Continue without images - don't fail the entire metadata generation
+    }
+
+    const canonicalUrl = PAGES_ROUTES.PROPERTIES.PREVIEW + slug;
+
+    return {
+      title: propertyData.title,
+      description: propertyData.description,
+      alternates: {
+        canonical: canonicalUrl,
+      },
+      openGraph: {
+        images: propertyImagesMetadata,
+        title: propertyData.title,
+        description: propertyData.description,
+        url: canonicalUrl,
+        siteName: SITE_INFO.NAME,
+        type: "article",
+        countryName: SITE_INFO.COUNTRY,
+      },
+      twitter: {
+        images: propertyImagesMetadata,
+        title: propertyData.title,
+        description: propertyData.description,
+        card: "summary_large_image",
+      },
+      robots: { index: true, follow: true },
+    };
+  } catch (error) {
+    console.error("Error generating metadata for property:", error);
+    // Return fallback metadata instead of empty object (next-intl compatible)
+    return {
+      title: "Property",
+      description: "Property details",
+    };
   }
-  const propertyData = property.data;
-  const propertyImages = await getPropertyImages(property.data._id);
-  // const propertyImagesData = propertyImages.data;
-
-  const propertyImagesMetadata: OgImageType[] | undefined =
-    propertyImages.status > 200
-      ? propertyImages.data?.map((image) => ({
-          url: image.url,
-          width: image.dimensions.width,
-          height: image.dimensions.height,
-          alt: propertyData.title,
-          type: image.mimeType,
-        }))
-      : [];
-  const canonicalUrl = PAGES_ROUTES.PROPERTIES.PREVIEW + slug;
-
-  return {
-    title: property.data.title,
-    description: property.data.description,
-    alternates: {
-      canonical: canonicalUrl,
-    },
-    openGraph: {
-      images: propertyImagesMetadata,
-      title: property.data.title,
-      description: property.data.description,
-      url: canonicalUrl,
-      siteName: SITE_INFO.NAME,
-      type: "article",
-      countryName: SITE_INFO.COUNTRY,
-    },
-    twitter: {
-      images: propertyImagesMetadata,
-      title: property.data.title,
-      description: property.data.description,
-      card: "summary_large_image",
-    },
-    robots: { index: true, follow: true },
-  };
 }
 
 export default async function Page({ params }: Props) {

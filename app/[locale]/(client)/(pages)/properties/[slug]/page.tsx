@@ -13,63 +13,67 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const properties = await getProperties();
-  if (!properties.data?.data) {
-    return [];
-  }
-  const property = properties.data?.data.map((property) => ({
-    slug: property.slug,
-  }));
-  if (property.length === 0) return [];
-  return property;
-}
+// export async function generateStaticParams(): Promise<{ slug: string }[]> {
+//   const properties = await getProperties();
+//   if (!properties.data?.data) {
+//     return [];
+//   }
+//   const property = properties.data?.data.map((property) => ({
+//     slug: property.slug,
+//   }));
+//   if (property.length === 0) return [];
+//   return property;
+// }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+// export async function generateMetadata({ params }: Props): Promise<Metadata> {
+//   const { slug } = await params;
 
-  const property = await getProperty(slug);
-  if (!property.data) {
-    return {};
-  }
-  const propertyData = property.data;
-  const propertyImages = await getPropertyImages(property.data._id);
-  const propertyImagesData = propertyImages.data;
+//   const property = await getProperty(slug);
+//   if (!property.data) {
+//     return {};
+//   }
+//   const propertyData = property.data;
+//   const propertyImages = await getPropertyImages(property.data._id);
+//   console.log("propertyData", propertyImages);
+//   if(!propertyImages.data) {
+//     return {};
+//   }
+//   const propertyImagesData = propertyImages.data;
 
-  const propertyImagesMetadata: OgImageType[] | undefined =
-    propertyImagesData?.map((image) => ({
-      url: image.url,
-      width: image.dimensions.width,
-      height: image.dimensions.height,
-      alt: propertyData.title,
-      type: image.mimeType,
-    }));
-  const canonicalUrl = PAGES_ROUTES.PROPERTIES.PREVIEW + slug;
+//   const propertyImagesMetadata: OgImageType[] | undefined =
+//     propertyImagesData?.map((image) => ({
+//       url: image.url,
+//       width: image.dimensions.width,
+//       height: image.dimensions.height,
+//       alt: propertyData.title,
+//       type: image.mimeType,
+//     }));
+//   const canonicalUrl = PAGES_ROUTES.PROPERTIES.PREVIEW + slug;
 
-  return {
-    title: property.data.title,
-    description: property.data.description,
-    alternates: {
-      canonical: canonicalUrl,
-    },
-    openGraph: {
-      images: propertyImagesMetadata,
-      title: property.data.title,
-      description: property.data.description,
-      url: canonicalUrl,
-      siteName: SITE_INFO.NAME,
-      type: "article",
-      countryName: SITE_INFO.COUNTRY,
-    },
-    twitter: {
-      images: propertyImagesMetadata,
-      title: property.data.title,
-      description: property.data.description,
-      card: "summary_large_image",
-    },
-    robots: { index: true, follow: true },
-  };
-}
+//   return {
+//     title: property.data.title,
+//     description: property.data.description,
+//     alternates: {
+//       canonical: canonicalUrl,
+//     },
+//     openGraph: {
+//       images: propertyImagesMetadata,
+//       title: property.data.title,
+//       description: property.data.description,
+//       url: canonicalUrl,
+//       siteName: SITE_INFO.NAME,
+//       type: "article",
+//       countryName: SITE_INFO.COUNTRY,
+//     },
+//     twitter: {
+//       images: propertyImagesMetadata,
+//       title: property.data.title,
+//       description: property.data.description,
+//       card: "summary_large_image",
+//     },
+//     robots: { index: true, follow: true },
+//   };
+// }
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;

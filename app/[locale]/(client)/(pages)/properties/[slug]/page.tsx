@@ -11,6 +11,8 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const properties = await getProperties(
     undefined,

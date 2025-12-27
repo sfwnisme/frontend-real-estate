@@ -1,18 +1,18 @@
 "use server";
 
+import { API_ROUTES } from "@/constants/config";
 import { PAGINATION_CONFIG, STATUS_TEXT, USER_ROLES } from "@/constants/enums";
 import {
-  APIResponsePaginated,
   APIResponse,
+  APIResponsePaginated,
   BlogPost,
   ImageType,
   Property,
   User,
 } from "@/types/types";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { formatedApiErrRes, formatedSerErrRes } from "./utils";
-import { API_ROUTES } from "@/constants/config";
-import { revalidateTag } from "next/cache";
 
 const { PROPERTIES, BLOG_POSTS, IMAGES, USERS } = API_ROUTES;
 
@@ -80,10 +80,12 @@ export const deleteDataByQueryParams = async (
 export const getProperties = async (
   pageSize: number = PAGINATION_CONFIG.PROPERTIES.CLIENT.PAGE,
   currentPage?: number,
-  cache: RequestCache = "no-store"
+  cache: RequestCache = "no-store",
+  includeHidden: boolean = false
 ): Promise<APIResponsePaginated<Property[]>> => {
   try {
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL}${PROPERTIES.GET}?pageSize=${pageSize}&page=${currentPage}`;
+    const hiddenParam = includeHidden ? "" : "&hide=false";
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}${PROPERTIES.GET}?pageSize=${pageSize}&page=${currentPage}${hiddenParam}`;
     const response = await fetch(url, { cache });
     const responseData = await response.json();
     if (!response.ok) {

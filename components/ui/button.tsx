@@ -1,6 +1,6 @@
-import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
+import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
@@ -47,6 +47,11 @@ function Button({
   }) {
   const Comp = asChild ? Slot : "button"
 
+  const FRONTEND_URL = process.env.NEXT_PUBLIC_FRONTEND_URL
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+
+  console.log("testing", {FRONTEND_URL, BASE_URL});
+
   return (
     <Comp
       data-slot="button"
@@ -57,3 +62,4 @@ function Button({
 }
 
 export { Button, buttonVariants }
+

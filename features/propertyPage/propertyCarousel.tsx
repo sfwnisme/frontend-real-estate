@@ -19,7 +19,7 @@ export default async function PropertyCarousel({
   propertyId,
   propertyAlt,
 }: Props) {
-  const propertyImages = await getPropertyImages(propertyId);
+  const propertyImages = await getPropertyImages(propertyId, "force-cache");
   const images = propertyImages.data;
   console.log("images carousel", images)
   if (propertyImages.statusText !== STATUS_TEXT.SUCCESS) {

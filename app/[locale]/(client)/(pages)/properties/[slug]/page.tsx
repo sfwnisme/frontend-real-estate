@@ -9,36 +9,40 @@ import YoutubeVideoPlayer from "@/components/custom/youtube-video-player";
 import { type OgImageType } from "@/types/types";
 import { PAGES_ROUTES, SITE_INFO } from "@/constants/config";
 import { setRequestLocale } from "next-intl/server";
+import { routing } from "@/i18n/routing";
+
+export const dynamic = "force-static";
+export const dynamicParams = false;
 
 type Props = {
   params: Promise<{ slug: string, locale: string }>;
 };
 
-export async function generateStaticParams({ params }: Props): Promise<{ slug: string, locale: string }[]> {
-  const { locale } = await params;
-  setRequestLocale(locale);
-  const properties = await getProperties();
+export async function generateStaticParams(): Promise<{ slug: string; locale: string }[]> {
+  const properties = await getProperties(1000, undefined, "force-cache");
   if (!properties.data?.data) {
     return [];
   }
-  const property = properties.data?.data.map((property) => ({
-    slug: property.slug,
-    locale: locale,
-  }));
-  if (property.length === 0) return [];
-  return property;
+
+  const params = properties.data.data.flatMap((property) =>
+    routing.locales.map((locale) => ({
+      slug: property.slug,
+      locale: locale,
+    }))
+  );
+
+  return params;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug, locale } = await params;
-  setRequestLocale(locale);
+  const { slug } = await params;
 
-  const property = await getProperty(slug);
+  const property = await getProperty(slug, "force-cache");
   if (!property.data) {
     return {};
   }
   const propertyData = property.data;
-  const propertyImages = await getPropertyImages(property.data._id);
+  const propertyImages = await getPropertyImages(property.data._id, "force-cache");
   const propertyImagesData = propertyImages.data;
 
   const propertyImagesMetadata: OgImageType[] | undefined =
@@ -78,9 +82,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const { slug, locale } = await params;
-  console.log("--------locale", locale);
   setRequestLocale(locale);
-  const property = await getProperty(slug);
+  const property = await getProperty(slug, "force-cache");
   const propertyData = property.data;
 
   if (!propertyData) {

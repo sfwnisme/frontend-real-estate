@@ -12,13 +12,16 @@ import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 
 export const dynamic = "force-static";
-export const dynamicParams = false;
+export const revalidate = 86400; // Revalidate every 24 hours
+// export const dynamicParams = false; // Prevent dynamic params to improve performance
 
 type Props = {
-  params: Promise<{ slug: string, locale: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 };
 
-export async function generateStaticParams(): Promise<{ slug: string; locale: string }[]> {
+export async function generateStaticParams(): Promise<
+  { slug: string; locale: string }[]
+> {
   const properties = await getProperties(1000, undefined, "force-cache");
   if (!properties.data?.data) {
     return [];
@@ -42,7 +45,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {};
   }
   const propertyData = property.data;
-  const propertyImages = await getPropertyImages(property.data._id, "force-cache");
+  const propertyImages = await getPropertyImages(
+    property.data._id,
+    "force-cache"
+  );
   const propertyImagesData = propertyImages.data;
 
   const propertyImagesMetadata: OgImageType[] | undefined =

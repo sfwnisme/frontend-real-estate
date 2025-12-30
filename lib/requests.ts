@@ -72,14 +72,16 @@ export const getPropertiesWithRevalidate = async (
 };
 
 export const getPropertyImages = async (
-  propertyId: string
+  propertyId: string,
+  cache: RequestCache = "no-store"
 ): Promise<APIResponse<ImageType[]>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${IMAGES.GET_PROPERTY_IMAGES}/${propertyId}`;
     const response = await fetch(url, {
+      cache,
       next: {
         tags: [`delete-image-${propertyId}`, `property-images-${propertyId}`],
-      },
+      },  
     });
     const responseData = await response.json();
 

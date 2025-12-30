@@ -8,21 +8,30 @@ import { type Metadata } from "next";
 import YoutubeVideoPlayer from "@/components/custom/youtube-video-player";
 import { type OgImageType } from "@/types/types";
 import { PAGES_ROUTES, SITE_INFO } from "@/constants/config";
+import { routing } from "@/i18n/routing";
+// import dynamic from "next/dynamic";
+
+export const dynamic = "force-static"
+export const revalidate = 3600
+// export const dynamicParams = false
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const properties = await getProperties();
+export async function generateStaticParams(): Promise<{ slug: string; locale: string }[]> {
+  const properties = await getProperties(1000);
   if (!properties.data?.data) {
     return [];
   }
-  const property = properties.data?.data.map((property) => ({
-    slug: property.slug,
-  }));
-  if (property.length === 0) return [];
-  return property;
+  const propertiesData = properties.data?.data.flatMap((property) =>
+    routing.locales.map((locale) => ({
+      slug: property.slug,
+      locale: locale,
+    }))
+  );
+  if (!propertiesData || propertiesData.length === 0) return [];
+  return propertiesData
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -5,14 +5,9 @@ import HeroView from "@/features/client/hero-view";
 import PropertiesHomePageView from "@/features/properties/views/properties-home-page-view";
 import { Metadata } from "next";
 import { SITE_INFO } from "@/constants/config";
-import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 
 const { TITLE, DESCRIPTION, ROUTE } = SITE_INFO.PAGES.HOME;
-
-export async function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;

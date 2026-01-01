@@ -37,6 +37,10 @@ export const metadata: Metadata = {
   },
 };
 
+export async function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 export default async function RootLayout({ children, params }: Props) {
   const locale = (await params).locale;
   // MANDATORY: Ensure that the incoming `locale` is valid

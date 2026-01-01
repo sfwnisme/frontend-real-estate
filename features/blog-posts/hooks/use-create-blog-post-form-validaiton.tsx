@@ -6,7 +6,7 @@ import {
 } from "../schema/blog-post-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BLOG_POST_STATUS } from "@/constants/enums";
-import { createBlogPost, createBlogPostImage } from "../lib/requests";
+import { createBlogPost, createBlogPostImage } from "../lib/actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 

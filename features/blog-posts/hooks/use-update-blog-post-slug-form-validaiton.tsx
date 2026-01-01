@@ -11,7 +11,7 @@ import {
 } from "../schema/blog-post-schema";
 import { useRouter } from "next/navigation";
 import { PAGES_ROUTES } from "@/constants/config";
-import { updateBlogPostSlug } from "../lib/requests";
+import { updateBlogPostSlug } from "../lib/actions";
 
 export default function useUpdateBlogPostSlugFormValidation(
   blogPostId: string,

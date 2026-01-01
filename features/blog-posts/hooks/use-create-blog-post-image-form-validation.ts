@@ -6,7 +6,7 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { STATUS_TEXT } from "@/constants/enums";
 import { CreateImageSchema, CreateImageType } from "@/features/properties/schema/image-schema";
-import { createBlogPostImage } from "../lib/requests";
+import { createBlogPostImage } from "../lib/actions";
 
 export default function useCreateBlogPostImageFormValidation(blogPostId: string) {
   const [isUploading, startUploading] = useTransition();

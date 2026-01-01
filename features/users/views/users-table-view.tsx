@@ -45,7 +45,7 @@ export default async function UsersTableView({
 
   const currentUser = await getCurrentUser();
   return (
-    <div className="overflow-x-scroll w-full">
+    <div className="w-full">
       <Table>
         <TableHeader>
           <TableRow>

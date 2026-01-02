@@ -4,17 +4,20 @@ import { STATUS_TEXT } from "@/constants/enums";
 import { getBlogPost, getBlogPostImage, getBlogPosts } from "@/lib/requests";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import React from "react";
-import { BlogPost, OgImageType } from "@/types/types";
+import { OgImageType } from "@/types/types";
 import { Metadata } from "next";
 import { PAGES_ROUTES, SITE_INFO } from "@/constants/config";
+import { setRequestLocale } from "next-intl/server";
+
+export const dynamic = "force-static";
+export const revalidate = 3600;
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 };
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const blogPosts = await getBlogPosts();
+  const blogPosts = await getBlogPosts(1000);
   if (!blogPosts.data?.data) {
     return [];
   }
@@ -34,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   const blogPostData = blogPost.data;
   const blogPostImage = await getBlogPostImage(blogPostData._id);
-  const blogPostImageData = blogPostImage.data
+  const blogPostImageData = blogPostImage.data;
 
   const blogPostImageMetadata: OgImageType = {
     url: blogPostImageData?.url || "",
@@ -45,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
   const canonicalUrl = PAGES_ROUTES.BLOG_POSTS.PREVIEW + slug;
 
-  console.log(blogPostImageData)
+  console.log(blogPostImageData);
 
   return {
     title: blogPostData.title,
@@ -76,14 +79,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function page({ params }: Props) {
-  const { slug } = await params;
+export default async function page({
+  params,
+}: {
+  params: Promise<{ slug: string; locale: string }>;
+}) {
+  const { slug, locale } = await params;
+  setRequestLocale(locale);
+
   const blogPost = await getBlogPost(slug);
   const blogPostData = blogPost.data;
   if (!blogPostData) {
     notFound();
   }
-  
+
   const blogPostImage = await getBlogPostImage(blogPostData._id);
   const blogPostImageData = blogPostImage.data;
 
@@ -112,7 +121,10 @@ export default async function page({ params }: Props) {
           </div>
         )}
       </div>
-      <article className="mt-8" dangerouslySetInnerHTML={{ __html: blogPostData.content }} />
+      <article
+        className="mt-8"
+        dangerouslySetInnerHTML={{ __html: blogPostData.content }}
+      />
       <div className="mt-8 flex flex-wrap gap-2">{renderKeywords}</div>
     </div>
   );

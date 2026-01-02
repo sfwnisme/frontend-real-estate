@@ -1,5 +1,3 @@
-import React from "react";
-
 import PropertyOverviewCard from "@/features/propertyPage/propertyOverviewCard";
 import PropertyCarousel from "@/features/propertyPage/propertyCarousel";
 import { getProperties, getProperty, getPropertyImages } from "@/lib/requests";
@@ -8,25 +6,32 @@ import { type Metadata } from "next";
 import YoutubeVideoPlayer from "@/components/custom/youtube-video-player";
 import { type OgImageType } from "@/types/types";
 import { PAGES_ROUTES, SITE_INFO } from "@/constants/config";
+import { setRequestLocale } from "next-intl/server";
+
+export const dynamic = "force-static";
+export const revalidate = 3600;
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 };
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const properties = await getProperties();
+  const properties = await getProperties(1000);
   if (!properties.data?.data) {
     return [];
   }
-  const property = properties.data?.data.map((property) => ({
+  
+  const propertiesData = properties.data?.data.flatMap((property) => ({
     slug: property.slug,
   }));
-  if (property.length === 0) return [];
-  return property;
+
+  if (!propertiesData || propertiesData.length === 0) return [];
+  return propertiesData;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
 
   const property = await getProperty(slug);
   if (!property.data) {
@@ -72,7 +77,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
+  setRequestLocale(locale);
+  
   const property = await getProperty(slug);
   const propertyData = property.data;
 

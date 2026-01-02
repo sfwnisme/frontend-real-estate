@@ -17,13 +17,10 @@ import {
   useSearchParams,
 } from "next/navigation";
 import LoadingSpinner from "@/components/custom/loading-spinner";
-import { deleteDataByQueryParams } from "@/lib/requests";
+import { deleteDataByQueryParams } from "@/lib/actions";
 import { STATUS_TEXT } from "@/constants/enums";
-import { Models } from "@/types/types";
 export default function GlobalDeleteDialog() {
-  // const endpointDialogText: Record<(typeof MODELS_LOWERCASE)[keyof typeof MODELS_LOWERCASE], any> = {
   const endpointDialogText: Record<string, any> = {
-  // const endpointDialogText = {
     property: {
       endpoint: "/properties/delete/",
       title: "Delete Property Data?",

@@ -9,7 +9,7 @@ import type { SearchParamsType } from "@/types/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 
 export const generateMetadata = async ({
   searchParams,
@@ -44,14 +44,10 @@ export const generateMetadata = async ({
 };
 
 export default async function page({
-  params,
   searchParams,
 }: {
-  params: Promise<{ locale: string }>;
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
   const t = await getTranslations("BlogPostsPage");
   const page = (await searchParams)?.page;
   const currentPage = page ? parseInt(page) : 1;

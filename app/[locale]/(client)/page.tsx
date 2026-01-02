@@ -5,18 +5,20 @@ import HeroView from "@/features/client/hero-view";
 import PropertiesHomePageView from "@/features/properties/views/properties-home-page-view";
 import { Metadata } from "next";
 import { SITE_INFO } from "@/constants/config";
-import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
+
+export const dynamic = "force-static";
+export const revalidate = 604800;
 
 const { TITLE, DESCRIPTION, ROUTE } = SITE_INFO.PAGES.HOME;
 
-export async function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
-
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
   const { locale } = await params;
-  const canonical = locale === 'ar' ? `${ROUTE}` : `${ROUTE}/${locale}`;
+  const canonical = locale === "ar" ? `${ROUTE}` : `${ROUTE}/${locale}`;
   return {
     title: TITLE,
     description: DESCRIPTION,
@@ -37,10 +39,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function Home({params}: {params: Promise<{locale: string}>}) {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const locale = (await params).locale;
   setRequestLocale(locale);
-  
+
   return (
     <div className="min-h-screen">
       <HeroView />

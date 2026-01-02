@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MessageSquare } from "lucide-react";
-import React from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+
+export const dynamic = "force-static";
+export const revalidate = 2592000;
 
 export default async function page({
   params,
@@ -13,6 +15,7 @@ export default async function page({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+
   const t = await getTranslations("ContactPage");
   return (
     <div className="min-h-full">

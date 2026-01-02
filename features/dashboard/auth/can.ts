@@ -1,5 +1,5 @@
 import { Permission, rolePermissions } from "@/constants/permissions";
-import { getCurrentUser } from "@/lib/requests";
+import { getCurrentUser } from "@/lib/actions";
 
 export default async function can(permission: Permission) {
   const user = await getCurrentUser();

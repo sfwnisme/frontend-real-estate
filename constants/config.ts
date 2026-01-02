@@ -89,3 +89,12 @@ export const API_ROUTES = {
     DELETE: "/images/delete",
   },
 }
+
+export const REVALIDATE_TIMES = {
+  PROPERTIES: 3600, // 1 hour
+  BLOG_POSTS: 3600, // 1 hour
+  USERS: 60, // 1 minute
+  IMAGES: 60, // 1 minute
+  PROPERTY_IMAGES: 3600, // 1 hour
+  BLOG_POST_IMAGES: 3600, // 1 hour
+};

@@ -1,15 +1,13 @@
-import React from 'react'
+"use client"
 import Title from '../../components/custom/title'
 import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import { Button } from '../../components/ui/button'
 import Image from 'next/image'
-import { getTranslations } from 'next-intl/server'
+import { useTranslations } from 'next-intl'
 
-type Props = {}
-
-export default async function FooterView({ }: Props) {
-  const t =await getTranslations("HomePage.Footer")
+export default function FooterView() {
+  const t =  useTranslations("HomePage.Footer")
 
   const currentYear = new Date().getFullYear()
   return (

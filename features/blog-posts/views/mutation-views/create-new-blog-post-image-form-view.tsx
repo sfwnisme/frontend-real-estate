@@ -2,14 +2,12 @@
 import React, { useCallback, useMemo, memo } from "react";
 import { useTranslations } from "next-intl";
 import ImageInput from "@/components/custom/image-input";
-import { Button } from "@/components/ui/button";
 import InputWrapper from "@/components/custom/input-wrapper";
 import ImagePreview from "@/components/custom/image-preview";
 import useCreateBlogPostImageFormValidation from "../../hooks/use-create-blog-post-image-form-validation";
 import { ImageType } from "@/types/types";
 import FieldSet from "@/components/custom/field-set";
-import LoadingSpinner from "@/components/custom/loading-spinner";
-import { deleteImage } from "@/lib/requests";
+import { deleteImage } from "@/lib/actions";
 import { Case, Shift } from "@sfwnisme/visi";
 import { toast } from "sonner";
 

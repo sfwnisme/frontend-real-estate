@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { BLOG_POST_STATUS } from "@/constants/enums";
 import {
   updateBlogPost,
-} from "../lib/requests";
+} from "../lib/actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { BlogPost } from "@/types/types";

@@ -12,6 +12,9 @@ import { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 
+export const dynamic = "force-static";
+export const revalidate = 2592000;
+
 const { TITLE, DESCRIPTION, ROUTE } = SITE_INFO.PAGES.ABOUT;
 export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -51,6 +54,7 @@ export default async function page({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+
   const t = await getTranslations("AboutPage");
   return (
     <div className="flex flex-col gap-20">
@@ -142,24 +146,26 @@ export default async function page({
             className="w-full"
             defaultValue="item-1"
           >
-            {t.raw("faq.questions").map((faq: { title: string; description: string }) => (
-              <AccordionItem
-                value={faq.title}
-                key={faq.title}
-                className="border-gray-100 bg-white px-4"
-              >
-                <AccordionTrigger>
-                  {faq.title}
-                  <ChevronDown
-                    strokeWidth="1"
-                    className="border border-gray-200 rounded-full "
-                  />
-                </AccordionTrigger>
-                <AccordionContent className="flex flex-col gap-4 text-balance">
-                  <p>{faq.description}</p>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
+            {t
+              .raw("faq.questions")
+              .map((faq: { title: string; description: string }) => (
+                <AccordionItem
+                  value={faq.title}
+                  key={faq.title}
+                  className="border-gray-100 bg-white px-4"
+                >
+                  <AccordionTrigger>
+                    {faq.title}
+                    <ChevronDown
+                      strokeWidth="1"
+                      className="border border-gray-200 rounded-full "
+                    />
+                  </AccordionTrigger>
+                  <AccordionContent className="flex flex-col gap-4 text-balance">
+                    <p>{faq.description}</p>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
           </Accordion>
         </div>
       </div>

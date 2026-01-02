@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/sidebar";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { getCurrentUser } from "@/lib/requests";
+import { getCurrentUser } from "@/lib/actions";
 import { logOut } from "../users/lib/requests";
 
 export function DashboardNavUser() {

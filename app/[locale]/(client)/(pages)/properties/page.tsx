@@ -9,7 +9,7 @@ import PaginationLayout from "@/components/custom/pagination-layout";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import PropertyCardSkeleton from "@/features/properties/skeletons/property-card-skeleton";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({
   searchParams,
@@ -44,14 +44,10 @@ export async function generateMetadata({
 }
 
 export default async function page({
-  params,
   searchParams,
 }: {
-  params: Promise<{ locale: string }>;
   searchParams: SearchParamsType;
 }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
   const t = await getTranslations("PropertiesPage");
   const page = (await searchParams)?.page;
   const currentPage = page ? parseInt(page) : 1;

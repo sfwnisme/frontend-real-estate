@@ -1,14 +1,8 @@
 "use client";
-import { cn, returnFileSize, textTrimmer } from "@/lib/utils";
 import { ImageType } from "@/types/types";
-import { Trash2 } from "lucide-react";
-import Image from "next/image";
 import React, { memo, useCallback, useMemo, useTransition } from "react";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
-import { Label } from "../../../../components/ui/label";
-import { Checkbox } from "../../../../components/ui/checkbox";
-import { deleteImage } from "@/lib/requests";
+import { deleteImage } from "@/lib/actions";
 import { toast } from "sonner";
 import { setFeaturedImage } from "@/features/properties/lib/requests";
 import ImagePreview from "../../../../components/custom/image-preview";

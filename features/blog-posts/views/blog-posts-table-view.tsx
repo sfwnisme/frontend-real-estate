@@ -43,7 +43,7 @@ export default async function BlogPostsTableView({
   const canDeleteBlogPost = await can("blogpost.delete");
   const canEditBlogPost = await can("blogpost.update");
   return (
-    <div className="overflow-x-scroll w-full">
+    <div className="w-full">
       <Table>
         <TableHeader>
           <TableRow>

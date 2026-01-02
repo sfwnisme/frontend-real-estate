@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Title from "@/components/custom/title";
-import { login } from "@/lib/requests";
+import { login } from "@/lib/actions";
 import InputWrapper from "@/components/custom/input-wrapper";
 import useFormErrors from "@/hooks/use-form-errors";
 

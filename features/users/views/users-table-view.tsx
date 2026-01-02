@@ -16,7 +16,7 @@ import { PAGES_ROUTES } from "@/constants/config";
 import { getUsers } from "../lib/requests";
 import { USER_ROLES_READABLE } from "@/constants/enums";
 import { Badge } from "@/components/ui/badge";
-import { getCurrentUser } from "@/lib/requests";
+import { getCurrentUser } from "@/lib/actions";
 import can from "@/features/dashboard/auth/can";
 import { Visible } from "@sfwnisme/visi";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -45,7 +45,7 @@ export default async function UsersTableView({
 
   const currentUser = await getCurrentUser();
   return (
-    <div className="overflow-x-scroll w-full">
+    <div className="w-full">
       <Table>
         <TableHeader>
           <TableRow>

@@ -1,5 +1,5 @@
-import React, { Suspense } from "react";
-import { getProperties, getPropertiesWithRevalidate } from "@/lib/requests";
+import { Suspense } from "react";
+import { getProperties } from "@/lib/requests";
 import { PAGINATION_CONFIG } from "@/constants/enums";
 import PropertyCard from "@/components/custom/property-card";
 import PropertyCardSkeleton from "../skeletons/property-card-skeleton";
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const RenderProperties = async ({ pageSize, currentPage }: Props) => {
-  const properties = await getPropertiesWithRevalidate(pageSize, currentPage, 60);
+  const properties = await getProperties(pageSize, currentPage);
   if(!properties.data?.data) return null
   const propertiesData = properties.data.data;
   const renderProperties = propertiesData.map((property) => (

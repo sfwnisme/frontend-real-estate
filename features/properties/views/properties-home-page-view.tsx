@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { PAGINATION_CONFIG } from "@/constants/enums";
 import Title from "@/components/custom/title";
 import PropertiesGridView from "./properties-grid-veiw";

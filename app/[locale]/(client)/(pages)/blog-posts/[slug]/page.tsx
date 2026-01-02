@@ -4,10 +4,12 @@ import { STATUS_TEXT } from "@/constants/enums";
 import { getBlogPost, getBlogPostImage, getBlogPosts } from "@/lib/requests";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import React from "react";
-import { BlogPost, OgImageType } from "@/types/types";
+import { OgImageType } from "@/types/types";
 import { Metadata } from "next";
 import { PAGES_ROUTES, SITE_INFO } from "@/constants/config";
+
+export const dynamic = "force-static";
+export const revalidate = 3600
 
 type Props = {
   params: Promise<{ slug: string }>;

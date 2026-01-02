@@ -6,6 +6,7 @@ import { SITE_INFO } from "@/constants/config";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 
 const { NAME, DESCRIPTION } = SITE_INFO;
 type Props = {
@@ -47,18 +48,26 @@ export default async function RootLayout({ children, params }: Props) {
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
-  const defaultLocale = locale ?? routing.defaultLocale;
-  const isRtl = defaultLocale === "ar";
+  
+  // Enable static rendering for SSG
+  setRequestLocale(locale);
+  
+  // Import messages directly based on locale to avoid race conditions during parallel SSG
+  const messages = (await import(`@/messages/${locale}.json`)).default;
+  
+  const isRtl = locale === "ar";
   const font = isRtl ? kufiFont.className : interFont.className;
   const fontVariables = `${interFont.variable} ${kufiFont.variable}`
 
   return (
     <html
-      lang={defaultLocale}
+      lang={locale}
       dir={isRtl ? "rtl" : "ltr"}
     >
       <body className={`${font} ${fontVariables} antialiased overflow-x-hidden`}>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
         <Toaster position="top-right" expand />
       </body>
     </html>

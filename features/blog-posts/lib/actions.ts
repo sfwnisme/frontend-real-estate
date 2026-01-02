@@ -111,8 +111,17 @@ export const updateBlogPost = async (
   blogPostId: string
 ): Promise<APIResponse<BlogPost>> => {
   try {
+    const keywords = blogPostData.meta?.keywords
+    const keywordsArr = keywords ? strToArrElms(keywords) : [];
+    const refinedData = {
+      ...blogPostData,
+      meta: {
+        ...blogPostData.meta,
+        keywords: keywordsArr,
+      },
+    };
     const token = (await cookies()).get("TOKEN")?.value;
-    const bodyToJson = JSON.stringify(blogPostData);
+    const bodyToJson = JSON.stringify(refinedData);
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${UPDATE}/${blogPostId}`;
     const response = await fetch(url, {
       method: "PATCH",

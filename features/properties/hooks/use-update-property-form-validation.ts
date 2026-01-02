@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
   updateProperty,
-} from "@/features/properties/lib/requests";
+} from "@/features/properties/lib/actions";
 import { toast } from "sonner";
 import { STATUS_TEXT } from "@/constants/enums";
 import {

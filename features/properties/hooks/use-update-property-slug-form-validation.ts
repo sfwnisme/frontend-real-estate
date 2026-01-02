@@ -3,7 +3,7 @@ import { useTransition } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { updatePropertySlug } from "@/features/properties/lib/requests";
+import { updatePropertySlug } from "@/features/properties/lib/actions";
 import { toast } from "sonner";
 import { STATUS_TEXT } from "@/constants/enums";
 import {

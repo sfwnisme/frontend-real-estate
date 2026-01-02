@@ -4,7 +4,7 @@ import React, { memo, useCallback, useMemo, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { deleteImage } from "@/lib/actions";
 import { toast } from "sonner";
-import { setFeaturedImage } from "@/features/properties/lib/requests";
+import { setFeaturedImage } from "@/features/properties/lib/actions";
 import ImagePreview from "../../../../components/custom/image-preview";
 
 type Props = {

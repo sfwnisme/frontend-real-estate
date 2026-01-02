@@ -13,7 +13,7 @@ import { notFound } from "next/navigation";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { modalQuery } from "@/lib/utils";
 import { PAGES_ROUTES } from "@/constants/config";
-import { getUsers } from "../lib/requests";
+import { getUsers } from "../lib/actions";
 import { USER_ROLES_READABLE } from "@/constants/enums";
 import { Badge } from "@/components/ui/badge";
 import { getCurrentUser } from "@/lib/actions";

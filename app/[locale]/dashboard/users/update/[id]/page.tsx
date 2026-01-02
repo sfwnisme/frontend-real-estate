@@ -1,4 +1,4 @@
-import { getUser } from "@/features/users/lib/requests";
+import { getUser } from "@/features/users/lib/actions";
 import UpdateUserFormView from "@/features/users/views/mutation-views/update-user-form-view";
 import { notFound } from "next/navigation";
 

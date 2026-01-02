@@ -21,7 +21,7 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { getCurrentUser } from "@/lib/actions";
-import { logOut } from "../users/lib/requests";
+import { logOut } from "../users/lib/actions";
 
 export function DashboardNavUser() {
   const [userData, setUserData] = useState<{

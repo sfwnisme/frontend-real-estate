@@ -33,10 +33,11 @@ export const getData = async <T>(
 //-------------------------------
 // PROPERTIES REQUESTS
 //-------------------------------
+
 export const getProperties = async (
   pageSize: number = PAGINATION_CONFIG.PROPERTIES.CLIENT.PAGE,
   currentPage?: number,
-  cache: RequestCache = "no-store"
+  cache: RequestCache = "default"
 ): Promise<APIResponsePaginated<Property[]>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${PROPERTIES.GET}?pageSize=${pageSize}&page=${currentPage}`;
@@ -73,7 +74,7 @@ export const getPropertiesWithRevalidate = async (
 
 export const getPropertyImages = async (
   propertyId: string,
-  cache: RequestCache = "no-store"
+  cache: RequestCache = "default"
 ): Promise<APIResponse<ImageType[]>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${IMAGES.GET_PROPERTY_IMAGES}/${propertyId}`;
@@ -81,7 +82,7 @@ export const getPropertyImages = async (
       cache,
       next: {
         tags: [`delete-image-${propertyId}`, `property-images-${propertyId}`],
-      },  
+      },
     });
     const responseData = await response.json();
 
@@ -121,7 +122,7 @@ export const getPropertyImagesWithRevalidate = async (
 
 export const getProperty = async (
   slug: string,
-  cache: RequestCache = "no-store"
+  cache: RequestCache = "default"
 ): Promise<APIResponse<Property>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${PROPERTIES.GET}/${slug}`;
@@ -161,7 +162,7 @@ export const getPropertyWithRevalidate = async (
 export const getBlogPosts = async (
   pageSize: number = PAGINATION_CONFIG.BLOG.CLIENT.PAGE,
   currentPage?: number,
-  cache: RequestCache = "no-store"
+  cache: RequestCache = "default"
 ): Promise<APIResponsePaginated<BlogPost[]>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${BLOG_POSTS.GET}?pageSize=${pageSize}&page=${currentPage}`;
@@ -198,7 +199,7 @@ export const getBlogPostsWithRevalidate = async (
 
 export const getBlogPost = async (
   blogPostId: string,
-  cache: RequestCache = "no-store"
+  cache: RequestCache = "default"
 ): Promise<APIResponse<BlogPost>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${BLOG_POSTS.GET}/${blogPostId}`;
@@ -233,11 +234,13 @@ export const getBlogPostWithRevalidate = async (
 };
 
 export const getBlogPostImage = async (
-  blogPostId: string
+  blogPostId: string,
+  cache: RequestCache = "default"
 ): Promise<APIResponse<ImageType>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${IMAGES.GET_BLOG_POST_IMAGES}/${blogPostId}`;
     const response = await fetch(url, {
+      cache,
       next: {
         tags: [`blog-post-image-${blogPostId}`, `delete-image-${blogPostId}`],
       },

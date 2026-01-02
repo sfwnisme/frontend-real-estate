@@ -1,6 +1,6 @@
 "use server";
 
-import { getBaseUrl, STATUS_TEXT } from "@/constants/enums";
+import { STATUS_TEXT } from "@/constants/enums";
 import { formatedApiErrRes, formatedSerErrRes } from "@/lib/utils";
 import { APIResponse, ImageType, Property } from "@/types/types";
 import { cookies } from "next/headers";
@@ -8,8 +8,6 @@ import { API_ROUTES } from "@/constants/config";
 import { UpdatePropertyType } from "../schema/update-property-schema";
 import { CreatePropertyWithImagesType } from "../schema/create-property-with-images-schema";
 import { revalidateTag } from "next/cache";
-
-// update slug
 
 const { GET, CREATE, UPDATE, UPDATE_SLUG, DELETE } = API_ROUTES.PROPERTIES;
 const { MAKE_IMAGE_FEATURED, CREATE_TEMP_PROPERTY_IMAGE, CREATE_PROPERTY_IMAGE } = API_ROUTES.IMAGES;
@@ -70,7 +68,7 @@ export const createMultiTempPropertyImage = async (
 ): Promise<APIResponse<ImageType[]>> => {
   try {
     const token = (await cookies()).get("TOKEN")?.value;
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/images/create-temp-property-image`;
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}${CREATE_TEMP_PROPERTY_IMAGE}`;
     const controller = new AbortController();
 
     // Send all images as separate requests and collect JSON responses

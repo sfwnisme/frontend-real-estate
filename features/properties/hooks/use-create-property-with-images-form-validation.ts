@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   createProperty,
   createPropertyImage,
-} from "@/features/properties/lib/requests";
+} from "@/features/properties/lib/actions";
 import { toast } from "sonner";
 import { STATUS_TEXT, PROPERTY_TYPE, PROPERTY_STATUS } from "@/constants/enums";
 import {

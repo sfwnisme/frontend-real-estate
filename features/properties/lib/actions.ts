@@ -1,6 +1,6 @@
 "use server";
 
-import { getBaseUrl, STATUS_TEXT } from "@/constants/enums";
+import { STATUS_TEXT } from "@/constants/enums";
 import { formatedApiErrRes, formatedSerErrRes } from "@/lib/utils";
 import { APIResponse, ImageType, Property } from "@/types/types";
 import { cookies } from "next/headers";
@@ -9,17 +9,16 @@ import { UpdatePropertyType } from "../schema/update-property-schema";
 import { CreatePropertyWithImagesType } from "../schema/create-property-with-images-schema";
 import { revalidateTag } from "next/cache";
 
-// update slug
-
 const { GET, CREATE, UPDATE, UPDATE_SLUG, DELETE } = API_ROUTES.PROPERTIES;
-const { MAKE_IMAGE_FEATURED } = API_ROUTES.IMAGES;
+const { MAKE_IMAGE_FEATURED, CREATE_TEMP_PROPERTY_IMAGE, CREATE_PROPERTY_IMAGE } = API_ROUTES.IMAGES;
+
 export const createProperty = async (
   propertyData: Omit<CreatePropertyWithImagesType, "images">
 ): Promise<APIResponse<Property>> => {
   try {
     const token = (await cookies()).get("TOKEN")?.value;
     const bodyToJson = JSON.stringify(propertyData);
-    const url = process.env.NEXT_PUBLIC_BASE_URL + CREATE;
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}${CREATE}`;
     const response = await fetch(url, {
       method: "POST",
       body: bodyToJson,
@@ -44,7 +43,7 @@ export const createTempPropertyImage = async (
 ): Promise<APIResponse<ImageType>> => {
   try {
     const token = (await cookies()).get("TOKEN")?.value;
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/images/create-temp-property-image`;
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}${CREATE_TEMP_PROPERTY_IMAGE}`;
     const response = await fetch(url, {
       method: "POST",
       body: data,
@@ -69,7 +68,7 @@ export const createMultiTempPropertyImage = async (
 ): Promise<APIResponse<ImageType[]>> => {
   try {
     const token = (await cookies()).get("TOKEN")?.value;
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/images/create-temp-property-image`;
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}${CREATE_TEMP_PROPERTY_IMAGE}`;
     const controller = new AbortController();
 
     // Send all images as separate requests and collect JSON responses
@@ -128,7 +127,7 @@ export const createPropertyImage = async (
     FD.append("propertyId", propertyId);
     FD.append("isFeatured", String(isFeatured));
     const token = (await cookies()).get("TOKEN")?.value;
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/images/create-property-image`;
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}${CREATE_PROPERTY_IMAGE}`;
     const response = await fetch(url, {
       method: "POST",
       body: FD,

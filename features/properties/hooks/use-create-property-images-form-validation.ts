@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { createPropertyImage, createTempPropertyImage } from "../lib/requests";
+import { createPropertyImage, createTempPropertyImage } from "../lib/actions";
 import { STATUS_TEXT } from "@/constants/enums";
 import {
   CreateArrayImagesType,

@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { UpdateUserSchema, UpdateUserInputType, UpdateUserType } from "../schema/user-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { STATUS_TEXT } from "@/constants/enums";
-import { updateUser } from "../lib/requests";
+import { updateUser } from "../lib/actions";
 import { toast } from "sonner";
 import { User } from "@/types/types";
 

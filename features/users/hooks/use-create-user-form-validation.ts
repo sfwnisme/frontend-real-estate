@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { CreateUserSchema, CreateUserType } from "../schema/user-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { STATUS_TEXT, USER_ROLES } from "@/constants/enums";
-import { createUser } from "../lib/requests";
+import { createUser } from "../lib/actions";
 import { toast } from "sonner";
 
 export default function useCreateUserFormValidation() {

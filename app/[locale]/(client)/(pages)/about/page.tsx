@@ -5,7 +5,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { PAGES_ROUTES, SITE_INFO } from "@/constants/config";
+import {
+  PAGES_ROUTES,
+  WEBSITE_URL,
+  WEBSITE_URL_AR,
+  WEBSITE_URL_EN,
+} from "@/constants/config";
 import { routing } from "@/i18n/routing";
 import { ChevronDown, Home } from "lucide-react";
 import { Metadata } from "next";
@@ -15,7 +20,6 @@ import Image from "next/image";
 export const dynamic = "force-static";
 export const revalidate = 2592000;
 
-const { TITLE, DESCRIPTION, ROUTE } = SITE_INFO.PAGES.ABOUT;
 export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -26,22 +30,25 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const canonical = locale === "ar" ? `${ROUTE}` : `${ROUTE}/${locale}`;
+  const localeParam = locale === "en" ? "/en" : "";
+  const canonical = `${WEBSITE_URL}${localeParam}${PAGES_ROUTES.ABOUT.PREVIEW}`;
+  const enCanonical = `${WEBSITE_URL_EN}${PAGES_ROUTES.ABOUT.PREVIEW}`;
+  const arCanonical = `${WEBSITE_URL_AR}${PAGES_ROUTES.ABOUT.PREVIEW}`;
+  const t = await getTranslations("Metadata.about");
   return {
-    title: TITLE,
-    description: DESCRIPTION,
+    title: t("title"),
+    description: t("description"),
     alternates: {
-      canonical,
+      canonical: canonical,
       languages: {
-        "x-default": ROUTE,
-        en: `${ROUTE}/en`,
-        ar: `${ROUTE}`,
+        "x-default": canonical,
+        en: enCanonical,
+        ar: arCanonical,
       },
     },
     openGraph: {
-      title: TITLE,
-      description: DESCRIPTION,
-      url: ROUTE,
+      title: t("title"),
+      description: t("description"),
       images: [{ url: "/logo.png" }],
     },
   };

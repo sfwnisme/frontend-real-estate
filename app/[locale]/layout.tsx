@@ -6,7 +6,7 @@ import { SITE_INFO } from "@/constants/config";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import { setRequestLocale } from "next-intl/server";
+import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 
 const { NAME, DESCRIPTION } = SITE_INFO;
 type Props = {
@@ -26,17 +26,22 @@ const kufiFont = Noto_Kufi_Arabic({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_FRONTEND_URL!),
-  title: {
-    template: `%s | ${NAME}`,
-    default: NAME,
-  },
-  description: DESCRIPTION,
-  verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SEARCH_CONSOLE_KEY,
-  },
-};
+export async function generateMetadata({params}: {params: Promise<{locale: string}>}): Promise<Metadata> {
+  const locale = (await params).locale;
+  const t = await getTranslations("Metadata.home");
+  const metadataBase = new URL(process.env.NEXT_PUBLIC_FRONTEND_URL!) + locale;
+  return {
+    metadataBase: metadataBase,
+    title: {
+      template: `%s | ${t("title")}`,
+      default: t("title"),
+    },
+    description: t("description"),
+    verification: {
+      google: process.env.NEXT_PUBLIC_GOOGLE_SEARCH_CONSOLE_KEY,
+    },
+  }
+}
 
 export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

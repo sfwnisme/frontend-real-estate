@@ -350,5 +350,23 @@
     "goToPreviousPage": "Go to previous page",
     "goToNextPage": "Go to next page",
     "morePages": "More pages"
+  },
+  "Metadata": {
+    "home": {
+      "title": "Real Estate",
+      "description": "Discover over 70+ properties!"
+    },
+    "about": {
+      "title": "Who is Real Estate?",
+      "description": "We’re not just about finding you a house; we’re here to help you find your home."
+    },
+    "properties": {
+      "title": "Find Your Dream Home",
+      "description": "Discover a curated selection of properties designed to suit every lifestyle, from cozy family homes to luxurious retreats."
+    },
+    "blogPosts": {
+      "title": "Blog Posts & Insights",
+      "description": "Stay up-to-date with the latest news, tips, and trends in the real estate industry."
+    }
   }
 }

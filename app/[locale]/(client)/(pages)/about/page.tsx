@@ -35,6 +35,8 @@ export async function generateMetadata({
   const enCanonical = `${WEBSITE_URL_EN}${PAGES_ROUTES.ABOUT.PREVIEW}`;
   const arCanonical = `${WEBSITE_URL_AR}${PAGES_ROUTES.ABOUT.PREVIEW}`;
   const t = await getTranslations("Metadata.about");
+  const tFaq = await getTranslations("AboutPage.faq")
+  const keywords = tFaq.raw("questions").map((key: { title: string }) => key.title);
   return {
     title: t("title"),
     description: t("description"),
@@ -51,6 +53,7 @@ export async function generateMetadata({
       description: t("ogDescription"),
       images: [{ url: WEBSITE_URL + "/hero-bg.webp" }],
     },
+    keywords: keywords,
   };
 }
 

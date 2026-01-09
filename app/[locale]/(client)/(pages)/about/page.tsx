@@ -49,7 +49,7 @@ export async function generateMetadata({
     openGraph: {
       title: t("ogTitle"),
       description: t("ogDescription"),
-      images: [{ url: "/logo.png" }],
+      images: [{ url: WEBSITE_URL + "/hero-bg.webp" }],
     },
   };
 }

@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import { Inter, Noto_Kufi_Arabic } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
-import { SITE_INFO } from "@/constants/config";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
-const { NAME, DESCRIPTION } = SITE_INFO;
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;

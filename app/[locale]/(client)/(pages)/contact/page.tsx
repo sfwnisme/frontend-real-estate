@@ -2,12 +2,58 @@ import Title from "@/components/custom/title";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  PAGES_ROUTES,
+  WEBSITE_URL_EN,
+  WEBSITE_URL,
+  WEBSITE_URL_AR,
+} from "@/constants/config";
 import { MessageSquare } from "lucide-react";
+import { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export const dynamic = "force-static";
 export const revalidate = 2592000;
 
+const { PREVIEW } = PAGES_ROUTES.CONTACT;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const localeParam = locale === "en" ? "/en" : "";
+  const canonical = `${WEBSITE_URL}${localeParam}${PREVIEW}`;
+  const enCanonical = `${WEBSITE_URL_EN}${PREVIEW}`;
+  const arCanonical = `${WEBSITE_URL_AR}${PREVIEW}`;
+
+  const t = await getTranslations("Metadata.contact");
+  const title = t("title");
+  const description = t("description");
+  const ogTitle = t("ogTitle");
+  const ogDescription = t("ogDescription");
+  const keywords = [title, ogTitle];
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+      languages: {
+        "x-default": canonical,
+        en: enCanonical,
+        ar: arCanonical,
+      },
+    },
+    openGraph: {
+      title: ogTitle,
+      description: ogDescription,
+      images: [{ url: WEBSITE_URL + "/hero-bg.webp" }],
+    },
+    keywords,
+  };
+}
 export default async function page({
   params,
 }: {

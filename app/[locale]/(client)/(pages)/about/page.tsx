@@ -34,12 +34,18 @@ export async function generateMetadata({
   const canonical = `${WEBSITE_URL}${localeParam}${PAGES_ROUTES.ABOUT.PREVIEW}`;
   const enCanonical = `${WEBSITE_URL_EN}${PAGES_ROUTES.ABOUT.PREVIEW}`;
   const arCanonical = `${WEBSITE_URL_AR}${PAGES_ROUTES.ABOUT.PREVIEW}`;
+
   const t = await getTranslations("Metadata.about");
+  const title = t("title");
+  const description = t("description");
+  const ogTitle = t("ogTitle");
+  const ogDescription = t("ogDescription");
   const tFaq = await getTranslations("AboutPage.faq")
   const keywords = tFaq.raw("questions").map((key: { title: string }) => key.title);
+  
   return {
-    title: t("title"),
-    description: t("description"),
+    title,
+    description,
     alternates: {
       canonical: canonical,
       languages: {
@@ -49,11 +55,11 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: t("ogTitle"),
-      description: t("ogDescription"),
+      title: ogTitle,
+      description: ogDescription,
       images: [{ url: WEBSITE_URL + "/hero-bg.webp" }],
     },
-    keywords: keywords,
+    keywords,
   };
 }
 

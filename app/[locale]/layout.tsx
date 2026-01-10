@@ -37,7 +37,7 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
     },
     description: t("description"),
     alternates: {
-      canonical: returnCanonical(locale, ""),
+      canonical: returnCanonical(locale, "/"),
       languages: returnAlternateLanguages("/"),
     },
     verification: {

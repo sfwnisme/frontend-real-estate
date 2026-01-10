@@ -4,10 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
   PAGES_ROUTES,
-  WEBSITE_URL_EN,
-  WEBSITE_URL,
-  WEBSITE_URL_AR,
 } from "@/constants/config";
+import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 import { MessageSquare } from "lucide-react";
 import { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -23,10 +21,6 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const localeParam = locale === "en" ? "/en" : "";
-  const canonical = `${WEBSITE_URL}${localeParam}${PREVIEW}`;
-  const enCanonical = `${WEBSITE_URL_EN}${PREVIEW}`;
-  const arCanonical = `${WEBSITE_URL_AR}${PREVIEW}`;
 
   const t = await getTranslations("Metadata.contact");
   const title = t("title");
@@ -39,17 +33,13 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical,
-      languages: {
-        "x-default": canonical,
-        en: enCanonical,
-        ar: arCanonical,
-      },
+      canonical: returnCanonical(locale, PREVIEW),
+      languages: returnAlternateLanguages(PREVIEW),
     },
     openGraph: {
       title: ogTitle,
       description: ogDescription,
-      images: [{ url: WEBSITE_URL + "/hero-bg.webp" }],
+      images: [{ url:"/hero-bg.webp" }],
     },
     keywords,
   };

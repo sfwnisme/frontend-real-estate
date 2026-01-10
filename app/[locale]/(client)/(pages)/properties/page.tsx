@@ -9,12 +9,8 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import PropertyCardSkeleton from "@/features/properties/skeletons/property-card-skeleton";
 import { getTranslations } from "next-intl/server";
-import {
-  WEBSITE_URL,
-  WEBSITE_URL_EN,
-  WEBSITE_URL_AR,
-} from "@/constants/config";
 import { PAGES_ROUTES } from "@/constants/config";
+import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 
 const { PREVIEW } = PAGES_ROUTES.PROPERTIES;
 const { PAGE } = PAGINATION_CONFIG.PROPERTIES.CLIENT;
@@ -27,10 +23,6 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const localeParam = locale === "en" ? "/en" : "";
-  const canonical = `${WEBSITE_URL}${localeParam}${PREVIEW}`;
-  const enCanonical = `${WEBSITE_URL_EN}${PREVIEW}`;
-  const arCanonical = `${WEBSITE_URL_AR}${PREVIEW}`;
 
   const page = (await searchParams)?.page;
   const currentPage = page ? parseInt(page) : 1;
@@ -46,19 +38,15 @@ export async function generateMetadata({
   const ogTitle = t("ogTitle");
   const ogDescription = t("ogDescription");
   const keywords = [title, ogTitle];
-  const next = canonical + `?page=${nextPage}`;
-  const previous = canonical + `?page=${prevPage}`;
+  const next = returnCanonical(locale, PREVIEW) + `?page=${nextPage}`;
+  const previous = returnCanonical(locale, PREVIEW) + `?page=${prevPage}`;
 
   return {
     title,
     description,
     alternates: {
-      canonical,
-      languages: {
-        "x-default": canonical,
-        en: enCanonical,
-        ar: arCanonical,
-      },
+      canonical: returnCanonical(locale, PREVIEW),
+      languages: returnAlternateLanguages(PREVIEW),
     },
     pagination: {
       next,
@@ -67,7 +55,7 @@ export async function generateMetadata({
     openGraph: {
       title: ogTitle,
       description: ogDescription,
-      images: [{ url: WEBSITE_URL + "/hero-bg.webp" }],
+      images: [{ url: "/hero-bg.webp" }],
     },
     keywords,
   };
@@ -82,10 +70,7 @@ export default async function page({
   const page = (await searchParams)?.page;
   const currentPage = page ? parseInt(page) : 1;
   const currentPageSize = PAGE;
-  const properties = await getProperties(
-    PAGE,
-    currentPage
-  );
+  const properties = await getProperties(PAGE, currentPage);
   if (!properties.data) {
     notFound();
   }

@@ -4,12 +4,8 @@ import BlogPostsHomePageView from "@/features/blog-posts/views/blog-posts-home-p
 import HeroView from "@/features/client/hero-view";
 import PropertiesHomePageView from "@/features/properties/views/properties-home-page-view";
 import { Metadata } from "next";
-import {
-  WEBSITE_URL,
-  WEBSITE_URL_AR,
-  WEBSITE_URL_EN,
-} from "@/constants/config";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 
 export const dynamic = "force-static";
 export const revalidate = 604800;
@@ -20,27 +16,22 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const localeParam = locale === "en" ? "/en" : "";
-  const canonical = `${WEBSITE_URL}${localeParam}`;
-  const enCanonical = `${WEBSITE_URL_EN}`;
-  const arCanonical = `${WEBSITE_URL_AR}`;
   const t = await getTranslations("Metadata.home");
+  const title = t("title");
+  const description = t("description");
+  const ogTitle = t("ogTitle");
+  const ogDescription = t("ogDescription");
   return {
-    title: t("title"),
-    description: t("description"),
+    title,
+    description,
     alternates: {
-      canonical,
-      languages: {
-        "x-default": WEBSITE_URL,
-        en: enCanonical,
-        ar: arCanonical,
-      },
+      canonical: returnCanonical(locale, "/"),
+      languages: returnAlternateLanguages("/"),
     },
     openGraph: {
-      title: t("ogTitle"),
-      description: t("ogDescription"),
-      url: canonical,
-      images: [{ url: WEBSITE_URL + "/hero-bg.webp" }],
+      title: ogTitle,
+      description: ogDescription,
+      images: [{ url: "/hero-bg.webp" }],
     },
   };
 }

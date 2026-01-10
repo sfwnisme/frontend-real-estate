@@ -375,6 +375,12 @@
       "description": "Stay up-to-date with the latest news, tips, and trends in the real estate industry.",
       "ogTitle": "Blog Posts & Insights",
       "ogDescription": "Stay up-to-date with the latest news, tips, and trends in the real estate industry."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "We're here to help you every step of the way",
+      "ogTitle": "Contact Us",
+      "ogDescription": "We're here to help you every step of the way"
     }
   }
 }

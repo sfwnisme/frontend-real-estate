@@ -81,9 +81,9 @@ export default async function page({
   const t = await getTranslations("BlogPostsPage");
   const page = (await searchParams)?.page;
   const currentPage = page ? parseInt(page) : 1;
-  const currentPageSize = PAGINATION_CONFIG.BLOG.CLIENT.PAGE;
+  const currentPageSize = PAGE;
   const blogPosts = await getBlogPosts(
-    PAGINATION_CONFIG.BLOG.CLIENT.PAGE,
+    PAGE,
     currentPage
   );
   if (!blogPosts.data) {

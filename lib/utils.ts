@@ -94,3 +94,16 @@ export const strToArrElms = (str: string): string[] => {
     .map((element) => element.trim())
     .filter((element) => element !== "");
 };
+
+export const returnCanonical = (locale: string, path: string) => {
+  const localeParam = locale === "en" ? "/en" : "";
+  return `${localeParam}${path}`;
+}
+
+export const returnAlternateLanguages = (path: string) => {
+  return {
+    "x-default": path,
+    en: returnCanonical("en", path),
+    ar: returnCanonical("ar", path),
+  }
+}

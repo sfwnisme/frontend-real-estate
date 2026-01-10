@@ -7,11 +7,9 @@ import {
 } from "@/components/ui/accordion";
 import {
   PAGES_ROUTES,
-  WEBSITE_URL,
-  WEBSITE_URL_AR,
-  WEBSITE_URL_EN,
 } from "@/constants/config";
 import { routing } from "@/i18n/routing";
+import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 import { ChevronDown, Home } from "lucide-react";
 import { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
@@ -19,6 +17,8 @@ import Image from "next/image";
 
 export const dynamic = "force-static";
 export const revalidate = 2592000;
+
+const { PREVIEW } = PAGES_ROUTES.ABOUT;
 
 export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -30,10 +30,6 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const localeParam = locale === "en" ? "/en" : "";
-  const canonical = `${WEBSITE_URL}${localeParam}${PAGES_ROUTES.ABOUT.PREVIEW}`;
-  const enCanonical = `${WEBSITE_URL_EN}${PAGES_ROUTES.ABOUT.PREVIEW}`;
-  const arCanonical = `${WEBSITE_URL_AR}${PAGES_ROUTES.ABOUT.PREVIEW}`;
 
   const t = await getTranslations("Metadata.about");
   const title = t("title");
@@ -42,22 +38,18 @@ export async function generateMetadata({
   const ogDescription = t("ogDescription");
   const tFaq = await getTranslations("AboutPage.faq")
   const keywords = tFaq.raw("questions").map((key: { title: string }) => key.title);
-  
+
   return {
     title,
     description,
     alternates: {
-      canonical: canonical,
-      languages: {
-        "x-default": canonical,
-        en: enCanonical,
-        ar: arCanonical,
-      },
+      canonical: returnCanonical(locale, PREVIEW),
+      languages: returnAlternateLanguages(PREVIEW),
     },
     openGraph: {
       title: ogTitle,
       description: ogDescription,
-      images: [{ url: WEBSITE_URL + "/hero-bg.webp" }],
+      images: [{ url: "/hero-bg.webp" }],
     },
     keywords,
   };

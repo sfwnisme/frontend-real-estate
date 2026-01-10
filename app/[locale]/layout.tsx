@@ -6,6 +6,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 
 type Props = {
   children: React.ReactNode;
@@ -27,14 +28,18 @@ const kufiFont = Noto_Kufi_Arabic({
 export async function generateMetadata({params}: {params: Promise<{locale: string}>}): Promise<Metadata> {
   const locale = (await params).locale;
   const t = await getTranslations("Metadata.home");
-  const metadataBase = new URL(process.env.NEXT_PUBLIC_FRONTEND_URL!) + locale;
+  const metadataBase = new URL(process.env.NEXT_PUBLIC_FRONTEND_URL as string);
   return {
-    metadataBase: metadataBase,
+    metadataBase,
     title: {
       template: `%s | ${t("title")}`,
       default: t("title"),
     },
     description: t("description"),
+    alternates: {
+      canonical: returnCanonical(locale, ""),
+      languages: returnAlternateLanguages("/"),
+    },
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_SEARCH_CONSOLE_KEY,
     },

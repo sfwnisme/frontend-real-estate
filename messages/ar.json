@@ -2,7 +2,11 @@
   "SiteConfig": {
     "name": "العقارات",
     "description": "العقارات هو منصة لعرض العقارات",
-    "country": "SA"
+    "country": "SA",
+    "dashboard": {
+      "title": "لوحة التحكم",
+      "description": "صفحة لوحة التحكم"
+    }
   },
   "HomePage": {
     "title": "أهلاً بكم!",

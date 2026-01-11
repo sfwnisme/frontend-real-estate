@@ -2,7 +2,11 @@
   "SiteConfig": {
     "name": "Real Estate",
     "description": "Real Estate is a platform for properties listing",
-    "country": "SA"
+    "country": "SA",
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Dashboard page"
+    }
   },
   "HomePage": {
     "title": "Hello world!",

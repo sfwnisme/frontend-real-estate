@@ -57,6 +57,11 @@ export const generateMetadata = async ({
       description: ogDescription,
       images: [{ url: "/hero-bg.webp" }],
     },
+    twitter: {
+      title: ogTitle,
+      description: ogDescription,
+      images: [{ url: "/hero-bg.webp" }],
+    },
     keywords,
   };
 };

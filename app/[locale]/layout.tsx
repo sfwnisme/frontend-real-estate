@@ -27,13 +27,18 @@ const kufiFont = Noto_Kufi_Arabic({
 
 export async function generateMetadata({params}: {params: Promise<{locale: string}>}): Promise<Metadata> {
   const locale = (await params).locale;
-  const t = await getTranslations("Metadata.home");
+  const t = await getTranslations("SiteConfig");
   const metadataBase = new URL(process.env.NEXT_PUBLIC_FRONTEND_URL as string);
+
+  const SITE_NAME = t("name")
+  const PAGE_TEMPLATE_AR = `${SITE_NAME} | %s`
+  const PAGE_TEMPLATE_EN = `%s | ${SITE_NAME}`
+  const PAGE_TEMPLATE = locale === "ar" ? PAGE_TEMPLATE_AR : PAGE_TEMPLATE_EN
   return {
     metadataBase,
     title: {
-      template: `%s | ${t("title")}`,
-      default: t("title"),
+      template: PAGE_TEMPLATE,
+      default: SITE_NAME,
     },
     description: t("description"),
     alternates: {

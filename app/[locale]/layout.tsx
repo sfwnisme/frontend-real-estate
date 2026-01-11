@@ -43,6 +43,10 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_SEARCH_CONSOLE_KEY,
     },
+    robots: {
+      index: true,
+      follow: true,
+    }
   }
 }
 

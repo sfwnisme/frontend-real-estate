@@ -1,4 +1,9 @@
 {
+  "SiteConfig": {
+    "name": "العقارات",
+    "description": "العقارات هو منصة لعرض العقارات",
+    "country": "SA"
+  },
   "HomePage": {
     "title": "أهلاً بكم!",
     "button": "اكتشف العقارات",

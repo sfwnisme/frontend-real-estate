@@ -1,4 +1,9 @@
 {
+  "SiteConfig": {
+    "name": "Real Estate",
+    "description": "Real Estate is a platform for properties listing",
+    "country": "SA"
+  },
   "HomePage": {
     "title": "Hello world!",
     "button": "Explore Properties",

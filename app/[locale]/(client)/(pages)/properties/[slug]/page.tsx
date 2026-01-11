@@ -6,10 +6,13 @@ import { type Metadata } from "next";
 import YoutubeVideoPlayer from "@/components/custom/youtube-video-player";
 import { type OgImageType } from "@/types/types";
 import { PAGES_ROUTES, SITE_INFO } from "@/constants/config";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;
+
+const { PREVIEW } = PAGES_ROUTES.PROPERTIES;
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -20,7 +23,7 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   if (!properties.data?.data) {
     return [];
   }
-  
+
   const propertiesData = properties.data?.data.flatMap((property) => ({
     slug: property.slug,
   }));
@@ -49,22 +52,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       alt: propertyData.title,
       type: image.mimeType,
     }));
-  const canonicalUrl = PAGES_ROUTES.PROPERTIES.PREVIEW + slug;
+  const pagePath = PREVIEW + "/" + slug;
+  const canonical = returnCanonical(locale, pagePath);
+
+  const t = await getTranslations("SiteConfig");
+  const SITE_NAME = t("name");
+  const SITE_COUNTRY = t("country");
 
   return {
     title: property.data.title,
     description: property.data.description,
     alternates: {
-      canonical: canonicalUrl,
+      canonical,
+      languages: returnAlternateLanguages(pagePath),
     },
     openGraph: {
       images: propertyImagesMetadata,
       title: property.data.title,
       description: property.data.description,
-      url: canonicalUrl,
-      siteName: SITE_INFO.NAME,
+      url: canonical,
+      siteName: SITE_NAME,
+      countryName: SITE_COUNTRY,
       type: "article",
-      countryName: SITE_INFO.COUNTRY,
+      authors: SITE_NAME,
     },
     twitter: {
       images: propertyImagesMetadata,
@@ -72,14 +82,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: property.data.description,
       card: "summary_large_image",
     },
-    robots: { index: true, follow: true },
   };
 }
 
 export default async function Page({ params }: Props) {
   const { slug, locale } = await params;
   setRequestLocale(locale);
-  
+
   const property = await getProperty(slug);
   const propertyData = property.data;
 

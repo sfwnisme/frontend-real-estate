@@ -6,11 +6,14 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { OgImageType } from "@/types/types";
 import { Metadata } from "next";
-import { PAGES_ROUTES, SITE_INFO } from "@/constants/config";
-import { setRequestLocale } from "next-intl/server";
+import { PAGES_ROUTES } from "@/constants/config";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;
+
+const { PREVIEW } = PAGES_ROUTES.BLOG_POSTS
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -30,7 +33,7 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const blogPost = await getBlogPost(slug);
   if (!blogPost.data) {
     return {};
@@ -46,15 +49,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alt: blogPostData.title || "",
     type: blogPostImageData?.mimeType || "",
   };
-  const canonicalUrl = PAGES_ROUTES.BLOG_POSTS.PREVIEW + slug;
+  const pagePath = PREVIEW +"/"+ slug
+  const canonical = returnCanonical(locale, pagePath)
 
-  console.log(blogPostImageData);
+  const t = await getTranslations("SiteConfig")
+  const SITE_NAME = t("name")
+  const SITE_COUNTRY = t("country")
 
   return {
     title: blogPostData.title,
     description: blogPostData.meta.description || blogPostData.excerpt,
     alternates: {
-      canonical: canonicalUrl,
+      canonical,
+      languages: returnAlternateLanguages(pagePath),
     },
     keywords: blogPostData.meta.keywords,
     openGraph: {
@@ -62,13 +69,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: blogPostImageMetadata,
       title: blogPostData.title,
       description: blogPostData.meta.description || blogPostData.excerpt,
-      siteName: SITE_INFO.NAME,
-      url: canonicalUrl,
-      countryName: SITE_INFO.COUNTRY,
+      siteName: SITE_NAME,
+      url: canonical,
+      countryName: SITE_COUNTRY,
       publishedTime: String(blogPostData.createdAt),
       modifiedTime: String(blogPostData.updatedAt),
       tags: blogPostData.meta.keywords,
-      authors: SITE_INFO.NAME,
+      authors: SITE_NAME,
     },
     twitter: {
       images: blogPostImageMetadata,

@@ -16,10 +16,12 @@ import { Suspense } from "react";
 
 const { CREATE } = PAGES_ROUTES.BLOG_POSTS;
 
-export const metadata: Metadata = {
-  title: "Blog posts",
-  description: "Blog posts page",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("resources.blogPost")
+  return {
+    title: t("plural"),
+  }
+}
 export default async function page({
   searchParams,
 }: {

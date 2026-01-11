@@ -14,9 +14,11 @@ import { Visible } from "@sfwnisme/visi";
 import { PAGES_ROUTES } from "@/constants/config";
 import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Properties",
-  description: "Properties page",
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("resources.property")
+  return {
+    title: t("plural"),
+  }
 };
 
 const {CREATE} = PAGES_ROUTES.PROPERTIES

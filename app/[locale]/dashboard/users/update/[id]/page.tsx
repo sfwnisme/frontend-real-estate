@@ -1,7 +1,15 @@
 import { getUser } from "@/features/users/lib/actions";
 import UpdateUserFormView from "@/features/users/views/mutation-views/update-user-form-view";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("resources.user")
+  return {
+    title: t("update"),
+  }
+}
 export default async function page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   console.log(id);

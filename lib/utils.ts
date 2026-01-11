@@ -103,7 +103,7 @@ export const returnCanonical = (locale: string, path: string) => {
 export const returnAlternateLanguages = (path: string) => {
   return {
     "x-default": path,
-    en: returnCanonical("en", path),
-    ar: returnCanonical("ar", path),
+    en: `/en${path}`,
+    ar: `${path}`,
   }
 }

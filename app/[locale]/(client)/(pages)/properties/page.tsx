@@ -2,7 +2,6 @@ import Title from "@/components/custom/title";
 import { getProperties } from "@/lib/requests";
 import type { Metadata } from "next";
 import { PAGINATION_CONFIG } from "@/constants/enums";
-import { SITE_INFO } from "@/constants/config";
 import type { SearchParamsType } from "@/types/types";
 import PropertiesGridView from "@/features/properties/views/properties-grid-veiw";
 import PaginationLayout from "@/components/custom/pagination-layout";
@@ -10,36 +9,60 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import PropertyCardSkeleton from "@/features/properties/skeletons/property-card-skeleton";
 import { getTranslations } from "next-intl/server";
+import { PAGES_ROUTES } from "@/constants/config";
+import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
+
+const { PREVIEW } = PAGES_ROUTES.PROPERTIES;
+const { PAGE } = PAGINATION_CONFIG.PROPERTIES.CLIENT;
 
 export async function generateMetadata({
   searchParams,
+  params,
 }: {
   searchParams: SearchParamsType;
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
+  const { locale } = await params;
+
   const page = (await searchParams)?.page;
   const currentPage = page ? parseInt(page) : 1;
-  const properties = await getProperties(
-    PAGINATION_CONFIG.PROPERTIES.CLIENT.PAGE,
-    currentPage
-  );
-
+  const properties = await getProperties(PAGE, currentPage);
   if (!properties.data) {
     return {};
   }
-
   const { nextPage, prevPage } = properties.data;
-  const { TITLE, DESCRIPTION, ROUTE } = SITE_INFO.PAGES.PROPERTIES;
+
+  const t = await getTranslations("Metadata.properties");
+  const title = t("title");
+  const description = t("description");
+  const ogTitle = t("ogTitle");
+  const ogDescription = t("ogDescription");
+  const keywords = [title, ogTitle];
+  const next = returnCanonical(locale, PREVIEW) + `?page=${nextPage}`;
+  const previous = returnCanonical(locale, PREVIEW) + `?page=${prevPage}`;
 
   return {
-    title: TITLE,
-    description: DESCRIPTION,
+    title,
+    description,
     alternates: {
-      canonical: ROUTE,
+      canonical: returnCanonical(locale, PREVIEW),
+      languages: returnAlternateLanguages(PREVIEW),
     },
     pagination: {
-      next: ROUTE + `?page=${nextPage}`,
-      previous: ROUTE + `?page=${prevPage}`,
+      next,
+      previous,
     },
+    openGraph: {
+      title: ogTitle,
+      description: ogDescription,
+      images: [{ url: "/hero-bg.webp" }],
+    },
+    twitter: {
+      title: ogTitle,
+      description: ogDescription,
+      images: [{ url: "/hero-bg.webp" }],
+    },
+    keywords,
   };
 }
 
@@ -51,15 +74,13 @@ export default async function page({
   const t = await getTranslations("PropertiesPage");
   const page = (await searchParams)?.page;
   const currentPage = page ? parseInt(page) : 1;
-  const currentPageSize = PAGINATION_CONFIG.PROPERTIES.CLIENT.PAGE;
-  const properties = await getProperties(
-    PAGINATION_CONFIG.PROPERTIES.CLIENT.PAGE,
-    currentPage
-  );
+  const currentPageSize = PAGE;
+  const properties = await getProperties(PAGE, currentPage);
   if (!properties.data) {
     notFound();
   }
   const propertiesData = properties.data;
+
   return (
     <div>
       <Title

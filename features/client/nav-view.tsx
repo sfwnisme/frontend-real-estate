@@ -19,7 +19,6 @@ type Props = {};
 export default function Nav({}: Props) {
   const pathname = usePathname()
   const locale = useLocale();
-  const switchLocale = useLocale() === "en" ? "ar" : "en";
   const t = useTranslations("navigation");
   console.log("locale test", t("properties"));
   return (
@@ -111,13 +110,25 @@ export default function Nav({}: Props) {
             </NextIntlLink>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <NextIntlLink
-              href="/"
-              locale={switchLocale}
-              className="font-medium"
-            >
-              {locale === "ar" ? t("english") : t("arabic")}
-            </NextIntlLink>
+          {
+            locale === "ar" ? (
+              <NextIntlLink 
+                href={pathname}
+                locale={'en'} 
+                className={`font-medium font-english`}
+              >
+                {t("english")}
+              </NextIntlLink>
+            ) : (
+              <NextIntlLink 
+                href={pathname}
+                locale={'ar'} 
+                className={`font-medium font-arabic`}
+              >
+                {t("arabic")}
+              </NextIntlLink>
+            )
+          }
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

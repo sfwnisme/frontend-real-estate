@@ -6,10 +6,12 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import React from "react";
 
-export const metadata: Metadata = {
-  title: "Update Blog posts",
-  description: "Update Blog posts page",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("resources.blogPost")
+  return {
+    title: t("update"),
+  }
+}
 
 type Props = {
   params: SlugParamsType;

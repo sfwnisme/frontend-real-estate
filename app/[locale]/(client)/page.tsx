@@ -4,13 +4,11 @@ import BlogPostsHomePageView from "@/features/blog-posts/views/blog-posts-home-p
 import HeroView from "@/features/client/hero-view";
 import PropertiesHomePageView from "@/features/properties/views/properties-home-page-view";
 import { Metadata } from "next";
-import { SITE_INFO } from "@/constants/config";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 
 export const dynamic = "force-static";
 export const revalidate = 604800;
-
-const { TITLE, DESCRIPTION, ROUTE } = SITE_INFO.PAGES.HOME;
 
 export async function generateMetadata({
   params,
@@ -18,23 +16,27 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const canonical = locale === "ar" ? `${ROUTE}` : `${ROUTE}/${locale}`;
+  const t = await getTranslations("Metadata.home");
+  const title = t("title");
+  const description = t("description");
+  const ogTitle = t("ogTitle");
+  const ogDescription = t("ogDescription");
   return {
-    title: TITLE,
-    description: DESCRIPTION,
+    title,
+    description,
     alternates: {
-      canonical,
-      languages: {
-        "x-default": ROUTE,
-        en: `${ROUTE}/en`,
-        ar: `${ROUTE}`,
-      },
+      canonical: returnCanonical(locale, "/"),
+      languages: returnAlternateLanguages("/"),
     },
     openGraph: {
-      title: TITLE,
-      description: DESCRIPTION,
-      url: ROUTE,
-      images: [{ url: "/logo.png" }],
+      title: ogTitle,
+      description: ogDescription,
+      images: [{ url: "/hero-bg.webp" }],
+    },
+    twitter: {
+      title: ogTitle,
+      description: ogDescription,
+      images: [{ url: "/hero-bg.webp" }],
     },
   };
 }

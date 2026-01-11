@@ -5,8 +5,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { PAGES_ROUTES, SITE_INFO } from "@/constants/config";
+import {
+  PAGES_ROUTES,
+} from "@/constants/config";
 import { routing } from "@/i18n/routing";
+import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 import { ChevronDown, Home } from "lucide-react";
 import { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
@@ -15,7 +18,8 @@ import Image from "next/image";
 export const dynamic = "force-static";
 export const revalidate = 2592000;
 
-const { TITLE, DESCRIPTION, ROUTE } = SITE_INFO.PAGES.ABOUT;
+const { PREVIEW } = PAGES_ROUTES.ABOUT;
+
 export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -26,24 +30,33 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const canonical = locale === "ar" ? `${ROUTE}` : `${ROUTE}/${locale}`;
+
+  const t = await getTranslations("Metadata.about");
+  const title = t("title");
+  const description = t("description");
+  const ogTitle = t("ogTitle");
+  const ogDescription = t("ogDescription");
+  const tFaq = await getTranslations("AboutPage.faq")
+  const keywords = tFaq.raw("questions").map((key: { title: string }) => key.title);
+
   return {
-    title: TITLE,
-    description: DESCRIPTION,
+    title,
+    description,
     alternates: {
-      canonical,
-      languages: {
-        "x-default": ROUTE,
-        en: `${ROUTE}/en`,
-        ar: `${ROUTE}`,
-      },
+      canonical: returnCanonical(locale, PREVIEW),
+      languages: returnAlternateLanguages(PREVIEW),
     },
     openGraph: {
-      title: TITLE,
-      description: DESCRIPTION,
-      url: ROUTE,
-      images: [{ url: "/logo.png" }],
+      title: ogTitle,
+      description: ogDescription,
+      images: [{ url: "/hero-bg.webp" }],
     },
+    twitter: {
+      title: ogTitle,
+      description: ogDescription,
+      images: [{ url: "/hero-bg.webp" }],
+    },
+    keywords,
   };
 }
 

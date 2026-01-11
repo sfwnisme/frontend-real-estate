@@ -30,6 +30,10 @@ export const SITE_INFO = {
   },
 };
 
+export const WEBSITE_URL = process.env.NEXT_PUBLIC_FRONTEND_URL;
+export const WEBSITE_URL_EN = process.env.NEXT_PUBLIC_FRONTEND_URL + "/en";
+export const WEBSITE_URL_AR = process.env.NEXT_PUBLIC_FRONTEND_URL
+
 export const PAGES_ROUTES = {
   PROPERTIES: {
     PREVIEW: "/properties",
@@ -52,7 +56,7 @@ export const PAGES_ROUTES = {
   CONTACT: {
     PREVIEW: "/contact",
   },
-}
+};
 
 export const API_ROUTES = {
   PROPERTIES: {
@@ -88,7 +92,7 @@ export const API_ROUTES = {
     CREATE_TEMP_BLOG_POST_IMAGE: "/images/create-temp-blog-post-image",
     DELETE: "/images/delete",
   },
-}
+};
 
 export const REVALIDATE_TIMES = {
   PROPERTIES: 3600, // 1 hour

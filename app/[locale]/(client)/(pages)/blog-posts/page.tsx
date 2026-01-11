@@ -70,10 +70,7 @@ export default async function page({
   const page = (await searchParams)?.page;
   const currentPage = page ? parseInt(page) : 1;
   const currentPageSize = PAGE;
-  const blogPosts = await getBlogPosts(
-    PAGE,
-    currentPage
-  );
+  const blogPosts = await getBlogPosts(PAGE, currentPage);
   if (!blogPosts.data) {
     notFound();
   }

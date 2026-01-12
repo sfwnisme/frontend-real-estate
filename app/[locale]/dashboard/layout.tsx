@@ -1,5 +1,4 @@
 import LoadingPage from "@/components/custom/loading-page";
-import { SITE_INFO } from "@/constants/config";
 import DashboardLayout from "@/features/dashboard/dashboard-layout";
 import AuthProvider from "@/features/dashboard/auth/auth-context";
 import { getCurrentUser } from "@/lib/actions";

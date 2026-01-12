@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { type Metadata } from "next";
 import YoutubeVideoPlayer from "@/components/custom/youtube-video-player";
 import { type OgImageType } from "@/types/types";
-import { PAGES_ROUTES, SITE_INFO } from "@/constants/config";
+import { PAGES_ROUTES } from "@/constants/config";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 

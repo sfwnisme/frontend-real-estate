@@ -4,7 +4,7 @@ import { SlugParamsType } from "@/types/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import React from "react";
+import { Typography } from "@/components/custom/typography";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("resources.property")
@@ -29,9 +29,9 @@ export default async function page(props: Props) {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-semibold text-primary">
+      <Typography as="h1" variant="h4">
         {t("editing")}: {property.data.title}
-      </h1>
+      </Typography>
       <UpdatePropertyView
         property={property.data}
         images={propertyImages.data}

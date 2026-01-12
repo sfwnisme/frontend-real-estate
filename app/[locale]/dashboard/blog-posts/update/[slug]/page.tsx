@@ -4,13 +4,13 @@ import { SlugParamsType } from "@/types/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import React from "react";
+import { Typography } from "@/components/custom/typography";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("resources.blogPost")
+  const t = await getTranslations("resources.blogPost");
   return {
     title: t("update"),
-  }
+  };
 }
 
 type Props = {
@@ -29,10 +29,12 @@ export default async function page(props: Props) {
   }
   const blogPostImage = await getBlogPostImage(blogPost.data._id);
 
-  return <div>
-    <h1 className="text-2xl font-semibold text-primary">
-      {t("editing")}: {blogPost.data.title}
-    </h1>
-    <UpdateBlogPostView blogPost={blogPost.data}  image={blogPostImage.data} />
-  </div>;
+  return (
+    <div>
+      <Typography as="h1" variant="h5" className="mb-4">
+        {t("editing")}: {blogPost.data.title}
+      </Typography>
+      <UpdateBlogPostView blogPost={blogPost.data} image={blogPostImage.data} />
+    </div>
+  );
 }

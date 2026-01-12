@@ -8,7 +8,8 @@ import { Visible } from "@sfwnisme/visi";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import React, { Suspense } from "react";
+import { Suspense } from "react";
+import { Typography } from "@/components/custom/typography";
 type Props = {
   searchParams: SearchParamsType;
 };
@@ -29,9 +30,9 @@ export default async function page({ searchParams }: Props) {
   return (
     <div className="w-full">
       <div className="inline-flex justify-between w-full mb-12">
-        <h1 className="scroll-m-20 text-center text-4xl font-medium tracking-tight text-balance">
+        <Typography as="h1" variant="h4">
           {t("plural")}
-        </h1>
+        </Typography>
         <Visible when={canCreateUser}>
           <Button asChild>
             <Link href={CREATE}>{t("create")}</Link>

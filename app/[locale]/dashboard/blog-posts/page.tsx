@@ -1,5 +1,6 @@
 import PaginationLayout from "@/components/custom/pagination-layout";
 import { Button } from "@/components/ui/button";
+import { Typography } from "@/components/custom/typography";
 import { PAGES_ROUTES } from "@/constants/config";
 import { PAGINATION_CONFIG } from "@/constants/enums";
 import BlogPostsTableSkeleton from "@/features/blog-posts/skeletons/blog-posts-table-skeleton";
@@ -43,9 +44,7 @@ export default async function page({
   return (
     <div className="w-full">
       <div className="inline-flex justify-between w-full mb-12">
-        <h1 className="scroll-m-20 text-center text-4xl font-medium tracking-tight text-balance">
-          {t("plural")}
-        </h1>
+        <Typography as="h1" variant="h4">{t("plural")}</Typography>
         <Visible when={canCreateBlogPost}>
           <Button asChild>
             <Link href={CREATE}>{t("create")}</Link>

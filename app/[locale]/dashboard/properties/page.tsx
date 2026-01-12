@@ -13,6 +13,7 @@ import can from "@/features/dashboard/auth/can";
 import { Visible } from "@sfwnisme/visi";
 import { PAGES_ROUTES } from "@/constants/config";
 import { getTranslations } from "next-intl/server";
+import { Typography } from "@/components/custom/typography";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("resources.property")
@@ -44,9 +45,7 @@ export default async function page({
   return (
     <div>
       <div className="inline-flex justify-between w-full mb-12">
-        <h1 className="scroll-m-20 text-center text-4xl font-medium tracking-tight text-balance">
-          {t("plural")}
-        </h1>
+        <Typography as="h1" variant="h4">{t("plural")}</Typography>
         <Visible when={canCreateProperty}>
           <Button asChild>
             <Link href={CREATE}>{t("create")}</Link>

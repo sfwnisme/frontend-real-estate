@@ -1,7 +1,7 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const typographyVariants = cva("", {
   variants: {
@@ -23,7 +23,7 @@ const typographyVariants = cva("", {
   defaultVariants: {
     variant: "p",
   },
-})
+});
 
 type TypographyElement =
   | "h1"
@@ -37,22 +37,23 @@ type TypographyElement =
   | "small"
   | "strong"
   | "em"
-  | "blockquote"
+  | "blockquote";
 
 type TypographyProps = {
-  as?: TypographyElement
-  className?: string
-  children?: React.ReactNode
+  as?: TypographyElement;
+  className?: string;
+  children?: React.ReactNode;
 } & VariantProps<typeof typographyVariants> &
-  React.HTMLAttributes<HTMLElement>
+  React.HTMLAttributes<HTMLElement>;
 
 function Typography({
-  as: Component = "p",
+  as = "p",
   variant,
   className,
   children,
   ...props
 }: TypographyProps) {
+  const Component = as;
   return (
     <Component
       data-slot="typography"
@@ -61,7 +62,7 @@ function Typography({
     >
       {children}
     </Component>
-  )
+  );
 }
 
-export { Typography, typographyVariants }
+export { Typography, typographyVariants };

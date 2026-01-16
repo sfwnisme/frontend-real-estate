@@ -9,7 +9,7 @@ import HorizontalRule from "@tiptap/extension-horizontal-rule";
 import Youtube from "@tiptap/extension-youtube";
 
 interface RichTextEditorProps {
-  content: string;
+  content?: string;
 }
 export default function RichTextEditor({
   content = "<p>Hello World! 🌎️</p>",

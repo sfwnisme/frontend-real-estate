@@ -201,6 +201,6 @@ a {
         @apply text-sm leading-7 sm:text-base
     }
     blockquote {
-        @apply mt-4 border-s-2 p-2 italic sm:mt-6 sm:pl-6 bg-primary-foreground
+        @apply mt-4 border-s-4 p-2 sm:mt-6 bg-primary-foreground
     }
 }

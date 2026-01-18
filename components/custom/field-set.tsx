@@ -22,7 +22,7 @@ export default function FieldSet({
   error,
 }: Props) {
   return (
-    <fieldset className={cn("border rounded-lg w-full", className)}>
+    <fieldset className={cn("border rounded-lg min-w-0", className)}>
       {variant === "default" && (
         <div className="p-4 flex flex-col gap-1">
           <h3 className="text-md font-semibold text-primary">{title}</h3>

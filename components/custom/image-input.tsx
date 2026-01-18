@@ -1,7 +1,6 @@
 "use client";
 import { UploadCloud } from "lucide-react";
-import React, { forwardRef, useRef } from "react";
-import { Button } from "../ui/button";
+import React, { forwardRef } from "react";
 import { Badge } from "../ui/badge";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
@@ -30,7 +29,9 @@ const ImageInput = forwardRef<HTMLInputElement, InputType>(
           htmlFor={inputId}
           className="hover:bg-gray-50/50 duration-75 p-4 md:p-8 h-full w-full text-center text-sm md:text-base flex flex-col gap-2 items-center justify-center text-gray-500 rounded-2xl border-2 border-dashed cursor-pointer"
         >
+          <div className="size-10">
           <UploadCloud />
+          </div>
           <p>{t("chooseFile")}</p>
           <small>
             {t("webpPreferable")}

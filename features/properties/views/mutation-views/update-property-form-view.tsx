@@ -23,6 +23,7 @@ import { Property } from "@/types/types";
 import useUpdatePropertyFormValidation from "../../hooks/use-update-property-form-validation";
 import FieldSet from "@/components/custom/field-set";
 import LoadingSpinner from "@/components/custom/loading-spinner";
+import RichTextEditor from "@/components/rich-text-editor";
 
 type Props = {
   property: Property;
@@ -45,6 +46,12 @@ const UpdatePropertyFormView = (props: Props) => {
   const canUpdate = isValueChanged && isValid && !isPending;
   console.log("TRIGGER: property-form");
 
+  const content = form.getValues("description") ?? "";
+  const onRichTextEditorChange = (value: string) => {
+    form.setValue("description", value);
+    form.trigger("description");
+  };
+
   return (
     <div>
       <form onSubmit={onSubmit} className="grid lg:gap-4">
@@ -66,15 +73,12 @@ const UpdatePropertyFormView = (props: Props) => {
               >
                 <Input type="text" {...form.register("title")} />
               </InputWrapper>
-
-              <InputWrapper
-                title={t("description")}
-                description={tDescs("description")}
-                error={formErrors.description?.message}
-                className="col-span-full"
-              >
-                <Textarea id="description" {...form.register("description")} />
-              </InputWrapper>
+              <div className="col-span-full">
+                <RichTextEditor
+                  content={content}
+                  onChange={onRichTextEditorChange}
+                />
+              </div>
               <InputWrapper
                 title={t("price")}
                 error={formErrors.price?.message}
@@ -120,7 +124,10 @@ const UpdatePropertyFormView = (props: Props) => {
                   {...form.register("bathrooms")}
                 />
               </InputWrapper>
-              <InputWrapper title={t("garage")} error={formErrors.garage?.message}>
+              <InputWrapper
+                title={t("garage")}
+                error={formErrors.garage?.message}
+              >
                 <Input type="number" id="garage" {...form.register("garage")} />
               </InputWrapper>
               <InputWrapper
@@ -152,7 +159,10 @@ const UpdatePropertyFormView = (props: Props) => {
             childrenClassName="grid gap-4"
             className="col-span-full sm:col-span-1"
           >
-            <InputWrapper title={t("type")} error={formErrors.propertyType?.message}>
+            <InputWrapper
+              title={t("type")}
+              error={formErrors.propertyType?.message}
+            >
               <Controller
                 name="propertyType"
                 control={form.control}
@@ -311,13 +321,14 @@ const UpdatePropertyFormView = (props: Props) => {
           variant="destructive"
           className={cn(
             "invisible",
-            typeof globalError === "string" && globalError !== "" && "visible"
+            typeof globalError === "string" && globalError !== "" && "visible",
           )}
         >
           <AlertDescription>{globalError}</AlertDescription>
         </Alert>
         <Button type="submit" className="w-full" disabled={!canUpdate}>
-          {isPending && <LoadingSpinner />}{tActions("updatePropertyDetails")}
+          {isPending && <LoadingSpinner />}
+          {tActions("updatePropertyDetails")}
         </Button>
         <DevTool control={form.control} />
       </form>

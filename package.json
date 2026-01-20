@@ -30,6 +30,7 @@
     "@tiptap/extension-horizontal-rule": "^3.15.3",
     "@tiptap/extension-image": "^3.15.3",
     "@tiptap/extension-link": "^3.15.3",
+    "@tiptap/extension-paragraph": "^3.16.0",
     "@tiptap/extension-text-align": "^3.15.3",
     "@tiptap/extension-youtube": "^3.15.3",
     "@tiptap/pm": "^3.15.3",

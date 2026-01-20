@@ -7,10 +7,12 @@ import TextAlign from "@tiptap/extension-text-align";
 import Image from "@tiptap/extension-image";
 import Youtube from "@tiptap/extension-youtube";
 import Link from "@tiptap/extension-link";
-import Highlight from '@tiptap/extension-highlight'
+import Highlight from "@tiptap/extension-highlight";
+import Paragraph from "@tiptap/extension-paragraph";
 
 interface RichTextEditorProps {
-  content?: string;
+  content: string;
+  onChange: (content: string) => void;
 }
 
 const LinkConfig = Link.configure({
@@ -43,7 +45,7 @@ const LinkConfig = Link.configure({
 
       // only allow protocols specified in ctx.protocols
       const allowedProtocols = ctx.protocols.map((p: any) =>
-        typeof p === "string" ? p : p.scheme
+        typeof p === "string" ? p : p.scheme,
       );
 
       if (!allowedProtocols.includes(protocol)) {
@@ -86,11 +88,13 @@ const LinkConfig = Link.configure({
 });
 
 export default function RichTextEditor({
-  content = "<p>Hello World! 🌎️</p>",
+  content,
+  onChange,
 }: RichTextEditorProps) {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
+        paragraph: false, // disable default paragraph to use custom one
         bulletList: {
           HTMLAttributes: {
             class: "list-disc ml-3",
@@ -101,7 +105,14 @@ export default function RichTextEditor({
             class: "list-decimal ml-3",
           },
         },
+        heading: {
+          levels: [1, 2, 3],
+          HTMLAttributes: {
+            class: "my-4 md:my-6",
+          },
+        },
       }),
+      Paragraph,
       TextAlign.configure({
         types: ["heading", "paragraph", "blockquote"],
       }),
@@ -127,9 +138,12 @@ export default function RichTextEditor({
     content: content,
     immediatelyRender: false,
     // shouldRerenderOnTransaction: true,
+    onUpdate: ({ editor }) => {
+      onChange(editor.getHTML());
+    },
   });
   return (
-    <div className="m-8">
+    <div className="">
       <MenuBar editor={editor} />
       <div className="h-4" />
       <EditorContent editor={editor} />

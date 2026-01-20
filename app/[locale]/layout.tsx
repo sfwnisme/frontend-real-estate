@@ -68,7 +68,7 @@ export default async function RootLayout({ children, params }: Props) {
   
   // Enable static rendering for SSG
   setRequestLocale(locale);
-  
+
   // Import messages directly based on locale to avoid race conditions during parallel SSG
   const messages = (await import(`@/messages/${locale}.json`)).default;
   

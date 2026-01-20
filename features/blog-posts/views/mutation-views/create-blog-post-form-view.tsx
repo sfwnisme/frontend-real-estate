@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import useCreateBlogPostFormValidation from "../../hooks/use-create-blog-post-form-validaiton";
 import FieldSet from "@/components/custom/field-set";
 import { Input } from "@/components/ui/input";
@@ -20,6 +20,7 @@ import ImagePreview from "@/components/custom/image-preview";
 import { Button } from "@/components/ui/button";
 import LoadingSpinner from "@/components/custom/loading-spinner";
 import { useTranslations } from "next-intl";
+import RichTextEditor from "@/components/rich-text-editor";
 type Props = {};
 
 export default function CreateBlogPostFormView({}: Props) {
@@ -32,6 +33,11 @@ export default function CreateBlogPostFormView({}: Props) {
     ? URL.createObjectURL(form.getValues("image") as File)
     : "";
 
+  const onRichTextEditorChange = useCallback((content: string) => {
+    form.setValue("content", content);
+    form.trigger("content");
+  }, [form.getValues("content")]);
+    
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (!files) {
@@ -69,8 +75,8 @@ export default function CreateBlogPostFormView({}: Props) {
 
   return (
     <div>
-      <form onSubmit={onSubmit} className="flex flex-col lg:flex-row gap-4">
-        <div className="flex flex-col gap-4 w-full min-w-[500px] flex-1">
+      <form onSubmit={onSubmit} className="grid lg:grid-cols-5 gap-4">
+        <div className="flex flex-col gap-4 min-w-full col-span-full lg:col-span-3">
           <FieldSet title="title" variant="container">
             <InputWrapper
               title={t("title")}
@@ -87,16 +93,8 @@ export default function CreateBlogPostFormView({}: Props) {
               <Input type="text" {...form.register("excerpt")} />
             </InputWrapper>
           </FieldSet>
-          <FieldSet title="content" variant="container">
-            <InputWrapper
-              title={t("content")}
-              error={form.formState.errors.content?.message}
-            >
-              <Textarea
-                className="min-h-[200px] wrap-break-word"
-                {...form.register("content")}
-              />
-            </InputWrapper>
+          <FieldSet title={t("content")} variant="default">
+            <RichTextEditor content={form.getValues("content")} onChange={onRichTextEditorChange} />
           </FieldSet>
           <Button
             type="submit"
@@ -106,7 +104,8 @@ export default function CreateBlogPostFormView({}: Props) {
             {isPending && <LoadingSpinner />}{tActions("create")}
           </Button>
         </div>
-        <div className="flex flex-col gap-4 w-full lg:max-w-[400px]">
+        {/* <div className="flex flex-col gap-4 w-full lg:min-w-[300px]"> */}
+        <div className="flex flex-col gap-4 lg:col-span-2">
           <FieldSet title={tSections("seoSettings")} childrenClassName="grid gap-4">
             <InputWrapper
               title={t("status")}

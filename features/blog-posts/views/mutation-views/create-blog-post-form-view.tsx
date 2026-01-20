@@ -95,7 +95,6 @@ export default function CreateBlogPostFormView({}: Props) {
           </FieldSet>
           <FieldSet title={t("content")} variant="default">
             <RichTextEditor content={form.getValues("content")} onChange={onRichTextEditorChange} />
-            {form.getValues("content")}
           </FieldSet>
           <Button
             type="submit"

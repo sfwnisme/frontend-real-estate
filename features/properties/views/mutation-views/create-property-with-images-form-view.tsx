@@ -24,16 +24,23 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import CreatePropertyImagesFormView from "./create-property-images-form-view";
 import FieldSet from "@/components/custom/field-set";
 import { useTranslations } from "next-intl";
+import RichTextEditor from "@/components/rich-text-editor";
 
 const CreatePropertyWithImagesFormView = () => {
-  const t = useTranslations("common.form.labels")
-  const tSections = useTranslations("common.form.sections")
-  const tDescs = useTranslations("common.form.descriptions")
-  const tActions = useTranslations("common.actions")
+  const t = useTranslations("common.form.labels");
+  const tSections = useTranslations("common.form.sections");
+  const tDescs = useTranslations("common.form.descriptions");
+  const tActions = useTranslations("common.actions");
   const { form, onSubmit, isPending } =
     useCreatePropertyWithImagesFormValidation();
   const formErrors = form.formState.errors;
   const globalFormError = formErrors.root?.message;
+
+  const content = form.getValues("description") ?? "";
+  const onRichTextEditorChange = (content: string) => {
+    form.setValue("description", content);
+    form.trigger("description");
+  };
 
   return (
     <div className="flex flex-col lg:flex-row lg:gap-4">
@@ -55,15 +62,12 @@ const CreatePropertyWithImagesFormView = () => {
           >
             <Input type="text" {...form.register("title")} />
           </InputWrapper>
-
-          <InputWrapper
-            title={t("description")}
-            description={tDescs("description")}
-            error={formErrors.description?.message}
-            className="col-span-full"
-          >
-            <Textarea id="description" {...form.register("description")} />
-          </InputWrapper>
+          <div className="col-span-full">
+            <RichTextEditor
+              content={content}
+              onChange={onRichTextEditorChange}
+            />
+          </div>
           <InputWrapper
             title={t("price")}
             error={formErrors.price?.message}
@@ -88,10 +92,16 @@ const CreatePropertyWithImagesFormView = () => {
           childrenClassName="grid grid-cols-2 gap-4"
           className="col-span-full sm:col-span-1"
         >
-          <InputWrapper title={t("bedrooms")} error={formErrors.bedrooms?.message}>
+          <InputWrapper
+            title={t("bedrooms")}
+            error={formErrors.bedrooms?.message}
+          >
             <Input type="number" id="bedrooms" {...form.register("bedrooms")} />
           </InputWrapper>
-          <InputWrapper title={t("bathrooms")} error={formErrors.bathrooms?.message}>
+          <InputWrapper
+            title={t("bathrooms")}
+            error={formErrors.bathrooms?.message}
+          >
             <Input
               type="number"
               id="bathrooms"
@@ -129,7 +139,10 @@ const CreatePropertyWithImagesFormView = () => {
           childrenClassName="grid gap-4"
           className="col-span-full sm:col-span-1"
         >
-          <InputWrapper title={t("type")} error={formErrors.propertyType?.message}>
+          <InputWrapper
+            title={t("type")}
+            error={formErrors.propertyType?.message}
+          >
             <Controller
               name="propertyType"
               control={form.control}
@@ -212,14 +225,20 @@ const CreatePropertyWithImagesFormView = () => {
               {...form.register("address.state")}
             />
           </InputWrapper>
-          <InputWrapper title={t("city")} error={formErrors.address?.city?.message}>
+          <InputWrapper
+            title={t("city")}
+            error={formErrors.address?.city?.message}
+          >
             <Input
               type="text"
               id="address.city"
               {...form.register("address.city")}
             />
           </InputWrapper>
-          <InputWrapper title={t("area")} error={formErrors.address?.area?.message}>
+          <InputWrapper
+            title={t("area")}
+            error={formErrors.address?.area?.message}
+          >
             <Input
               type="text"
               id="address.area"
@@ -281,7 +300,7 @@ const CreatePropertyWithImagesFormView = () => {
             "invisible col-span-full",
             typeof globalFormError === "string" &&
               globalFormError !== "" &&
-              "visible"
+              "visible",
           )}
         >
           <AlertDescription>{globalFormError}</AlertDescription>
@@ -291,7 +310,7 @@ const CreatePropertyWithImagesFormView = () => {
           className="w-full col-span-full hidden lg:block"
           disabled={isPending || !form.formState.isValid}
         >
-        {isPending ? tActions("creating") : tActions("create")}
+          {isPending ? tActions("creating") : tActions("create")}
         </Button>
         <DevTool control={form.control} />
       </form>

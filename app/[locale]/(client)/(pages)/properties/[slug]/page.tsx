@@ -105,7 +105,7 @@ export default async function Page({ params }: Props) {
       <PropertyOverviewCard property={propertyData} />
       <article className="flex-1">
         <h1 className="text-3xl font-semibold mb-10">{propertyData.title}</h1>
-        <p>{propertyData.description}</p>
+        <p dangerouslySetInnerHTML={{ __html: propertyData.description }} />
       </article>
       {propertyData.video && (
         <div>

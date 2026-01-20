@@ -287,7 +287,7 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
 
   const renderMenuItems = menuItems.map(({ icon: IconComponent, ...item }) => (
     <Tooltip key={item.name}>
-      <TooltipTrigger>
+      <TooltipTrigger type="button">
         <Toggle
           aria-label={item.name}
           key={item.name}

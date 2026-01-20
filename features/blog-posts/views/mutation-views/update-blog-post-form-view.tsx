@@ -18,6 +18,7 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import LoadingSpinner from "@/components/custom/loading-spinner";
 import useUpdateBlogPostFormValidation from "../../hooks/use-update-blog-post-form-validaiton";
+import RichTextEditor from "@/components/rich-text-editor";
 type Props = {
   blogPost: BlogPost;
 };
@@ -34,6 +35,13 @@ export default function UpdateBlogPostFormView(props: Props) {
 
   const formErrors = form.formState.errors;
   const globalError = form.formState.errors.root?.message;
+  
+  const onRichTextEditorChange = (content: string) => {
+    form.setValue("content", content);
+    form.trigger("content")
+  }
+  
+  const content = form.getValues("content") ?? ""
 
   return (
     <div>
@@ -59,15 +67,7 @@ export default function UpdateBlogPostFormView(props: Props) {
             </InputWrapper>
           </FieldSet>
           <FieldSet title={t("content")} variant="container">
-            <InputWrapper
-              title={t("content")}
-              error={form.formState.errors.content?.message}
-            >
-              <Textarea
-                className="min-h-[200px] wrap-break-word"
-                {...form.register("content")}
-              />
-            </InputWrapper>
+            <RichTextEditor content={content} onChange={onRichTextEditorChange} />
           </FieldSet>
         </div>
         <div className="flex flex-col gap-4 w-full">

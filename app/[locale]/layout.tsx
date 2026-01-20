@@ -7,7 +7,6 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
-import RichTextEditor from "@/components/rich-text-editor";
 
 type Props = {
   children: React.ReactNode;
@@ -69,7 +68,7 @@ export default async function RootLayout({ children, params }: Props) {
   
   // Enable static rendering for SSG
   setRequestLocale(locale);
-  
+
   // Import messages directly based on locale to avoid race conditions during parallel SSG
   const messages = (await import(`@/messages/${locale}.json`)).default;
   
@@ -84,7 +83,6 @@ export default async function RootLayout({ children, params }: Props) {
     >
       <body className={`${font} ${fontVariables} antialiased overflow-x-hidden`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <RichTextEditor />
           {children}
         </NextIntlClientProvider>
         <Toaster position="top-right" expand />

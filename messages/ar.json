@@ -145,7 +145,7 @@
         "description": "الوصف",
         "price": "السعر",
         "propertySize": "مساحة العقار",
-        "bedrooms": "الغرف النومية",
+        "bedrooms": "غرف النوم",
         "bathrooms": "الحمامات",
         "garage": "المركبات",
         "garageSize": "مساحة المركبات",

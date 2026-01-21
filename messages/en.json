@@ -394,5 +394,19 @@
       "ogTitle": "Contact Us",
       "ogDescription": "We're here to help you every step of the way"
     }
+  },
+  "Dialog": {
+    "deleteProperty": {
+      "title": "Delete property!",
+      "description": "Are you sure you want to delete this property?"
+    },
+    "deleteUser": {
+      "title": "Delete user!",
+      "description": "Are you sure you want to delete this user?"
+    },
+    "deleteBlog": {
+      "title": "Delete blog!",
+      "description": "Are you sure you want to delete this blog?"
+    }
   }
 }

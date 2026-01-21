@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useState, useTransition } from "react";
+import { useCallback, useTransition } from "react";
 import {
   Dialog,
   DialogClose,
@@ -11,33 +11,30 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import {
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import LoadingSpinner from "@/components/custom/loading-spinner";
 import { deleteDataByQueryParams } from "@/lib/actions";
 import { STATUS_TEXT } from "@/constants/enums";
+import { useTranslations } from "next-intl";
+
 export default function GlobalDeleteDialog() {
+  const t = useTranslations("Dialog");
+  const tActions = useTranslations("common.actions");
   const endpointDialogText: Record<string, any> = {
     property: {
       endpoint: "/properties/delete/",
-      title: "Delete Property Data?",
-      description:
-        "Are you sure you want to permanently delete this property data? This action cannot be undone.",
+      title: t("deleteProperty.title"),
+      description: t("deleteProperty.description"),
     },
     blog: {
       endpoint: "/blog-posts/delete/",
-      title: "Delete Blog Post Data?",
-      description:
-        "Are you sure you want to permanently delete this blog post data? This action cannot be undone.",
+      title: t("deleteBlog.title"),
+      description: t("deleteBlog.description"),
     },
     user: {
       endpoint: "/users/delete/",
-      title: "Delete User Data?",
-      description:
-        "Are you sure you want to permanently delete this user data? This action cannot be undone.",
+      title: t("deleteUser.title"),
+      description: t("deleteUser.description"),
     },
   };
 
@@ -63,7 +60,7 @@ export default function GlobalDeleteDialog() {
     startDeletingProperty(async () => {
       const deleteResponse = await deleteDataByQueryParams(
         endpointDialogText[endpoint].endpoint,
-        id
+        id,
       );
 
       if (deleteResponse.statusText === STATUS_TEXT.SUCCESS) {
@@ -80,15 +77,15 @@ export default function GlobalDeleteDialog() {
     <div>
       <Dialog open={modal !== null} onOpenChange={handleCloseDialog}>
         <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
+          <DialogHeader className="items-start">
             <DialogTitle>{endpointDialogText[endpoint]?.title}</DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-start">
               {endpointDialogText[endpoint]?.description}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button variant="outline">{tActions("cancel")}</Button>
             </DialogClose>
             <Button
               type="button"
@@ -97,7 +94,7 @@ export default function GlobalDeleteDialog() {
               disabled={isDeletingProperty}
             >
               {isDeletingProperty && <LoadingSpinner />}
-              Delete
+              {tActions("delete")}
             </Button>
           </DialogFooter>
         </DialogContent>

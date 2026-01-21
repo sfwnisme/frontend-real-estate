@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { Permission } from "@/constants/permissions";
+import {Link as NextIntlLink} from "@/i18n/navigation"
 
 export function DashboardNavRoutes({
   projects,
@@ -29,10 +30,10 @@ export function DashboardNavRoutes({
         {projects.map((item) => (
             <SidebarMenuItem key={item.name}>
               <SidebarMenuButton asChild>
-                <Link href={item.url}>
+                <NextIntlLink href={item.url}>
                   <item.icon />
                   <span>{item.name}</span>
-                </Link>
+                </NextIntlLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
         ))}

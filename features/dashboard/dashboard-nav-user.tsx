@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronsUpDown, LogOut, Sparkles } from "lucide-react";
+import { ChevronsUpDown, Languages, LogOut } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -22,6 +22,8 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { getCurrentUser } from "@/lib/actions";
 import { logOut } from "../users/lib/actions";
+import { Link as NextIntlLink, usePathname } from "@/i18n/navigation";
+import { useLocale, useTranslations } from "next-intl";
 
 export function DashboardNavUser() {
   const [userData, setUserData] = useState<{
@@ -32,21 +34,24 @@ export function DashboardNavUser() {
     email: "",
   });
   const { isMobile } = useSidebar();
+  const pathname = usePathname();
+  const locale = useLocale();
+  const t = useTranslations("navigation");
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
       const response = await getCurrentUser();
-      if(!response?.data) {
-        window.location.pathname = "/login"
+      if (!response?.data) {
+        window.location.pathname = "/login";
       }
       console.log("user client", response);
-      setUserData({ name: response.data?.name , email: response.data?.email });
+      setUserData({ name: response.data?.name, email: response.data?.email });
     };
     fetchCurrentUser();
   }, []);
 
   const signOutUser = async () => {
-    await logOut()
+    await logOut();
     toast.success("you signed out successfully");
     window.location.pathname = "/";
   };
@@ -95,13 +100,30 @@ export function DashboardNavUser() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Profile
+              <DropdownMenuItem asChild>
+                {locale === "ar" ? (
+                  <NextIntlLink
+                    href={pathname}
+                    locale={"en"}
+                    className={`font-medium font-english`}
+                  >
+                    <Languages />
+                    {t("english")}
+                  </NextIntlLink>
+                ) : (
+                  <NextIntlLink
+                    href={pathname}
+                    locale={"ar"}
+                    className={`font-medium font-arabic`}
+                  >
+                    <Languages />
+                    {t("arabic")}
+                  </NextIntlLink>
+                )}
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={signOutUser}>
+            <DropdownMenuItem onClick={signOutUser} className="cursor-pointer">
               <LogOut />
               Log out
             </DropdownMenuItem>

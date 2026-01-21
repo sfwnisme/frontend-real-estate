@@ -2,15 +2,12 @@
 
 import * as React from "react";
 import {
-  Book,
-  BookPlus,
   Frame,
   House,
   HousePlus,
   LibraryBig,
   LucideIcon,
   NotebookPen,
-  User,
   UserPlus,
   Users,
 } from "lucide-react";

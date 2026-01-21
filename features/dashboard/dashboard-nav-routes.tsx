@@ -6,7 +6,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@/components/ui/sidebar";
 import { Permission } from "@/constants/permissions";
 import { Link as NextIntlLink } from "@/i18n/navigation";

@@ -28,12 +28,13 @@ export default async function PropertiesTableView({
   searchParams,
 }: Props) {
   const locale = await getLocale();
-  const tTable = await getTranslations("common.table.headers")
-  const tActions = await getTranslations("common.actions")
-  console.log(tTable("title"))
+  const tTable = await getTranslations("common.table.headers");
+  const tActions = await getTranslations("common.actions");
+  const tUnits = await getTranslations("common.units");
+  console.log(tTable("title"));
   const properties = await getProperties(
     PAGINATION_CONFIG.PROPERTIES.DASHBOARD,
-    currentPage
+    currentPage,
   );
   const propertiesData = properties.data?.data;
   if (!propertiesData || propertiesData?.length === 0) {
@@ -47,12 +48,14 @@ export default async function PropertiesTableView({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-start">{tTable('name')}</TableHead>
-            <TableHead className="text-start">{tTable('price')}</TableHead>
-            <TableHead className="text-start">{tTable('size')}</TableHead>
-            <TableHead className="text-start">{tTable('yearBuilt')}</TableHead>
-            <TableHead className="text-start">{tTable('type')}</TableHead>
-            <TableHead className="text-start w-20">{tTable('actions')}</TableHead>
+            <TableHead className="text-start">{tTable("name")}</TableHead>
+            <TableHead className="text-start">{tTable("price")}</TableHead>
+            <TableHead className="text-start">{tTable("size")}</TableHead>
+            <TableHead className="text-start">{tTable("yearBuilt")}</TableHead>
+            <TableHead className="text-start">{tTable("type")}</TableHead>
+            <TableHead className="text-start w-20">
+              {tTable("actions")}
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -60,16 +63,14 @@ export default async function PropertiesTableView({
             <TableRow key={property._id}>
               <TableCell className="font-medium">{property.title}</TableCell>
               <TableCell>
-                {property.price.toLocaleString("en-SA", {
+                {property.price.toLocaleString("ar", {
                   style: "currency",
                   currency: "SAR",
                 })}
               </TableCell>
               <TableCell className="flex">
                 {property.propertySize}
-                <p>
-                  m<sup>2</sup>
-                </p>
+                <span>{tUnits("squareMeter")}</span>
               </TableCell>
               <TableCell className="text-start">{property.yearBuilt}</TableCell>
               <TableCell className="text-start">
@@ -77,12 +78,16 @@ export default async function PropertiesTableView({
               </TableCell>
               <TableCell className="text-end w-fit">
                 <div className="inline-flex items-center gap-2">
-                  <ButtonGroup orientation={locale === "en" ? "horizontal" : "horizontalAr"}>
+                  <ButtonGroup
+                    orientation={
+                      locale === "en" ? "horizontal" : "horizontalAr"
+                    }
+                  >
                     <Button variant="outline" size="sm" asChild>
                       <Link
                         href={`${PAGES_ROUTES.PROPERTIES.PREVIEW}/${property.slug}`}
                       >
-                        {tActions('open')}
+                        {tActions("open")}
                       </Link>
                     </Button>
                     <Visible when={canEditProperty}>
@@ -101,7 +106,7 @@ export default async function PropertiesTableView({
                         "delete",
                         "property",
                         property._id,
-                        searchParams
+                        searchParams,
                       )}
                       prefetch={true}
                     >

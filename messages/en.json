@@ -245,6 +245,9 @@
       "setDefaultSlugBlogPost": "set the blog post title as the slug",
       "visitProperty": "Visit property",
       "visitBlogPost": "Visit blog post"
+    },
+    "units": {
+      "squareMeter": "m²"
     }
   },
   "resources": {

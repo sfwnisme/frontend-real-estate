@@ -36,6 +36,8 @@ const UpdatePropertyFormView = (props: Props) => {
   const tDescs = useTranslations("common.form.descriptions");
   const tSections = useTranslations("common.form.sections");
   const tPlaceholders = useTranslations("common.form.placeholders");
+  const tPropertyTypes = useTranslations("common.propertyTypes");
+  const tPropertyStatus = useTranslations("common.propertyStatus");
   const { form, onSubmit, isPending } =
     useUpdatePropertyFormValidation(property);
   const formErrors = form.formState.errors;
@@ -178,7 +180,7 @@ const UpdatePropertyFormView = (props: Props) => {
                     <SelectContent>
                       {Object.values(PROPERTY_TYPE).map((type) => (
                         <SelectItem value={type} key={type}>
-                          {type}
+                          {tPropertyTypes(type)}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -205,7 +207,7 @@ const UpdatePropertyFormView = (props: Props) => {
                     <SelectContent>
                       {Object.values(PROPERTY_STATUS).map((status) => (
                         <SelectItem value={status} key={status}>
-                          {status}
+                          {tPropertyStatus(status)}
                         </SelectItem>
                       ))}
                     </SelectContent>

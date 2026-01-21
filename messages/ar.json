@@ -147,8 +147,8 @@
         "propertySize": "مساحة العقار",
         "bedrooms": "غرف النوم",
         "bathrooms": "الحمامات",
-        "garage": "المركبات",
-        "garageSize": "مساحة المركبات",
+        "garage": "مواقف سيارة",
+        "garageSize": "مساحة مواقف السيارة",
         "yearBuilt": "سنة البناء",
         "state": "المحافظة",
         "city": "المدينة",
@@ -246,6 +246,19 @@
     },
     "units": {
       "squareMeter": "م²"
+    },
+    "propertyTypes": {
+      "apartment": "شقة",
+      "villa": "فيلا",
+      "chalet": "شاليه",
+      "house": "منزل",
+      "studio": "استوديو"
+    },
+    "propertyStatus": {
+      "for_sale": "للبيع",
+      "for_rent": "للإيجار",
+      "sold": "مباع",
+      "rented": "مؤجر"
     }
   },
   "resources": {

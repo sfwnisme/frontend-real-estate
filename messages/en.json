@@ -248,6 +248,19 @@
     },
     "units": {
       "squareMeter": "m²"
+    },
+    "propertyTypes": {
+      "apartment": "Apartment",
+      "villa": "Villa",
+      "chalet": "Chalet",
+      "house": "House",
+      "studio": "Studio"
+    },
+    "propertyStatus": {
+      "for_sale": "For Sale",
+      "for_rent": "For Rent",
+      "sold": "Sold",
+      "rented": "Rented"
     }
   },
   "resources": {

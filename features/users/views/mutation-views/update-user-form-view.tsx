@@ -1,6 +1,4 @@
 "use client";
-import React from "react";
-import { DevTool } from "@hookform/devtools";
 import { Controller } from "react-hook-form";
 import { useTranslations } from "next-intl";
 
@@ -22,10 +20,10 @@ import useErrorMessage from "@/features/dashboard/hooks/use-error-message";
 import { User } from "@/types/types";
 
 type Props = {
-  user: User
-}
+  user: User;
+};
 
-const UpdateUserFormView = ({user}: Props) => {
+const UpdateUserFormView = ({ user }: Props) => {
   const t = useTranslations("common.form.labels");
   const tActions = useTranslations("common.actions");
   const tDescs = useTranslations("common.form.descriptions");
@@ -113,7 +111,6 @@ const UpdateUserFormView = ({user}: Props) => {
         >
           {isPending ? tActions("updating") : tActions("update")}
         </Button>
-        <DevTool control={form.control} />
       </form>
     </div>
   );

@@ -1,6 +1,4 @@
 "use client";
-import React from "react";
-import { DevTool } from "@hookform/devtools";
 import { Controller } from "react-hook-form";
 
 import {
@@ -11,13 +9,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-
 import { PROPERTY_STATUS, PROPERTY_TYPE } from "@/constants/enums";
 import useCreatePropertyWithImagesFormValidation from "../../hooks/use-create-property-with-images-form-validation";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import InputWrapper from "@/components/custom/input-wrapper";
-import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -25,6 +21,7 @@ import CreatePropertyImagesFormView from "./create-property-images-form-view";
 import FieldSet from "@/components/custom/field-set";
 import { useTranslations } from "next-intl";
 import RichTextEditor from "@/components/rich-text-editor";
+import { useCallback } from "react";
 
 const CreatePropertyWithImagesFormView = () => {
   const t = useTranslations("common.form.labels");
@@ -37,10 +34,15 @@ const CreatePropertyWithImagesFormView = () => {
   const globalFormError = formErrors.root?.message;
 
   const content = form.getValues("description") ?? "";
-  const onRichTextEditorChange = (content: string) => {
-    form.setValue("description", content);
-    form.trigger("description");
-  };
+  const onRichTextEditorChange = useCallback(
+    (value: string) => {
+      form.setValue("description", value, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+    },
+    [form.setValue],
+  );
 
   return (
     <div className="flex flex-col lg:flex-row lg:gap-4">
@@ -312,7 +314,6 @@ const CreatePropertyWithImagesFormView = () => {
         >
           {isPending ? tActions("creating") : tActions("create")}
         </Button>
-        <DevTool control={form.control} />
       </form>
       <div className="w-full lg:max-w-[400px]">
         <FieldSet

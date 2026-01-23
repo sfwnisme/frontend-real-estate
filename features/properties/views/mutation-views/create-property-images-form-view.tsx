@@ -1,14 +1,7 @@
-import React, { useCallback, useMemo, useEffect } from "react";
+import React, { useCallback, useMemo } from "react";
 import ImageInput from "@/components/custom/image-input";
-import { cn, returnFileSize } from "@/lib/utils";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Trash, Trash2 } from "lucide-react";
 import { FieldArrayPath, UseFormReturn, useFieldArray } from "react-hook-form";
 import { CreatePropertyWithImagesType } from "../../schema/create-property-with-images-schema";
-import { Separator } from "@/components/ui/separator";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import InputWrapper from "@/components/custom/input-wrapper";
 import ImagePreview from "@/components/custom/image-preview";
 

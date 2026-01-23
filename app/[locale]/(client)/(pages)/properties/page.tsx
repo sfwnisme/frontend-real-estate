@@ -56,6 +56,8 @@ export async function generateMetadata({
       title: ogTitle,
       description: ogDescription,
       images: [{ url: "/hero-bg.webp" }],
+      type: "website", 
+      url: returnCanonical(locale, PREVIEW),
     },
     twitter: {
       title: ogTitle,
@@ -87,6 +89,7 @@ export default async function page({
         title={t("hero.title")}
         description={t("hero.description")}
         type="start"
+        as="h1"
       />
       <div className="h-10" />
       <Suspense fallback={<PropertyCardSkeleton count={currentPageSize} />}>

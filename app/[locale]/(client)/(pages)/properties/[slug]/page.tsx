@@ -8,6 +8,7 @@ import { type OgImageType } from "@/types/types";
 import { PAGES_ROUTES } from "@/constants/config";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
+import { Typography } from "@/components/custom/typography";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;
@@ -102,9 +103,11 @@ export default async function Page({ params }: Props) {
         propertyId={propertyData._id}
         propertyAlt={propertyData.title}
       />
-      <PropertyOverviewCard property={propertyData} />
+      <PropertyOverviewCard property={propertyData} locale={locale} />
       <article className="flex-1">
-        <h1 className="text-3xl font-semibold mb-10">{propertyData.title}</h1>
+        <Typography as="h1" variant="h2" className="mb-10">
+          {propertyData.title}
+        </Typography>
         <p dangerouslySetInnerHTML={{ __html: propertyData.description }} />
       </article>
       {propertyData.video && (

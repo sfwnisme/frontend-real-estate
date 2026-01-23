@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import { useCallback } from "react";
 import { useTranslations } from "next-intl";
 import FieldSet from "@/components/custom/field-set";
 import { Input } from "@/components/ui/input";
@@ -33,22 +33,28 @@ export default function UpdateBlogPostFormView(props: Props) {
     useUpdateBlogPostFormValidation(blogPost);
   console.log("trigger:", blogPost);
 
+  const isValueChanged = form.formState.isDirty;
+  const isValid = form.formState.isValid;
+  const canUpdate = isValueChanged && isValid && !isPending;
+
   const formErrors = form.formState.errors;
   const globalError = form.formState.errors.root?.message;
-  
-  const onRichTextEditorChange = (content: string) => {
-    form.setValue("content", content);
-    form.trigger("content")
-  }
-  
-  const content = form.getValues("content") ?? ""
+
+  const onRichTextEditorChange = useCallback(
+    (value: string) => {
+      form.setValue("content", value, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+    },
+    [form.setValue]
+  );
+
+  const content = form.getValues("content") ?? "";
 
   return (
     <div>
-      <form
-        onSubmit={onSubmit}
-        className="grid grid-cols-1 gap-4"
-      >
+      <form onSubmit={onSubmit} className="grid grid-cols-1 gap-4">
         <div className="flex flex-col gap-4 w-full">
           <FieldSet title={t("title")} variant="container">
             <InputWrapper
@@ -67,11 +73,17 @@ export default function UpdateBlogPostFormView(props: Props) {
             </InputWrapper>
           </FieldSet>
           <FieldSet title={t("content")} variant="container">
-            <RichTextEditor content={content} onChange={onRichTextEditorChange} />
+            <RichTextEditor
+              content={content}
+              onChange={onRichTextEditorChange}
+            />
           </FieldSet>
         </div>
         <div className="flex flex-col gap-4 w-full">
-          <FieldSet title={tSections("seoSettings")} childrenClassName="grid gap-4">
+          <FieldSet
+            title={tSections("seoSettings")}
+            childrenClassName="grid gap-4"
+          >
             <InputWrapper
               title={t("status")}
               error={form.formState.errors.status?.message}
@@ -128,12 +140,9 @@ export default function UpdateBlogPostFormView(props: Props) {
             </InputWrapper>
           </FieldSet>
         </div>
-        <Button
-          type="submit"
-          disabled={isPending || !form.formState.isValid}
-          className=""
-        >
-          {isPending && <LoadingSpinner />}{tActions("updateBlogPostDetails")}
+        <Button type="submit" disabled={!canUpdate} className="">
+          {isPending && <LoadingSpinner />}
+          {tActions("updateBlogPostDetails")}
         </Button>
       </form>
     </div>

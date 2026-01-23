@@ -9,10 +9,13 @@ import Youtube from "@tiptap/extension-youtube";
 import Link from "@tiptap/extension-link";
 import Highlight from "@tiptap/extension-highlight";
 import Paragraph from "@tiptap/extension-paragraph";
+import { memo, useMemo } from "react";
+import { createDebounce } from "@/lib/utils";
 
 interface RichTextEditorProps {
   content: string;
   onChange: (content: string) => void;
+  debounceMs?: number;
 }
 
 const LinkConfig = Link.configure({
@@ -87,10 +90,16 @@ const LinkConfig = Link.configure({
   },
 });
 
-export default function RichTextEditor({
+function RichTextEditor({
   content,
   onChange,
+  debounceMs = 300,
 }: RichTextEditorProps) {
+  const debouncedOnChange = useMemo(
+    () => createDebounce(onChange, debounceMs),
+    [onChange, debounceMs],
+  );
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -137,11 +146,11 @@ export default function RichTextEditor({
     },
     content: content,
     immediatelyRender: false,
-    // shouldRerenderOnTransaction: true,
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
+      debouncedOnChange(editor.getHTML());
     },
   });
+
   return (
     <div className="">
       <MenuBar editor={editor} />
@@ -150,3 +159,5 @@ export default function RichTextEditor({
     </div>
   );
 }
+
+export default memo(RichTextEditor);

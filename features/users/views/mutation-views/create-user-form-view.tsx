@@ -1,6 +1,4 @@
 "use client";
-import React from "react";
-import { DevTool } from "@hookform/devtools";
 import { Controller } from "react-hook-form";
 
 import {
@@ -23,10 +21,10 @@ import useErrorMessage from "@/features/dashboard/hooks/use-error-message";
 import { useTranslations } from "next-intl";
 
 const CreateUserFormView = () => {
-  const t = useTranslations("common.form.labels")
-  const tActions = useTranslations("common.actions")
-  const tDescs = useTranslations("common.form.descriptions")
-  const tSections = useTranslations("common.form.sections")
+  const t = useTranslations("common.form.labels");
+  const tActions = useTranslations("common.actions");
+  const tDescs = useTranslations("common.form.descriptions");
+  const tSections = useTranslations("common.form.sections");
   const { form, onSubmit, isPending } = useCreateUserFormValidation();
   const formErrors = form.formState.errors;
   const globalFormError = formErrors.root?.message;
@@ -110,7 +108,6 @@ const CreateUserFormView = () => {
         >
           {isPending ? tActions("creating") : tActions("create")}
         </Button>
-        <DevTool control={form.control} />
       </form>
     </div>
   );

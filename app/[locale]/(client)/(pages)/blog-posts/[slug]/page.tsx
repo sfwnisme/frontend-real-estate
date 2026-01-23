@@ -9,6 +9,7 @@ import { Metadata } from "next";
 import { PAGES_ROUTES } from "@/constants/config";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
+import { Typography } from "@/components/custom/typography";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;
@@ -113,7 +114,9 @@ export default async function page({
     <div>
       <div className="mb-8">
         <div className="mb-8">
-          <Title title={blogPostData.title} type="start" />
+          <Typography variant="h2" as="h1">
+            {blogPostData.title}
+          </Typography>
           <p className="text-gray-500 mt-4">{blogPostData.excerpt}</p>
         </div>
         {blogPostImage.statusText === STATUS_TEXT.SUCCESS &&

@@ -20,7 +20,6 @@ export default function Nav({}: Props) {
   const pathname = usePathname()
   const locale = useLocale();
   const t = useTranslations("navigation");
-  console.log("locale test", t("properties"));
   return (
     <nav className="flex items-center h-fit px-6 py-6 sticky top-0 z-50 bg-red- backdrop-blur-xs">
       <div className="w-50 max-w-full h-auto overflow-hidden me-auto">

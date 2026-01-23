@@ -87,6 +87,7 @@ export default async function page({
         title={t("hero.title")}
         description={t("hero.description")}
         type="start"
+        as="h1"
       />
       <div className="h-10" />
       <Suspense fallback={<PropertyCardSkeleton count={currentPageSize} />}>

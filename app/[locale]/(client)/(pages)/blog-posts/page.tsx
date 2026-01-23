@@ -87,6 +87,7 @@ export default async function page({
         type="start"
         title={t("hero.title")}
         description={t("hero.description")}
+        as="h1"
       />
       <div className="h-10" />
       <Suspense fallback={<BlogPostCardSkeleton count={currentPageSize} />}>

@@ -47,7 +47,7 @@ export default function UpdateBlogPostFormView(props: Props) {
         shouldValidate: true,
       });
     },
-    [form.setValue],
+    [form.setValue]
   );
 
   const content = form.getValues("content") ?? "";

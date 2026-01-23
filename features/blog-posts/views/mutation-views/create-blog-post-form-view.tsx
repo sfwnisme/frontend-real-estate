@@ -24,20 +24,25 @@ import RichTextEditor from "@/components/rich-text-editor";
 type Props = {};
 
 export default function CreateBlogPostFormView({}: Props) {
-  const t = useTranslations("common.form.labels")
-  const tSections = useTranslations("common.form.sections")
-  const tActions = useTranslations("common.actions")
+  const t = useTranslations("common.form.labels");
+  const tSections = useTranslations("common.form.sections");
+  const tActions = useTranslations("common.actions");
   const { form, onSubmit, isPending } = useCreateBlogPostFormValidation();
   const image = form.watch("image");
   const imageUrl = image
     ? URL.createObjectURL(form.getValues("image") as File)
     : "";
 
-  const onRichTextEditorChange = useCallback((content: string) => {
-    form.setValue("content", content);
-    form.trigger("content");
-  }, [form.getValues("content")]);
-    
+  const onRichTextEditorChange = useCallback(
+    (value: string) => {
+      form.setValue("content", value, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+    },
+    [form.setValue],
+  );
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (!files) {
@@ -94,19 +99,26 @@ export default function CreateBlogPostFormView({}: Props) {
             </InputWrapper>
           </FieldSet>
           <FieldSet title={t("content")} variant="default">
-            <RichTextEditor content={form.getValues("content")} onChange={onRichTextEditorChange} />
+            <RichTextEditor
+              content={form.getValues("content")}
+              onChange={onRichTextEditorChange}
+            />
           </FieldSet>
           <Button
             type="submit"
             disabled={isPending || !form.formState.isValid}
             className="hidden lg:flex"
           >
-            {isPending && <LoadingSpinner />}{tActions("create")}
+            {isPending && <LoadingSpinner />}
+            {tActions("create")}
           </Button>
         </div>
         {/* <div className="flex flex-col gap-4 w-full lg:min-w-[300px]"> */}
         <div className="flex flex-col gap-4 lg:col-span-2">
-          <FieldSet title={tSections("seoSettings")} childrenClassName="grid gap-4">
+          <FieldSet
+            title={tSections("seoSettings")}
+            childrenClassName="grid gap-4"
+          >
             <InputWrapper
               title={t("status")}
               error={form.formState.errors.status?.message}
@@ -176,7 +188,8 @@ export default function CreateBlogPostFormView({}: Props) {
             disabled={isPending || !form.formState.isValid}
             className="w-full lg:hidden"
           >
-            {isPending && <LoadingSpinner />}{tActions("create")}
+            {isPending && <LoadingSpinner />}
+            {tActions("create")}
           </Button>
         </div>
       </form>

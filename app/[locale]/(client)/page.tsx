@@ -32,6 +32,10 @@ export async function generateMetadata({
       title: ogTitle,
       description: ogDescription,
       images: [{ url: "/hero-bg.webp" }],
+      url: returnCanonical(locale, "/"),
+      // siteName: "Real Estate",
+      type: "website",
+      // locale: locale,
     },
     twitter: {
       title: ogTitle,

@@ -42,7 +42,7 @@ export const modalQuery = (
   type: "delete",
   endpoint: "user" | "property" | "blog" | "image",
   id: string,
-  existingParams: Record<string, string | undefined>
+  existingParams: Record<string, string | undefined>,
 ) => {
   return {
     query: {
@@ -98,12 +98,16 @@ export const strToArrElms = (str: string): string[] => {
 export const returnCanonical = (locale: string, path: string) => {
   const localeParam = locale === "en" ? "/en" : "";
   return `${localeParam}${path}`;
-}
+};
 
 export const returnAlternateLanguages = (path: string) => {
   return {
     "x-default": path,
     en: `/en${path}`,
     ar: `${path}`,
-  }
-}
+  };
+};
+
+export const currency = (price: number, locale: string) => {
+  return price?.toLocaleString(locale, { style: "currency", currency: "SAR" });
+};

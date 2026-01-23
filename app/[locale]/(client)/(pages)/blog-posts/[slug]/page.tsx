@@ -13,7 +13,7 @@ import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 export const dynamic = "force-static";
 export const revalidate = 3600;
 
-const { PREVIEW } = PAGES_ROUTES.BLOG_POSTS
+const { PREVIEW } = PAGES_ROUTES.BLOG_POSTS;
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -49,12 +49,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alt: blogPostData.title || "",
     type: blogPostImageData?.mimeType || "",
   };
-  const pagePath = PREVIEW +"/"+ slug
-  const canonical = returnCanonical(locale, pagePath)
+  const pagePath = PREVIEW + "/" + slug;
+  const canonical = returnCanonical(locale, pagePath);
 
-  const t = await getTranslations("SiteConfig")
-  const SITE_NAME = t("name")
-  const SITE_COUNTRY = t("country")
+  const t = await getTranslations("SiteConfig");
+  const SITE_NAME = t("name");
+  const SITE_COUNTRY = t("country");
 
   return {
     title: blogPostData.title,
@@ -116,17 +116,18 @@ export default async function page({
           <Title title={blogPostData.title} type="start" />
           <p className="text-gray-500 mt-4">{blogPostData.excerpt}</p>
         </div>
-        {blogPostImage.statusText === STATUS_TEXT.SUCCESS && (
-          <div className="w-full h-auto">
-            <Image
-              src={blogPostImageData?.url || ""}
-              height={blogPostImageData?.dimensions.height || 500}
-              width={blogPostImageData?.dimensions.width || 500}
-              alt={blogPostData.title}
-              className="rounded-2xl size-full max-h-[500px] object-cover aspect-video"
-            />
-          </div>
-        )}
+        {blogPostImage.statusText === STATUS_TEXT.SUCCESS &&
+          blogPostImageData?.url && (
+            <div className="w-full h-auto">
+              <Image
+                src={blogPostImageData.url}
+                height={blogPostImageData.dimensions?.height || 500}
+                width={blogPostImageData.dimensions?.width || 500}
+                alt={blogPostData.title}
+                className="rounded-2xl size-full max-h-[500px] object-cover aspect-video"
+              />
+            </div>
+          )}
       </div>
       <article
         className="mt-8"

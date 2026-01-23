@@ -1,5 +1,5 @@
 "use client";
-import React, { memo } from "react";
+import { memo, useCallback } from "react";
 import { DevTool } from "@hookform/devtools";
 import { Controller } from "react-hook-form";
 import { useTranslations } from "next-intl";
@@ -15,7 +15,6 @@ import { PROPERTY_STATUS, PROPERTY_TYPE } from "@/constants/enums";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import InputWrapper from "@/components/custom/input-wrapper";
-import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -49,10 +48,15 @@ const UpdatePropertyFormView = (props: Props) => {
   console.log("TRIGGER: property-form");
 
   const content = form.getValues("description") ?? "";
-  const onRichTextEditorChange = (value: string) => {
-    form.setValue("description", value);
-    form.trigger("description");
-  };
+  const onRichTextEditorChange = useCallback(
+    (value: string) => {
+      form.setValue("description", value, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+    },
+    [form.setValue],
+  );
 
   return (
     <div>

@@ -39,7 +39,9 @@ export async function generateMetadata({
     openGraph: {
       title: ogTitle,
       description: ogDescription,
-      images: [{ url:"/hero-bg.webp" }],
+      images: [{ url: "/hero-bg.webp" }],
+      url: returnCanonical(locale, PREVIEW), 
+      type: "website"
     },
     twitter: {
       title: ogTitle,
@@ -65,6 +67,7 @@ export default async function page({
         title={t("hero.title")}
         description={t("hero.description")}
         Icon={<MessageSquare />}
+        as="h1"
       />
       <div
         data-component="contact-form"

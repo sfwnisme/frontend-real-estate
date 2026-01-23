@@ -50,6 +50,8 @@ export async function generateMetadata({
       title: ogTitle,
       description: ogDescription,
       images: [{ url: "/hero-bg.webp" }],
+      url: returnCanonical(locale, PREVIEW),
+      type: "website"
     },
     twitter: {
       title: ogTitle,
@@ -76,6 +78,7 @@ export default async function page({
           title={t("hero.title")}
           description={t("hero.description")}
           type="start"
+          as="h1"
         />
         <div className="grid grid-rows-2 md:grid-rows-1 grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 h-80 mt-10">
           <div className="rounded-2xl overflow-hidden h-full row-span-full md:col-span-1">

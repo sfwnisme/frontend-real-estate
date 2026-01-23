@@ -55,7 +55,7 @@ const UpdatePropertyFormView = (props: Props) => {
         shouldValidate: true,
       });
     },
-    [form.setValue],
+    [form.setValue]
   );
 
   return (

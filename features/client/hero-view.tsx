@@ -8,7 +8,7 @@ type Props = {};
 export default function Hero({}: Props) {
   const t = useTranslations("SiteConfig");
   const tButton = useTranslations("HomePage");
-  console.log(t("title"));
+  
   return (
     <header
       className="relative h-[calc(100dvh-100px)] box-border bg-center bg-cover bg-no-repeat bg-gray-100 rounded-4xl"

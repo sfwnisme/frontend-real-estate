@@ -1,4 +1,3 @@
-import Title from "@/components/custom/title";
 import { Badge } from "@/components/ui/badge";
 import { STATUS_TEXT } from "@/constants/enums";
 import { getBlogPost, getBlogPostImage, getBlogPosts } from "@/lib/requests";

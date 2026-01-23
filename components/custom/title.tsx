@@ -9,6 +9,7 @@ import { Typography } from "./typography";
 type Props = {
   type?: "center" | "start" | "with_button" | "with_badge" | "with_icon";
   title: string;
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   description?: string;
   url?: string;
   badge?: string;
@@ -18,11 +19,12 @@ function TitleWithButton({
   title,
   description,
   url = "#",
+  as,
 }: Omit<Props, "type" | "badge">) {
   const tActions = useTranslations("common.actions");
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
-      <Typography variant="h1" as="h2" className="font-medium">{title}</Typography>
+      <Typography variant="h1" as={as} className="font-medium">{title}</Typography>
       <div className="flex flex-col justify-between items-start gap-4 md:gap-8">
         {description && <Typography variant="pMuted" as="p">{description}</Typography>}
         <ButtonLink href={url}>{tActions("viewAll")}</ButtonLink>
@@ -34,13 +36,14 @@ function TitleAlignStartWithBadge({
   title,
   description,
   badge,
+  as,
 }: Omit<Props, "type" | "url">) {
   return (
     <div className="flex flex-col gap-4 items-start">
       <Badge className="text-sm text-black font-light bg-blue-200 rounded-full px-4 py-1">
         {badge}
       </Badge>
-      <Typography variant="h1" as="h2" className="font-medium">{title}</Typography>
+      <Typography variant="h1" as={as} className="font-medium">{title}</Typography>
       {description && <Typography variant="pMuted" as="p">{description}</Typography>}
     </div>
   );
@@ -48,10 +51,11 @@ function TitleAlignStartWithBadge({
 function TitleAlignStart({
   title,
   description,
-}: Pick<Props, "title" | "description">) {
+  as,
+}: Pick<Props, "title" | "description" | "as">) {
   return (
     <div className="flex flex-col gap-4 items-start">
-      <Typography variant="h1" as="h2" className="font-medium">{title}</Typography>
+      <Typography variant="h1" as={as} className="font-medium">{title}</Typography>
       {description && <Typography variant="pMuted" as="p">{description}</Typography>}
     </div>
   );
@@ -59,10 +63,11 @@ function TitleAlignStart({
 function TitleAlignCenter({
   title,
   description,
-}: Pick<Props, "title" | "description">) {
+  as,
+}: Pick<Props, "title" | "description" | "as">) {
   return (
     <div className="flex flex-col gap-4 items-center">
-      <Typography variant="h1" as="h2" className="font-medium">{title}</Typography>
+      <Typography variant="h1" as={as} className="font-medium">{title}</Typography>
       {description && <Typography variant="pMuted" as="p">{description}</Typography>}
     </div>
   );
@@ -72,7 +77,8 @@ function TitleAlignCenterWithIcon({
   title,
   description,
   Icon,
-}: Pick<Props, "title" | "description" | "Icon">) {
+  as,
+}: Pick<Props, "title" | "description" | "Icon" | "as">) {
   return (
     <div className="flex flex-col gap-4 items-center">
       {Icon && (
@@ -84,7 +90,7 @@ function TitleAlignCenterWithIcon({
           })}
         </div>
       )}
-      <Typography variant="h1" as="h2" className="font-medium">{title}</Typography>
+      <Typography variant="h1" as={as} className="font-medium">{title}</Typography>
       {description && <Typography variant="pMuted" as="p">{description}</Typography>}
     </div>
   );
@@ -94,15 +100,16 @@ export default function Title({
   type = "center",
   title,
   description,
+  as="h2",
   url,
   badge,
   Icon,
 }: Props) {
   if (type === "start")
-    return <TitleAlignStart title={title} description={description} />;
+    return <TitleAlignStart title={title} description={description} as={as} />;
   if (type === "with_button")
     return (
-      <TitleWithButton title={title} description={description} url={url} />
+      <TitleWithButton title={title} description={description} url={url} as={as} />
     );
   if (type === "with_badge")
     return (
@@ -110,6 +117,7 @@ export default function Title({
         title={title}
         description={description}
         badge={badge}
+        as={as}
       />
     );
   if (type === "with_icon")
@@ -118,7 +126,8 @@ export default function Title({
         title={title}
         description={description}
         Icon={Icon}
+        as={as}
       />
     );
-  return <TitleAlignCenter title={title} description={description} />;
+  return <TitleAlignCenter title={title} description={description} as={as} />;
 }

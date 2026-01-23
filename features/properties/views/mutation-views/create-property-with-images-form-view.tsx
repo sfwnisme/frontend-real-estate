@@ -1,5 +1,4 @@
 "use client";
-import { DevTool } from "@hookform/devtools";
 import { Controller } from "react-hook-form";
 
 import {
@@ -42,7 +41,7 @@ const CreatePropertyWithImagesFormView = () => {
         shouldValidate: true,
       });
     },
-    [form.setValue]
+    [form.setValue],
   );
 
   return (
@@ -315,7 +314,6 @@ const CreatePropertyWithImagesFormView = () => {
         >
           {isPending ? tActions("creating") : tActions("create")}
         </Button>
-        <DevTool control={form.control} />
       </form>
       <div className="w-full lg:max-w-[400px]">
         <FieldSet

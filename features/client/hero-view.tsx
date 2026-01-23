@@ -22,8 +22,8 @@ export default function Hero({}: Props) {
         {tButton("button")} <ArrowDown />
       </Button>
       <div className="flex flex-col items-center gap-10 bg-gray-100 rounded-3xl py-8 px-6 absolute md:bottom-4 md:top-auto top-1/2 md:right-4 right-1/2 md:translate-y-0 -translate-y-1/2 md:translate-x-0 translate-x-1/2 text-center">
-        <Typography variant="h1" as="p">{t("name")}</Typography>
-        <Typography variant="muted" as="h1" className="w-40">
+        <Typography variant="h1" as="h1">{t("name")}</Typography>
+        <Typography variant="pMuted" as="p" className="w-46">
           {t("description")}
         </Typography>
       </div>

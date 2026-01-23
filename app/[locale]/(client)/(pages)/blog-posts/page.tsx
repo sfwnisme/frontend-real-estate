@@ -56,6 +56,8 @@ export const generateMetadata = async ({
       title: ogTitle,
       description: ogDescription,
       images: [{ url: "/hero-bg.webp" }],
+      type: "website", 
+      url: returnCanonical(locale, PREVIEW),
     },
     twitter: {
       title: ogTitle,

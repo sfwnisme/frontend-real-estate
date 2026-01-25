@@ -5,7 +5,7 @@ import { Toaster } from "sonner";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 
 type Props = {
@@ -66,8 +66,8 @@ export default async function RootLayout({ children, params }: Props) {
     notFound();
   }
   
-  // Enable static rendering for SSG
-  setRequestLocale(locale);
+  // // Enable static rendering for SSG
+  // setRequestLocale(locale);
 
   // Import messages directly based on locale to avoid race conditions during parallel SSG
   const messages = (await import(`@/messages/${locale}.json`)).default;

@@ -13,8 +13,6 @@ import { Button } from "@/components/ui/button";
 import { USER_ROLES, USER_ROLES_READABLE } from "@/constants/enums";
 import { Input } from "@/components/ui/input";
 import InputWrapper from "@/components/custom/input-wrapper";
-import { cn } from "@/lib/utils";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import FieldSet from "@/components/custom/field-set";
 import useCreateUserFormValidation from "../../hooks/use-create-user-form-validation";
 import useErrorMessage from "@/features/dashboard/hooks/use-error-message";
@@ -27,7 +25,6 @@ const CreateUserFormView = () => {
   const tSections = useTranslations("common.form.sections");
   const { form, onSubmit, isPending } = useCreateUserFormValidation();
   const formErrors = form.formState.errors;
-  const globalFormError = formErrors.root?.message;
   const globalError = useErrorMessage(form.formState.errors.root?.message);
 
   return (

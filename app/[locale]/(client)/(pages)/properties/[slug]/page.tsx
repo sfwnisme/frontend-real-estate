@@ -1,5 +1,5 @@
 import PropertyOverviewCard from "@/features/propertyPage/propertyOverviewCard";
-import PropertyCarousel from "@/features/propertyPage/propertyCarousel";
+import PropertyCarousel from "@/features/propertyPage/property-carousel";
 import { getProperties, getProperty, getPropertyImages } from "@/lib/requests";
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
@@ -102,6 +102,7 @@ export default async function Page({ params }: Props) {
       <PropertyCarousel
         propertyId={propertyData._id}
         propertyAlt={propertyData.title}
+         locale={locale}
       />
       <PropertyOverviewCard property={propertyData} locale={locale} />
       <article className="flex-1">

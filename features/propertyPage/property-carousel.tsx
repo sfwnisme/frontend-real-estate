@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Carousel,
   CarouselContent,
@@ -13,30 +12,35 @@ import { STATUS_TEXT } from "@/constants/enums";
 type Props = {
   propertyId: string;
   propertyAlt: string;
+  locale: string;
 };
 
 export default async function PropertyCarousel({
   propertyId,
   propertyAlt,
+  locale,
 }: Props) {
   const propertyImages = await getPropertyImages(propertyId);
   const images = propertyImages.data;
-  console.log("images carousel", images)
   if (propertyImages.statusText !== STATUS_TEXT.SUCCESS) {
     return null;
   }
 
-  images?.sort((a, b) => a.isFeatured === b.isFeatured? 0: a.isFeatured? -1:1)
-  console.log("sorted images by boolean value: ", images)
+  images?.sort((a, b) =>
+    a.isFeatured === b.isFeatured ? 0 : a.isFeatured ? -1 : 1,
+  );
 
-  // const featuredImage = images?.filter((img) => img.isFeatured)[0]
-  // console.log("the featured image" ,featuredImage)
   return (
     <div
       data-component="carousel-container"
       className="flex items-center w-full justify-center rounded-2xl overflow-hidden"
     >
-      <Carousel className="w-full max-w-full">
+      <Carousel
+        className="w-full max-w-full"
+        opts={{
+          direction: locale === "en"? "ltr": "rtl",
+        }}
+      >
         <CarouselContent className="lg:h-140 m-0! gap-4">
           {/* {featuredImage && <CarouselItem className="rounded-2xl pl-0!">
               <Image
@@ -65,6 +69,7 @@ export default async function PropertyCarousel({
         <CarouselPrevious className="left-4 bg-gray-900/80 text-gray-50" />
         <CarouselNext className="right-4 bg-gray-900/80 text-gray-50 border-transparent" />
       </Carousel>
+      
     </div>
   );
 }

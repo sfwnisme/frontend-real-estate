@@ -1,7 +1,6 @@
 "use client";
 import { memo, useCallback } from "react";
 import { DevTool } from "@hookform/devtools";
-import { Controller } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import {
   Select,
@@ -18,7 +17,7 @@ import InputWrapper from "@/components/custom/input-wrapper";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Property } from "@/types/types";
+import { Property, PropertyStatus, PropertyType } from "@/types/types";
 import useUpdatePropertyFormValidation from "../../hooks/use-update-property-form-validation";
 import FieldSet from "@/components/custom/field-set";
 import LoadingSpinner from "@/components/custom/loading-spinner";
@@ -55,7 +54,7 @@ const UpdatePropertyFormView = (props: Props) => {
         shouldValidate: true,
       });
     },
-    [form.setValue]
+    [form.setValue],
   );
 
   return (
@@ -169,55 +168,53 @@ const UpdatePropertyFormView = (props: Props) => {
               title={t("type")}
               error={formErrors.propertyType?.message}
             >
-              <Controller
+              <Select
+                value={form.getValues("propertyType")}
+                onValueChange={(v: PropertyType) => {
+                  form.setValue("propertyType", v, {
+                    shouldDirty: true,
+                    shouldValidate: true,
+                  });
+                }}
                 name="propertyType"
-                control={form.control}
-                render={({ field }) => (
-                  <Select
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    name="propertyType"
-                  >
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder={t("type")} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {Object.values(PROPERTY_TYPE).map((type) => (
-                        <SelectItem value={type} key={type}>
-                          {tPropertyTypes(type)}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                )}
-              />
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder={t("type")} />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.values(PROPERTY_TYPE).map((type) => (
+                    <SelectItem value={type} key={type}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </InputWrapper>
             <InputWrapper
               title={t("status")}
               error={formErrors.propertyStatus?.message}
             >
-              <Controller
+              <Select
+                value={form.getValues("propertyStatus")}
+                onValueChange={(v: PropertyStatus) => {
+                  form.setValue("propertyStatus", v, {
+                    shouldDirty: true,
+                    shouldValidate: true,
+                  });
+                }}
                 name="propertyStatus"
-                control={form.control}
-                render={({ field }) => (
-                  <Select
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    name="propertyStatus"
-                  >
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder={tPlaceholders("status")} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {Object.values(PROPERTY_STATUS).map((status) => (
-                        <SelectItem value={status} key={status}>
-                          {tPropertyStatus(status)}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                )}
-              />
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder={t("status")} />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.values(PROPERTY_STATUS).map((status) => (
+                    <SelectItem value={status} key={status}>
+                      {status}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </InputWrapper>
             <Label className="flex items-start gap-3 rounded-lg cursor-pointer">
               <Checkbox

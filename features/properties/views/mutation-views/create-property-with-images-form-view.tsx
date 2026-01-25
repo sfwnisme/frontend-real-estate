@@ -1,5 +1,4 @@
 "use client";
-import { Controller } from "react-hook-form";
 
 import {
   Select,
@@ -22,6 +21,7 @@ import FieldSet from "@/components/custom/field-set";
 import { useTranslations } from "next-intl";
 import RichTextEditor from "@/components/rich-text-editor";
 import { useCallback } from "react";
+import { PropertyStatus, PropertyType } from "@/types/types";
 
 const CreatePropertyWithImagesFormView = () => {
   const t = useTranslations("common.form.labels");
@@ -145,55 +145,53 @@ const CreatePropertyWithImagesFormView = () => {
             title={t("type")}
             error={formErrors.propertyType?.message}
           >
-            <Controller
+            <Select
+              value={form.getValues("propertyType")}
+              onValueChange={(v: PropertyType) => {
+                form.setValue("propertyType", v, {
+                  shouldDirty: true,
+                  shouldValidate: true,
+                });
+              }}
               name="propertyType"
-              control={form.control}
-              render={({ field }) => (
-                <Select
-                  value={field.value}
-                  onValueChange={field.onChange}
-                  name="propertyType"
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder={t("type")} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Object.values(PROPERTY_TYPE).map((type) => (
-                      <SelectItem value={type} key={type}>
-                        {type}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )}
-            />
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder={t("type")} />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.values(PROPERTY_TYPE).map((type) => (
+                  <SelectItem value={type} key={type}>
+                    {type}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </InputWrapper>
           <InputWrapper
             title={t("status")}
             error={formErrors.propertyStatus?.message}
           >
-            <Controller
+            <Select
+              value={form.getValues("propertyStatus")}
+              onValueChange={(v: PropertyStatus) => {
+                form.setValue("propertyStatus", v, {
+                  shouldDirty: true,
+                  shouldValidate: true,
+                });
+              }}
               name="propertyStatus"
-              control={form.control}
-              render={({ field }) => (
-                <Select
-                  value={field.value}
-                  onValueChange={field.onChange}
-                  name="propertyStatus"
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder={t("status")} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Object.values(PROPERTY_STATUS).map((status) => (
-                      <SelectItem value={status} key={status}>
-                        {status}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )}
-            />
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder={t("status")} />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.values(PROPERTY_STATUS).map((status) => (
+                  <SelectItem value={status} key={status}>
+                    {status}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </InputWrapper>
           <Label className="flex items-start gap-3 rounded-lg cursor-pointer">
             <Checkbox

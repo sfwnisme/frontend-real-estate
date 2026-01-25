@@ -126,7 +126,10 @@ export default function CreateBlogPostFormView({}: Props) {
               <Select
                 value={form.getValues("status")}
                 onValueChange={(v: BlogPostStatus) =>
-                  form.setValue("status", v)
+                  form.setValue("status", v, {
+                    shouldDirty: true,
+                    shouldValidate: true,
+                  })
                 }
                 name="blogPostStatus"
               >

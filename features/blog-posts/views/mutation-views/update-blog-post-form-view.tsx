@@ -47,7 +47,7 @@ export default function UpdateBlogPostFormView(props: Props) {
         shouldValidate: true,
       });
     },
-    [form.setValue]
+    [form.setValue],
   );
 
   const content = form.getValues("content") ?? "";
@@ -91,7 +91,10 @@ export default function UpdateBlogPostFormView(props: Props) {
               <Select
                 value={form.getValues("status")}
                 onValueChange={(v: BlogPostStatus) =>
-                  form.setValue("status", v)
+                  form.setValue("status", v, {
+                    shouldDirty: true,
+                    shouldValidate: true,
+                  })
                 }
                 name="blogPostStatus"
               >

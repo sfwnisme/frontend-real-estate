@@ -1,5 +1,4 @@
 "use client";
-import { Controller } from "react-hook-form";
 
 import {
   Select,
@@ -17,6 +16,7 @@ import FieldSet from "@/components/custom/field-set";
 import useCreateUserFormValidation from "../../hooks/use-create-user-form-validation";
 import useErrorMessage from "@/features/dashboard/hooks/use-error-message";
 import { useTranslations } from "next-intl";
+import { UserRoles } from "@/types/types";
 
 const CreateUserFormView = () => {
   const t = useTranslations("common.form.labels");
@@ -69,32 +69,27 @@ const CreateUserFormView = () => {
             error={formErrors.role?.message}
             className="max-md:col-span-full"
           >
-            <Controller
+            <Select
+              value={form.getValues("role")}
+              onValueChange={(v: UserRoles) => {
+                form.setValue("role", v, {
+                  shouldDirty: true,
+                  shouldValidate: true,
+                });
+              }}
               name="role"
-              control={form.control}
-              render={({ field }) => (
-                <Select
-                  value={field.value}
-                  onValueChange={field.onChange}
-                  name="role"
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder={t("role")} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Object.values(USER_ROLES).map((role) => (
-                      <SelectItem
-                        value={role}
-                        key={role}
-                        className="capitalize"
-                      >
-                        {USER_ROLES_READABLE[role]}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )}
-            />
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder={t("role")} />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.values(USER_ROLES).map((role) => (
+                  <SelectItem value={role} key={role} className="capitalize">
+                    {USER_ROLES_READABLE[role]}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </InputWrapper>
         </FieldSet>
         {globalError}

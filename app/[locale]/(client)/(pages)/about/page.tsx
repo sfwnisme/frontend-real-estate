@@ -1,13 +1,12 @@
 import Title from "@/components/custom/title";
+import { Typography } from "@/components/custom/typography";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  PAGES_ROUTES,
-} from "@/constants/config";
+import { PAGES_ROUTES } from "@/constants/config";
 import { routing } from "@/i18n/routing";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 import { ChevronDown, Home } from "lucide-react";
@@ -36,8 +35,10 @@ export async function generateMetadata({
   const description = t("description");
   const ogTitle = t("ogTitle");
   const ogDescription = t("ogDescription");
-  const tFaq = await getTranslations("AboutPage.faq")
-  const keywords = tFaq.raw("questions").map((key: { title: string }) => key.title);
+  const tFaq = await getTranslations("AboutPage.faq");
+  const keywords = tFaq
+    .raw("questions")
+    .map((key: { title: string }) => key.title);
 
   return {
     title,
@@ -51,7 +52,7 @@ export async function generateMetadata({
       description: ogDescription,
       images: [{ url: "/hero-bg.webp" }],
       url: returnCanonical(locale, PREVIEW),
-      type: "website"
+      type: "website",
     },
     twitter: {
       title: ogTitle,
@@ -117,18 +118,26 @@ export default async function page({
           badge={t("whyWorkWithUs.badge")}
         />
         <div className="grid md:grid-cols-4 gap-4">
-          <div className="flex flex-col gap-2 text-start p-8">
-            <h2 className="text-2xl font-semibold">150+</h2>
-            <p>{t("whyWorkWithUs.stats.homesMatched")}</p>
+          <div className="flex flex-col text-start p-4 md:p-8">
+            <Typography variant="h3" as="h3">
+              150+
+            </Typography>
+            <Typography variant="p" as="p">
+              {t("whyWorkWithUs.stats.homesMatched")}
+            </Typography>
           </div>
-          <div className="flex flex-col gap-2 text-start p-8">
-            <h2 className="text-2xl font-semibold">2,000+</h2>
-            <p>{t("whyWorkWithUs.stats.clientsGuided")}</p>
+          <div className="flex flex-col text-start p-4 md:p-8">
+            <Typography variant="h3" as="h3">
+              2,000+
+            </Typography>
+            <Typography variant="p" as="p">
+              {t("whyWorkWithUs.stats.clientsGuided")}
+            </Typography>
           </div>
           <div className="md:col-span-2">
-            <p className="text-base p-8">
+            <Typography variant="p" as="p" className="p-4 md:p-8">
               {t("whyWorkWithUs.stats.description")}
-            </p>
+            </Typography>
           </div>
         </div>
       </div>
@@ -171,14 +180,18 @@ export default async function page({
                   className="border-gray-100 bg-white px-4"
                 >
                   <AccordionTrigger>
-                    {faq.title}
+                    <Typography as="p" variant="lead">
+                      {faq.title}
+                    </Typography>
                     <ChevronDown
                       strokeWidth="1"
                       className="border border-gray-200 rounded-full "
                     />
                   </AccordionTrigger>
                   <AccordionContent className="flex flex-col gap-4 text-balance">
-                    <p>{faq.description}</p>
+                    <Typography as="p" variant="p">
+                      {faq.description}
+                    </Typography>
                   </AccordionContent>
                 </AccordionItem>
               ))}

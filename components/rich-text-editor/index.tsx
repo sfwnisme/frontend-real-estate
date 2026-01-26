@@ -145,7 +145,7 @@ function RichTextEditor({
       },
     },
     content: content,
-    immediatelyRender: false,
+    immediatelyRender: true,
     onUpdate: ({ editor }) => {
       debouncedOnChange(editor.getHTML());
     },

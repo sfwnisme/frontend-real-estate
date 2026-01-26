@@ -88,7 +88,7 @@ const UploadedPropertyImagesView = (props: Props) => {
 
   return (
     images.length > 0 && (
-      <div className="overflow-y-scroll flex gap-2 max-h-100 items-start">
+      <div className="overflow-y-auto flex gap-2 max-h-100 items-start">
         {renderImagePreview}
       </div>
     )

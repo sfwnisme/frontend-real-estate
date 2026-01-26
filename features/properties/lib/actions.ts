@@ -7,13 +7,17 @@ import { cookies } from "next/headers";
 import { API_ROUTES } from "@/constants/config";
 import { UpdatePropertyType } from "../schema/update-property-schema";
 import { CreatePropertyWithImagesType } from "../schema/create-property-with-images-schema";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 
 const { GET, CREATE, UPDATE, UPDATE_SLUG, DELETE } = API_ROUTES.PROPERTIES;
-const { MAKE_IMAGE_FEATURED, CREATE_TEMP_PROPERTY_IMAGE, CREATE_PROPERTY_IMAGE } = API_ROUTES.IMAGES;
+const {
+  MAKE_IMAGE_FEATURED,
+  CREATE_TEMP_PROPERTY_IMAGE,
+  CREATE_PROPERTY_IMAGE,
+} = API_ROUTES.IMAGES;
 
 export const createProperty = async (
-  propertyData: Omit<CreatePropertyWithImagesType, "images">
+  propertyData: Omit<CreatePropertyWithImagesType, "images">,
 ): Promise<APIResponse<Property>> => {
   try {
     const token = (await cookies()).get("TOKEN")?.value;
@@ -39,7 +43,7 @@ export const createProperty = async (
 };
 
 export const createTempPropertyImage = async (
-  data: FormData
+  data: FormData,
 ): Promise<APIResponse<ImageType>> => {
   try {
     const token = (await cookies()).get("TOKEN")?.value;
@@ -64,7 +68,7 @@ export const createTempPropertyImage = async (
 
 export const createMultiTempPropertyImage = async (
   images: File[],
-  tempId: string
+  tempId: string,
 ): Promise<APIResponse<ImageType[]>> => {
   try {
     const token = (await cookies()).get("TOKEN")?.value;
@@ -92,12 +96,12 @@ export const createMultiTempPropertyImage = async (
           return formatedApiErrRes(responseData);
         }
         return responseData;
-      })
+      }),
     );
 
     // If any response is an error, return the first error
     const errorResponse = responses.find(
-      (res) => !(res as APIResponse<ImageType>).status || (res as any).error
+      (res) => !(res as APIResponse<ImageType>).status || (res as any).error,
     );
     if (errorResponse) {
       return errorResponse as APIResponse<ImageType[]>;
@@ -119,7 +123,7 @@ export const createMultiTempPropertyImage = async (
 export const createPropertyImage = async (
   image: File,
   propertyId: string,
-  isFeatured: boolean = false
+  isFeatured: boolean = false,
 ): Promise<APIResponse<ImageType>> => {
   try {
     const FD = new FormData();
@@ -139,14 +143,17 @@ export const createPropertyImage = async (
     if (!response.ok) {
       return formatedApiErrRes(responseData);
     }
-    revalidateTag(`property-images-${propertyId}`, "max");
+    updateTag(`property-images-${propertyId}`);
     return responseData;
   } catch (error) {
     return formatedSerErrRes("server error", error);
   }
 };
 
-export const setFeaturedImage = async(imageId: string, ownerId: string): Promise<APIResponse<ImageType>> => {
+export const setFeaturedImage = async (
+  imageId: string,
+  ownerId: string,
+): Promise<APIResponse<ImageType>> => {
   try {
     const token = (await cookies()).get("TOKEN")?.value;
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${MAKE_IMAGE_FEATURED}`;
@@ -163,16 +170,16 @@ export const setFeaturedImage = async(imageId: string, ownerId: string): Promise
     if (!response.ok) {
       return formatedApiErrRes(responseData);
     }
-    revalidateTag(`property-images-${ownerId}`, "max");
+    updateTag(`property-images-${ownerId}`);
     return responseData;
   } catch (error) {
     return formatedSerErrRes("server error", error);
   }
-}
+};
 
 export const updateProperty = async (
   propertyData: UpdatePropertyType,
-  propertyId: string
+  propertyId: string,
 ): Promise<APIResponse<Property>> => {
   try {
     const token = (await cookies()).get("TOKEN")?.value;
@@ -198,7 +205,7 @@ export const updateProperty = async (
 
 export const updatePropertySlug = async (
   propertyId: string,
-  slug: string
+  slug: string,
 ): Promise<APIResponse<Property>> => {
   try {
     const token = (await cookies()).get("TOKEN")?.value;
@@ -223,7 +230,7 @@ export const updatePropertySlug = async (
 };
 
 export const deleteProperty = async (
-  propertyId: string
+  propertyId: string,
 ): Promise<APIResponse<null>> => {
   try {
     const token = (await cookies()).get("TOKEN")?.value;

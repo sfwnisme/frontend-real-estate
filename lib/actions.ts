@@ -1,20 +1,17 @@
 "use server";
 
 import { STATUS_TEXT, USER_ROLES } from "@/constants/enums";
-import {
-  APIResponse,
-  User,
-} from "@/types/types";
+import { APIResponse, User } from "@/types/types";
 import { cookies } from "next/headers";
 import { formatedApiErrRes, formatedSerErrRes } from "./utils";
 import { API_ROUTES } from "@/constants/config";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 
 const { IMAGES, USERS } = API_ROUTES;
 
 export const deleteDataByQueryParams = async (
   endpoint: string,
-  id: string | null
+  id: string | null,
 ): Promise<APIResponse<undefined>> => {
   try {
     if (!id) {
@@ -35,7 +32,7 @@ export const deleteDataByQueryParams = async (
           "Content-Type": "application/json",
           Authorization: String(token),
         },
-      }
+      },
     );
     const responseData = await response.json();
 
@@ -46,7 +43,7 @@ export const deleteDataByQueryParams = async (
   } catch (error: any) {
     return formatedSerErrRes(
       "Client Error > lib/requests.ts/deleteData",
-      error
+      error,
     );
   }
 };
@@ -56,7 +53,7 @@ export const deleteDataByQueryParams = async (
 //-------------------------------
 export const login = async (
   email: string,
-  password: string
+  password: string,
 ): Promise<APIResponse<User>> => {
   try {
     const cookieStore = await cookies();
@@ -114,7 +111,7 @@ export const getCurrentUser = async (): Promise<
         headers: {
           Authorization: String(token),
         },
-      }
+      },
     );
     const responseData = await response.json();
     if (!response.ok) {
@@ -149,7 +146,7 @@ export const deleteImage = async (imageId: string, ownerId: string) => {
     if (!response.ok) {
       return formatedApiErrRes(responseData);
     }
-    revalidateTag(`delete-image-${ownerId}`, "max");
+    updateTag(`delete-image-${ownerId}`);
     return responseData;
   } catch (error) {
     return formatedSerErrRes("server error", error);

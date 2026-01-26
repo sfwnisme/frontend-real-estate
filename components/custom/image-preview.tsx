@@ -1,12 +1,9 @@
-import React from "react";
-import z from "zod";
 import Image from "next/image";
 import { cn, returnFileSize } from "@/lib/utils";
-import { CheckCircle, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
-import LoadingSpinner from "./loading-spinner";
 
 type Props = {
   imageSize: number;
@@ -21,12 +18,17 @@ type Props = {
   error?: string | null;
 };
 
-const ImageError = (props: { error?: string | null, deleteImage:() => void | undefined }) => {
-  const {error, deleteImage} = props;
+const ImageError = (props: {
+  error?: string | null;
+  deleteImage: () => void | undefined;
+}) => {
+  const { error, deleteImage } = props;
   return (
-    <div className="z-10 flex flex-col gap-2 items-center justify-center text-center size-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 right-0 bottom-0 bg-white/70 p-2">
+    <div className="z-10 flex flex-col gap-2 items-center justify-center text-center size-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white/70 p-2">
       {<small className="text-xs text-destructive">{error}</small>}
-      <Button variant="destructive" size="sm" onClick={deleteImage}>Remove</Button>
+      <Button variant="destructive" size="sm" onClick={deleteImage}>
+        Remove
+      </Button>
     </div>
   );
 };
@@ -35,12 +37,17 @@ export default function ImagePreview(props: Props) {
   return (
     <div
       className={cn(
-        "group flex flex-col relative aspect-square rounded-md overflow-hidden border data-[featured=true]:border-yellow-500"
+        "group flex flex-col relative aspect-square rounded-md overflow-hidden border data-[featured=true]:border-yellow-500",
       )}
       data-featured={props.isFeatured}
       data-error={!!props.error}
     >
-      {props.error && <ImageError error={props.error} deleteImage={props.deleteImage ?? (() => {})} />}
+      {props.error && (
+        <ImageError
+          error={props.error}
+          deleteImage={props.deleteImage ?? (() => {})}
+        />
+      )}
       <Image
         src={props.imageUrl}
         width={"300"}
@@ -62,7 +69,7 @@ export default function ImagePreview(props: Props) {
               <Checkbox
                 id={props.imageUrl + "featured"}
                 className={cn(
-                  "data-[state=checked]:border-yellow-500 data-[state=checked]:bg-yellow-500 data-[state=checked]:text-white dark:data-[state=checked]:border-yellow-500 dark:data-[state=checked]:bg-yellow-500 disabled:cursor-not-allowed!"
+                  "data-[state=checked]:border-yellow-500 data-[state=checked]:bg-yellow-500 data-[state=checked]:text-white dark:data-[state=checked]:border-yellow-500 dark:data-[state=checked]:bg-yellow-500 disabled:cursor-not-allowed!",
                 )}
                 checked={props.isFeatured}
                 onCheckedChange={props.setFeaturedImage}
@@ -73,9 +80,7 @@ export default function ImagePreview(props: Props) {
         </div>
       </div>
       <div className="z-10 absolute top-2 right-2 flex flex-col gap-2 items-center justify-center group-data-[error=true]:hidden">
-        <div
-          className={cn("flex items-center justify-between gap-2")}
-        >
+        <div className={cn("flex items-center justify-between gap-2")}>
           <Button
             variant="destructive"
             size="icon"
@@ -85,9 +90,7 @@ export default function ImagePreview(props: Props) {
             aria-label="delete image"
             title="Delete image"
           >
-            <Trash2
-              className="text-white"
-            />
+            <Trash2 className="text-white" />
           </Button>
         </div>
       </div>

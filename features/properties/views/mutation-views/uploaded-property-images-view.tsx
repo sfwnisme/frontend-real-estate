@@ -1,6 +1,6 @@
 "use client";
 import { ImageType } from "@/types/types";
-import React, { memo, useCallback, useMemo, useTransition } from "react";
+import { memo, useCallback, useMemo, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { deleteImage } from "@/lib/actions";
 import { toast } from "sonner";

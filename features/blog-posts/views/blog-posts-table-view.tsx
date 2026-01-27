@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Pencil, Trash } from "lucide-react";
-import Link from "next/link";
+import { Link as NextIntlLink } from "@/i18n/navigation"
 import { notFound } from "next/navigation";
 import { getBlogPosts } from "@/lib/requests";
 import { ButtonGroup } from "@/components/ui/button-group";
@@ -71,24 +71,24 @@ export default async function BlogPostsTableView({
                 <div className="inline-flex items-center gap-2">
                   <ButtonGroup orientation={locale === "en" ? "horizontal" : "horizontalAr"}>
                     <Button variant="outline" size="sm">
-                      <Link
+                      <NextIntlLink
                         href={`${PAGES_ROUTES.BLOG_POSTS.PREVIEW}/${blogPost.slug}`}
                       >
                         {tActions('open')}
-                      </Link>
+                      </NextIntlLink>
                     </Button>
                     <Visible when={canEditBlogPost}>
                       <Button variant="outline" size="sm">
-                        <Link
+                        <NextIntlLink
                           href={`${PAGES_ROUTES.BLOG_POSTS.UPDATE}/${blogPost.slug}`}
                         >
                           <Pencil />
-                        </Link>
+                        </NextIntlLink>
                       </Button>
                     </Visible>
                   </ButtonGroup>
                   <Visible when={canDeleteBlogPost}>
-                    <Link
+                    <NextIntlLink
                       href={modalQuery(
                         "delete",
                         "blog",
@@ -100,7 +100,7 @@ export default async function BlogPostsTableView({
                       <Button variant="secondary" size="sm">
                         <Trash />
                       </Button>
-                    </Link>
+                    </NextIntlLink>
                   </Visible>
                 </div>
               </TableCell>

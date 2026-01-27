@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Pencil, Trash } from "lucide-react";
-import Link from "next/link";
+import { Link as NextIntlLink } from "@/i18n/navigation"
 import { notFound } from "next/navigation";
 import { getProperties } from "@/lib/requests";
 import { ButtonGroup } from "@/components/ui/button-group";
@@ -84,24 +84,24 @@ export default async function PropertiesTableView({
                     }
                   >
                     <Button variant="outline" size="sm" asChild>
-                      <Link
+                      <NextIntlLink
                         href={`${PAGES_ROUTES.PROPERTIES.PREVIEW}/${property.slug}`}
                       >
                         {tActions("open")}
-                      </Link>
+                      </NextIntlLink>
                     </Button>
                     <Visible when={canEditProperty}>
                       <Button variant="outline" size="sm" asChild>
-                        <Link
+                        <NextIntlLink
                           href={`${PAGES_ROUTES.PROPERTIES.UPDATE}/${property.slug}`}
                         >
                           <Pencil />
-                        </Link>
+                        </NextIntlLink>
                       </Button>
                     </Visible>
                   </ButtonGroup>
                   <Visible when={canDeleteProperty}>
-                    <Link
+                    <NextIntlLink
                       href={modalQuery(
                         "delete",
                         "property",
@@ -113,7 +113,7 @@ export default async function PropertiesTableView({
                       <Button variant="secondary" size="sm">
                         <Trash />
                       </Button>
-                    </Link>
+                    </NextIntlLink>
                   </Visible>
                 </div>
               </TableCell>

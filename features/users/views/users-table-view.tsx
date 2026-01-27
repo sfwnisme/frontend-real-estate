@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Pencil, Trash } from "lucide-react";
-import Link from "next/link";
+import { Link as NextIntlLink } from "@/i18n/navigation"
 import { notFound } from "next/navigation";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { modalQuery } from "@/lib/utils";
@@ -69,20 +69,20 @@ export default async function UsersTableView({
                 <div className="inline-flex items-center gap-2">
                   <ButtonGroup orientation={locale === "en" ? "horizontal" : "horizontalAr"}>
                     <Button variant="outline" size="sm">
-                      <Link href={`${PAGES_ROUTES.USERS.PREVIEW}/${user._id}`}>
+                      <NextIntlLink href={`${PAGES_ROUTES.USERS.PREVIEW}/${user._id}`}>
                         {tActions('open')}
-                      </Link>
+                      </NextIntlLink>
                     </Button>
                     <Visible when={canUpdateUser}>
                       <Button variant="outline" size="sm">
-                        <Link href={`${PAGES_ROUTES.USERS.UPDATE}/${user._id}`}>
+                        <NextIntlLink href={`${PAGES_ROUTES.USERS.UPDATE}/${user._id}`}>
                           <Pencil />
-                        </Link>
+                        </NextIntlLink>
                       </Button>
                     </Visible>
                   </ButtonGroup>
                   <Visible when={canDeleteUser}>
-                    <Link
+                    <NextIntlLink
                       href={
                         currentUser.data?._id !== user._id
                           ? modalQuery("delete", "user", user._id, searchParams)
@@ -102,7 +102,7 @@ export default async function UsersTableView({
                       >
                         <Trash />
                       </Button>
-                    </Link>
+                    </NextIntlLink>
                   </Visible>
                 </div>
               </TableCell>

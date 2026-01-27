@@ -1,4 +1,4 @@
-import { BreadcrumbLayout } from '@/components/custom/breadcrump-layout'
+import { BreadcrumbLayout } from '@/components/custom/breadcrumb-layout'
 import React from 'react'
 
 export default function layout({ children }: { children: React.ReactNode }) {

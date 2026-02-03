@@ -8,10 +8,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Pencil, Trash } from "lucide-react";
-import { Link as NextIntlLink } from "@/i18n/navigation"
+import { Link as NextIntlLink } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { ButtonGroup } from "@/components/ui/button-group";
-import { modalQuery } from "@/lib/utils";
+import { cn, modalQuery } from "@/lib/utils";
 import { PAGES_ROUTES } from "@/constants/config";
 import { getUsers } from "../lib/actions";
 import { USER_ROLES_READABLE } from "@/constants/enums";
@@ -25,15 +25,14 @@ type Props = {
   searchParams: { [key: string]: string | undefined };
 };
 
-
 export default async function UsersTableView({
   currentPage,
   searchParams,
 }: Props) {
   const locale = await getLocale();
-  const tTable = await getTranslations("common.table.headers")
-  const tActions = await getTranslations("common.actions")
-  const tMessages = await getTranslations("common.messages")
+  const tTable = await getTranslations("common.table.headers");
+  const tActions = await getTranslations("common.actions");
+  const tMessages = await getTranslations("common.messages");
   const users = await getUsers();
   const usersData = users.data;
   if (!usersData) {
@@ -44,15 +43,21 @@ export default async function UsersTableView({
   const canUpdateUser = await can("user.update");
 
   const currentUser = await getCurrentUser();
+  const isCurrentUser = (userId: string) => {
+    if (!userId) return false;
+    return currentUser.data?._id === userId;
+  };
   return (
     <div className="w-full">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-start">{tTable('name')}</TableHead>
-            <TableHead className="text-start">{tTable('email')}</TableHead>
-            <TableHead className="text-start">{tTable('role')}</TableHead>
-            <TableHead className="text-start w-20">{tTable('actions')}</TableHead>
+            <TableHead className="text-start">{tTable("name")}</TableHead>
+            <TableHead className="text-start">{tTable("email")}</TableHead>
+            <TableHead className="text-start">{tTable("role")}</TableHead>
+            <TableHead className="text-start w-20">
+              {tTable("actions")}
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -67,15 +72,23 @@ export default async function UsersTableView({
               </TableCell>
               <TableCell className="text-end w-fit">
                 <div className="inline-flex items-center gap-2">
-                  <ButtonGroup orientation={locale === "en" ? "horizontal" : "horizontalAr"}>
+                  <ButtonGroup
+                    orientation={
+                      locale === "en" ? "horizontal" : "horizontalAr"
+                    }
+                  >
                     <Button variant="outline" size="sm">
-                      <NextIntlLink href={`${PAGES_ROUTES.USERS.PREVIEW}/${user._id}`}>
-                        {tActions('open')}
+                      <NextIntlLink
+                        href={`${PAGES_ROUTES.USERS.PREVIEW}/${user._id}`}
+                      >
+                        {tActions("open")}
                       </NextIntlLink>
                     </Button>
                     <Visible when={canUpdateUser}>
                       <Button variant="outline" size="sm">
-                        <NextIntlLink href={`${PAGES_ROUTES.USERS.UPDATE}/${user._id}`}>
+                        <NextIntlLink
+                          href={`${PAGES_ROUTES.USERS.UPDATE}/${user._id}`}
+                        >
                           <Pencil />
                         </NextIntlLink>
                       </Button>
@@ -84,7 +97,7 @@ export default async function UsersTableView({
                   <Visible when={canDeleteUser}>
                     <NextIntlLink
                       href={
-                        currentUser.data?._id !== user._id
+                        isCurrentUser(user._id)
                           ? modalQuery("delete", "user", user._id, searchParams)
                           : ""
                       }
@@ -93,10 +106,11 @@ export default async function UsersTableView({
                       <Button
                         variant="secondary"
                         size="sm"
-                        disabled={currentUser.data?._id === user._id}
+                        disabled={isCurrentUser(user._id)}
+                        className={cn(isCurrentUser(user._id) && "invisible")}
                         title={
                           currentUser.data?._id === user._id
-                            ? tMessages('youCannotDeleteYourself')
+                            ? tMessages("youCannotDeleteYourself")
                             : ""
                         }
                       >

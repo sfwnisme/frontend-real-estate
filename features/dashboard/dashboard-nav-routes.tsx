@@ -8,7 +8,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Permission } from "@/constants/permissions";
-import { Link as NextIntlLink } from "@/i18n/navigation";
+import { Link as NextIntlLink, usePathname } from "@/i18n/navigation";
 
 export function DashboardNavRoutes({
   projects,
@@ -19,13 +19,15 @@ export function DashboardNavRoutes({
     icon: LucideIcon;
     permission: Permission;
   }[];
-}) {
+  }) {
+  const pathname = usePathname()
+  console.log(pathname)
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild isActive={pathname === item.url}>
               <NextIntlLink href={item.url}>
                 <item.icon />
                 <span>{item.name}</span>

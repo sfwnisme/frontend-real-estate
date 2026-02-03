@@ -1,6 +1,7 @@
 import { STATUS_TEXT } from "@/constants/enums";
 import { ApiErrorResponse } from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
+import slugify from "slugify";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -126,4 +127,50 @@ export const createDebounce = <T extends (...args: any[]) => void>(
       callback(...args);
     }, ms);
   };
+};
+
+export const returnSlug = (text: string) => {
+  const arabic = {
+    ء: "ء",
+    ا: "ا",
+    أ: "أ",
+    إ: "إ",
+    آ: "آ",
+    ؤ: "ؤ",
+    ئ: "ئ",
+    ب: "ب",
+    ت: "ت",
+    ث: "ث",
+    ج: "ج",
+    ح: "ح",
+    خ: "خ",
+    د: "د",
+    ذ: "ذ",
+    ر: "ر",
+    ز: "ز",
+    س: "س",
+    ش: "ش",
+    ص: "ص",
+    ض: "ض",
+    ط: "ط",
+    ظ: "ظ",
+    ع: "ع",
+    غ: "غ",
+    ف: "ف",
+    ق: "ق",
+    ك: "ك",
+    ل: "ل",
+    م: "م",
+    ن: "ن",
+    ه: "ه",
+    و: "و",
+    ي: "ي",
+    ة: "ة",
+    ى: "ى",
+  };
+  slugify.extend(arabic);
+  return slugify(text, {
+    remove: /[$*_+~.()'"!\-:@]+/g,
+    lower: true,
+  });
 };

@@ -2,9 +2,8 @@
 
 import InputWrapper from "@/components/custom/input-wrapper";
 import { Input } from "@/components/ui/input";
-import React, { memo } from "react";
+import { memo } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import slugify from "slugify";
 import useUpdatePropertySlugFormValidation from "../../hooks/use-update-property-slug-form-validation";
 import { Property } from "@/types/types";
 import { Loader2 } from "lucide-react";
@@ -13,8 +12,8 @@ import {
   ButtonGroup,
   ButtonGroupSeparator,
 } from "@/components/ui/button-group";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { returnSlug } from "@/lib/utils";
 
 type Props = {
   property: Property;
@@ -26,12 +25,12 @@ const UpdatePropertySlugFormView = (props: Props) => {
   const { property } = props;
   const { form, onSubmit, isPending } = useUpdatePropertySlugFormValidation(
     property._id,
-    property.slug
+    property.slug,
   );
   const router = useRouter();
   const { isValid, isDirty } = form.formState;
   const canUpdate = isValid || isPending;
-  const isDefaultSlug = slugify(property.title, { lower: true }) === property.slug;
+  const isDefaultSlug = returnSlug(property.title) === property.slug;
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4">
@@ -39,14 +38,16 @@ const UpdatePropertySlugFormView = (props: Props) => {
         description={
           process.env.NEXT_PUBLIC_FRONTEND_URL +
           "/properties/" +
-          slugify(form.getValues("slug"), { lower: true })
+          returnSlug(form.getValues("slug"))
         }
         error={form.formState.errors.slug?.message}
         childrenClassName="flex flex-row"
       >
         <Input type="text" {...form.register("slug")} />
       </InputWrapper>
-      <ButtonGroup orientation={locale === "en" ? "horizontal" : "horizontalAr"}>
+      <ButtonGroup
+        orientation={locale === "en" ? "horizontal" : "horizontalAr"}
+      >
         <Button type="submit" disabled={!canUpdate} size="sm">
           {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
           {tActions("update")}
@@ -57,11 +58,7 @@ const UpdatePropertySlugFormView = (props: Props) => {
           variant="outline"
           onClick={() => form.setValue("slug", property.title)}
           disabled={isDefaultSlug}
-          title={
-            isDefaultSlug
-              ? tSlug("defaultSlug")
-              : tSlug("setDefaultSlug")
-          }
+          title={isDefaultSlug ? tSlug("defaultSlug") : tSlug("setDefaultSlug")}
           aria-label="reset to default slug"
           size="sm"
         >

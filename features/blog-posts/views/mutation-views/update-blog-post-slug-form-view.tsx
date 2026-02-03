@@ -4,7 +4,6 @@ import InputWrapper from "@/components/custom/input-wrapper";
 import { Input } from "@/components/ui/input";
 import React, { memo } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import slugify from "slugify";
 import useUpdateBlogPostSlugFormValidation from "../../hooks/use-update-blog-post-slug-form-validaiton";
 import { BlogPost, Property } from "@/types/types";
 import { Loader2 } from "lucide-react";
@@ -16,6 +15,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import FieldSet from "@/components/custom/field-set";
+import { returnSlug } from "@/lib/utils";
 
 type Props = {
   blogPost: BlogPost;
@@ -34,7 +34,7 @@ const UpdateBlogPostSlugFormView = (props: Props) => {
   const router = useRouter();
   const { isValid, isDirty } = form.formState;
   const canUpdate = isValid || isPending;  
-  const isDefaultSlug = slugify(blogPost.title, { lower: true }) === blogPost.slug;
+  const isDefaultSlug = returnSlug(blogPost.title) === blogPost.slug;
 
   return (
     <FieldSet title={tSections("slug")} description={tDescs("slugDescriptionBlogPost")} childrenClassName="grid gap-4">
@@ -43,7 +43,7 @@ const UpdateBlogPostSlugFormView = (props: Props) => {
         description={
           process.env.NEXT_PUBLIC_FRONTEND_URL +
           "/blog-posts/" +
-          slugify(form.getValues("slug"), { lower: true })
+          returnSlug(form.getValues("slug"))
         }
         error={form.formState.errors.slug?.message}
         childrenClassName="flex flex-row"

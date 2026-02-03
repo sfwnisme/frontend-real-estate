@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useLocale } from "next-intl";
-import Link from "next/link";
 import { Link as NextIntlLink } from "@/i18n/navigation";
 import React from "react";
 

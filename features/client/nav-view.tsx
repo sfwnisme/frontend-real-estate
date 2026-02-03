@@ -11,13 +11,24 @@ import { PAGES_ROUTES } from "@/constants/config";
 import { Link as NextIntlLink } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
+import { cn } from "@/lib/utils";
 
 type Props = {};
 
 export default function Nav({}: Props) {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const locale = useLocale();
   const t = useTranslations("navigation");
+
+  const navLinks = [
+    { href: PAGES_ROUTES.PROPERTIES.PREVIEW, label: t("properties") },
+    { href: PAGES_ROUTES.ABOUT.PREVIEW, label: t("about") },
+    { href: PAGES_ROUTES.CONTACT.PREVIEW, label: t("contact") },
+    { href: PAGES_ROUTES.BLOG_POSTS.PREVIEW, label: t("blog") },
+  ];
+
+  const isActive = (href: string) => pathname.startsWith(href);
+
   return (
     <nav className="flex items-center h-fit px-6 py-6 sticky top-0 z-50 bg-red- backdrop-blur-xs">
       <div className="w-50 max-w-full h-auto overflow-hidden me-auto">
@@ -33,46 +44,37 @@ export default function Nav({}: Props) {
         </NextIntlLink>
       </div>
       <ul className="flex items-center gap-8 max-md:hidden">
+        {navLinks.map((link) => (
+          <li
+            key={link.href}
+            className={cn(
+              "relative before:absolute before:-bottom-1 before:bg-black before:h-0.5 before:transition-all",
+              isActive(link.href) ? "before:w-full" : "before:w-0",
+            )}
+          >
+            <NextIntlLink href={link.href} className="font-medium">
+              {link.label}
+            </NextIntlLink>
+          </li>
+        ))}
         <li>
-          <NextIntlLink href={PAGES_ROUTES.PROPERTIES.PREVIEW} className="font-medium">
-            {t("properties")}
-          </NextIntlLink>
-        </li>
-        <li>
-          <NextIntlLink href={PAGES_ROUTES.ABOUT.PREVIEW} className="font-medium">
-            {t("about")}
-          </NextIntlLink>
-        </li>
-        <li>
-          <NextIntlLink href={PAGES_ROUTES.CONTACT.PREVIEW} className="font-medium">
-            {t("contact")}
-          </NextIntlLink>
-        </li>
-        <li>
-          <NextIntlLink href={PAGES_ROUTES.BLOG_POSTS.PREVIEW} className="font-medium">
-            {t("blog")}
-          </NextIntlLink>
-        </li>
-        <li>
-          {
-            locale === "ar" ? (
-              <NextIntlLink 
-                href={pathname}
-                locale={'en'} 
-                className={`font-medium font-english`}
-              >
-                {t("english")}
-              </NextIntlLink>
-            ) : (
-              <NextIntlLink 
-                href={pathname}
-                locale={'ar'} 
-                className={`font-medium font-arabic`}
-              >
-                {t("arabic")}
-              </NextIntlLink>
-            )
-          }
+          {locale === "ar" ? (
+            <NextIntlLink
+              href={pathname}
+              locale={"en"}
+              className={`font-medium font-english`}
+            >
+              {t("english")}
+            </NextIntlLink>
+          ) : (
+            <NextIntlLink
+              href={pathname}
+              locale={"ar"}
+              className={`font-medium font-arabic`}
+            >
+              {t("arabic")}
+            </NextIntlLink>
+          )}
         </li>
       </ul>
       <DropdownMenu>
@@ -80,52 +82,31 @@ export default function Nav({}: Props) {
           <MenuIcon className="size-8" />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
+          {navLinks.map((link) => (
+            <DropdownMenuItem key={link.href}>
+              <NextIntlLink href={link.href} className="font-medium">
+                {link.label}
+              </NextIntlLink>
+            </DropdownMenuItem>
+          ))}
           <DropdownMenuItem>
-            <NextIntlLink
-              href={PAGES_ROUTES.PROPERTIES.PREVIEW}
-              className="font-medium"
-            >
-              {t("properties")}
-            </NextIntlLink>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <NextIntlLink href={PAGES_ROUTES.ABOUT.PREVIEW} className="font-medium">
-              {t("about")}
-            </NextIntlLink>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <NextIntlLink href={PAGES_ROUTES.CONTACT.PREVIEW} className="font-medium">
-              {t("contact")}
-            </NextIntlLink>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <NextIntlLink
-              href={PAGES_ROUTES.BLOG_POSTS.PREVIEW}
-              className="font-medium"
-            >
-              {t("blog")}
-            </NextIntlLink>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-          {
-            locale === "ar" ? (
-              <NextIntlLink 
+            {locale === "ar" ? (
+              <NextIntlLink
                 href={pathname}
-                locale={'en'} 
+                locale={"en"}
                 className={`font-medium font-english`}
               >
                 {t("english")}
               </NextIntlLink>
             ) : (
-              <NextIntlLink 
+              <NextIntlLink
                 href={pathname}
-                locale={'ar'} 
+                locale={"ar"}
                 className={`font-medium font-arabic`}
               >
                 {t("arabic")}
               </NextIntlLink>
-            )
-          }
+            )}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -259,6 +259,10 @@
       "for_rent": "للإيجار",
       "sold": "مباع",
       "rented": "مؤجر"
+    },
+    "blogPostStatus": {
+      "draft": "مسودة",
+      "published": "منشور"
     }
   },
   "resources": {
@@ -419,7 +423,7 @@
       "title": "حذف المقال!",
       "description": "هل أنت متأكد أنك تريد حذف هذا المقال؟"
     }
-  } ,
+  },
   "RoutesConfig": {
     "home": "الرئيسية",
     "about": "من نحن",

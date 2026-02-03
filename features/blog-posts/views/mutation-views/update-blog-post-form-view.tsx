@@ -29,6 +29,7 @@ export default function UpdateBlogPostFormView(props: Props) {
   const tActions = useTranslations("common.actions");
   const tSections = useTranslations("common.form.sections");
   const tPlaceholders = useTranslations("common.form.placeholders");
+  const tStatus = useTranslations("common.blogPostStatus");
   const { form, onSubmit, isPending } =
     useUpdateBlogPostFormValidation(blogPost);
   console.log("trigger:", blogPost);
@@ -104,7 +105,7 @@ export default function UpdateBlogPostFormView(props: Props) {
                 <SelectContent>
                   {Object.values(BLOG_POST_STATUS).map((status) => (
                     <SelectItem value={status} key={status}>
-                      {status}
+                      {tStatus(status)}
                     </SelectItem>
                   ))}
                 </SelectContent>

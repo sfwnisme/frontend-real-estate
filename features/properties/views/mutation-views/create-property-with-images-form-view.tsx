@@ -28,6 +28,8 @@ const CreatePropertyWithImagesFormView = () => {
   const tSections = useTranslations("common.form.sections");
   const tDescs = useTranslations("common.form.descriptions");
   const tActions = useTranslations("common.actions");
+  const tTypes= useTranslations("common.propertyTypes")
+  const tStatus= useTranslations("common.propertyStatus")
   const { form, onSubmit, isPending } =
     useCreatePropertyWithImagesFormValidation();
   const formErrors = form.formState.errors;
@@ -161,7 +163,7 @@ const CreatePropertyWithImagesFormView = () => {
               <SelectContent>
                 {Object.values(PROPERTY_TYPE).map((type) => (
                   <SelectItem value={type} key={type}>
-                    {type}
+                    {tTypes(type)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -187,7 +189,7 @@ const CreatePropertyWithImagesFormView = () => {
               <SelectContent>
                 {Object.values(PROPERTY_STATUS).map((status) => (
                   <SelectItem value={status} key={status}>
-                    {status}
+                    {tStatus(status)}
                   </SelectItem>
                 ))}
               </SelectContent>

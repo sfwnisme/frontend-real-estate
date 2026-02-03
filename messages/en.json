@@ -261,6 +261,10 @@
       "for_rent": "For Rent",
       "sold": "Sold",
       "rented": "Rented"
+    },
+    "blogPostStatus": {
+      "draft": "Draft",
+      "published": "Published"
     }
   },
   "resources": {
@@ -421,7 +425,7 @@
       "title": "Delete blog!",
       "description": "Are you sure you want to delete this blog?"
     }
-  }, 
+  },
   "RoutesConfig": {
     "home": "home",
     "about": "about",

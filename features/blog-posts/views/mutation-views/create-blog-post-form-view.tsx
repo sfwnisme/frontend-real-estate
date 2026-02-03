@@ -27,6 +27,7 @@ export default function CreateBlogPostFormView({}: Props) {
   const t = useTranslations("common.form.labels");
   const tSections = useTranslations("common.form.sections");
   const tActions = useTranslations("common.actions");
+  const tStatus = useTranslations("common.blogPostStatus");
   const { form, onSubmit, isPending } = useCreateBlogPostFormValidation();
   const image = form.watch("image");
   const imageUrl = image
@@ -139,7 +140,7 @@ export default function CreateBlogPostFormView({}: Props) {
                 <SelectContent>
                   {Object.values(BLOG_POST_STATUS).map((status) => (
                     <SelectItem value={status} key={status}>
-                      {status}
+                      {tStatus(status)}
                     </SelectItem>
                   ))}
                 </SelectContent>

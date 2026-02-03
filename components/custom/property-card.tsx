@@ -37,7 +37,7 @@ export default async function PropertyCard({
           <p className="text-sm group-hover:text-gray-500 max-xl:text-gray-500 pb-1">
             {property.title}
           </p>
-          <div className="inline-flex gap-2 items-center justify-between w-full">
+          <div className="inline-flex gap-2 items-center justify-between w-full xl:hidden group-hover:inline-flex">
             <span className="text-xl text-gray-700 font-semibold hidden group-hover:block max-xl:block">
               {Number(property.price).toLocaleString("en-SA", {
                 style: "currency",

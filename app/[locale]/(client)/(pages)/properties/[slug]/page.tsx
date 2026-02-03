@@ -1,4 +1,4 @@
-import PropertyOverviewCard from "@/features/propertyPage/propertyOverviewCard";
+import PropertyOverviewCard from "@/features/propertyPage/property-overview-card";
 import PropertyCarousel from "@/features/propertyPage/property-carousel";
 import { getProperties, getProperty, getPropertyImages } from "@/lib/requests";
 import { notFound } from "next/navigation";

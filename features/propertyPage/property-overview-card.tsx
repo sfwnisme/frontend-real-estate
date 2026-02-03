@@ -26,7 +26,7 @@ export default function PropertyOverviewCard({ property, locale }: Props) {
 
   return (
     <div className="border border-gray-300 rounded-2xl p-4 sm:p-6 w-full flex max-sm:flex-col items-center gap-8">
-      <Typography as="h2" variant="h2" className="sm:border-r sm:border-r-gray-200 pr-6">
+      <Typography as="h2" variant="h2" className="sm:border-e sm:border-e-gray-200 pe-6">
         {currency(price, locale)}
       </Typography>
       <ul className="flex flex-wrap gap-3 sm:gap-x-4 sm:gap-y-4 xl:gap-x-8 lg:gap-y-4 w-full flex-1 max-sm:justify-center lg:justify-between">

@@ -56,7 +56,7 @@ export async function generateMetadata({
       title: ogTitle,
       description: ogDescription,
       images: [{ url: "/hero-bg.webp" }],
-      type: "website", 
+      type: "website",
       url: returnCanonical(locale, PREVIEW),
     },
     twitter: {

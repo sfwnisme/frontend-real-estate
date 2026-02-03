@@ -37,8 +37,6 @@ export function BreadcrumbLayout() {
     <BreadcrumbSeparator className={cn(locale === "ar" && "-scale-[1]")} />
   );
 
-  console.log(t("lkjlksjdf"));
-
   return (
     <Breadcrumb>
       <BreadcrumbList>

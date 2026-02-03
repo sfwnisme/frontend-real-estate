@@ -434,6 +434,8 @@
     "properties": "properties",
     "blog-posts": "blog posts",
     "dashboard": "dashboard",
-    "users": "users"
+    "users": "users",
+    "update": "update",
+    "create": "create"
   }
 }

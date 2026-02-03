@@ -37,8 +37,8 @@ export function DashboardSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
   const locale = useLocale();
-  const t = useTranslations("dashboard.sidebar")
-  const {can} = useCan()
+  const t = useTranslations("dashboard.sidebar");
+  const { can } = useCan();
 
   const routes: FilteredRoute[] = [
     {
@@ -83,24 +83,28 @@ export function DashboardSidebar({
       icon: UserPlus,
       permission: "user.write",
     },
-  ]
-  
+  ];
+
   const filteredRoutes = routes.filter((route) => {
     const canSee = can(route.permission);
     if (!canSee) return null;
     return route;
   });
-  
+
   return (
-    <Sidebar collapsible="icon" {...props} side={locale === "en" ? "left" : "right"}>
+    <Sidebar
+      collapsible="icon"
+      {...props}
+      side={locale === "en" ? "left" : "right"}
+    >
       <SidebarHeader>
         <div className="w-full p-2">
           <Image
-            src="/logoipsum.png"
+            className="size-12"
+            src="/logo.svg"
             height={300}
             width={300}
             alt="project logo"
-            className="w-full"
           />
         </div>
       </SidebarHeader>

@@ -1,7 +1,5 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +8,7 @@ import {
 } from "../../components/ui/dropdown-menu";
 import { MenuIcon } from "lucide-react";
 import { PAGES_ROUTES } from "@/constants/config";
-import { Link as NextIntlLink, getPathname } from "@/i18n/navigation";
+import { Link as NextIntlLink } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 
@@ -25,8 +23,8 @@ export default function Nav({}: Props) {
       <div className="w-50 max-w-full h-auto overflow-hidden me-auto">
         <NextIntlLink href="/" className="flex size-full">
           <Image
-            className="size-full"
-            src="/logoipsum.png"
+            className="size-12"
+            src="/logo.svg"
             priority={true}
             alt="logo"
             width={200}

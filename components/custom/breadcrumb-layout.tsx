@@ -21,7 +21,7 @@ export function BreadcrumbLayout() {
   const pathnameArray = pathname.split("/");
 
   const prevPathname = pathnameArray.slice(0, -1);
-  const currentPathname = pathnameArray.slice(-1)[0];
+  const currentPathname = decodeURIComponent(pathnameArray.slice(-1)[0]);
   const translatedCurrentPathname =
     t(currentPathname) !== `RoutesConfig.${currentPathname}`
       ? t(currentPathname)

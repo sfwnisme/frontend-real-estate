@@ -44,8 +44,8 @@ export default async function BlogPostsTableView({
   const canEditBlogPost = await can("blogpost.update");
   return (
     <div className="w-full">
-      <Table>
-        <TableHeader>
+      <Table className="rounded-lg overflow-hidden">
+        <TableHeader className="bg-secondary">
           <TableRow>
             <TableHead className="text-start">{tTable('title')}</TableHead>
             <TableHead className="text-start">{tTable('creationDate')}</TableHead>

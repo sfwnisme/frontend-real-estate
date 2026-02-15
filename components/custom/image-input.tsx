@@ -27,7 +27,7 @@ const ImageInput = forwardRef<HTMLInputElement, InputType>(
         />
         <label
           htmlFor={inputId}
-          className="hover:bg-gray-50/50 duration-75 p-4 md:p-8 h-full w-full text-center text-sm md:text-base flex flex-col gap-2 items-center justify-center text-gray-500 rounded-2xl border-2 border-dashed cursor-pointer"
+          className="hover:bg-gray-50/50 duration-75 p-4 md:p-8 h-full w-full text-center text-sm md:text-base flex flex-col gap-2 items-center justify-center text-gray-500 rounded-xl border-2 border-dashed cursor-pointer"
         >
           <div className="size-10">
           <UploadCloud />

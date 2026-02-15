@@ -49,6 +49,10 @@
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
     --radius-xl: calc(var(--radius) + 4px);
+    /* --radius-sm: 0px;
+    --radius-md: 0px;
+    --radius-lg: 0px;
+    --radius-xl: 0px; */
 }
 
 :root {
@@ -75,7 +79,7 @@
     --success: oklch(0.546 0.16 149.214);
     --success-foreground: oklch(0.985 0 0);
     --border: oklch(0.922 0 0);
-    --input: oklch(0.97 0 0);
+    --input: oklch(0.95 0 0);
     --ring: oklch(0.708 0 0);
     --chart-1: oklch(0.646 0.222 41.116);
     --chart-2: oklch(0.6 0.118 184.704);

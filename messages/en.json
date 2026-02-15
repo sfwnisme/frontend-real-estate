@@ -7,7 +7,7 @@
       "title": "Dashboard",
       "description": "Dashboard page"
     }
-  },
+    },
   "HomePage": {
     "title": "Hello world!",
     "button": "Explore Properties",
@@ -86,7 +86,8 @@
       "blogPosts": "Blog Posts",
       "createBlogPost": "Create Blog Post",
       "users": "Users",
-      "createUser": "Create User"
+      "createUser": "Create User",
+      "siteInfo": "Site Info"
     }
   },
   "common": {

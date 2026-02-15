@@ -86,7 +86,8 @@
       "blogPosts": "المقالات",
       "createBlogPost": "إنشاء مقال",
       "users": "المستخدمون",
-      "createUser": "إنشاء مستخدم"
+      "createUser": "إنشاء مستخدم",
+      "siteInfo": "معلومات الموقع"
     }
   },
   "common": {

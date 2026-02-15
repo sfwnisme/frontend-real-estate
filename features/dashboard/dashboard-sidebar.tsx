@@ -10,6 +10,7 @@ import {
   NotebookPen,
   UserPlus,
   Users,
+  Settings
 } from "lucide-react";
 
 import { DashboardNavRoutes } from "./dashboard-nav-routes";
@@ -82,6 +83,12 @@ export function DashboardSidebar({
       url: "/dashboard/users/create",
       icon: UserPlus,
       permission: "user.write",
+    },
+    {
+      name: t("siteInfo"),
+      url: "/dashboard/site-info",
+      icon: Settings,
+      permission: "siteinfo.read",
     },
   ];
 

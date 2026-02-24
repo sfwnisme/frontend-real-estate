@@ -24,9 +24,9 @@ const typographyVariants = cva("", {
       h6: "scroll-m-20 text-sm font-semibold tracking-tight sm:text-base",
       h6Muted:
         "scroll-m-20 text-sm font-semibold tracking-tight text-muted-foreground sm:text-base",
-      p: "text-sm leading-7 sm:text-base [&:not(:first-child)]:mt-4 sm:[&:not(:first-child)]:mt-6",
+      p: "text-sm leading-7 sm:text-base",
       pMuted:
-        "text-sm text-muted-foreground leading-7 sm:text-base [&:not(:first-child)]:mt-4 sm:[&:not(:first-child)]:mt-6",
+        "text-sm text-muted-foreground leading-7 sm:text-base",
       lead: "text-base sm:text-lg md:text-xl",
       leadMuted: "text-base text-muted-foreground sm:text-lg md:text-xl",
       large: "text-base font-semibold sm:text-lg",

@@ -108,6 +108,7 @@
       "notPublished": "Not Published",
       "reset": "Reset",
       "visit": "Visit",
+      "view": "View",
       "viewAll": "View all",
       "uploadImages": "Upload Images",
       "updatePropertyDetails": "Update property details",
@@ -437,6 +438,7 @@
     "dashboard": "dashboard",
     "users": "users",
     "update": "update",
-    "create": "create"
+    "create": "create",
+    "siteInfo": "site info"
   }
 }

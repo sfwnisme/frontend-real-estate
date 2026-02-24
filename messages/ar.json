@@ -107,6 +107,7 @@
       "deleting": "جاري الحذف...",
       "reset": "إعادة تعيين",
       "visit": "زيارة",
+      "view": "عرض",
       "viewAll": "عرض الكل",
       "uploadImages": "رفع الصور",
       "updatePropertyDetails": "تحديث تفاصيل العقار",
@@ -435,6 +436,8 @@
     "dashboard": "لوحة التحكم",
     "users": "المستخدمين",
     "update": "تحديث",
-    "create": "إنشاء"
+    "create": "إنشاء",
+    "site-info": "معلومات الموقع"
+
   }
 }

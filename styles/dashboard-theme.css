@@ -1,0 +1,6 @@
+.dashboard {
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --primary: 158 64% 52%;       /* teal for end-user */
+  --radius: 1rem;               /* rounder, friendlier */
+}

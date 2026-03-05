@@ -16,6 +16,44 @@ export type PropertyType = (typeof PROPERTY_TYPE)[keyof typeof PROPERTY_TYPE];
 export type BlogPostStatus =
   (typeof BLOG_POST_STATUS)[keyof typeof BLOG_POST_STATUS];
 
+type SiteInfoSchema = {
+  info: {
+    name: string;
+    address: string;
+    description: string;
+  };
+  seo: {
+    title: string;
+    description: string;
+    keywords: string[];
+    ogImage: string;
+  };
+};
+export type SiteInfo = {
+  ar: SiteInfoSchema;
+  en: SiteInfoSchema;
+  contact: {
+    phone: string;
+    email: string;
+    facebook: string;
+    instagram: string;
+    x: string;
+    linkedin: string;
+    youtube: string;
+    tiktok: string;
+    snapchat: string;
+    whatsapp: string;
+  };
+  marketing: {
+    googleSearchConsole: string;
+    googleTagManager: string;
+    googleMerchant: string;
+  };
+  settings: { maintenanceMode: boolean };
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 export type Property = {
   tempId?: string;
   _id: string;

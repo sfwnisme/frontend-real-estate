@@ -1,11 +1,11 @@
 import { Typography } from '@/components/custom/typography'
-import React from 'react'
+import { Input } from '@/components/portal/input'
+import UpdateSiteInfoFormView from '@/features/site-info/update-site-info-form-view'
 
 export default function page() {
-  // const t = useTranslations("dashboard.siteInfo");
   return (
     <div>
-      <Typography variant="h1" as="h1">معلومات الموقع</Typography>
+      <UpdateSiteInfoFormView />
     </div>
   )
 }

@@ -6,6 +6,8 @@ import PropertiesHomePageView from "@/features/properties/views/properties-home-
 import { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
+import { getSiteInfo } from "@/lib/requests";
+import { notFound } from "next/navigation";
 
 export const dynamic = "force-static";
 export const revalidate = 604800;
@@ -16,11 +18,18 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations("Metadata.home");
-  const title = t("title");
-  const description = t("description");
-  const ogTitle = t("ogTitle");
-  const ogDescription = t("ogDescription");
+  const siteInfo = await getSiteInfo();
+  if (!siteInfo.data) {
+    return {};
+  }
+  const localeName = locale === "ar" ? "ar" : "en";
+  const siteInfoData = siteInfo.data;
+  const localizedSiteInfo = siteInfoData[localeName];
+  const seoData = localizedSiteInfo?.seo;
+
+  const title = seoData?.title;
+  const description = seoData?.description;
+  const ogImage = seoData?.ogImage;
   return {
     title,
     description,
@@ -29,18 +38,16 @@ export async function generateMetadata({
       languages: returnAlternateLanguages("/"),
     },
     openGraph: {
-      title: ogTitle,
-      description: ogDescription,
-      images: [{ url: "/hero-bg.webp" }],
+      title,
+      description,
+      images: [{ url: ogImage}],
       url: returnCanonical(locale, "/"),
-      // siteName: "Real Estate",
       type: "website",
-      // locale: locale,
     },
     twitter: {
-      title: ogTitle,
-      description: ogDescription,
-      images: [{ url: "/hero-bg.webp" }],
+      title,
+      description,
+      images: [{ url: ogImage }],
     },
   };
 }
@@ -52,10 +59,24 @@ export default async function Home({
 }) {
   const locale = (await params).locale;
   setRequestLocale(locale);
+  const siteInfo = await getSiteInfo();
+  if (!siteInfo.data) {
+    notFound();
+  }
+  const localeName = locale === "ar" ? "ar" : "en";
+  const siteInfoData = siteInfo.data;
+  const localizedSiteInfo = siteInfoData[localeName];
+  const contactData = siteInfoData.contact;
+
+  console.log(siteInfoData);
 
   return (
     <div className="min-h-screen">
-      <HeroView />
+      <HeroView
+        title={localizedSiteInfo.info.name}
+        description={localizedSiteInfo.info.description}
+        image={localizedSiteInfo.seo.ogImage}
+      />
       <div className="responsive grid gap-16 md:gap-40 mt-40">
         <PropertiesHomePageView />
         <BlogPostsHomePageView />

@@ -26,7 +26,7 @@ function Accordion({ className, ...props }: AccordionProps) {
 function AccordionItem({ className, ...props }: AccordionItemProps) {
   return (
     <BaseAccordionItem
-      className={cn("border border-gray-100 rounded-lg", className)}
+      className={cn("border rounded-lg", className)}
       {...props}
     />
   );

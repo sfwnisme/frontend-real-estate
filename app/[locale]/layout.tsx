@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
 
 type Props = {
   children: React.ReactNode;
@@ -83,7 +84,14 @@ export default async function RootLayout({ children, params }: Props) {
     >
       <body className={`${font} ${fontVariables} antialiased overflow-x-hidden`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
+          <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
         </NextIntlClientProvider>
         <Toaster position="top-right" expand />
       </body>

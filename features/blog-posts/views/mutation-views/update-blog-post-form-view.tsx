@@ -133,13 +133,13 @@ export default function UpdateBlogPostFormView(props: Props) {
               />
             </InputWrapper>
             <InputWrapper
-              title={t("metaKeywords")}
+              title={t("keywords")}
               error={form.formState.errors.meta?.keywords?.message}
             >
               <Input
                 type="text"
                 {...form.register("meta.keywords")}
-                placeholder={tPlaceholders("metaKeywords")}
+                placeholder={tPlaceholders("keywords")}
               />
             </InputWrapper>
           </FieldSet>

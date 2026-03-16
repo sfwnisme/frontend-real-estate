@@ -8,6 +8,27 @@
       "description": "صفحة لوحة التحكم"
     }
   },
+  "SiteInfo": {
+    "labels": {
+      "siteName": "اسم الموقع",
+      "physicalAddress": "العنوان",
+      "siteDescription": "وصف الموقع"
+    },
+    "titles": {
+      "generalInformation": "المعلومات العامة",
+      "socialMedia": "التواصل الاجتماعي",
+      "seo": "محركات البحث",
+      "marketingAndIntegrations": "التسويق والتكامل",
+      "advancedSettings": "الإعدادات المتقدمة"
+    },
+    "descriptions": {
+      "generalInformation": "المعلومات العامة للموقع",
+      "socialMedia": "معلومات التواصل الاجتماعي",
+      "seo": "معلومات محركات البحث",
+      "marketingAndIntegrations": "معلومات التسويق والتكامل",
+      "advancedSettings": "الإعدادات المتقدمة"
+    }
+  },
   "HomePage": {
     "title": "أهلاً بكم!",
     "button": "اكتشف العقارات",
@@ -91,6 +112,12 @@
     }
   },
   "common": {
+    "labels": {
+      "english": "الانجليزية",
+      "arabic": "العربية",
+      "enEnglish": "English",
+      "enArabic": "العربية"
+    },
     "actions": {
       "create": "إنشاء",
       "update": "تحديث",
@@ -142,7 +169,7 @@
         "content": "المحتوى",
         "metaTitle": "عنوان Meta",
         "metaDescription": "وصف Meta",
-        "metaKeywords": "الكلامات المفتاحية",
+        "keywords": "الكلامات المفتاحية",
         "featuredImage": "الصورة المميزة",
         "description": "الوصف",
         "price": "السعر",
@@ -167,7 +194,7 @@
         "role": "الدور",
         "metaTitle": "عنوان Meta",
         "metaDescription": "وصف Meta",
-        "metaKeywords": "الكلامات المفتاحية",
+        "keywords": "الكلامات المفتاحية",
         "email": "عنوان بريدك الإلكتروني",
         "chooseFile": "اختر ملف",
         "browseFiles": "تصفح الملفات",

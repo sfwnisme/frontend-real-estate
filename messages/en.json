@@ -7,7 +7,28 @@
       "title": "Dashboard",
       "description": "Dashboard page"
     }
+  },
+  "SiteInfo": {
+    "labels": {
+      "siteName": "Site Name",
+      "physicalAddress": "Physical Address",
+      "siteDescription": "Site Description"
     },
+    "titles": {
+      "generalInformation": "General Information",
+      "socialMedia": "Social Media",
+      "seo": "SEO",
+      "marketingAndIntegrations": "Marketing and Integrations",
+      "advancedSettings": "Advanced Settings"
+    },
+    "descriptions": {
+      "generalInformation": "Site general information",
+      "socialMedia": "Site social media information",
+      "seo": "Site SEO information",
+      "marketingAndIntegrations": "Site marketing and integrations information",
+      "advancedSettings": "Site advanced settings information"
+    }
+  },
   "HomePage": {
     "title": "Hello world!",
     "button": "Explore Properties",
@@ -91,6 +112,12 @@
     }
   },
   "common": {
+    "labels": {
+      "english": "الانجليزية",
+      "arabic": "العربية",
+      "enEnglish": "English",
+      "enArabic": "العربية"
+    },
     "actions": {
       "create": "Create",
       "update": "Update",
@@ -144,7 +171,7 @@
         "content": "Content",
         "metaTitle": "Meta Title",
         "metaDescription": "Meta Description",
-        "metaKeywords": "Meta Keywords",
+        "keywords": "Keywords",
         "featuredImage": "Featured Image",
         "description": "Description",
         "price": "Price",
@@ -169,7 +196,7 @@
         "role": "Role",
         "metaTitle": "Meta Title",
         "metaDescription": "Meta Description",
-        "metaKeywords": "Meta Keywords",
+        "keywords": "Keywords",
         "email": "Your email address",
         "chooseFile": "Choose a file",
         "browseFiles": "Browse Files",

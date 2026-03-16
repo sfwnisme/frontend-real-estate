@@ -28,11 +28,12 @@ export function BreadcrumbLayout() {
       : currentPathname;
   const isInDashboard = pathnameArray.includes("dashboard");
 
-  // remove empty and locale elements from pathname array
+  // remove empty and locale(ar, en) routes from pathname array
   const returnCleanPathname = prevPathname.filter((path) => {
     return path !== locale && path !== "";
   });
 
+  // apply separator direction based on locale
   const separator = (
     <BreadcrumbSeparator className={cn(locale === "ar" && "-scale-[1]")} />
   );
@@ -44,16 +45,16 @@ export function BreadcrumbLayout() {
           <BreadcrumbLink asChild>
             <NextIntlLink href="/">{t("home")}</NextIntlLink>
           </BreadcrumbLink>
-          {separator}
         </BreadcrumbItem>
+        {separator}
         {returnCleanPathname.map((path) => (
           <Fragment key={path}>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
                 <NextIntlLink href={`/${path}`}>{t(path)}</NextIntlLink>
               </BreadcrumbLink>
-              {separator}
             </BreadcrumbItem>
+            {separator}
           </Fragment>
         ))}
         <BreadcrumbItem title={translatedCurrentPathname}>

@@ -1,7 +1,6 @@
 "use client";
 
-import { ChevronsUpDown, Languages, LogOut } from "lucide-react";
-
+import { ChevronsUpDown, Home, Languages, LogOut } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -37,6 +36,7 @@ export function DashboardNavUser() {
   const pathname = usePathname();
   const locale = useLocale();
   const t = useTranslations("navigation");
+  const tCommon = useTranslations("common.actions")
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
@@ -120,6 +120,12 @@ export function DashboardNavUser() {
                     {t("arabic")}
                   </NextIntlLink>
                 )}
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <NextIntlLink href={"/"}>
+                  <Home />
+                  {tCommon("visit")}
+                </NextIntlLink>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

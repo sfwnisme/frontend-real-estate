@@ -41,7 +41,7 @@ function AccordionTrigger({
   return (
     <BaseAccordionTrigger
       className={cn(
-        "hover:no-underline hover:bg-primary-foreground/50 p-4 rounded-none flex items-center",
+        "hover:no-underline hover:bg-primary-foreground/50 p-4 rounded-none flex items-start",
         className,
       )}
       {...props}
@@ -52,7 +52,7 @@ function AccordionTrigger({
             <Icon className="size-6 text-secondary-foreground" />
           </div>
         )}
-        <div className="flex flex-col gap-0">{children}</div>
+        <div className="flex flex-col gap-0 items-start">{children}</div>
       </div>
     </BaseAccordionTrigger>
   );

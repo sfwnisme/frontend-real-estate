@@ -55,13 +55,18 @@ export const modalQuery = (
   };
 };
 
-export const formatDate = (date: Date, fallback?: string) => {
+export const formatDate = (date: Date, fallback?: string, locale: string = "en", fullDate: boolean = false) => {
   if (!date) return fallback;
   const convertDate = new Date(date);
-  const format = new Intl.DateTimeFormat("en-US", {
+  const format = new Intl.DateTimeFormat(`${locale ?? "en"}-US`, {
     year: "numeric",
     month: "short",
     day: "numeric",
+    ...(fullDate && {
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    }),
   }).format(convertDate);
   return format;
 };

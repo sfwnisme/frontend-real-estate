@@ -1,13 +1,18 @@
-import { BreadcrumbLayout } from "@/components/custom/breadcrumb-layout"
-import { DashboardSidebar } from "./dashboard-sidebar"
-import { Separator } from "@/components/ui/separator"
+import { BreadcrumbLayout } from "@/components/custom/breadcrumb-layout";
+import { DashboardSidebar } from "./dashboard-sidebar";
+import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
+import { ModeToggle } from "@/components/mode-toggle";
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <SidebarProvider>
       <DashboardSidebar />
@@ -21,6 +26,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             />
             <BreadcrumbLayout />
           </div>
+          <div className="flex items-center gap-2 ms-auto me-4">
+            <ModeToggle />
+          </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           {/* <div className="grid auto-rows-min gap-4 md:grid-cols-3">
@@ -33,5 +41,5 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }

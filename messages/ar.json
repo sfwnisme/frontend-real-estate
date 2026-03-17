@@ -15,7 +15,21 @@
       "siteDescription": "وصف الموقع",
       "metaTitle": "عنوان Meta",
       "metaDescription": "وصف Meta",
-      "keywords": "الكلمات المفتاحية"
+      "keywords": "الكلمات المفتاحية",
+      "email": "البريد الإلكتروني",
+      "facebook": "فيسبوك",
+      "instagram": "انستجرام",
+      "linkedin": "لينكدان",
+      "phone": "الهاتف",
+      "snapchat": "سناب شات",
+      "tiktok": "تيك توك",
+      "whatsapp": "واتساب",
+      "x": "إكس (تويتر سابقاً)",
+      "youtube": "يوتيوب",
+      "googleMerchant": "جوجل ميرتشنت",
+      "googleSearchConsole": "جوجل سيرش كونسول",
+      "googleTagManager": "جوجل تاج مانجر",
+      "maintenanceMode": "وضع الصيانة"
     },
     "titles": {
       "generalInformation": "المعلومات العامة",
@@ -29,7 +43,8 @@
       "socialMedia": "معلومات التواصل الاجتماعي",
       "seo": "معلومات محركات البحث",
       "marketingAndIntegrations": "معلومات التسويق والتكامل",
-      "advancedSettings": "الإعدادات المتقدمة"
+      "advancedSettings": "الإعدادات المتقدمة",
+      "maintenanceMode": "تفعيل وضع الصيانة للموقع"
     }
   },
   "HomePage": {
@@ -97,9 +112,17 @@
       "copyright": "جميع الحقوق محفوظة لشركة Sfwn.",
       "QuickLinks": {
         "title": "روابط سريعة",
-        "links": ["من نحن", "العقارات", "المدونة", "اتصل بنا"]
+        "links": [
+          "من نحن",
+          "العقارات",
+          "المدونة",
+          "اتصل بنا"
+        ]
       },
-      "Others": ["سياسة الخصوصية", "شروط الخدمة"]
+      "Others": [
+        "سياسة الخصوصية",
+        "شروط الخدمة"
+      ]
     }
   },
   "dashboard": {
@@ -119,7 +142,8 @@
       "english": "الانجليزية",
       "arabic": "العربية",
       "enEnglish": "English",
-      "enArabic": "العربية"
+      "enArabic": "العربية",
+      "lastUpdated": "آخر تحديث"
     },
     "actions": {
       "create": "إنشاء",
@@ -468,6 +492,5 @@
     "update": "تحديث",
     "create": "إنشاء",
     "site-info": "معلومات الموقع"
-
   }
 }

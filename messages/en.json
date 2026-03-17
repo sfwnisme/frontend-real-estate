@@ -15,7 +15,21 @@
       "siteDescription": "Site Description",
       "metaTitle": "Meta Title",
       "metaDescription": "Meta Description",
-      "keywords": "Keywords"
+      "keywords": "Keywords",
+      "email": "Email",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "phone": "Phone",
+      "snapchat": "Snapchat",
+      "tiktok": "TikTok",
+      "whatsapp": "WhatsApp",
+      "x": "X (formerly Twitter)",
+      "youtube": "YouTube",
+      "googleMerchant": "Google Merchant",
+      "googleSearchConsole": "Google Search Console",
+      "googleTagManager": "Google Tag Manager",
+      "maintenanceMode": "Maintenance Mode"
     },
     "titles": {
       "generalInformation": "General Information",
@@ -29,7 +43,8 @@
       "socialMedia": "Site social media information",
       "seo": "Site SEO information",
       "marketingAndIntegrations": "Site marketing and integrations information",
-      "advancedSettings": "Site advanced settings information"
+      "advancedSettings": "Site advanced settings information",
+      "maintenanceMode": "Apply the maintenance mode to the site"
     }
   },
   "HomePage": {
@@ -97,9 +112,17 @@
       "copyright": "Sfwn. All rights reserved.",
       "QuickLinks": {
         "title": "Quick Links",
-        "links": ["About Us", "Properties", "Blog", "Contact Us"]
+        "links": [
+          "About Us",
+          "Properties",
+          "Blog",
+          "Contact Us"
+        ]
       },
-      "Others": ["Privacy Policy", "Terms of Service"]
+      "Others": [
+        "Privacy Policy",
+        "Terms of Service"
+      ]
     }
   },
   "dashboard": {
@@ -119,7 +142,8 @@
       "english": "الانجليزية",
       "arabic": "العربية",
       "enEnglish": "English",
-      "enArabic": "العربية"
+      "enArabic": "العربية",
+      "lastUpdated": "last modified on"
     },
     "actions": {
       "create": "Create",

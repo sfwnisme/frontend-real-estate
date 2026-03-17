@@ -152,6 +152,12 @@ a {
     cursor: pointer;
 }
 
+/* rich text editor */
+.ProseMirror {
+    border-radius: 0;
+    border: none;
+}
+
 /* .responsive {
   width: 100%;
   margin-inline: auto;

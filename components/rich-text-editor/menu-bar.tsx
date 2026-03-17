@@ -305,8 +305,10 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
     </Tooltip>
   ));
   return (
-    <div className="flex gap-2 border rounded-sm w-full p-2 overflow-x-auto">
-      {renderMenuItems}
+    <div className="overflow-hidden rounded-sm border">
+      <div className="flex gap-2 w-full p-2 overflow-x-auto">
+        {renderMenuItems}
+      </div>
     </div>
   );
 }

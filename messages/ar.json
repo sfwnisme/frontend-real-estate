@@ -12,7 +12,10 @@
     "labels": {
       "siteName": "اسم الموقع",
       "physicalAddress": "العنوان",
-      "siteDescription": "وصف الموقع"
+      "siteDescription": "وصف الموقع",
+      "metaTitle": "عنوان Meta",
+      "metaDescription": "وصف Meta",
+      "keywords": "الكلمات المفتاحية"
     },
     "titles": {
       "generalInformation": "المعلومات العامة",
@@ -169,7 +172,7 @@
         "content": "المحتوى",
         "metaTitle": "عنوان Meta",
         "metaDescription": "وصف Meta",
-        "keywords": "الكلامات المفتاحية",
+        "keywords": "الكلمات المفتاحية",
         "featuredImage": "الصورة المميزة",
         "description": "الوصف",
         "price": "السعر",
@@ -194,7 +197,7 @@
         "role": "الدور",
         "metaTitle": "عنوان Meta",
         "metaDescription": "وصف Meta",
-        "keywords": "الكلامات المفتاحية",
+        "keywords": "الكلمات المفتاحية",
         "email": "عنوان بريدك الإلكتروني",
         "chooseFile": "اختر ملف",
         "browseFiles": "تصفح الملفات",

@@ -12,7 +12,10 @@
     "labels": {
       "siteName": "Site Name",
       "physicalAddress": "Physical Address",
-      "siteDescription": "Site Description"
+      "siteDescription": "Site Description",
+      "metaTitle": "Meta Title",
+      "metaDescription": "Meta Description",
+      "keywords": "Keywords"
     },
     "titles": {
       "generalInformation": "General Information",

@@ -10,7 +10,7 @@ import {
   NotebookPen,
   UserPlus,
   Users,
-  Settings
+  Bolt
 } from "lucide-react";
 
 import { DashboardNavRoutes } from "./dashboard-nav-routes";
@@ -87,7 +87,7 @@ export function DashboardSidebar({
     {
       name: t("siteInfo"),
       url: "/dashboard/site-info",
-      icon: Settings,
+      icon: Bolt,
       permission: "siteinfo.read",
     },
   ];

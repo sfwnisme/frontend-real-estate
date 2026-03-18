@@ -31,7 +31,7 @@ export default async function page(props: Props) {
 
   return (
     <div>
-      <Typography as="h1" variant="h5" className="mb-4">
+      <Typography as="h1" className="mb-4">
         {t("editing")}: {blogPost.data.title}
       </Typography>
       <UpdateBlogPostView blogPost={blogPost.data} image={blogPostImage.data} />

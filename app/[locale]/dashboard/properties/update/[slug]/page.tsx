@@ -29,7 +29,7 @@ export default async function page(props: Props) {
 
   return (
     <div className="flex flex-col gap-4">
-      <Typography as="h1" variant="h4">
+      <Typography as="h1">
         {t("editing")}: {property.data.title}
       </Typography>
       <UpdatePropertyView

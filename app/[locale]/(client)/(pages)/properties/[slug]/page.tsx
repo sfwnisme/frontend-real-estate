@@ -106,7 +106,7 @@ export default async function Page({ params }: Props) {
       />
       <PropertyOverviewCard property={propertyData} locale={locale} />
       <article className="flex-1">
-        <Typography as="h1" variant="h2" className="mb-10">
+        <Typography as="h1" size="3xl" className="mb-10">
           {propertyData.title}
         </Typography>
         <p dangerouslySetInnerHTML={{ __html: propertyData.description }} />

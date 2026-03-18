@@ -113,7 +113,7 @@ export default async function page({
     <div>
       <div className="mb-8">
         <div className="mb-8">
-          <Typography variant="h2" as="h1">
+          <Typography size="3xl" as="h1">
             {blogPostData.title}
           </Typography>
           <p className="text-gray-500 mt-4">{blogPostData.excerpt}</p>

@@ -119,23 +119,23 @@ export default async function page({
         />
         <div className="grid md:grid-cols-4 gap-4">
           <div className="flex flex-col text-start p-4 md:p-8">
-            <Typography variant="h3" as="h3">
+            <Typography size="2xl" as="h3">
               150+
             </Typography>
-            <Typography variant="p" as="p">
+            <Typography size="sm" as="p">
               {t("whyWorkWithUs.stats.homesMatched")}
             </Typography>
           </div>
           <div className="flex flex-col text-start p-4 md:p-8">
-            <Typography variant="h3" as="h3">
+            <Typography size="2xl" as="h3">
               2,000+
             </Typography>
-            <Typography variant="p" as="p">
+            <Typography size="sm" as="p">
               {t("whyWorkWithUs.stats.clientsGuided")}
             </Typography>
           </div>
           <div className="md:col-span-2">
-            <Typography variant="p" as="p" className="p-4 md:p-8">
+            <Typography size="sm" as="p" className="p-4 md:p-8">
               {t("whyWorkWithUs.stats.description")}
             </Typography>
           </div>
@@ -180,7 +180,7 @@ export default async function page({
                   className="border-gray-100 bg-white px-4"
                 >
                   <AccordionTrigger>
-                    <Typography as="p" variant="lead">
+                    <Typography as="p" size="base">
                       {faq.title}
                     </Typography>
                     <ChevronDown
@@ -189,7 +189,7 @@ export default async function page({
                     />
                   </AccordionTrigger>
                   <AccordionContent className="flex flex-col gap-4 text-balance">
-                    <Typography as="p" variant="p">
+                    <Typography as="p" size="sm">
                       {faq.description}
                     </Typography>
                   </AccordionContent>

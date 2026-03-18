@@ -1,11 +1,16 @@
-import { Typography } from '@/components/custom/typography'
-import { Input } from '@/components/portal/input'
-import UpdateSiteInfoFormView from '@/features/site-info/update-site-info-form-view'
+import UpdateSiteInfoFormView from "@/features/site-info/update-site-info-form-view";
+import { getSiteInfo } from "@/lib/requests";
+import { notFound } from "next/navigation";
 
-export default function page() {
+export default async function page() {
+  const siteInfo = await getSiteInfo();
+  console.log(siteInfo);
+  if (!siteInfo.data || siteInfo.status !== 200) {
+    return notFound();
+  }
   return (
-    <div>
-      <UpdateSiteInfoFormView />
-    </div>
-  )
+    <>
+      <UpdateSiteInfoFormView data={siteInfo.data} />
+    </>
+  );
 }

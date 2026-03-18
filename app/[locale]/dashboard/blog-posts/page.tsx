@@ -1,6 +1,5 @@
 import PaginationLayout from "@/components/custom/pagination-layout";
 import { Button } from "@/components/ui/button";
-import { Typography } from "@/components/custom/typography";
 import { PAGES_ROUTES } from "@/constants/config";
 import { PAGINATION_CONFIG } from "@/constants/enums";
 import BlogPostsTableSkeleton from "@/features/blog-posts/skeletons/blog-posts-table-skeleton";
@@ -43,14 +42,6 @@ export default async function page({
 
   return (
     <div className="w-full">
-      <div className="inline-flex justify-between w-full mb-12">
-        <Typography as="h1" variant="h4">{t("plural")}</Typography>
-        <Visible when={canCreateBlogPost}>
-          <Button asChild>
-            <Link href={CREATE}>{t("create")}</Link>
-          </Button>
-        </Visible>
-      </div>
       <Suspense
         fallback={<BlogPostsTableSkeleton count={currentPageSize} />}
         key={currentPage}
@@ -67,6 +58,13 @@ export default async function page({
         currentPage={currentPage}
         totalPages={blogPostsData.totalPages}
       />
+       <Visible when={canCreateBlogPost}>
+          <div className="my-4 w-full flex justify-end">
+            <Button asChild variant="secondary">
+              <Link href={CREATE}>{t("create")}</Link>
+            </Button>
+          </div>
+        </Visible>
     </div>
   );
 }

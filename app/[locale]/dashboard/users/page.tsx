@@ -9,7 +9,6 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { Suspense } from "react";
-import { Typography } from "@/components/custom/typography";
 type Props = {
   searchParams: SearchParamsType;
 };
@@ -29,19 +28,16 @@ export default async function page({ searchParams }: Props) {
   const searchParamsRes = await searchParams;
   return (
     <div className="w-full">
-      <div className="inline-flex justify-between w-full mb-12">
-        <Typography as="h1" variant="h4">
-          {t("plural")}
-        </Typography>
-        <Visible when={canCreateUser}>
-          <Button asChild>
-            <Link href={CREATE}>{t("create")}</Link>
-          </Button>
-        </Visible>
-      </div>
       <Suspense fallback={<UsersTableSkeleton count={10} />}>
         <UsersTableView searchParams={searchParamsRes} />
       </Suspense>
+        <Visible when={canCreateUser}>
+          <div className="my-4 w-full flex justify-end">
+            <Button asChild variant="secondary">
+              <Link href={CREATE}>{t("create")}</Link>
+            </Button>
+          </div>
+        </Visible>
     </div>
   );
 }

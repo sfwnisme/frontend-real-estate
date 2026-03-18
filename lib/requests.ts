@@ -5,11 +5,12 @@ import {
   BlogPost,
   ImageType,
   Property,
+  SiteInfo,
 } from "@/types/types";
 import { formatedApiErrRes, formatedSerErrRes } from "./utils";
 import { API_ROUTES } from "@/constants/config";
 
-const { PROPERTIES, BLOG_POSTS, IMAGES } = API_ROUTES;
+const { PROPERTIES, BLOG_POSTS, IMAGES, SITE_INFO } = API_ROUTES;
 
 export const getData = async <T>(
   endpoint: string,
@@ -29,6 +30,24 @@ export const getData = async <T>(
     return formatedSerErrRes("server error", error);
   }
 };
+
+//-------------------------------
+// SITE INFO REQUESTS
+//-------------------------------
+export const getSiteInfo = async (): Promise<APIResponse<SiteInfo>> => {
+  try {
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}${SITE_INFO.GET}`;
+    const response = await fetch(url);
+    const responseData = await response.json();
+    if (!response.ok) {
+      return formatedApiErrRes(responseData);
+    }
+    return responseData;
+  } catch(error: any) {
+    console.error("error in getSiteInfo", error);
+    return formatedSerErrRes("Server error", error);
+  }
+}
 
 //-------------------------------
 // PROPERTIES REQUESTS

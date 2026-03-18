@@ -8,6 +8,45 @@
       "description": "صفحة لوحة التحكم"
     }
   },
+  "SiteInfo": {
+    "labels": {
+      "siteName": "اسم الموقع",
+      "physicalAddress": "العنوان",
+      "siteDescription": "وصف الموقع",
+      "metaTitle": "عنوان Meta",
+      "metaDescription": "وصف Meta",
+      "keywords": "الكلمات المفتاحية",
+      "email": "البريد الإلكتروني",
+      "facebook": "فيسبوك",
+      "instagram": "انستجرام",
+      "linkedin": "لينكدان",
+      "phone": "الهاتف",
+      "snapchat": "سناب شات",
+      "tiktok": "تيك توك",
+      "whatsapp": "واتساب",
+      "x": "إكس (تويتر سابقاً)",
+      "youtube": "يوتيوب",
+      "googleMerchant": "جوجل ميرتشنت",
+      "googleSearchConsole": "جوجل سيرش كونسول",
+      "googleTagManager": "جوجل تاج مانجر",
+      "maintenanceMode": "وضع الصيانة"
+    },
+    "titles": {
+      "generalInformation": "المعلومات العامة",
+      "socialMedia": "التواصل الاجتماعي",
+      "seo": "محركات البحث",
+      "marketingAndIntegrations": "التسويق والتكامل",
+      "advancedSettings": "الإعدادات المتقدمة"
+    },
+    "descriptions": {
+      "generalInformation": "المعلومات العامة للموقع",
+      "socialMedia": "معلومات التواصل الاجتماعي",
+      "seo": "معلومات محركات البحث",
+      "marketingAndIntegrations": "معلومات التسويق والتكامل",
+      "advancedSettings": "الإعدادات المتقدمة",
+      "maintenanceMode": "تفعيل وضع الصيانة للموقع"
+    }
+  },
   "HomePage": {
     "title": "أهلاً بكم!",
     "button": "اكتشف العقارات",
@@ -73,9 +112,17 @@
       "copyright": "جميع الحقوق محفوظة لشركة Sfwn.",
       "QuickLinks": {
         "title": "روابط سريعة",
-        "links": ["من نحن", "العقارات", "المدونة", "اتصل بنا"]
+        "links": [
+          "من نحن",
+          "العقارات",
+          "المدونة",
+          "اتصل بنا"
+        ]
       },
-      "Others": ["سياسة الخصوصية", "شروط الخدمة"]
+      "Others": [
+        "سياسة الخصوصية",
+        "شروط الخدمة"
+      ]
     }
   },
   "dashboard": {
@@ -86,10 +133,18 @@
       "blogPosts": "المقالات",
       "createBlogPost": "إنشاء مقال",
       "users": "المستخدمون",
-      "createUser": "إنشاء مستخدم"
+      "createUser": "إنشاء مستخدم",
+      "siteInfo": "معلومات الموقع"
     }
   },
   "common": {
+    "labels": {
+      "english": "الانجليزية",
+      "arabic": "العربية",
+      "enEnglish": "English",
+      "enArabic": "العربية",
+      "lastUpdated": "آخر تحديث"
+    },
     "actions": {
       "create": "إنشاء",
       "update": "تحديث",
@@ -106,6 +161,7 @@
       "deleting": "جاري الحذف...",
       "reset": "إعادة تعيين",
       "visit": "زيارة",
+      "view": "عرض",
       "viewAll": "عرض الكل",
       "uploadImages": "رفع الصور",
       "updatePropertyDetails": "تحديث تفاصيل العقار",
@@ -140,7 +196,7 @@
         "content": "المحتوى",
         "metaTitle": "عنوان Meta",
         "metaDescription": "وصف Meta",
-        "metaKeywords": "الكلامات المفتاحية",
+        "keywords": "الكلمات المفتاحية",
         "featuredImage": "الصورة المميزة",
         "description": "الوصف",
         "price": "السعر",
@@ -165,7 +221,7 @@
         "role": "الدور",
         "metaTitle": "عنوان Meta",
         "metaDescription": "وصف Meta",
-        "metaKeywords": "الكلامات المفتاحية",
+        "keywords": "الكلمات المفتاحية",
         "email": "عنوان بريدك الإلكتروني",
         "chooseFile": "اختر ملف",
         "browseFiles": "تصفح الملفات",
@@ -434,6 +490,7 @@
     "dashboard": "لوحة التحكم",
     "users": "المستخدمين",
     "update": "تحديث",
-    "create": "إنشاء"
+    "create": "إنشاء",
+    "site-info": "معلومات الموقع"
   }
 }

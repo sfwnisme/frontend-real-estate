@@ -8,6 +8,45 @@
       "description": "Dashboard page"
     }
   },
+  "SiteInfo": {
+    "labels": {
+      "siteName": "Site Name",
+      "physicalAddress": "Physical Address",
+      "siteDescription": "Site Description",
+      "metaTitle": "Meta Title",
+      "metaDescription": "Meta Description",
+      "keywords": "Keywords",
+      "email": "Email",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "phone": "Phone",
+      "snapchat": "Snapchat",
+      "tiktok": "TikTok",
+      "whatsapp": "WhatsApp",
+      "x": "X (formerly Twitter)",
+      "youtube": "YouTube",
+      "googleMerchant": "Google Merchant",
+      "googleSearchConsole": "Google Search Console",
+      "googleTagManager": "Google Tag Manager",
+      "maintenanceMode": "Maintenance Mode"
+    },
+    "titles": {
+      "generalInformation": "General Information",
+      "socialMedia": "Social Media",
+      "seo": "SEO",
+      "marketingAndIntegrations": "Marketing and Integrations",
+      "advancedSettings": "Advanced Settings"
+    },
+    "descriptions": {
+      "generalInformation": "Site general information",
+      "socialMedia": "Site social media information",
+      "seo": "Site SEO information",
+      "marketingAndIntegrations": "Site marketing and integrations information",
+      "advancedSettings": "Site advanced settings information",
+      "maintenanceMode": "Apply the maintenance mode to the site"
+    }
+  },
   "HomePage": {
     "title": "Hello world!",
     "button": "Explore Properties",
@@ -73,9 +112,17 @@
       "copyright": "Sfwn. All rights reserved.",
       "QuickLinks": {
         "title": "Quick Links",
-        "links": ["About Us", "Properties", "Blog", "Contact Us"]
+        "links": [
+          "About Us",
+          "Properties",
+          "Blog",
+          "Contact Us"
+        ]
       },
-      "Others": ["Privacy Policy", "Terms of Service"]
+      "Others": [
+        "Privacy Policy",
+        "Terms of Service"
+      ]
     }
   },
   "dashboard": {
@@ -86,10 +133,18 @@
       "blogPosts": "Blog Posts",
       "createBlogPost": "Create Blog Post",
       "users": "Users",
-      "createUser": "Create User"
+      "createUser": "Create User",
+      "siteInfo": "Site Info"
     }
   },
   "common": {
+    "labels": {
+      "english": "الانجليزية",
+      "arabic": "العربية",
+      "enEnglish": "English",
+      "enArabic": "العربية",
+      "lastUpdated": "last modified on"
+    },
     "actions": {
       "create": "Create",
       "update": "Update",
@@ -107,6 +162,7 @@
       "notPublished": "Not Published",
       "reset": "Reset",
       "visit": "Visit",
+      "view": "View",
       "viewAll": "View all",
       "uploadImages": "Upload Images",
       "updatePropertyDetails": "Update property details",
@@ -142,7 +198,7 @@
         "content": "Content",
         "metaTitle": "Meta Title",
         "metaDescription": "Meta Description",
-        "metaKeywords": "Meta Keywords",
+        "keywords": "Keywords",
         "featuredImage": "Featured Image",
         "description": "Description",
         "price": "Price",
@@ -167,7 +223,7 @@
         "role": "Role",
         "metaTitle": "Meta Title",
         "metaDescription": "Meta Description",
-        "metaKeywords": "Meta Keywords",
+        "keywords": "Keywords",
         "email": "Your email address",
         "chooseFile": "Choose a file",
         "browseFiles": "Browse Files",
@@ -436,6 +492,7 @@
     "dashboard": "dashboard",
     "users": "users",
     "update": "update",
-    "create": "create"
+    "create": "create",
+    "siteInfo": "site info"
   }
 }

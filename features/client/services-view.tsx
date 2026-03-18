@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import Title from '../../components/custom/title'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../../components/ui/accordion'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../../components/portal/accordion'
 import { servicesDummyData } from '@/data/dummyData'
 import ImageCard from '../../components/custom/ImageCard'
 import { useTranslations } from 'next-intl'
@@ -26,7 +26,7 @@ export default function ServicesView({ }: Props) {
               defaultValue="item-1"
             >
               {t.raw("ServicesList").map((service: Record<string, string>) => (
-                <AccordionItem value={String(service.title)} key={service.title} className='border-gray-200' onClick={() => setimgPreview(service.image)}>
+                <AccordionItem value={String(service.title)} key={service.title} onClick={() => setimgPreview(service.image)}>
                   <AccordionTrigger>{service.title}</AccordionTrigger>
                   <AccordionContent className="flex flex-col gap-4 text-balance">
                     <p>{service.description}</p>

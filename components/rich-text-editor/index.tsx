@@ -145,7 +145,7 @@ function RichTextEditor({
       },
     },
     content: content,
-    immediatelyRender: true,
+    immediatelyRender: false,
     onUpdate: ({ editor }) => {
       debouncedOnChange(editor.getHTML());
     },
@@ -155,7 +155,7 @@ function RichTextEditor({
     <div className="">
       <MenuBar editor={editor} />
       <div className="h-4" />
-      <EditorContent editor={editor} />
+        <EditorContent editor={editor} className="overflow-hidden border rounded-sm" />
     </div>
   );
 }

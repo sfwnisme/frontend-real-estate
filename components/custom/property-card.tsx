@@ -48,7 +48,7 @@ export default async function PropertyCard({
               <ButtonLink
                 href={PAGES_ROUTES.PROPERTIES.PREVIEW + "/" + property.slug}
               >
-                {tActions("viewAll")}
+                {tActions("view")}
               </ButtonLink>
             </div>
           </div>

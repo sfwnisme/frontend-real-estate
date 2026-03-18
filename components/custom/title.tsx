@@ -24,9 +24,9 @@ function TitleWithButton({
   const tActions = useTranslations("common.actions");
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
-      <Typography variant="h1" as={as} className="font-medium">{title}</Typography>
+      <Typography size="4xl" as={as} className="font-medium">{title}</Typography>
       <div className="flex flex-col justify-between items-start gap-4 md:gap-8">
-        {description && <Typography variant="pMuted" as="p">{description}</Typography>}
+        {description && <Typography size="sm" variant="muted" as="p">{description}</Typography>}
         <ButtonLink href={url}>{tActions("viewAll")}</ButtonLink>
       </div>
     </div>
@@ -43,8 +43,8 @@ function TitleAlignStartWithBadge({
       <Badge className="text-sm text-black font-light bg-blue-200 rounded-full px-4 py-1">
         {badge}
       </Badge>
-      <Typography variant="h1" as={as} className="font-medium">{title}</Typography>
-      {description && <Typography variant="pMuted" as="p">{description}</Typography>}
+      <Typography size="4xl" as={as} className="font-medium">{title}</Typography>
+      {description && <Typography size="sm" variant="muted" as="p">{description}</Typography>}
     </div>
   );
 }
@@ -55,8 +55,8 @@ function TitleAlignStart({
 }: Pick<Props, "title" | "description" | "as">) {
   return (
     <div className="flex flex-col gap-4 items-start">
-      <Typography variant="h1" as={as} className="font-medium">{title}</Typography>
-      {description && <Typography variant="pMuted" as="p">{description}</Typography>}
+      <Typography size="4xl" as={as} className="font-medium">{title}</Typography>
+      {description && <Typography size="sm" variant="muted" as="p">{description}</Typography>}
     </div>
   );
 }
@@ -67,8 +67,8 @@ function TitleAlignCenter({
 }: Pick<Props, "title" | "description" | "as">) {
   return (
     <div className="flex flex-col gap-4 items-center">
-      <Typography variant="h1" as={as} className="font-medium">{title}</Typography>
-      {description && <Typography variant="pMuted" as="p">{description}</Typography>}
+      <Typography size="4xl" as={as} className="font-medium">{title}</Typography>
+      {description && <Typography size="sm" variant="muted" as="p">{description}</Typography>}
     </div>
   );
 }
@@ -90,8 +90,8 @@ function TitleAlignCenterWithIcon({
           })}
         </div>
       )}
-      <Typography variant="h1" as={as} className="font-medium">{title}</Typography>
-      {description && <Typography variant="pMuted" as="p">{description}</Typography>}
+      <Typography size="4xl" as={as} className="font-medium">{title}</Typography>
+      {description && <Typography size="sm" variant="muted" as="p">{description}</Typography>}
     </div>
   );
 }

@@ -49,8 +49,8 @@ export default async function UsersTableView({
   };
   return (
     <div className="w-full">
-      <Table>
-        <TableHeader>
+      <Table className="rounded-lg overflow-hidden">
+      <TableHeader className="bg-secondary">
           <TableRow>
             <TableHead className="text-start">{tTable("name")}</TableHead>
             <TableHead className="text-start">{tTable("email")}</TableHead>

@@ -4,7 +4,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "../../components/ui/accordion";
+} from "../../components/portal/accordion";
+// } from "../../components/ui/accordion";
 import { ChevronDown } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
@@ -31,15 +32,8 @@ export default async function Faq({}: Props) {
               <AccordionItem
                 value={String(faq.question)}
                 key={faq.question}
-                className="border-gray-100"
               >
-                <AccordionTrigger>
-                  {faq.question}
-                  <ChevronDown
-                    strokeWidth="1"
-                    className="border border-gray-200 rounded-full "
-                  />
-                </AccordionTrigger>
+                <AccordionTrigger>{faq.question}</AccordionTrigger>
                 <AccordionContent className="flex flex-col gap-4 text-balance">
                   <p>{faq.answer}</p>
                 </AccordionContent>

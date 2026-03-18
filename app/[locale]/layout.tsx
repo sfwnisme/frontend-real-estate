@@ -83,7 +83,7 @@ export default async function RootLayout({ children, params }: Props) {
     >
       <body className={`${font} ${fontVariables} antialiased overflow-x-hidden`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
+            {children}
         </NextIntlClientProvider>
         <Toaster position="top-right" expand />
       </body>

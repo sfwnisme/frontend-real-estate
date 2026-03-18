@@ -1,5 +1,5 @@
-import PropertyOverviewCard from "@/features/propertyPage/property-overview-card";
-import PropertyCarousel from "@/features/propertyPage/property-carousel";
+import PropertyOverviewCard from "@/features/property-page/property-overview-card";
+import PropertyCarousel from "@/features/property-page/property-carousel";
 import { getProperties, getProperty, getPropertyImages } from "@/lib/requests";
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
@@ -106,7 +106,7 @@ export default async function Page({ params }: Props) {
       />
       <PropertyOverviewCard property={propertyData} locale={locale} />
       <article className="flex-1">
-        <Typography as="h1" variant="h2" className="mb-10">
+        <Typography as="h1" size="3xl" className="mb-10">
           {propertyData.title}
         </Typography>
         <p dangerouslySetInnerHTML={{ __html: propertyData.description }} />

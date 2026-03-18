@@ -27,6 +27,10 @@ export const PAGES_ROUTES = {
 };
 
 export const API_ROUTES = {
+  SITE_INFO: {
+    GET: "/site-info",
+    UPDATE: "/site-info/update",
+  },
   PROPERTIES: {
     GET: "/properties",
     CREATE: "/properties/create",

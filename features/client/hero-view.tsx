@@ -19,16 +19,15 @@ export default function Hero({ title, description, image }: Props) {
       style={{ backgroundImage: "url('/hero-bg.webp')" }}
     >
       <Button
-        // variant="intent"
-        intent="glass"
+        variant="glass"
         size="lg"
         className="absolute bottom-4 left-1/2 -translate-x-1/2"
       >
         {tButton("button")} <ArrowDown />
       </Button>
       <div className="flex flex-col items-center gap-10 bg-gray-100 rounded-3xl py-8 px-6 absolute md:bottom-4 md:top-auto top-1/2 md:right-4 right-1/2 md:translate-y-0 -translate-y-1/2 md:translate-x-0 translate-x-1/2 text-center">
-        <Typography variant="h1" as="h1">{title}</Typography>
-        <Typography variant="pMuted" as="p" className="w-46">
+        <Typography size="4xl" as="h1">{title}</Typography>
+        <Typography size="sm" variant="muted" as="p" className="w-46">
           {description}
         </Typography>
       </div>

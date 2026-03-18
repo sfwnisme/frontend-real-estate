@@ -1,5 +1,5 @@
-import PropertyOverviewCard from "@/features/propertyPage/property-overview-card";
-import PropertyCarousel from "@/features/propertyPage/property-carousel";
+import PropertyOverviewCard from "@/features/property-page/property-overview-card";
+import PropertyCarousel from "@/features/property-page/property-carousel";
 import { getProperties, getProperty, getPropertyImages } from "@/lib/requests";
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";

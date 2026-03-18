@@ -1,24 +1,26 @@
+"use client"
 import { cn } from "@/lib/utils";
-import { Button as BaseButton, buttonVariants } from "@/components/ui/button";
-import { cva, type VariantProps } from "class-variance-authority";
+import { Button as BaseButton } from "@/components/ui/button";
 
-// add specific variants on top of shadcn
-const portalButtonVariants = cva("", {
-  variants: {
-    intent: {
-      action: "bg-indigo-600 text-white hover:bg-indigo-700 font-semibold",
-      danger: "bg-red-600 text-white hover:bg-red-700",
-      glass: "border-0 border-transparent px-6! py-4 bg-black/10 hover:bg-black/10 backdrop-blur-sm rounded-full hover:py-6"
-    },
-  },
-});
+const portalVariants = {
+  sfwn: "bg-yellow-500 text-black hover:bg-yellow-600",
+  glass: "border-0 border-transparent px-6! py-4 bg-black/10 hover:bg-black/10 backdrop-blur-sm rounded-full hover:py-6",
+} as const;
 
-type Props = React.ComponentProps<typeof BaseButton> &
-  VariantProps<typeof portalButtonVariants>;
+type BaseVariant = NonNullable<React.ComponentProps<typeof BaseButton>["variant"]>;
+type PortalVariant = keyof typeof portalVariants;
+type BaseButtonProps = Omit<React.ComponentProps<typeof BaseButton>, "variant">;
+type VariantsProp = {variant?: BaseVariant | PortalVariant};
 
-export const Button = ({ className, intent, ...props }: Props) => (
-  <BaseButton
-    className={cn(portalButtonVariants({ intent }), className)}
-    {...props}
-  />
-);
+type Props = BaseButtonProps & VariantsProp;
+
+export const Button = ({ className, variant = "default", ...props }: Props) => {
+  const portalClasses = variant in portalVariants ? portalVariants[variant as PortalVariant] : undefined;
+  return (
+    <BaseButton
+      variant={portalClasses ? undefined : (variant as BaseVariant)}
+      className={cn(portalClasses, className)}
+      {...props}
+    />
+  );
+};

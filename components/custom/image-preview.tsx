@@ -43,7 +43,7 @@ export default function ImagePreview(props: Props) {
   return (
     <div
       className={cn(
-        "group flex flex-col relative aspect-square rounded-md overflow-hidden border data-[featured=true]:border-yellow-500",
+        "group flex flex-col relative aspect-video rounded-md overflow-hidden border data-[featured=true]:border-yellow-500",
       )}
       data-featured={props.isFeatured}
       data-error={!!props.error}
@@ -60,7 +60,7 @@ export default function ImagePreview(props: Props) {
         width={"300"}
         height={"300"}
         alt={props.imageType}
-        className="object-cover size-full"
+        className="object-contain size-full"
       />
       <div className="flex flex-col gap-1 p-2 absolute bottom-0 left-0 w-full bg-white/20 backdrop-blur-xs text-black group-data-[featured=true]:bg-yellow-500/50">
         <div className="flex gap-1 items-center justify-between w-full">

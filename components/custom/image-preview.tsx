@@ -13,6 +13,7 @@ type Props = {
   disableSetFeaturedImage?: boolean;
   deleteImage?: () => void;
   disableDeleteImage?: boolean;
+  hideDeleteImage?: boolean;
   setFeaturedImage?: () => void;
   isLoading?: boolean;
   error?: string | null;
@@ -79,21 +80,23 @@ export default function ImagePreview(props: Props) {
           )}
         </div>
       </div>
-      <div className="z-10 absolute top-2 right-2 flex flex-col gap-2 items-center justify-center group-data-[error=true]:hidden">
-        <div className={cn("flex items-center justify-between gap-2")}>
-          <Button
-            variant="destructive"
-            size="icon"
-            onClick={props.deleteImage}
-            disabled={props.disableDeleteImage}
-            className="bg-destructive/40 hover:bg-destructive/70 text-white size-8"
-            aria-label="delete image"
-            title="Delete image"
-          >
-            <Trash2 className="text-white" />
-          </Button>
+      {!props.hideDeleteImage && (
+        <div className="z-10 absolute top-2 right-2 flex flex-col gap-2 items-center justify-center group-data-[error=true]:hidden">
+          <div className={cn("flex items-center justify-between gap-2")}>
+            <Button
+              variant="destructive"
+              size="icon"
+              onClick={props.deleteImage}
+              disabled={props.disableDeleteImage}
+              className="bg-destructive/40 hover:bg-destructive/70 text-white size-8"
+              aria-label="delete image"
+              title="Delete image"
+            >
+              <Trash2 className="text-white" />
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

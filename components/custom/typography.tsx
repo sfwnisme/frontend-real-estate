@@ -10,6 +10,7 @@ const typographyVariants = cva("", {
       muted: "text-muted-foreground",
     },
     size: {
+      xxs: "text-[10px] sm:text-xs",
       xs: "text-xs sm:text-sm",
       sm: "text-sm leading-7 sm:text-base",
       base: "text-base sm:text-lg md:text-xl",

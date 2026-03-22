@@ -81,7 +81,7 @@ export default function UpdateSiteInfoFormView({ data }: Props) {
               <Typography as="p" size="sm">
                 {tTitles("generalInformation")}
               </Typography>
-              <Typography as="p" size="sm" variant="muted">
+              <Typography as="p" size="xxs" variant="muted">
                 {tDescriptions("generalInformation")}
               </Typography>
             </AccordionTrigger>
@@ -157,7 +157,7 @@ export default function UpdateSiteInfoFormView({ data }: Props) {
               <Typography as="p" size="sm">
                 {tTitles("seo")}
               </Typography>
-              <Typography as="p" size="sm" variant="muted">
+              <Typography as="p" size="xxs" variant="muted">
                 {tDescriptions("seo")}
               </Typography>
             </AccordionTrigger>
@@ -236,7 +236,7 @@ export default function UpdateSiteInfoFormView({ data }: Props) {
               <Typography as="p" size="sm">
                 {tTitles("socialMedia")}
               </Typography>
-              <Typography as="p" size="sm" variant="muted">
+              <Typography as="p" size="xxs" variant="muted">
                 {tDescriptions("socialMedia")}
               </Typography>
             </AccordionTrigger>
@@ -307,7 +307,7 @@ export default function UpdateSiteInfoFormView({ data }: Props) {
               <Typography as="p" size="sm">
                 {tTitles("marketingAndIntegrations")}
               </Typography>
-              <Typography as="p" size="sm" variant="muted">
+              <Typography as="p" size="xxs" variant="muted">
                 {tDescriptions("marketingAndIntegrations")}
               </Typography>
             </AccordionTrigger>
@@ -343,7 +343,7 @@ export default function UpdateSiteInfoFormView({ data }: Props) {
               <Typography as="p" size="sm">
                 {tTitles("advancedSettings")}
               </Typography>
-              <Typography as="p" size="sm" variant="muted">
+              <Typography as="p" size="xxs" variant="muted">
                 {tDescriptions("advancedSettings")}
               </Typography>
             </AccordionTrigger>

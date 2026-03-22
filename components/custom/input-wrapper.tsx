@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { Typography } from "./typography";
 
 type Props = {
   title?: string;
@@ -32,18 +33,24 @@ export default function InputWrapper(props: Props) {
           {children}
         </div>
       </Label>
-      <small
-        className="flex min-h-4 h-full text-xs mt-1 text-primary/60"
+      <Typography
+        as="small"
+        size="xxs"
+        variant="muted"
+        className="flex min-h-4 h-full mt-1"
         hidden={!description}
       >
         {description}
-      </small>
-      <small
-        className="flex min-h-4 h-full text-xs mt-1 text-destructive"
+      </Typography>
+      <Typography
+        as="small"
+        size="xxs"
+        variant="destructive"
+        className="flex min-h-4 h-full mt-1"
         hidden={disableError}
       >
         {error}
-      </small>
+      </Typography>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import useCreateSiteInfoIconFormValidation from "../../hooks/use-create-site-info-icon-form-validation";
+import useCreateSiteInfoIconDarkFormValidation from "../../hooks/use-create-site-info-icon-dark-form-validation";
 import ImageInput from "@/components/custom/image-input";
 import ImagePreview from "@/components/custom/image-preview";
 import InputWrapper from "@/components/custom/input-wrapper";
@@ -12,8 +12,9 @@ type Props = {
   data: ImageType;
 };
 
-export default function CreateSiteInfoIconFormView({ data }: Props) {
-  const { form, onSubmit, isPending } = useCreateSiteInfoIconFormValidation();
+export default function CreateSiteInfoIconDarkFormView({ data }: Props) {
+  const { form, onSubmit, isPending } =
+    useCreateSiteInfoIconDarkFormValidation();
   const icon = form.watch("icon");
   const imageUrl = !icon ? data?.url : URL.createObjectURL(icon as File);
   const imageSize = !icon ? data?.size : icon?.size;
@@ -47,7 +48,7 @@ export default function CreateSiteInfoIconFormView({ data }: Props) {
     <div>
       <form onChange={onSubmit} className="relative">
         <InputWrapper
-          title="Icon"
+          title="Icon (dark)"
           description={!imageUrl ? imageRulesDescription : ""}
         >
           {!imageUrl ? (

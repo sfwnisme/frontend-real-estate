@@ -1,3 +1,5 @@
+import { SITE_INFO_IMAGES_CONFIG } from "@/constants/enums";
+import { kbToBytes, unitToBytes } from "@/lib/utils";
 import z from "zod";
 
 const InfoSchema = z.object({
@@ -44,5 +46,41 @@ export const SiteInfoSchema = z.object({
   marketing: MarketingSchema,
   settings: SettingsSchema,
 });
+
+export const CreateSiteInfoIconSchema = z.object({
+  icon: z
+    .file()
+    .max(
+      unitToBytes(SITE_INFO_IMAGES_CONFIG.ICON.MAX_FILE_SIZE, "mb"),
+      `maximum size is ${SITE_INFO_IMAGES_CONFIG.ICON.MAX_FILE_SIZE}MB`,
+    )
+    .mime(
+      SITE_INFO_IMAGES_CONFIG.ICON.MIME_TYPES,
+      `only accept ${SITE_INFO_IMAGES_CONFIG.ICON.MIME_TYPES.join(", ")} image types`,
+    ).optional(),
+});
+export type CreateSiteInfoIconType = z.infer<typeof CreateSiteInfoIconSchema>;
+
+export const CreateSiteInfoLogoSchema = z.object({
+  logo: z
+    .file()
+    .max(
+      unitToBytes(SITE_INFO_IMAGES_CONFIG.LOGO.MAX_FILE_SIZE, "mb"),
+      `maximum size is ${SITE_INFO_IMAGES_CONFIG.LOGO.MAX_FILE_SIZE}MB`,
+    )
+    .mime(SITE_INFO_IMAGES_CONFIG.LOGO.MIME_TYPES, `only accept ${SITE_INFO_IMAGES_CONFIG.LOGO.MIME_TYPES.join(", ")} image types`).optional(),
+});
+export type CreateSiteInfoLogoType = z.infer<typeof CreateSiteInfoLogoSchema>;
+
+export const CreateSiteInfoOgImageSchema = z.object({
+  ogImage: z
+    .file()
+    .max(
+      unitToBytes(SITE_INFO_IMAGES_CONFIG.OG_IMAGE.MAX_FILE_SIZE, "mb"),
+      `maximum size is ${SITE_INFO_IMAGES_CONFIG.OG_IMAGE.MAX_FILE_SIZE}MB`,
+    )
+    .mime(SITE_INFO_IMAGES_CONFIG.OG_IMAGE.MIME_TYPES, `only accept ${SITE_INFO_IMAGES_CONFIG.OG_IMAGE.MIME_TYPES.join(", ")} image types`).optional(),
+});
+export type CreateSiteInfoOgImageType = z.infer<typeof CreateSiteInfoOgImageSchema>;
 
 export type UpdateSiteInfoType = z.infer<typeof SiteInfoSchema>;

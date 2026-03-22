@@ -1,6 +1,6 @@
 "use client";
 
-import useCreateSiteInfoIconFormValidation from "../../hooks/use-create-site-info-icon-form-validation";
+import useCreateSiteInfoOgImageFormValidation from "../../hooks/use-create-site-info-og-image-form-validation";
 import ImageInput from "@/components/custom/image-input";
 import ImagePreview from "@/components/custom/image-preview";
 import InputWrapper from "@/components/custom/input-wrapper";
@@ -12,13 +12,14 @@ type Props = {
   data: ImageType;
 };
 
-export default function CreateSiteInfoIconFormView({ data }: Props) {
-  const { form, onSubmit, isPending } = useCreateSiteInfoIconFormValidation();
-  const icon = form.watch("icon");
-  const imageUrl = !icon ? data?.url : URL.createObjectURL(icon as File);
-  const imageSize = !icon ? data?.size : icon?.size;
-  const imageMimeType = !icon ? data?.mimeType : icon?.type;
-  const imageRulesDescription = `Types: ${SITE_INFO_IMAGES_CONFIG.ICON.MIME_TYPES.join(", ")}. Maximum file size: ${SITE_INFO_IMAGES_CONFIG.ICON.MAX_FILE_SIZE} MB. Acceptable dimensions: ${SITE_INFO_IMAGES_CONFIG.ICON.DIMENSIONS.map((dimension) => `${dimension.width}x${dimension.height}`).join(", ")}.`;
+export default function CreateSiteInfoOgImageFormView({ data }: Props) {
+  const { form, onSubmit, isPending } =
+    useCreateSiteInfoOgImageFormValidation();
+  const ogImage = form.watch("ogImage");
+  const imageUrl = !ogImage ? data?.url : URL.createObjectURL(ogImage as File);
+  const imageSize = !ogImage ? data?.size : ogImage?.size;
+  const imageMimeType = !ogImage ? data?.mimeType : ogImage?.type;
+  const imageRulesDescription = `Types: ${SITE_INFO_IMAGES_CONFIG.OG_IMAGE.MIME_TYPES.join(", ")}. Maximum file size: ${SITE_INFO_IMAGES_CONFIG.OG_IMAGE.MAX_FILE_SIZE} MB. Recommended dimensions: ${SITE_INFO_IMAGES_CONFIG.OG_IMAGE.RECOMMENDED_WIDTH}x${SITE_INFO_IMAGES_CONFIG.OG_IMAGE.RECOMMENDED_HEIGHT}.`;
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
@@ -27,7 +28,7 @@ export default function CreateSiteInfoIconFormView({ data }: Props) {
       return;
     }
     const file = files[0];
-    form.setValue("icon", file, {
+    form.setValue("ogImage", file, {
       shouldValidate: true,
       shouldDirty: true,
     });
@@ -36,7 +37,7 @@ export default function CreateSiteInfoIconFormView({ data }: Props) {
   };
 
   const removeImage = async () => {
-    form.reset({ icon: undefined });
+    form.reset({ ogImage: undefined });
 
     if (data?._id) {
       await deleteImage(data?._id, `site-info-${data?.role}-${data?.tag}`);
@@ -47,7 +48,7 @@ export default function CreateSiteInfoIconFormView({ data }: Props) {
     <div>
       <form onChange={onSubmit} className="relative">
         <InputWrapper
-          title="Icon"
+          title="OG image"
           description={!imageUrl ? imageRulesDescription : ""}
         >
           {!imageUrl ? (
@@ -62,7 +63,7 @@ export default function CreateSiteInfoIconFormView({ data }: Props) {
                 imageUrl={imageUrl}
                 imageSize={imageSize || 0}
                 imageType={imageMimeType || ""}
-                error={form.formState.errors.icon?.message}
+                error={form.formState.errors.ogImage?.message}
               />
             </>
           )}

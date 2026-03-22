@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
-import useUpdateSiteInfoFormValidation from "../../hooks/use-update-site-info-form-validation";
+import useUpdateSiteInfoFormValidation from "@/features/site-info/hooks/use-update-site-info-form-validation";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";

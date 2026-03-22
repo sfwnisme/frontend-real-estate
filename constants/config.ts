@@ -63,6 +63,7 @@ export const API_ROUTES = {
     CREATE_BLOG_POST_IMAGE: "/images/create-blog-post-image",
     CREATE_TEMP_BLOG_POST_IMAGE: "/images/create-temp-blog-post-image",
     DELETE: "/images/delete",
+    GET_SITE_INFO_IMAGES: "/images/site-info",
     CREATE_SITE_INFO_ICON: "/images/create-site-info-icon",
     CREATE_SITE_INFO_ICON_DARK: "/images/create-site-info-icon-dark",
     CREATE_SITE_INFO_LOGO: "/images/create-site-info-logo",

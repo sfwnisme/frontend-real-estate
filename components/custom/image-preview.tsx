@@ -28,7 +28,7 @@ const ImageError = (props: {
   return (
     <div className="flex flex-col gap-2 items-center justify-center text-center size-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-primary/70 p-2">
       {<small className="text-xs text-destructive">{error}</small>}
-      <Button variant="destructive" size="sm" onClick={deleteImage}>
+      <Button variant="destructive" size="sm" onClick={deleteImage} type="button">
         Remove
       </Button>
     </div>
@@ -97,6 +97,7 @@ export default function ImagePreview(props: Props) {
               className="bg-destructive/40 hover:bg-destructive/70 text-white size-8"
               aria-label="delete image"
               title="Delete image"
+              type="button"
             >
               <Trash2 className="text-white" />
             </Button>

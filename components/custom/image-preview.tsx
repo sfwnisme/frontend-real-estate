@@ -4,6 +4,7 @@ import { Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
+import LoadingSpinner from "./loading-spinner";
 
 type Props = {
   imageSize: number;
@@ -34,6 +35,10 @@ const ImageError = (props: {
   );
 };
 
+const ImageLoading = () => {
+  return <div className="size-full absolute grid place-items-center"><LoadingSpinner /></div>
+}
+
 export default function ImagePreview(props: Props) {
   return (
     <div
@@ -43,6 +48,7 @@ export default function ImagePreview(props: Props) {
       data-featured={props.isFeatured}
       data-error={!!props.error}
     >
+      {props.isLoading && <ImageLoading />}
       {props.error && (
         <ImageError
           error={props.error}

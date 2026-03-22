@@ -75,7 +75,7 @@ export default function ImagePreview(props: Props) {
   return (
     <div
       className={cn(
-        "group flex flex-col relative rounded-md overflow-hidden border",
+        "group flex flex-col relative rounded-md overflow-hidden border bg-foreground/20",
         aspectRatioClass,
         className,
       )}

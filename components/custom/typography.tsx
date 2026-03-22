@@ -8,6 +8,7 @@ const typographyVariants = cva("", {
     variant: {
       default: "",
       muted: "text-muted-foreground",
+      destructive: "text-destructive",
     },
     size: {
       xxs: "text-[10px] sm:text-xs",

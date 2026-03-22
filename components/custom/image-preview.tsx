@@ -1,10 +1,12 @@
+"use client"
 import Image from "next/image";
 import { cn, returnFileSize } from "@/lib/utils";
-import { Trash2 } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
 import LoadingSpinner from "./loading-spinner";
+import { Typography } from "./typography";
 
 type Props = {
   imageSize: number;
@@ -43,7 +45,7 @@ export default function ImagePreview(props: Props) {
   return (
     <div
       className={cn(
-        "group flex flex-col relative aspect-video rounded-md overflow-hidden border data-[featured=true]:border-yellow-500",
+        "group flex flex-col relative aspect-video rounded-md overflow-hidden border",
       )}
       data-featured={props.isFeatured}
       data-error={!!props.error}
@@ -62,12 +64,12 @@ export default function ImagePreview(props: Props) {
         alt={props.imageType}
         className="object-contain size-full"
       />
-      <div className="flex flex-col gap-1 p-2 absolute bottom-0 left-0 w-full bg-white/20 backdrop-blur-xs text-black group-data-[featured=true]:bg-yellow-500/50">
+      <div className="flex flex-col items-end justify-end gap-1 p-2 absolute bottom-0 left-0 size-full bg-linear-to-t from-black/40 to-transparent text-black">
         <div className="flex gap-1 items-center justify-between w-full">
-          <small className="text-xs">
+          <Typography as="small" size="xxs" className="text-white">
             {returnFileSize(props.imageSize)},{" "}
             {props.imageType.split("/")[1].toUpperCase()}
-          </small>
+          </Typography>
           {!props.disableSetFeaturedImage && (
             <Label
               className={cn("flex items-center gap-1")}
@@ -90,16 +92,16 @@ export default function ImagePreview(props: Props) {
         <div className="z-10 absolute top-2 right-2 flex flex-col gap-2 items-center justify-center group-data-[error=true]:hidden">
           <div className={cn("flex items-center justify-between gap-2")}>
             <Button
-              variant="destructive"
+              variant="secondary"
               size="icon"
               onClick={props.deleteImage}
               disabled={props.disableDeleteImage}
-              className="bg-destructive/40 hover:bg-destructive/70 text-white size-8"
+              className="rounded-full size-6"
               aria-label="delete image"
               title="Delete image"
               type="button"
             >
-              <Trash2 className="text-white" />
+              <X />
             </Button>
           </div>
         </div>

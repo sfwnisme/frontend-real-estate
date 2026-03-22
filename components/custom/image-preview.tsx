@@ -24,7 +24,7 @@ const ImageError = (props: {
 }) => {
   const { error, deleteImage } = props;
   return (
-    <div className="z-10 flex flex-col gap-2 items-center justify-center text-center size-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white/70 p-2">
+    <div className="flex flex-col gap-2 items-center justify-center text-center size-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-primary/70 p-2">
       {<small className="text-xs text-destructive">{error}</small>}
       <Button variant="destructive" size="sm" onClick={deleteImage}>
         Remove

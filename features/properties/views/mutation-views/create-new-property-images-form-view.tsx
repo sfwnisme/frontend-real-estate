@@ -62,7 +62,7 @@ const CreateNewPropertyImagesFormView = ({
 
   const renderUploadImages = useMemo(() => {
     return (
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-2 max-h-[400px] overflow-y-scroll">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-2 max-h-[400px] overflow-y-auto">
         {fieldArray.fields.length !== 0 &&
           fieldArray.fields.map((item, idx) => {
             const imageError =

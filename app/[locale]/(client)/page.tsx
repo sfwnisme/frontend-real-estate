@@ -4,10 +4,11 @@ import BlogPostsHomePageView from "@/features/blog-posts/views/blog-posts-home-p
 import HeroView from "@/features/client/hero-view";
 import PropertiesHomePageView from "@/features/properties/views/properties-home-page-view";
 import { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 import { getSiteInfo } from "@/lib/requests";
 import { notFound } from "next/navigation";
+import { getSiteInfoImage } from "@/features/site-info/lib/requests";
 
 export const dynamic = "force-static";
 export const revalidate = 604800;
@@ -26,10 +27,10 @@ export async function generateMetadata({
   const siteInfoData = siteInfo.data;
   const localizedSiteInfo = siteInfoData[localeName];
   const seoData = localizedSiteInfo?.seo;
-
+  const getOgImage = await getSiteInfoImage("og-image", null);
+  const ogImageUrl = getOgImage?.url;
   const title = seoData?.title;
   const description = seoData?.description;
-  const ogImage = seoData?.ogImage;
   return {
     title,
     description,
@@ -40,14 +41,14 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      images: [{ url: ogImage}],
+      images: [{ url: ogImageUrl }],
       url: returnCanonical(locale, "/"),
       type: "website",
     },
     twitter: {
       title,
       description,
-      images: [{ url: ogImage }],
+      images: [{ url: ogImageUrl }],
     },
   };
 }

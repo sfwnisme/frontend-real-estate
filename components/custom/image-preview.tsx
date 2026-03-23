@@ -31,7 +31,7 @@ const ImageError = (props: {
 }) => {
   const { error, deleteImage } = props;
   return (
-    <div className="flex flex-col gap-2 items-center justify-center text-center size-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-primary/70 p-2">
+    <div className="z-10 flex flex-col gap-2 items-center justify-center text-center size-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-primary/70 p-2">
       {<small className="text-xs text-destructive">{error}</small>}
       <Button
         variant="destructive"
@@ -71,7 +71,12 @@ export default function ImagePreview(props: Props) {
     className = "",
   } = props;
 
-  const aspectRatioClass = aspectRatio === "video" ? "aspect-video" : aspectRatio === "square"? "aspect-square" : "aspect-auto";
+  const aspectRatioClass =
+    aspectRatio === "video"
+      ? "aspect-video"
+      : aspectRatio === "square"
+        ? "aspect-square"
+        : "aspect-auto";
   return (
     <div
       className={cn(
@@ -84,10 +89,7 @@ export default function ImagePreview(props: Props) {
     >
       {isLoading && <ImageLoading />}
       {error && (
-        <ImageError
-          error={error}
-          deleteImage={deleteImage ?? (() => {})}
-        />
+        <ImageError error={error} deleteImage={deleteImage ?? (() => {})} />
       )}
       <Image
         src={imageUrl}
@@ -98,9 +100,13 @@ export default function ImagePreview(props: Props) {
       />
       <div className="flex flex-col items-end justify-end gap-1 p-2 absolute bottom-0 left-0 size-full bg-linear-to-t from-black/40 to-transparent text-black">
         <div className="flex gap-1 items-center justify-between w-full">
-          <Typography as="small" size="xxs" className="text-white" hidden={hideInfo}>
-            {returnFileSize(imageSize)},{" "}
-            {imageType.split("/")[1].toUpperCase()}
+          <Typography
+            as="small"
+            size="xxs"
+            className="text-white"
+            hidden={hideInfo}
+          >
+            {returnFileSize(imageSize)}, {imageType.split("/")[1].toUpperCase()}
           </Typography>
           {!disableSetFeaturedImage && (
             <Label
@@ -121,7 +127,7 @@ export default function ImagePreview(props: Props) {
         </div>
       </div>
       {!hideDeleteImage && (
-        <div className="z-10 absolute top-2 right-2 flex flex-col gap-2 items-center justify-center group-data-[error=true]:hidden">
+        <div className="absolute top-2 right-2 flex flex-col gap-2 items-center justify-center group-data-[error=true]:hidden">
           <div className={cn("flex items-center justify-between gap-2")}>
             <Button
               variant="secondary"

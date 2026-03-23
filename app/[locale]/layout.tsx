@@ -7,6 +7,8 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
+import { getSiteInfoImage } from "@/features/site-info/lib/requests";
+import { STATUS_TEXT } from "@/constants/enums";
 
 type Props = {
   children: React.ReactNode;
@@ -16,24 +18,30 @@ type Props = {
 const interFont = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 const kufiFont = Noto_Kufi_Arabic({
   variable: "--font-noto-kufi-arabic",
   subsets: ["arabic"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
-export async function generateMetadata({params}: {params: Promise<{locale: string}>}): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
   const locale = (await params).locale;
   const t = await getTranslations("SiteConfig");
   const metadataBase = new URL(process.env.NEXT_PUBLIC_FRONTEND_URL as string);
+  const getFavicon = await getSiteInfoImage("icon", "theme_default");
+  const faviconUrl = getFavicon?.url;
 
-  const SITE_NAME = t("name")
-  const PAGE_TEMPLATE_AR = `${SITE_NAME} | %s`
-  const PAGE_TEMPLATE_EN = `%s | ${SITE_NAME}`
-  const PAGE_TEMPLATE = locale === "ar" ? PAGE_TEMPLATE_AR : PAGE_TEMPLATE_EN
+  const SITE_NAME = t("name");
+  const PAGE_TEMPLATE_AR = `${SITE_NAME} | %s`;
+  const PAGE_TEMPLATE_EN = `%s | ${SITE_NAME}`;
+  const PAGE_TEMPLATE = locale === "ar" ? PAGE_TEMPLATE_AR : PAGE_TEMPLATE_EN;
   return {
     metadataBase,
     title: {
@@ -48,11 +56,14 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_SEARCH_CONSOLE_KEY,
     },
+    icons: {
+      icon: faviconUrl,
+    },
     robots: {
       index: true,
       follow: true,
-    }
-  }
+    },
+  };
 }
 
 export async function generateStaticParams() {
@@ -65,25 +76,24 @@ export default async function RootLayout({ children, params }: Props) {
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
-  
+
   // // Enable static rendering for SSG
   // setRequestLocale(locale);
 
   // Import messages directly based on locale to avoid race conditions during parallel SSG
   const messages = (await import(`@/messages/${locale}.json`)).default;
-  
+
   const isRtl = locale === "ar";
   const font = isRtl ? kufiFont.className : interFont.className;
-  const fontVariables = `${interFont.variable} ${kufiFont.variable}`
+  const fontVariables = `${interFont.variable} ${kufiFont.variable}`;
 
   return (
-    <html
-      lang={locale}
-      dir={isRtl ? "rtl" : "ltr"}
-    >
-      <body className={`${font} ${fontVariables} antialiased overflow-x-hidden`}>
+    <html lang={locale} dir={isRtl ? "rtl" : "ltr"}>
+      <body
+        className={`${font} ${fontVariables} antialiased overflow-x-hidden`}
+      >
         <NextIntlClientProvider locale={locale} messages={messages}>
-            {children}
+          {children}
         </NextIntlClientProvider>
         <Toaster position="top-right" expand />
       </body>

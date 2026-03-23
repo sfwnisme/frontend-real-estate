@@ -4,6 +4,7 @@ import useCreateSiteInfoIconFormValidation from "../../hooks/use-create-site-inf
 import ImageInput from "@/components/custom/image-input";
 import ImagePreview from "@/components/custom/image-preview";
 import InputWrapper from "@/components/custom/input-wrapper";
+import { Typography } from "@/components/custom/typography";
 import { SITE_INFO_IMAGES_CONFIG } from "@/constants/enums";
 import { deleteImage } from "@/lib/actions";
 import { ImageType } from "@/types/types";
@@ -46,27 +47,33 @@ export default function CreateSiteInfoIconFormView({ data }: Props) {
   return (
     <div>
       <form onChange={onSubmit} className="relative">
-        <InputWrapper
-          title="Icon"
-          description={!imageUrl ? imageRulesDescription : ""}
-        >
-          {!imageUrl ? (
+        <Typography as="p" size="xs">
+          Icon
+        </Typography>
+        {!imageUrl && (
+          <InputWrapper
+            description={imageRulesDescription}
+            error={form.formState.errors.icon?.message}
+          >
             <ImageInput onChange={handleImageChange} />
-          ) : (
-            <>
-              <ImagePreview
-                isLoading={isPending}
-                disableSetFeaturedImage
-                deleteImage={removeImage}
-                disableDeleteImage={isPending}
-                imageUrl={imageUrl}
-                imageSize={imageSize || 0}
-                imageType={imageMimeType || ""}
-                error={form.formState.errors.icon?.message}
-              />
-            </>
-          )}
-        </InputWrapper>
+          </InputWrapper>
+        )}
+        {imageUrl && (
+          <>
+            <ImagePreview
+              isLoading={isPending}
+              disableSetFeaturedImage
+              deleteImage={removeImage}
+              disableDeleteImage={isPending}
+              imageUrl={imageUrl}
+              imageSize={imageSize || 0}
+              imageType={imageMimeType || ""}
+              error={form.formState.errors.icon?.message}
+              aspectRatio="square"
+              hideInfo
+            />
+          </>
+        )}
       </form>
     </div>
   );

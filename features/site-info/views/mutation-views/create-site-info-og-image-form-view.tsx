@@ -4,6 +4,7 @@ import useCreateSiteInfoOgImageFormValidation from "../../hooks/use-create-site-
 import ImageInput from "@/components/custom/image-input";
 import ImagePreview from "@/components/custom/image-preview";
 import InputWrapper from "@/components/custom/input-wrapper";
+import { Typography } from "@/components/custom/typography";
 import { SITE_INFO_IMAGES_CONFIG } from "@/constants/enums";
 import { deleteImage } from "@/lib/actions";
 import { ImageType } from "@/types/types";
@@ -47,27 +48,33 @@ export default function CreateSiteInfoOgImageFormView({ data }: Props) {
   return (
     <div>
       <form onChange={onSubmit} className="relative">
-        <InputWrapper
-          title="OG image"
-          description={!imageUrl ? imageRulesDescription : ""}
-        >
-          {!imageUrl ? (
+        <Typography as="p" size="xs">
+          OG image
+        </Typography>
+        {!imageUrl && (
+          <InputWrapper
+            description={imageRulesDescription}
+            error={form.formState.errors.ogImage?.message}
+          >
             <ImageInput onChange={handleImageChange} />
-          ) : (
-            <>
-              <ImagePreview
-                isLoading={isPending}
-                disableSetFeaturedImage
-                deleteImage={removeImage}
-                disableDeleteImage={isPending}
-                imageUrl={imageUrl}
-                imageSize={imageSize || 0}
-                imageType={imageMimeType || ""}
-                error={form.formState.errors.ogImage?.message}
-              />
-            </>
-          )}
-        </InputWrapper>
+          </InputWrapper>
+        )}
+        {imageUrl && (
+          <>
+            <ImagePreview
+              isLoading={isPending}
+              disableSetFeaturedImage
+              deleteImage={removeImage}
+              disableDeleteImage={isPending}
+              imageUrl={imageUrl}
+              imageSize={imageSize || 0}
+              imageType={imageMimeType || ""}
+              error={form.formState.errors.ogImage?.message}
+              aspectRatio="auto"
+              hideInfo
+            />
+          </>
+        )}
       </form>
     </div>
   );

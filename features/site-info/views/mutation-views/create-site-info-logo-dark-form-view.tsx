@@ -4,6 +4,7 @@ import useCreateSiteInfoLogoDarkFormValidation from "../../hooks/use-create-site
 import ImageInput from "@/components/custom/image-input";
 import ImagePreview from "@/components/custom/image-preview";
 import InputWrapper from "@/components/custom/input-wrapper";
+import { Typography } from "@/components/custom/typography";
 import { SITE_INFO_IMAGES_CONFIG } from "@/constants/enums";
 import { deleteImage } from "@/lib/actions";
 import { ImageType } from "@/types/types";
@@ -47,27 +48,33 @@ export default function CreateSiteInfoLogoDarkFormView({ data }: Props) {
   return (
     <div>
       <form onChange={onSubmit} className="relative">
-        <InputWrapper
-          title="Logo (dark)"
-          description={!imageUrl ? imageRulesDescription : ""}
-        >
-          {!imageUrl ? (
+        <Typography as="p" size="xs">
+          Logo (dark)
+        </Typography>
+        {!imageUrl && (
+          <InputWrapper
+            description={imageRulesDescription}
+            error={form.formState.errors.logo?.message}
+          >
             <ImageInput onChange={handleImageChange} />
-          ) : (
-            <>
-              <ImagePreview
-                isLoading={isPending}
-                disableSetFeaturedImage
-                deleteImage={removeImage}
-                disableDeleteImage={isPending}
-                imageUrl={imageUrl}
-                imageSize={imageSize || 0}
-                imageType={imageMimeType || ""}
-                error={form.formState.errors.logo?.message}
-              />
-            </>
-          )}
-        </InputWrapper>
+          </InputWrapper>
+        )}
+        {imageUrl && (
+          <>
+            <ImagePreview
+              isLoading={isPending}
+              disableSetFeaturedImage
+              deleteImage={removeImage}
+              disableDeleteImage={isPending}
+              imageUrl={imageUrl}
+              imageSize={imageSize || 0}
+              imageType={imageMimeType || ""}
+              error={form.formState.errors.logo?.message}
+              aspectRatio="square"
+              hideInfo
+            />
+          </>
+        )}
       </form>
     </div>
   );

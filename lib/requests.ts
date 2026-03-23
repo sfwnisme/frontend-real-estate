@@ -9,12 +9,13 @@ import {
 } from "@/types/types";
 import { formatedApiErrRes, formatedSerErrRes } from "./utils";
 import { API_ROUTES } from "@/constants/config";
+import { TAGS } from "@/constants/tags";
 
 const { PROPERTIES, BLOG_POSTS, IMAGES, SITE_INFO } = API_ROUTES;
 
 export const getData = async <T>(
   endpoint: string,
-  query?: string
+  query?: string,
 ): Promise<APIResponsePaginated<any>> => {
   try {
     if (!process.env.NEXT_PUBLIC_BASE_URL) {
@@ -37,17 +38,19 @@ export const getData = async <T>(
 export const getSiteInfo = async (): Promise<APIResponse<SiteInfo>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${SITE_INFO.GET}`;
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      next: { tags: [TAGS.UPDATED_SITE_INFO] },
+    });
     const responseData = await response.json();
     if (!response.ok) {
       return formatedApiErrRes(responseData);
     }
     return responseData;
-  } catch(error: any) {
+  } catch (error: any) {
     console.error("error in getSiteInfo", error);
     return formatedSerErrRes("Server error", error);
   }
-}
+};
 
 //-------------------------------
 // PROPERTIES REQUESTS
@@ -56,7 +59,7 @@ export const getSiteInfo = async (): Promise<APIResponse<SiteInfo>> => {
 export const getProperties = async (
   pageSize: number = PAGINATION_CONFIG.PROPERTIES.CLIENT.PAGE,
   currentPage?: number,
-  cache: RequestCache = "default"
+  cache: RequestCache = "default",
 ): Promise<APIResponsePaginated<Property[]>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${PROPERTIES.GET}?pageSize=${pageSize}&page=${currentPage}`;
@@ -75,7 +78,7 @@ export const getProperties = async (
 export const getPropertiesWithRevalidate = async (
   pageSize: number = PAGINATION_CONFIG.PROPERTIES.CLIENT.PAGE,
   currentPage?: number,
-  revalidate: number = 60
+  revalidate: number = 60,
 ): Promise<APIResponsePaginated<Property[]>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${PROPERTIES.GET}?pageSize=${pageSize}&page=${currentPage}`;
@@ -93,7 +96,7 @@ export const getPropertiesWithRevalidate = async (
 
 export const getPropertyImages = async (
   propertyId: string,
-  cache: RequestCache = "default"
+  cache: RequestCache = "default",
 ): Promise<APIResponse<ImageType[]>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${IMAGES.GET_PROPERTY_IMAGES}/${propertyId}`;
@@ -117,7 +120,7 @@ export const getPropertyImages = async (
 
 export const getPropertyImagesWithRevalidate = async (
   propertyId: string,
-  revalidate: number = 60
+  revalidate: number = 60,
 ): Promise<APIResponse<ImageType[]>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${IMAGES.GET_PROPERTY_IMAGES}/${propertyId}`;
@@ -141,7 +144,7 @@ export const getPropertyImagesWithRevalidate = async (
 
 export const getProperty = async (
   slug: string,
-  cache: RequestCache = "default"
+  cache: RequestCache = "default",
 ): Promise<APIResponse<Property>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${PROPERTIES.GET}/${slug}`;
@@ -159,7 +162,7 @@ export const getProperty = async (
 
 export const getPropertyWithRevalidate = async (
   slug: string,
-  revalidate: number = 60
+  revalidate: number = 60,
 ): Promise<APIResponse<Property>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${PROPERTIES.GET}/${slug}`;
@@ -181,7 +184,7 @@ export const getPropertyWithRevalidate = async (
 export const getBlogPosts = async (
   pageSize: number = PAGINATION_CONFIG.BLOG.CLIENT.PAGE,
   currentPage?: number,
-  cache: RequestCache = "default"
+  cache: RequestCache = "default",
 ): Promise<APIResponsePaginated<BlogPost[]>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${BLOG_POSTS.GET}?pageSize=${pageSize}&page=${currentPage}`;
@@ -200,7 +203,7 @@ export const getBlogPosts = async (
 export const getBlogPostsWithRevalidate = async (
   pageSize: number = PAGINATION_CONFIG.BLOG.CLIENT.PAGE,
   currentPage?: number,
-  revalidate: number = 60
+  revalidate: number = 60,
 ): Promise<APIResponsePaginated<BlogPost[]>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${BLOG_POSTS.GET}?pageSize=${pageSize}&page=${currentPage}`;
@@ -218,7 +221,7 @@ export const getBlogPostsWithRevalidate = async (
 
 export const getBlogPost = async (
   blogPostId: string,
-  cache: RequestCache = "default"
+  cache: RequestCache = "default",
 ): Promise<APIResponse<BlogPost>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${BLOG_POSTS.GET}/${blogPostId}`;
@@ -236,7 +239,7 @@ export const getBlogPost = async (
 
 export const getBlogPostWithRevalidate = async (
   blogPostId: string,
-  revalidate: number = 60
+  revalidate: number = 60,
 ): Promise<APIResponse<BlogPost>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${BLOG_POSTS.GET}/${blogPostId}`;
@@ -254,7 +257,7 @@ export const getBlogPostWithRevalidate = async (
 
 export const getBlogPostImage = async (
   blogPostId: string,
-  cache: RequestCache = "default"
+  cache: RequestCache = "default",
 ): Promise<APIResponse<ImageType>> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}${IMAGES.GET_BLOG_POST_IMAGES}/${blogPostId}`;

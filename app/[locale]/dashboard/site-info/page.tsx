@@ -10,11 +10,10 @@ import { notFound } from "next/navigation";
 
 export default async function page() {
   const siteInfo = await getSiteInfo();
-  console.log(siteInfo);
   if (!siteInfo.data || siteInfo.status !== 200) {
     return notFound();
   }
-  console.log("page triggered")
+  console.log("page triggered");
   const [getIcon, getIconDark, getLogo, getLogoDark, getOgImage] =
     await Promise.all([
       getSiteInfoImage("icon", "theme_default"),
@@ -23,11 +22,7 @@ export default async function page() {
       getSiteInfoImage("logo", "theme_dark"),
       getSiteInfoImage("og-image", null),
     ]);
-  console.log("getIcon", getIcon);
-  console.log("getIconDark", getIconDark);
-  console.log("getLogo", getLogo);
-  console.log("getLogoDark", getLogoDark);
-  console.log("getOgImage", getOgImage);
+
   return (
     <>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -36,7 +31,7 @@ export default async function page() {
         <CreateSiteInfoLogoFormView data={getLogo} />
         <CreateSiteInfoLogoDarkFormView data={getLogoDark} />
         <div className="col-span-full">
-        <CreateSiteInfoOgImageFormView data={getOgImage} />
+          <CreateSiteInfoOgImageFormView data={getOgImage} />
         </div>
       </div>
       <UpdateSiteInfoFormView data={siteInfo.data} />

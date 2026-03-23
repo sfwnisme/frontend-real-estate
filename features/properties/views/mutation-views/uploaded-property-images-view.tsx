@@ -79,6 +79,7 @@ const UploadedPropertyImagesView = (props: Props) => {
             disableSetFeaturedImage={false} 
             deleteImage={() => handleDeleteImage(image._id)}
             setFeaturedImage={() => handleSetFeaturedImage(image._id)}
+            aspectRatio="auto"
             />;
           })}
         </div>

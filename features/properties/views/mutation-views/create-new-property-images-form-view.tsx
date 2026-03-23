@@ -87,6 +87,7 @@ const CreateNewPropertyImagesFormView = ({
                 deleteImage={() => removeImage(idx)}
                 setFeaturedImage={() => handleSetFeaturedImage(idx)}
                 error={imageError}
+                aspectRatio="auto"
                 key={`image-preview-${
                   item.image.lastModified + item.image.name + item.image.size
                 }`}

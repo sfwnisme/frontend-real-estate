@@ -88,6 +88,7 @@ const CreatePropertyImagesFormView = (props: Props) => {
                 disableSetFeaturedImage={isDisabled}
                 setFeaturedImage={() => handleSetFeaturedImage(idx)}
                 error={imageError}
+                aspectRatio="auto"
                 key={`image-preview-${
                   image?.image.lastModified +
                   image?.image.name +

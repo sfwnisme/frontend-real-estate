@@ -26,6 +26,8 @@ import Image from "next/image";
 import useCan from "./auth/use-can";
 import { Permission } from "@/constants/permissions";
 import { useLocale, useTranslations } from "next-intl";
+import { ImageType } from "@/types/types";
+import { useTheme } from "next-themes";
 
 type FilteredRoute = {
   name: string;
@@ -34,13 +36,23 @@ type FilteredRoute = {
   permission: Permission;
 };
 
+type Props = {
+  logo: {
+    default: ImageType | null,
+    dark: ImageType | null,
+  }
+}
+
 export function DashboardSidebar({
+  logo,
   ...props
-}: React.ComponentProps<typeof Sidebar>) {
+}: React.ComponentProps<typeof Sidebar> & Props) {
   const locale = useLocale();
   const t = useTranslations("dashboard.sidebar");
   const { can } = useCan();
-
+  const {theme} = useTheme();
+  console.log(theme);
+  const logoUrl = theme === "dark" ? logo.default?.url : logo.dark?.url;
   const routes: FilteredRoute[] = [
     {
       name: t("overview"),
@@ -108,7 +120,7 @@ export function DashboardSidebar({
         <div className="w-full p-2">
           <Image
             className="size-12"
-            src="/logo.svg"
+            src={logoUrl || "/logo.svg"}
             height={300}
             width={300}
             alt="project logo"

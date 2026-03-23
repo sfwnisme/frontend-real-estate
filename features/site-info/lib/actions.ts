@@ -5,7 +5,8 @@ import { formatedApiErrRes, formatedSerErrRes } from "@/lib/utils";
 import { APIResponse, ImageType, SiteInfo } from "@/types/types";
 import { cookies } from "next/headers";
 import { UpdateSiteInfoType } from "../schema/site-info-schema";
-import { updateTag } from "next/cache";
+import { revalidateTag, updateTag } from "next/cache";
+import { TAGS } from "@/constants/tags";
 
 const { UPDATE } = API_ROUTES.SITE_INFO;
 const {
@@ -35,6 +36,7 @@ export const updateSiteInfo = async (
     if (!response.ok) {
       return formatedApiErrRes(responseData);
     }
+    revalidateTag(TAGS.UPDATED_SITE_INFO, "max");
     return responseData;
   } catch (error) {
     return formatedSerErrRes("server error", error);
@@ -60,7 +62,9 @@ export const createSiteInfoIcon = async (
     if (!response.ok) {
       return formatedApiErrRes(responseData);
     }
-    updateTag(`create-image-site-info-${responseData.data?.role}-${responseData.data?.tag}`)
+    updateTag(
+      `create-image-site-info-${responseData.data?.role}-${responseData.data?.tag}`,
+    );
     return responseData;
   } catch (error) {
     return formatedSerErrRes("server error", error);

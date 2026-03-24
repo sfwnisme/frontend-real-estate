@@ -151,6 +151,16 @@ function SidebarProvider({
   );
 }
 
+/**
+ * Render a responsive sidebar component with configurable side, visual variant, and collapsibility.
+ *
+ * Renders a fixed static sidebar when `collapsible` is `"none"`, a sheet-based mobile sidebar when running on mobile, and a desktop sidebar with a responsive gap and container otherwise. Applies data attributes (`data-state`, `data-collapsible`, `data-variant`, `data-side`, and slot attributes) used by surrounding layout and styling.
+ *
+ * @param side - Which side the sidebar is anchored on (`"left"` or `"right"`).
+ * @param variant - Visual variant of the sidebar (`"sidebar"`, `"floating"`, or `"inset"`).
+ * @param collapsible - Collapsibility mode: `"offcanvas"` (slides off-screen), `"icon"` (icon-only collapsed width), or `"none"` (not collapsible).
+ * @returns A React element representing the sidebar.
+ */
 function Sidebar({
   side = "left",
   variant = "sidebar",
@@ -244,7 +254,7 @@ function Sidebar({
         <div
           data-sidebar="sidebar"
           data-slot="sidebar-inner"
-          className="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm"
+          className="bg-background group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm"
         >
           {children}
         </div>

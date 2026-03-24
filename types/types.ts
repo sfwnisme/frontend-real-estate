@@ -177,6 +177,9 @@ export type ImageType = {
   };
   isFeatured: boolean;
   isTemp: boolean;
+  role: string | null;
+  tag: string | null;
+  alt: string | null;
   createdAt: Date;
   updatedAt: Date;
 };

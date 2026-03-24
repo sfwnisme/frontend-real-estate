@@ -10,7 +10,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 import { Typography } from "@/components/custom/typography";
 
-export const dynamic = "force-static";
 export const revalidate = 3600;
 
 const { PREVIEW } = PAGES_ROUTES.PROPERTIES;
@@ -19,8 +18,13 @@ type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
+/**
+ * Produce static route parameters for property preview pages by fetching a short list of properties.
+ *
+ * @returns An array of objects each containing a `slug` property for use as a static route parameter; returns an empty array if no property slugs are available.
+ */
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const properties = await getProperties(1000);
+  const properties = await getProperties(10);
   if (!properties.data?.data) {
     return [];
   }
@@ -33,6 +37,12 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return propertiesData;
 }
 
+/**
+ * Builds localized metadata for a property preview page.
+ *
+ * @param params - A promise resolving to an object with `locale` and `slug` used to determine the request locale and target property
+ * @returns A Metadata object containing page title and description, canonical and alternate language URLs, and Open Graph/Twitter metadata (including image data when available). Returns an empty object when the property is not found.
+ */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   setRequestLocale(locale);
@@ -56,7 +66,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const pagePath = PREVIEW + "/" + slug;
   const canonical = returnCanonical(locale, pagePath);
 
-  const t = await getTranslations("SiteConfig");
+  const t = await getTranslations({locale, namespace: "SiteConfig"});
   const SITE_NAME = t("name");
   const SITE_COUNTRY = t("country");
 

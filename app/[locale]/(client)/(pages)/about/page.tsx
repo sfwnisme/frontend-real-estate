@@ -14,7 +14,6 @@ import { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 
-export const dynamic = "force-static";
 export const revalidate = 2592000;
 
 const { PREVIEW } = PAGES_ROUTES.ABOUT;
@@ -23,6 +22,12 @@ export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+/**
+ * Generate localized page metadata for the About page using the provided locale.
+ *
+ * @param params - Promise resolving to an object with a `locale` string used to localize metadata
+ * @returns A `Metadata` object containing title, description, alternate URLs for languages, Open Graph and Twitter metadata (including image and canonical URL), and `keywords` extracted from the localized FAQ questions
+ */
 export async function generateMetadata({
   params,
 }: {
@@ -30,7 +35,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  const t = await getTranslations("Metadata.about");
+  const t = await getTranslations({locale, namespace: "Metadata.about"});
   const title = t("title");
   const description = t("description");
   const ogTitle = t("ogTitle");

@@ -26,6 +26,8 @@ import Image from "next/image";
 import useCan from "./auth/use-can";
 import { Permission } from "@/constants/permissions";
 import { useLocale, useTranslations } from "next-intl";
+import { ImageType } from "@/types/types";
+import { useTheme } from "next-themes";
 
 type FilteredRoute = {
   name: string;
@@ -34,13 +36,31 @@ type FilteredRoute = {
   permission: Permission;
 };
 
+type Props = {
+  logo: {
+    default: ImageType | null,
+    dark: ImageType | null,
+  }
+}
+
+/**
+ * Renders the dashboard sidebar containing the logo, permission-filtered navigation, user section, and rail.
+ *
+ * The selected logo variant depends on the current theme; the sidebar's side (left/right) depends on the active locale; navigation routes are included only when the current user has the required permission.
+ *
+ * @param logo - Object with `default` and `dark` image variants; each variant may be an ImageType or `null`. The component uses the appropriate variant for the current theme and falls back to "/logo.svg" when no URL is available.
+ * @returns The Sidebar React element with header, content (navigation), footer (user controls), and rail.
+ */
 export function DashboardSidebar({
+  logo,
   ...props
-}: React.ComponentProps<typeof Sidebar>) {
+}: React.ComponentProps<typeof Sidebar> & Props) {
   const locale = useLocale();
   const t = useTranslations("dashboard.sidebar");
   const { can } = useCan();
-
+  const {theme} = useTheme();
+  console.log(theme);
+  const logoUrl = theme === "dark" ? logo.default?.url : logo.dark?.url;
   const routes: FilteredRoute[] = [
     {
       name: t("overview"),
@@ -108,7 +128,7 @@ export function DashboardSidebar({
         <div className="w-full p-2">
           <Image
             className="size-12"
-            src="/logo.svg"
+            src={logoUrl || "/logo.svg"}
             height={300}
             width={300}
             alt="project logo"

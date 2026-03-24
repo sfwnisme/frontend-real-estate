@@ -4,14 +4,22 @@ import BlogPostsHomePageView from "@/features/blog-posts/views/blog-posts-home-p
 import HeroView from "@/features/client/hero-view";
 import PropertiesHomePageView from "@/features/properties/views/properties-home-page-view";
 import { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 import { getSiteInfo } from "@/lib/requests";
 import { notFound } from "next/navigation";
+import { getSiteInfoImage } from "@/features/site-info/lib/requests";
 
-export const dynamic = "force-static";
 export const revalidate = 604800;
 
+/**
+ * Generate locale-aware metadata for the homepage.
+ *
+ * Builds title, description, canonical and alternate links, Open Graph fields, and Twitter fields using the site's localized SEO data and the site "og-image" asset.
+ *
+ * @param params - A promise that resolves to an object with a `locale` string used to select localized site data
+ * @returns A `Metadata` object containing `title`, `description`, `alternates` (canonical and languages), `openGraph` (title, description, images, url, type), and `twitter` (title, description, images)
+ */
 export async function generateMetadata({
   params,
 }: {
@@ -26,10 +34,10 @@ export async function generateMetadata({
   const siteInfoData = siteInfo.data;
   const localizedSiteInfo = siteInfoData[localeName];
   const seoData = localizedSiteInfo?.seo;
-
+  const getOgImage = await getSiteInfoImage("og-image", null);
+  const ogImageUrl = getOgImage?.url;
   const title = seoData?.title;
   const description = seoData?.description;
-  const ogImage = seoData?.ogImage;
   return {
     title,
     description,
@@ -40,14 +48,14 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      images: [{ url: ogImage}],
+      images: [{ url: ogImageUrl }],
       url: returnCanonical(locale, "/"),
       type: "website",
     },
     twitter: {
       title,
       description,
-      images: [{ url: ogImage }],
+      images: [{ url: ogImageUrl }],
     },
   };
 }

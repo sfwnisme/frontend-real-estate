@@ -78,6 +78,12 @@ export const textTrimmer = (text: string, length: number = 20): string => {
   return `${text.slice(0, length)}...`;
 };
 
+export const unitToBytes = (size: number, unit: "kb" | "mb") => {
+  if (unit === "kb") return size * 1024;
+  if (unit === "mb") return size * 1024 * 1024;
+  return size;
+};
+
 export const kbToBytes = (kb: number) => kb * 1024;
 export const bytesToKb = (bytes: number) => bytes / 1024;
 export const returnFileSize = (bytes: number): string => {

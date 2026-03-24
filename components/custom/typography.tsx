@@ -1,3 +1,4 @@
+"use client"
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
@@ -8,8 +9,10 @@ const typographyVariants = cva("", {
     variant: {
       default: "",
       muted: "text-muted-foreground",
+      destructive: "text-destructive",
     },
     size: {
+      xxs: "text-[10px] sm:text-xs",
       xs: "text-xs sm:text-sm",
       sm: "text-sm leading-7 sm:text-base",
       base: "text-base sm:text-lg md:text-xl",

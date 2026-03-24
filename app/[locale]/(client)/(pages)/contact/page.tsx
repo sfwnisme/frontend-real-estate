@@ -10,11 +10,16 @@ import { MessageSquare } from "lucide-react";
 import { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-export const dynamic = "force-static";
 export const revalidate = 2592000;
 
 const { PREVIEW } = PAGES_ROUTES.CONTACT;
 
+/**
+ * Produce locale-aware metadata for the Contact page.
+ *
+ * @param params - An object (possibly a promise) containing `locale`, used to load locale-specific translations
+ * @returns A `Metadata` object with `title`, `description`, `keywords`, `alternates` (canonical URL and language alternates), `openGraph` (title, description, images, url, type), and `twitter` (title, description, images) properties populated from translations
+ */
 export async function generateMetadata({
   params,
 }: {
@@ -22,7 +27,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  const t = await getTranslations("Metadata.contact");
+  const t = await getTranslations({locale, namespace: "Metadata.contact"});
   const title = t("title");
   const description = t("description");
   const ogTitle = t("ogTitle");

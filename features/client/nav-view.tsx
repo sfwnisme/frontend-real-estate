@@ -12,10 +12,23 @@ import { Link as NextIntlLink } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
+import { ImageType } from "@/types/types";
+import { useTheme } from "next-themes";
 
-type Props = {};
+type Props = {
+  logo: {
+    default: ImageType | null,
+    dark: ImageType | null,
+  }
+};
 
-export default function Nav({}: Props) {
+/**
+ * Render a responsive navigation bar containing a clickable logo, desktop navigation links with active-state styling, a locale toggle that preserves the current pathname, and a mobile dropdown menu with the same links.
+ *
+ * @param logo - Object with optional `default` and `dark` image entries; the component uses `logo.dark?.url` when available and falls back to `"/logo.svg"`.
+ * @returns A `JSX.Element` representing the navigation bar.
+ */
+export default function Nav({ logo }: Props) {
   const pathname = usePathname();
   const locale = useLocale();
   const t = useTranslations("navigation");
@@ -28,14 +41,15 @@ export default function Nav({}: Props) {
   ];
 
   const isActive = (href: string) => pathname.startsWith(href);
-
+  const theme = useTheme()
+  console.log(theme);
   return (
     <nav className="flex items-center h-fit px-6 py-6 sticky top-0 z-50 bg-red- backdrop-blur-xs">
       <div className="w-50 max-w-full h-auto overflow-hidden me-auto">
         <NextIntlLink href="/" className="flex size-full">
           <Image
             className="size-12"
-            src="/logo.svg"
+            src={logo.dark?.url || "/logo.svg"}
             priority={true}
             alt="logo"
             width={200}

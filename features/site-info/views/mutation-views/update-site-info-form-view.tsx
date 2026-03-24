@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
-import useUpdateSiteInfoFormValidation from "./hooks/use-update-site-info-form-validation";
+import useUpdateSiteInfoFormValidation from "@/features/site-info/hooks/use-update-site-info-form-validation";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -32,6 +32,14 @@ type Props = {
   data: SiteInfo;
 };
 
+/**
+ * Render the site information update form with sections for general information, SEO, contact, marketing, and advanced settings.
+ *
+ * The form is initialized with the provided site data, integrates validation and submit handling, and adapts layout direction based on the current locale. The advanced settings section exposes a maintenance mode toggle that updates the form state.
+ *
+ * @param data - Initial site information used to populate form fields (languages, contact, marketing, settings, and last-updated timestamp)
+ * @returns The JSX element containing the composed update form
+ */
 export default function UpdateSiteInfoFormView({ data }: Props) {
   const { form, onSubmit, isPending } = useUpdateSiteInfoFormValidation(data);
   const tTitles = useTranslations("SiteInfo.titles");
@@ -81,7 +89,7 @@ export default function UpdateSiteInfoFormView({ data }: Props) {
               <Typography as="p" size="sm">
                 {tTitles("generalInformation")}
               </Typography>
-              <Typography as="p" size="sm" variant="muted">
+              <Typography as="p" size="xxs" variant="muted">
                 {tDescriptions("generalInformation")}
               </Typography>
             </AccordionTrigger>
@@ -157,7 +165,7 @@ export default function UpdateSiteInfoFormView({ data }: Props) {
               <Typography as="p" size="sm">
                 {tTitles("seo")}
               </Typography>
-              <Typography as="p" size="sm" variant="muted">
+              <Typography as="p" size="xxs" variant="muted">
                 {tDescriptions("seo")}
               </Typography>
             </AccordionTrigger>
@@ -236,7 +244,7 @@ export default function UpdateSiteInfoFormView({ data }: Props) {
               <Typography as="p" size="sm">
                 {tTitles("socialMedia")}
               </Typography>
-              <Typography as="p" size="sm" variant="muted">
+              <Typography as="p" size="xxs" variant="muted">
                 {tDescriptions("socialMedia")}
               </Typography>
             </AccordionTrigger>
@@ -307,7 +315,7 @@ export default function UpdateSiteInfoFormView({ data }: Props) {
               <Typography as="p" size="sm">
                 {tTitles("marketingAndIntegrations")}
               </Typography>
-              <Typography as="p" size="sm" variant="muted">
+              <Typography as="p" size="xxs" variant="muted">
                 {tDescriptions("marketingAndIntegrations")}
               </Typography>
             </AccordionTrigger>
@@ -343,7 +351,7 @@ export default function UpdateSiteInfoFormView({ data }: Props) {
               <Typography as="p" size="sm">
                 {tTitles("advancedSettings")}
               </Typography>
-              <Typography as="p" size="sm" variant="muted">
+              <Typography as="p" size="xxs" variant="muted">
                 {tDescriptions("advancedSettings")}
               </Typography>
             </AccordionTrigger>

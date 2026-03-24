@@ -114,3 +114,31 @@ export const MODELS = {
   BLOG_POST: "BlogPost",
   USER: "User",
 } as const;
+
+// site info enums
+export const SITE_INFO_IMAGES_CONFIG = {
+  ICON: {
+    MIME_TYPES: ["image/png", "image/x-icon", "image/vnd.microsoft.icon"],
+    MAX_FILE_SIZE: 1,
+    DIMENSIONS: [
+      { width: 16, height: 16 },
+      { width: 32, height: 32 },
+      { width: 48, height: 48 },
+      { width: 192, height: 192 },
+    ],
+  },
+  LOGO: {
+    MIME_TYPES: ["image/png", "image/svg+xml"],
+    MAX_FILE_SIZE: 2,
+    MIN_WIDTH: 200,
+    MIN_HEIGHT: 200,
+    MAX_WIDTH: 500,
+    MAX_HEIGHT: 500,
+  },
+  OG_IMAGE: {
+    MIME_TYPES: ["image/jpeg", "image/png", "image/webp"],
+    MAX_FILE_SIZE: 3,
+    RECOMMENDED_WIDTH: 1200,
+    RECOMMENDED_HEIGHT: 630,
+  },
+};

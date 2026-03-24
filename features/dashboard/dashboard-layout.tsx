@@ -7,15 +7,28 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { ModeToggle } from "@/components/mode-toggle";
+import { getSiteInfoImage } from "../site-info/lib/requests";
 
-export default function DashboardLayout({
+/**
+ * Wraps page content in the dashboard layout: a sidebar (supplied with default and dark theme logos), a sticky header with breadcrumb and mode toggle, and a main content area that renders `children`.
+ *
+ * Fetches the site's default and dark theme logo images and passes them to the sidebar before rendering.
+ *
+ * @param children - The page content to render inside the dashboard main area
+ * @returns A React element representing the complete dashboard layout
+ */
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [logo_default, logo_dark] = await Promise.all([
+    getSiteInfoImage("logo", "theme_default"),
+    getSiteInfoImage("logo", "theme_dark"),
+  ]);
   return (
     <SidebarProvider>
-      <DashboardSidebar />
+      <DashboardSidebar logo={{ default: logo_default, dark: logo_dark }} />
       <SidebarInset className="min-w-0">
         <header className="sticky top-0 z-10 bg-background border-b mb-4 flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">

@@ -60,6 +60,7 @@ const CreateNewBlogPostImageFormView = ({ blogPostId, image }: Props) => {
         deleteImage={removeNewImage}
         setFeaturedImage={() => {}}
         error={imageFieldErrors?.message}
+        aspectRatio="auto"
         key={`image-preview-${formImage?.name}`}
       />
     );
@@ -86,6 +87,7 @@ const CreateNewBlogPostImageFormView = ({ blogPostId, image }: Props) => {
         deleteImage={removeImage}
         setFeaturedImage={() => {}}
         error={imageFieldErrors?.message}
+        aspectRatio="auto"
         key={`image-preview-${image?._id!}`}
       />
     );

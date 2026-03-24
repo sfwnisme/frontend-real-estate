@@ -22,6 +22,12 @@ export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+/**
+ * Generate localized page metadata for the About page using the provided locale.
+ *
+ * @param params - Promise resolving to an object with a `locale` string used to localize metadata
+ * @returns A `Metadata` object containing title, description, alternate URLs for languages, Open Graph and Twitter metadata (including image and canonical URL), and `keywords` extracted from the localized FAQ questions
+ */
 export async function generateMetadata({
   params,
 }: {

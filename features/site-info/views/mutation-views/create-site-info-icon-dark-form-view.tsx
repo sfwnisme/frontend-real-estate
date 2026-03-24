@@ -13,6 +13,15 @@ type Props = {
   data: ImageType;
 };
 
+/**
+ * Renders a form UI for uploading, previewing, and deleting the site's dark icon.
+ *
+ * Displays either an image upload input with validation rules or a preview with delete controls,
+ * deriving preview URL and metadata from the provided `data` when no new file is selected or from the chosen file.
+ *
+ * @param data - Existing image metadata (for example `url`, `size`, `mimeType`, `_id`, `role`, `tag`) used as the current icon when no new file is selected.
+ * @returns The JSX element containing the icon upload/preview form.
+ */
 export default function CreateSiteInfoIconDarkFormView({ data }: Props) {
   const { form, onSubmit, isPending } =
     useCreateSiteInfoIconDarkFormValidation();

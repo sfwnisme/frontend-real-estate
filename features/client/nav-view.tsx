@@ -22,6 +22,12 @@ type Props = {
   }
 };
 
+/**
+ * Render a responsive navigation bar containing a clickable logo, desktop navigation links with active-state styling, a locale toggle that preserves the current pathname, and a mobile dropdown menu with the same links.
+ *
+ * @param logo - Object with optional `default` and `dark` image entries; the component uses `logo.dark?.url` when available and falls back to `"/logo.svg"`.
+ * @returns A `JSX.Element` representing the navigation bar.
+ */
 export default function Nav({ logo }: Props) {
   const pathname = usePathname();
   const locale = useLocale();

@@ -4,6 +4,13 @@ import { getSiteInfoImage } from "@/features/site-info/lib/requests";
 import { setRequestLocale } from "next-intl/server";
 import React from "react";
 
+/**
+ * Render the localized page layout including navigation, content area, and footer.
+ *
+ * @param children - The page content to render inside the layout
+ * @param params - A promise that resolves to an object with `locale`, used to set the request locale for this render
+ * @returns The layout element containing the navigation (with theme-aware logos), the provided `children` content, and the footer
+ */
 export default async function layout({
   children,
   params,

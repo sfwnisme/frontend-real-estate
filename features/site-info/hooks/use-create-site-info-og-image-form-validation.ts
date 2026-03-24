@@ -11,6 +11,14 @@ import { toast } from "sonner";
 import { createSiteInfoOgImage } from "../lib/actions";
 import { STATUS_TEXT } from "@/constants/enums";
 
+/**
+ * Wires up validation and submission for the "create site info OG image" form.
+ *
+ * @returns An object containing:
+ * - `form`: the react-hook-form instance configured with the `CreateSiteInfoOgImageSchema` resolver and `onChange` validation mode.
+ * - `onSubmit`: a submit handler (already wrapped with `form.handleSubmit`) that validates presence of `ogImage`, shows toast errors for missing or failed requests, and invokes the create API when valid.
+ * - `isPending`: a boolean indicating whether the create transition is in progress.
+ */
 export default function useCreateSiteInfoOgImageFormValidation() {
   const [isPending, startCreate] = useTransition();
   const form = useForm<CreateSiteInfoOgImageType>({

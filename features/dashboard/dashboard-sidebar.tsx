@@ -43,6 +43,14 @@ type Props = {
   }
 }
 
+/**
+ * Renders the dashboard sidebar containing the logo, permission-filtered navigation, user section, and rail.
+ *
+ * The selected logo variant depends on the current theme; the sidebar's side (left/right) depends on the active locale; navigation routes are included only when the current user has the required permission.
+ *
+ * @param logo - Object with `default` and `dark` image variants; each variant may be an ImageType or `null`. The component uses the appropriate variant for the current theme and falls back to "/logo.svg" when no URL is available.
+ * @returns The Sidebar React element with header, content (navigation), footer (user controls), and rail.
+ */
 export function DashboardSidebar({
   logo,
   ...props

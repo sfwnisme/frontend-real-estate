@@ -15,6 +15,19 @@ type Props = {
   childrenClassName?: string;
 };
 
+/**
+ * Wraps form input content with an optional title label, optional description text, and optional error text.
+ *
+ * @param props - Component props.
+ * @param props.title - Label text rendered above the input content.
+ * @param props.description - Muted helper text shown under the input when provided.
+ * @param props.error - Destructive-styled error message shown under the input unless suppressed.
+ * @param props.disableError - When truthy, hides the `error` text.
+ * @param props.className - Additional classes applied to the outer container.
+ * @param props.children - The input or control elements to render inside the wrapper.
+ * @param props.childrenClassName - Additional classes applied to the container that wraps `children`.
+ * @returns A React element that renders the labeled input wrapper with optional helper and error text.
+ */
 export default function InputWrapper(props: Props) {
   const {
     title,

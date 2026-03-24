@@ -18,6 +18,11 @@ type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
+/**
+ * Produce static route parameters for property preview pages by fetching a short list of properties.
+ *
+ * @returns An array of objects each containing a `slug` property for use as a static route parameter; returns an empty array if no property slugs are available.
+ */
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const properties = await getProperties(10);
   if (!properties.data?.data) {
@@ -32,6 +37,12 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return propertiesData;
 }
 
+/**
+ * Builds localized metadata for a property preview page.
+ *
+ * @param params - A promise resolving to an object with `locale` and `slug` used to determine the request locale and target property
+ * @returns A Metadata object containing page title and description, canonical and alternate language URLs, and Open Graph/Twitter metadata (including image data when available). Returns an empty object when the property is not found.
+ */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   setRequestLocale(locale);

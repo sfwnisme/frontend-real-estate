@@ -11,6 +11,17 @@ import { toast } from "sonner";
 import { createSiteInfoLogoDark } from "../lib/actions";
 import { STATUS_TEXT } from "@/constants/enums";
 
+/**
+ * Set up validation and submission handling for the "site info logo dark" creation form.
+ *
+ * Initializes a react-hook-form instance validated by `CreateSiteInfoLogoSchema` and provides a submit
+ * handler that uploads the selected logo and displays success or error toasts.
+ *
+ * @returns An object containing:
+ * - `form` — the configured `useForm` instance for the create form
+ * - `onSubmit` — a submit callback wired to `form.handleSubmit` that validates input and triggers creation
+ * - `isPending` — a boolean indicating whether the create transition is in progress
+ */
 export default function useCreateSiteInfoLogoDarkFormValidation() {
   const [isPending, startCreate] = useTransition();
   const form = useForm<CreateSiteInfoLogoType>({

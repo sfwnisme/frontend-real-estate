@@ -27,6 +27,14 @@ const kufiFont = Noto_Kufi_Arabic({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
+/**
+ * Builds page metadata for the requested locale using site translations and configuration.
+ *
+ * Produces a Metadata object that includes a locale-aware title template and default title, site description, canonical and alternate language links, Google verification token (if configured), icon URL (if available), and robots directives.
+ *
+ * @param params - A promise resolving to an object with the `locale` string for which metadata should be generated
+ * @returns A Metadata object containing the title template and default title, description, alternates (canonical and languages), verification.google, icons.icon (favicon URL or `undefined`), and robots settings
+ */
 export async function generateMetadata({
   params,
 }: {
@@ -66,10 +74,26 @@ export async function generateMetadata({
   };
 }
 
+/**
+ * Produce route params for each supported locale for static generation.
+ *
+ * @returns An array of route param objects, each with `locale` set to a supported locale
+ */
 export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+/**
+ * Render the application root layout configured for a specific locale.
+ *
+ * Validates the provided `locale`, applies it to the request scope, loads locale-specific
+ * translations, sets document direction and fonts, and returns the root HTML structure
+ * that supplies `NextIntlClientProvider` to its children and renders the global `Toaster`.
+ *
+ * @param children - The page content to render inside the layout
+ * @param params - A promise resolving to an object with a `locale` string (e.g., `{ locale: "en" }`)
+ * @returns The root `<html>` element containing the locale-aware `<body>` with the provider and toaster
+ */
 export default async function RootLayout({ children, params }: Props) {
   const locale = (await params).locale;
   // MANDATORY: Ensure that the incoming `locale` is valid

@@ -11,6 +11,18 @@ import { toast } from "sonner";
 import { createSiteInfoIcon } from "../lib/actions";
 import { STATUS_TEXT } from "@/constants/enums";
 
+/**
+ * Provides a validated form instance, submit handler, and pending state for creating a site info icon.
+ *
+ * Initializes a react-hook-form configured with the `CreateSiteInfoIconSchema` and exposes a submit handler
+ * that attempts to create a site info icon, reports success or field-level errors via toast notifications,
+ * and sets form errors when the creation fails.
+ *
+ * @returns An object containing:
+ * - `form` — the `useForm` instance for `CreateSiteInfoIconType`.
+ * - `onSubmit` — a submit handler wired through `form.handleSubmit` to validate and submit form values.
+ * - `isPending` — a boolean indicating whether the create action is in progress.
+ */
 export default function useCreateSiteInfoIconFormValidation() {
   const [isPending, startCreate] = useTransition();
   const form = useForm<CreateSiteInfoIconType>({

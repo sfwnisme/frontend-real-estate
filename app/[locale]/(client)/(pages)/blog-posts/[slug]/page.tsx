@@ -18,6 +18,11 @@ type Props = {
   params: Promise<{ slug: string; locale: string }>;
 };
 
+/**
+ * Provides the list of blog post slugs used to generate static routes.
+ *
+ * @returns An array of objects each containing a `slug` string; an empty array if no posts are available.
+ */
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const blogPosts = await getBlogPosts(10);
   if (!blogPosts.data?.data) {
@@ -31,6 +36,12 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return blogPost;
 }
 
+/**
+ * Generate page metadata including Open Graph and Twitter cards for a blog post identified by slug.
+ *
+ * @param params - A promise resolving to an object with `slug` and `locale` used to fetch the blog post and locale-specific site translations
+ * @returns The assembled `Metadata` for the blog post (title, description, keywords, alternates, `openGraph`, and `twitter`). Returns an empty object if the blog post cannot be found.
+ */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, locale } = await params;
   const blogPost = await getBlogPost(slug);

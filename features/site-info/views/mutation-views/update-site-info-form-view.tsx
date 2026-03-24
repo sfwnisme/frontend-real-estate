@@ -32,6 +32,14 @@ type Props = {
   data: SiteInfo;
 };
 
+/**
+ * Render the site information update form with sections for general information, SEO, contact, marketing, and advanced settings.
+ *
+ * The form is initialized with the provided site data, integrates validation and submit handling, and adapts layout direction based on the current locale. The advanced settings section exposes a maintenance mode toggle that updates the form state.
+ *
+ * @param data - Initial site information used to populate form fields (languages, contact, marketing, settings, and last-updated timestamp)
+ * @returns The JSX element containing the composed update form
+ */
 export default function UpdateSiteInfoFormView({ data }: Props) {
   const { form, onSubmit, isPending } = useUpdateSiteInfoFormValidation(data);
   const tTitles = useTranslations("SiteInfo.titles");

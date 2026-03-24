@@ -8,6 +8,13 @@ import UpdateSiteInfoFormView from "@/features/site-info/views/mutation-views/up
 import { getSiteInfo } from "@/lib/requests";
 import { notFound } from "next/navigation";
 
+/**
+ * Renders the site-info management page containing forms to create/mutate icons, logos, the OG image, and to update site information.
+ *
+ * Fetches the current site info and, if valid, concurrently loads image assets for both default and dark themes plus the OG image, then renders form views populated with those results. If the site info response is missing or not successful, the route resolves to a not-found response.
+ *
+ * @returns The React element tree for the site-info management UI, with form views populated by the fetched site info and image assets.
+ */
 export default async function page() {
   const siteInfo = await getSiteInfo();
   if (!siteInfo.data || siteInfo.status !== 200) {

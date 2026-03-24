@@ -13,6 +13,14 @@ type Props = {
   data: ImageType;
 };
 
+/**
+ * Render a form UI for uploading, previewing, and removing the "Logo (dark)" image for the provided image data.
+ *
+ * Shows an upload input when no image is selected; when a file is selected or an existing image URL is available it shows an image preview with delete controls and validation/error messaging.
+ *
+ * @param data - Existing image metadata (may include `url`, `size`, `mimeType`, `_id`, `role`, `tag`) used to populate preview, size/type display, and to construct the delete path when removing the stored image.
+ * @returns The JSX element for the logo (dark) upload/preview form.
+ */
 export default function CreateSiteInfoLogoDarkFormView({ data }: Props) {
   const { form, onSubmit, isPending } =
     useCreateSiteInfoLogoDarkFormValidation();

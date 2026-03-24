@@ -12,6 +12,14 @@ import { getSiteInfoImage } from "@/features/site-info/lib/requests";
 
 export const revalidate = 604800;
 
+/**
+ * Generate locale-aware metadata for the homepage.
+ *
+ * Builds title, description, canonical and alternate links, Open Graph fields, and Twitter fields using the site's localized SEO data and the site "og-image" asset.
+ *
+ * @param params - A promise that resolves to an object with a `locale` string used to select localized site data
+ * @returns A `Metadata` object containing `title`, `description`, `alternates` (canonical and languages), `openGraph` (title, description, images, url, type), and `twitter` (title, description, images)
+ */
 export async function generateMetadata({
   params,
 }: {

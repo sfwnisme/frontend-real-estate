@@ -13,6 +13,17 @@ type Props = {
   data: ImageType;
 };
 
+/**
+ * Render a form section for selecting, previewing, and removing the site-info icon image.
+ *
+ * The component shows an image input with upload rules and validation when no image is selected,
+ * or a preview with remove controls when an image URL is available. It integrates with the
+ * form validation hook to update form state, validate on change, and perform server-side deletion
+ * of an existing image when removed.
+ *
+ * @param data - Existing icon data used as the initial source and metadata (may be `undefined`). Expected fields include `_id`, `url`, `size`, `mimeType`, `role`, and `tag`.
+ * @returns A JSX element rendering the icon input and preview controls for the site-info form.
+ */
 export default function CreateSiteInfoIconFormView({ data }: Props) {
   const { form, onSubmit, isPending } = useCreateSiteInfoIconFormValidation();
   const icon = form.watch("icon");

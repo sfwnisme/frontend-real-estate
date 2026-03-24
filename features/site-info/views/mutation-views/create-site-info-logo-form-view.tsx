@@ -13,6 +13,17 @@ type Props = {
   data: ImageType;
 };
 
+/**
+ * Render a logo upload form with preview, validation, and remove functionality for site info.
+ *
+ * Uses the form returned by `useCreateSiteInfoLogoFormValidation()` to manage a `logo` field,
+ * displays an upload input when no image is present, and displays a preview with delete controls
+ * when an existing or newly selected image is available. The preview URL, size, and MIME type
+ * are derived from the selected File when present or from the provided `data` otherwise.
+ *
+ * @param data - Optional existing image metadata used as the initial preview. Expected fields: `url`, `size`, `mimeType`, `_id`, `role`, and `tag`.
+ * @returns The JSX element rendering the logo upload form and image preview controls.
+ */
 export default function CreateSiteInfoLogoFormView({ data }: Props) {
   const { form, onSubmit, isPending } = useCreateSiteInfoLogoFormValidation();
   const logo = form.watch("logo");

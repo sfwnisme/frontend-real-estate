@@ -53,6 +53,22 @@ const ImageLoading = () => {
   );
 };
 
+/**
+ * Renders an image preview card with optional loading and error overlays, file/type info, a featured checkbox, and a delete control.
+ *
+ * @param props - Component props. Key behaviors:
+ *   - `imageUrl`, `imageSize`, `imageType`: source and metadata displayed in the footer.
+ *   - `isLoading`: when true shows a centered loading overlay.
+ *   - `error`: when truthy shows an error overlay and hides the top-right delete control.
+ *   - `isFeatured` / `setFeaturedImage` / `disableSetFeaturedImage`: control and update the "set as main image" checkbox.
+ *   - `deleteImage` / `disableDeleteImage` / `hideDeleteImage`: control the top-right delete button; `deleteImage` defaults to a no-op.
+ *   - `aspectRatio`: selects layout class (`"video"` → `aspect-video`, `"square"` → `aspect-square`, otherwise `aspect-auto`).
+ *   - `hideInfo` / `className`: hide the footer info or append wrapper classes.
+ *
+ * The wrapper element exposes `data-featured` and `data-error` attributes reflecting `isFeatured` and `!!error`.
+ *
+ * @returns The JSX element for the image preview UI.
+ */
 export default function ImagePreview(props: Props) {
   const {
     imageSize = 0,

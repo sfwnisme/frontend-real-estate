@@ -11,6 +11,18 @@ import { toast } from "sonner";
 import { createSiteInfoLogo } from "../lib/actions";
 import { STATUS_TEXT } from "@/constants/enums";
 
+/**
+ * Builds a validated form and submission handler for creating a site info logo.
+ *
+ * The hook configures `react-hook-form` with the `CreateSiteInfoLogoSchema`, handles client-side
+ * validation, performs the create request, shows success/error toasts, and sets field-level errors
+ * when the server response indicates failure.
+ *
+ * @returns An object containing:
+ *  - `form`: the `react-hook-form` instance for the site info logo form
+ *  - `onSubmit`: a submission handler already wrapped with `form.handleSubmit`
+ *  - `isPending`: `true` when a create submission is in progress, `false` otherwise
+ */
 export default function useCreateSiteInfoLogoFormValidation() {
   const [isPending, startCreate] = useTransition();
   const form = useForm<CreateSiteInfoLogoType>({

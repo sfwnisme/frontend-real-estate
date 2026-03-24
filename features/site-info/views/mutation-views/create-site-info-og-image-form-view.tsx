@@ -13,6 +13,14 @@ type Props = {
   data: ImageType;
 };
 
+/**
+ * Renders a form to upload, preview, validate, and optionally delete the OG image for the given site-info image data.
+ *
+ * The component displays an upload input with rules and validation when no preview is available, or an image preview with delete controls when an image URL is present. Removing the image resets the form field and, if the provided `data` contains an `_id`, deletes the existing stored image.
+ *
+ * @param data - Initial image metadata used as the fallback preview and for delete operations (`url`, `size`, `mimeType`, and optional `_id`, `role`, `tag`).
+ * @returns The JSX element for the OG image form view.
+ */
 export default function CreateSiteInfoOgImageFormView({ data }: Props) {
   const { form, onSubmit, isPending } =
     useCreateSiteInfoOgImageFormValidation();

@@ -11,6 +11,18 @@ import { toast } from "sonner";
 import { createSiteInfoIconDark } from "../lib/actions";
 import { STATUS_TEXT } from "@/constants/enums";
 
+/**
+ * Set up form validation and a submit handler for creating a "site info icon (dark)".
+ *
+ * The hook configures a `react-hook-form` form validated by `CreateSiteInfoIconSchema`, exposes
+ * a submit handler that performs the creation logic (including user feedback), and provides a
+ * transition `isPending` flag for pending state.
+ *
+ * @returns An object containing:
+ * - `form` — the `react-hook-form` instance configured for `CreateSiteInfoIconType`.
+ * - `onSubmit` — the wrapped submit handler (`form.handleSubmit(...)`) that validates input and triggers creation.
+ * - `isPending` — `true` when the creation transition is in progress, `false` otherwise.
+ */
 export default function useCreateSiteInfoIconDarkFormValidation() {
   const [isPending, startCreate] = useTransition();
   const form = useForm<CreateSiteInfoIconType>({

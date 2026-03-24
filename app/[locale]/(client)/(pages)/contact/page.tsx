@@ -14,6 +14,12 @@ export const revalidate = 2592000;
 
 const { PREVIEW } = PAGES_ROUTES.CONTACT;
 
+/**
+ * Produce locale-aware metadata for the Contact page.
+ *
+ * @param params - An object (possibly a promise) containing `locale`, used to load locale-specific translations
+ * @returns A `Metadata` object with `title`, `description`, `keywords`, `alternates` (canonical URL and language alternates), `openGraph` (title, description, images, url, type), and `twitter` (title, description, images) properties populated from translations
+ */
 export async function generateMetadata({
   params,
 }: {

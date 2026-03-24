@@ -14,7 +14,6 @@ import { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 
-export const dynamic = "force-static";
 export const revalidate = 2592000;
 
 const { PREVIEW } = PAGES_ROUTES.ABOUT;
@@ -30,7 +29,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  const t = await getTranslations("Metadata.about");
+  const t = await getTranslations({locale, namespace: "Metadata.about"});
   const title = t("title");
   const description = t("description");
   const ogTitle = t("ogTitle");

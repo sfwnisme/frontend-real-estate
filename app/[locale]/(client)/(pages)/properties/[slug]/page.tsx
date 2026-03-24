@@ -10,7 +10,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 import { Typography } from "@/components/custom/typography";
 
-export const dynamic = "force-static";
 export const revalidate = 3600;
 
 const { PREVIEW } = PAGES_ROUTES.PROPERTIES;
@@ -20,7 +19,7 @@ type Props = {
 };
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const properties = await getProperties(1000);
+  const properties = await getProperties(10);
   if (!properties.data?.data) {
     return [];
   }
@@ -56,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const pagePath = PREVIEW + "/" + slug;
   const canonical = returnCanonical(locale, pagePath);
 
-  const t = await getTranslations("SiteConfig");
+  const t = await getTranslations({locale, namespace: "SiteConfig"});
   const SITE_NAME = t("name");
   const SITE_COUNTRY = t("country");
 

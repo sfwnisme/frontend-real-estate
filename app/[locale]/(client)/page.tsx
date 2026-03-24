@@ -10,7 +10,6 @@ import { getSiteInfo } from "@/lib/requests";
 import { notFound } from "next/navigation";
 import { getSiteInfoImage } from "@/features/site-info/lib/requests";
 
-export const dynamic = "force-static";
 export const revalidate = 604800;
 
 export async function generateMetadata({

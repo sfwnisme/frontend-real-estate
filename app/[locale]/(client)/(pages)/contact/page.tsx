@@ -10,7 +10,6 @@ import { MessageSquare } from "lucide-react";
 import { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-export const dynamic = "force-static";
 export const revalidate = 2592000;
 
 const { PREVIEW } = PAGES_ROUTES.CONTACT;
@@ -22,7 +21,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  const t = await getTranslations("Metadata.contact");
+  const t = await getTranslations({locale, namespace: "Metadata.contact"});
   const title = t("title");
   const description = t("description");
   const ogTitle = t("ogTitle");

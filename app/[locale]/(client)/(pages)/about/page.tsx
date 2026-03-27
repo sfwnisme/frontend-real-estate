@@ -9,7 +9,7 @@ import {
 import { PAGES_ROUTES } from "@/constants/config";
 import { routing } from "@/i18n/routing";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
-import { ChevronDown, Home } from "lucide-react";
+import { Home } from "lucide-react";
 import { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
@@ -188,10 +188,6 @@ export default async function page({
                     <Typography as="p" size="base">
                       {faq.title}
                     </Typography>
-                    <ChevronDown
-                      strokeWidth="1"
-                      className="border border-gray-200 rounded-full "
-                    />
                   </AccordionTrigger>
                   <AccordionContent className="flex flex-col gap-4 text-balance">
                     <Typography as="p" size="sm">

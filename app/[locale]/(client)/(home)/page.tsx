@@ -66,6 +66,7 @@ export default async function Home({
   params: Promise<{ locale: string }>;
 }) {
   const locale = (await params).locale;
+  // NOTE: do not remove it, it is a double check to ensure SSG is enabled
   setRequestLocale(locale);
   const siteInfo = await getSiteInfo();
   if (!siteInfo.data) {
@@ -75,8 +76,6 @@ export default async function Home({
   const siteInfoData = siteInfo.data;
   const localizedSiteInfo = siteInfoData[localeName];
   const contactData = siteInfoData.contact;
-
-  console.log(siteInfoData);
 
   return (
     <div className="min-h-screen">

@@ -41,7 +41,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const locale = (await params).locale;
-  const t = await getTranslations("SiteConfig");
+  const t = await getTranslations({locale, namespace: "SiteConfig"});
   const metadataBase = new URL(process.env.NEXT_PUBLIC_FRONTEND_URL as string);
   const getFavicon = await getSiteInfoImage("icon", "theme_default");
   const faviconUrl = getFavicon?.url;
@@ -101,7 +101,8 @@ export default async function RootLayout({ children, params }: Props) {
     notFound();
   }
 
-  setRequestLocale(locale);
+  // TEMPORARY: Uncomment this if test did not work
+  // setRequestLocale(locale);
 
   // Import messages directly based on locale to avoid race conditions during parallel SSG
   const messages = (await import(`@/messages/${locale}.json`)).default;

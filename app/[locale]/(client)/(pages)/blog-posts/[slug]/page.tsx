@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { OgImageType } from "@/types/types";
 import { Metadata } from "next";
 import { PAGES_ROUTES } from "@/constants/config";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { returnAlternateLanguages, returnCanonical } from "@/lib/utils";
 import { Typography } from "@/components/custom/typography";
 
@@ -62,10 +62,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const pagePath = PREVIEW + "/" + slug;
   const canonical = returnCanonical(locale, pagePath);
 
-  const t = await getTranslations({ locale, namespace: "SiteConfig" });
-  const SITE_NAME = t("name");
-  const SITE_COUNTRY = t("country");
-
   return {
     title: blogPostData.title,
     description: blogPostData.meta.description || blogPostData.excerpt,
@@ -79,13 +75,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: blogPostImageMetadata,
       title: blogPostData.title,
       description: blogPostData.meta.description || blogPostData.excerpt,
-      siteName: SITE_NAME,
       url: canonical,
-      countryName: SITE_COUNTRY,
       publishedTime: String(blogPostData.createdAt),
       modifiedTime: String(blogPostData.updatedAt),
       tags: blogPostData.meta.keywords,
-      authors: SITE_NAME,
     },
     twitter: {
       images: blogPostImageMetadata,
@@ -102,6 +95,7 @@ export default async function page({
   params: Promise<{ slug: string; locale: string }>;
 }) {
   const { slug, locale } = await params;
+  // NOTE: do not remove it, it is a double check to ensure SSG is enabled
   setRequestLocale(locale);
 
   const blogPost = await getBlogPost(slug);

@@ -62,6 +62,7 @@ export default async function page({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  // NOTE: do not remove it, it is a double check to ensure SSG is enabled
   setRequestLocale(locale);
 
   const t = await getTranslations("ContactPage");

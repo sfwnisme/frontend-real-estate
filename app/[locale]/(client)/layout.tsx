@@ -19,7 +19,8 @@ export default async function layout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  // TEMPORARY: Uncomment this if test did not work
+  // setRequestLocale(locale);
   const [logo, logoDark] = await Promise.all([
     getSiteInfoImage("logo", "theme_default"),
     getSiteInfoImage("logo", "theme_dark"),

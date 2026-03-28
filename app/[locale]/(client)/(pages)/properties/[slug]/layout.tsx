@@ -9,7 +9,6 @@ export default async function layout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  // NOTE: do not remove it, it is a double check to ensure SSG is enabled
   setRequestLocale(locale);
-  return <div className="max-w-[900px] mx-auto">{children}</div>;
+  return children;
 }

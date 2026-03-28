@@ -66,9 +66,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const pagePath = PREVIEW + "/" + slug;
   const canonical = returnCanonical(locale, pagePath);
 
-  const t = await getTranslations({locale, namespace: "SiteConfig"});
-  const SITE_NAME = t("name");
-  const SITE_COUNTRY = t("country");
 
   return {
     title: property.data.title,
@@ -82,10 +79,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: property.data.title,
       description: property.data.description,
       url: canonical,
-      siteName: SITE_NAME,
-      countryName: SITE_COUNTRY,
       type: "article",
-      authors: SITE_NAME,
     },
     twitter: {
       images: propertyImagesMetadata,
@@ -98,6 +92,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const { slug, locale } = await params;
+  // NOTE: do not remove it, it is a double check to ensure SSG is enabled
   setRequestLocale(locale);
 
   const property = await getProperty(slug);

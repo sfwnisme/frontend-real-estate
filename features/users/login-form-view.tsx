@@ -10,6 +10,7 @@ import Title from "@/components/custom/title";
 import { login } from "@/lib/actions";
 import InputWrapper from "@/components/custom/input-wrapper";
 import useFormErrors from "@/hooks/use-form-errors";
+import { useRouter } from "@/i18n/navigation"
 
 type Props = {};
 const loginSchema = z.object({
@@ -20,6 +21,7 @@ type UserLoginType = z.infer<typeof loginSchema>;
 
 export default function LoginFormView({}: Props) {
   const [isLogin, startLogin] = useTransition();
+  const router = useRouter()
   const form = useForm<UserLoginType>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -40,7 +42,7 @@ export default function LoginFormView({}: Props) {
       if (!loginResponse.data) {
         form.setError("root", { message: loginResponse.msg });
       } else {
-        window.location.pathname = "/dashboard";
+        router.push("/dashboard")
       }
     });
   };

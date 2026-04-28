@@ -52,7 +52,7 @@ export default function LoginFormView({}: Props) {
       <Title title="Login"></Title>
       <div className="pb-4" />
       <div className="w-full max-w-md border p-8 rounded mx-auto shadow-2xl">
-        <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-y-5">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-y-5" data-testid="login-form">
           <InputWrapper
             title="Email"
             error={form.formState.errors.email?.message}

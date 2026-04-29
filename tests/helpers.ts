@@ -1,0 +1,1 @@
+export const locale = (path: string) => `/en${path}`;

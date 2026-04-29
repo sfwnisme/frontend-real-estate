@@ -24,7 +24,7 @@ export const PAGES_ROUTES = {
   CONTACT: {
     PREVIEW: "/contact",
   },
-  DASHBOARD: "dashboard"
+  DASHBOARD: "/dashboard"
 };
 
 export const API_ROUTES = {

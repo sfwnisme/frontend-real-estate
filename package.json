@@ -9,7 +9,10 @@
     "build": "next build",
     "list-SSG": "node -e \"console.log(Object.keys(require('./.next/prerender-manifest.json').routes))\"",
     "build:webpack": "next build --webpack",
-    "start": "next start"
+    "start": "next start",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
